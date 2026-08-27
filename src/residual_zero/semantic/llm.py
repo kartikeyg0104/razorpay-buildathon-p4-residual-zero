@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Protocol
 
 from residual_zero.canonical import canonical_json
+from residual_zero.semantic.redact import RedactionSession, assert_no_pii, redact_entity_request
 from residual_zero.semantic.schema import (
     EntityResolutionRequest,
     EntityResolutionResponse,
@@ -63,6 +64,8 @@ class CachedLLMClient:
         token_budget: int,
         prompt_version: int = 1,
         model_id: str = "stub",
+        enforce_pii: bool = False,
+        redaction: RedactionSession | None = None,
     ) -> None:
         self.provider = provider
         self.cache_dir = cache_dir
@@ -72,7 +75,16 @@ class CachedLLMClient:
         self.model_id = model_id
         self.tokens_used = 0
         self.provider_calls = 0
+        self.enforce_pii = enforce_pii
+        self.redaction = redaction if redaction is not None else RedactionSession()
+        self.egress_log: list[bytes] = []
         cache_dir.mkdir(parents=True, exist_ok=True)
+
+    def _guard(self, payload: bytes) -> None:
+        assert_no_amounts(payload)
+        if self.enforce_pii:
+            assert_no_pii(payload)
+        self.egress_log.append(payload)
 
     def _key(self, kind: str, request_dump: dict) -> str:
         payload = {
@@ -100,34 +112,39 @@ class CachedLLMClient:
             raise OfflineCacheMiss(f"malformed cache entry {path}: {exc}") from exc
 
     def resolve_entity(self, request: EntityResolutionRequest) -> EntityResolutionResponse | None:
-        payload = canonical_json({"kind": "resolve_entity", "request": request.model_dump(mode="json")})
-        assert_no_amounts(payload)
-        cached = self.lookup_entity(request)
+        outbound = request
+        if self.enforce_pii:
+            outbound = redact_entity_request(request, self.redaction)
+        payload = canonical_json({"kind": "resolve_entity", "request": outbound.model_dump(mode="json")})
+        self._guard(payload)
+        cached = self.lookup_entity(outbound)
         if cached is not None:
-            return bind_selection(request, cached)
+            return bind_selection(outbound, cached)
         if self.offline:
             raise OfflineCacheMiss("offline cache miss; refusing to call the provider (NN-9)")
         self._charge(getattr(self.provider, "tokens_per_call", 1))
         self.provider_calls += 1
-        response = self.provider.resolve_entity(request)
+        response = self.provider.resolve_entity(outbound)
         if response is None:
             return None
-        bound = bind_selection(request, response)
+        bound = bind_selection(outbound, response)
         if bound is None:
             return None
-        key = self._key("resolve_entity", request.model_dump(mode="json"))
+        key = self._key("resolve_entity", outbound.model_dump(mode="json"))
         self._path(key).write_bytes(bound.model_dump_json().encode("utf-8"))
         return bound
 
     def narrate(self, request: NarrationRequest) -> NarrationResponse | None:
         dump = request.model_dump(mode="json")
         payload = canonical_json({"kind": "narrate", "request": dump})
-        assert_no_amounts(payload)
+        self._guard(payload)
         key = self._key("narrate", dump)
         path = self._path(key)
         if path.is_file():
             raw = path.read_bytes()
             assert_no_amounts(raw)
+            if self.enforce_pii:
+                assert_no_pii(raw)
             return NarrationResponse.model_validate_json(raw)
         if self.offline:
             raise OfflineCacheMiss("offline cache miss; refusing to call the provider (NN-9)")

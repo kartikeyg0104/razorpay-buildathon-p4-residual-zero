@@ -16,11 +16,12 @@ from residual_zero.config import (
     ThresholdNotDerivedError,
     load_profile,
 )
+from residual_zero.features import FeatureFlags, load_features
 from residual_zero.exceptions.classify import ExceptionSignals, classify
 from residual_zero.models import BankCredit, Disposition, LedgerItem, PoolScope, Regime, ResolutionTier, Uniqueness
 from residual_zero.ordering import ordering_score, render_ordering_score
 from residual_zero.semantic.tiers import registry_from_items, resolve
-from residual_zero.solver import solve_search
+from residual_zero.solver import collect_enumerated, disambiguate, solve_search
 from residual_zero.solver.fastpath import DeclaredLine, verify_declared
 from residual_zero.tz import to_ist_date_display
 from residual_zero.verify import verify_decomposition
@@ -47,8 +48,10 @@ def run_a3(
     cfg: SolverConfig,
     llm_cfg: LLMRuntimeConfig,
     reserve_bps: int,
+    flags: FeatureFlags | None = None,
 ) -> A3Result:
     ledger = {it.id: it for it in items}
+    flags = flags if flags is not None else load_features()
     registry = registry_from_items(items)
     try:
         threshold = cfg.autonomy.derived_threshold
@@ -75,6 +78,28 @@ def run_a3(
                 member_ids = tuple(r.item_id for r in declared if r.item_id in ledger)
         pool = build_pool(credit, items, cfg)
         solve = solve_search(pool, credit.amount_paise, cfg)
+        if (
+            flags.f31_disambiguation
+            and solve.uniqueness == Uniqueness.AMBIGUOUS
+            and solve.pool_scope == PoolScope.FULL
+            and not member_ids
+        ):
+            enumerated, capped, budgeted = collect_enumerated(
+                pool, credit.amount_paise, cfg, flags.f31_enumerate_cap,
+            )
+            if not budgeted and enumerated:
+                d = disambiguate(
+                    pool.item_ids, enumerated, ledger, rates, fees, reserve_bps,
+                    frozenset(), enumeration_capped=capped,
+                )
+                if d.uniqueness == Uniqueness.UNIQUE:
+                    solve = solve.model_copy(
+                        update={
+                            "uniqueness": Uniqueness.UNIQUE,
+                            "member_ids": d.member_ids,
+                            "alternates": 1,
+                        }
+                    )
         if not member_ids and solve.uniqueness == Uniqueness.UNIQUE and solve.pool_scope == PoolScope.FULL:
             member_ids = solve.member_ids
         outcome = verify_decomposition(

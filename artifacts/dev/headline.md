@@ -1,4 +1,4 @@
-# Headline (dev)
+# Headline
 
 | arm | n | exact | assignment P | assignment R | cleared | flagged | budget |
 |---|---:|---:|---:|---:|---:|---:|---:|

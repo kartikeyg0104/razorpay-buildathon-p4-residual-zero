@@ -1,0 +1,16 @@
+# Phase 2 feature flags. Defaults ON for the v2 product.
+# tests/test_feature_flags_off.py never reads this file: it constructs FeatureFlags.all_off().
+
+f33_conservation: true
+f49_pii: true
+f55_ci: true
+f31_disambiguation: true
+f31_enumerate_cap: 32
+f40_journal: true
+f37_clustering: true
+f38_drift: true
+f52_trace: true
+f50_injection: true
+f54_eval_diff: true
+f24_adversarial: true
+f25_idempotency: true

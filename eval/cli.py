@@ -98,6 +98,11 @@ def main(argv: list[str] | None = None) -> int:
         results["a3"] = run_a3(
             items, credits, by_credit, truth_members, rates, fees, cfg, llm_cfg, reserve_bps,
         )
+        from eval.dispositions import write_dispositions
+        write_dispositions(
+            out.joinpath("dispositions.json"),
+            {cid: disp.value for cid, disp in results["a3"].dispositions.items()},
+        )
     if "a4" in wanted:
         results["a4"] = run_a4()
     elapsed_ms = int((time.perf_counter() - t0) * 1000)

@@ -1,0 +1,54 @@
+bank_control:
+  code: "1100"
+  name: "Bank"
+unreconciled:
+  code: "2300"
+  name: "Unreconciled settlements"
+kind_map:
+  PAYMENT:
+    credit:
+      code: "4100"
+      name: "Settled payments"
+  REFUND:
+    debit:
+      code: "5100"
+      name: "Refunds"
+  CHARGEBACK:
+    debit:
+      code: "5200"
+      name: "Chargebacks"
+  REPRESENTMENT:
+    credit:
+      code: "4100"
+      name: "Settled payments"
+  FEE:
+    debit:
+      code: "6100"
+      name: "Platform fees"
+  TAX_GST:
+    debit:
+      code: "6200"
+      name: "GST on fees"
+  TAX_WITHHOLDING:
+    debit:
+      code: "2100"
+      name: "Withholding payable"
+  RESERVE_HOLD:
+    debit:
+      code: "1400"
+      name: "Reserve receivable"
+  RESERVE_RELEASE:
+    credit:
+      code: "1400"
+      name: "Reserve receivable"
+  ADJUSTMENT:
+    debit:
+      code: "7100"
+      name: "Adjustments"
+    credit:
+      code: "7100"
+      name: "Adjustments"
+  BANK_CHARGE:
+    debit:
+      code: "6300"
+      name: "Bank charges"

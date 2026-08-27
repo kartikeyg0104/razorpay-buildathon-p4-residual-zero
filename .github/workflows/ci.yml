@@ -1,0 +1,53 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Test
+        run: make test
+        env:
+          PY: python
+      - name: Generate dev split if missing
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from generator.cli import generate_split
+          rendered = Path("data/dev/rendered")
+          if not rendered.joinpath("bank.csv").is_file():
+              generate_split("dev", Path("config/profiles/phase1.yaml"), Path("data"))
+          print("data/dev ready")
+          PY
+      - name: verify-audit
+        run: make verify-audit
+      - name: verify-books
+        run: make verify-books
+      - name: Flags-off exact floor
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+          from residual_zero.features import FeatureFlags
+          from eval.dispositions import collect_a3_dispositions
+          from eval.metrics import exact_decomposition_counted
+          from eval.truth_loader import load_truth
+          floor = yaml.safe_load(Path("config/ci.yaml").read_text())["dev_exact_floor"]
+          flags = FeatureFlags.all_off()
+          # Disposition regression is tests/test_feature_flags_off.py. Exact floor:
+          recs = load_truth("dev")
+          truth = {r.bank_credit_id: r.member_ids for r in recs}
+          print("ci floor", floor, "truth_n", len(truth))
+          print("ci offline: config/llm.yaml model_id=stub token_budget=0; no provider keys")
+          PY
+      - name: eval (dev, full, stub)
+        run: make eval
+      - name: reproduce
+        run: make reproduce

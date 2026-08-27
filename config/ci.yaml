@@ -1,0 +1,4 @@
+# F55: flags-off A3 exact-decomposition floor. Copied from the v1-submittable README,
+# not re-measured. Any drop OR rise with features off fails CI — the core moved.
+dev_exact_floor: "129/239"
+dev_split_n: 239

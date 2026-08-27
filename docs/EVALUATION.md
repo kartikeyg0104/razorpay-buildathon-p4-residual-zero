@@ -202,3 +202,29 @@ A1 exact-decomposition on each (sim, amount_tol_paise) cell, as exact Fractions:
 | 90 | 50000 | `0/239` |
 
 <!-- A1-SWEEP-END -->
+
+## 12 · Second-order results (§9.10)
+
+A feature is not done until its row is populated from a real run. F24 and F25 have no
+§9.10 row; their numbers live in §13 and come from spec §6.1.
+
+| Feature | The number it owes | Measured |
+|---|---|---|
+| F31 constraint disambiguation | % of `AMBIGUOUS` credits resolved to unique by structural constraints; auto-clear error on that subset; count proven structurally infeasible | Full dev pass: **245/245** arithmetically AMBIGUOUS credits hit `f31_enumerate_cap=32` (budget 0). PLAN-P2 §0.2 then refuses UNIQUE and INFEASIBLE. Resolved-to-unique **0/245**. Auto-clear error on that subset: not applicable (`0` auto-clears). Structurally infeasible **0/245**. Fixtures in `tests/test_disambiguation.py` still surface UNIQUE and INFEASIBLE on constructed, fully-enumerated domains. |
+| F33 conservation identity | the period identity itself; items claimed by >1 decomposition (must be 0); unreconciled value | Dev split, `artifacts/dev/ledger.sqlite` after `make verify-books`. Identity HOLDS on both accounts. `acc_00` `[2025-01-08, 2025-03-04]`: `62,79,853.99 = 0.00 + 62,79,853.99`, n_credits=121, n_cleared=0. `acc_01` `[2025-01-08, 2025-03-05]`: `81,45,904.20 = 0.00 + 81,45,904.20`, n_credits=127, n_cleared=0. double_claimed=0. unreconciled_value=`1,44,25,758.19`. Cleared members are zero because auto-clear coverage is 0 at threshold `1.000000`; the identity is still the joint check, and it held. |
+| F37 exception clustering | exception compression ratio; cluster purity against true cause labels | `artifacts/p2` flags-on run, n=248 exceptions: compression **248/34**. Purity against `cause_labels.structural` (eval-only): **159/248**. Labels never enter `src/residual_zero/cluster.py`. |
+| F38 rate drift | detection latency in windows; false-positive rate on undrifted profiles; rupee estimation error | Undrifted `data/dev`: 45 instrument-weeks, **alerts=0**, FP rate **0/45**. Detection latency: not applicable (class 24 is not on `phase1_dev_plan()`; `data/dev` was not regenerated). Rupee estimation error: not applicable with zero alerts. `min_sample=8`; contracted rate must sit outside the integer band. |
+| F40 journal export | debits = credits (exact); control-account tie-out residual (0); entries per cleared credit | `artifacts/p2/journal.csv`: debits=`1442575819` paise, credits=`1442575819` paise, control residual=`0`. Lines=496. CLEARED credits=0, so entries per cleared credit is not applicable; unreconciled credits post `Dr 1100 / Cr 2300` (2 lines per credit). No plug. |
+| F49 PII boundary | raw VPAs, card fragments, phone numbers in the model call log (must be 0); accuracy delta redacted vs raw | Egress log hits: **0**. Accuracy delta redacted vs raw: **not estimable** (Q2=C stub; both paths 0 model resolutions). Enforcement is `PiiLeakError`, not a warning. |
+| F50 injection corpus | injections causing an auto-clear (must be 0 of ~30); disposition of each | **0/30** auto-clear. All 30 recorded `FLAGGED` in `artifacts/injections_f50.json`. |
+| F52 decision trace | % of credits with a complete trace terminating in exactly one disposition | `artifacts/p2`: **248/248**. A mid-credit raise still writes a trace (`tests/test_trace.py`). |
+| F54 eval-diff | disposition deltas attached to every config change in `docs/EVALUATION.md` | Baseline: [docs/diffs/20260828-v1-self.md](../diffs/20260828-v1-self.md) (v1 vs itself, 0 rows). Gate 2 flags-on: [docs/diffs/20260828-v1-to-v2.md](../diffs/20260828-v1-to-v2.md) (`artifacts/v1` → `artifacts/dev`, 0 rows). **Rule:** no change to `config/solver.yaml`, `config/features.yaml`, or the autonomy threshold ships without an eval-diff link in this file. Threshold not moved. |
+| F55 CI | green build; run history; dev-split regression epsilon | Workflow `.github/workflows/ci.yml`. Offline: stub `model_id`, `token_budget: 0`. Epsilon: flags-off A3 exact must equal `129/239` (`config/ci.yaml`). Run history starts when this workflow is pushed. |
+
+## 13 · Second-wave carry (spec §6.1, not §9.10)
+
+| Feature | Source | Measured |
+|---|---|---|
+| F24 adversarial self-test | §6.1: publish what was found, including anything not fixed | 8 attacks in `artifacts/adversarial/catalogue.md`. Auto-clears of a non-truth set: **0**. Negative result published. |
+| F25 idempotency and crash-resume | §6.1: replay equality; kill-and-resume without double-count or a broken chain | Replay: second pass writes 0 new audit rows. Crash-resume: `halt_after` then restart; chain verifies; no double-count (`tests/test_idempotency.py`). |
+

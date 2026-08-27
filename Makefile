@@ -22,7 +22,7 @@ verify-audit:
 	$(PY) -c "from pathlib import Path; from residual_zero.db import open_readonly; from residual_zero.audit import verify_chain; conn=open_readonly(Path('artifacts/dev/ledger.sqlite')); ok, broken, head=verify_chain(conn); n=conn.execute('SELECT COUNT(*) FROM audit_entry').fetchone()[0]; print(f'verify-audit ok={ok} entries={n} head={head}'); raise SystemExit(0 if ok else 1)"
 
 verify-books:
-	@echo "make verify-books: not implemented until Phase 2 (F33 conservation identity)"; exit 1
+	$(PY) -m residual_zero.books --db artifacts/dev/ledger.sqlite --split dev
 
 reproduce:
 	sh scripts/reproduce.sh
@@ -34,4 +34,4 @@ evidence:
 	$(PY) scripts/evidence.py
 
 eval-diff:
-	@echo "make eval-diff RUN_A=... RUN_B=...: not implemented until Phase 2 (F54)"; exit 1
+	$(PY) -m eval.diff --a $(RUN_A) --b $(RUN_B)

@@ -76,4 +76,29 @@ make eval
 make reproduce
 make challenge FILE=fixtures/challenges/unsolvable_missing_record.json
 make evidence
+make verify-books
+make eval-diff RUN_A=artifacts/v1 RUN_B=artifacts/v1
 ```
+
+## Controller results (Phase 2, below the fold)
+
+Phase 1 auto-clear coverage remains `0/239` at threshold `1.000000`. Phase 2 does not move that threshold (F54). What changed is the controller surface around a still-conservative clearer.
+
+- **Books (F33).** Period identity holds on both accounts. double_claimed=`0`. Unreconciled value `1,44,25,758.19` (all credits; nothing auto-cleared).
+- **Journal (F40).** Debits equal credits at paise. Bank control residual `0`. Uncleared credits post to suspense `2300`. No plug line. This is a file you import; nothing here holds accounting-system credentials.
+- **Exceptions (F37).** Compression and purity are the measured pair in `docs/EVALUATION.md` §12, not an invented ratio.
+- **Fees (F38).** False-positive rate on the undrifted Phase 1 corpus is in §12. Class `24 FEE_RATE_DRIFT` exists; classes 25–26 do not.
+
+## Second-order results (§9.10)
+
+See `docs/EVALUATION.md` §12 for the live table (F33, F49, F55, F31, F40, F37, F38, F52, F50, F54). F24 and F25 are §6.1 carries, recorded in §13.
+
+## Phase 2 test-split note (NN-16)
+
+Evaluation **1 of 4** was spent at `v1-submittable`. Phase 2 did **not** spend evaluation 2 of 4: flags-off dispositions match the v1 map, the autonomy threshold is unchanged, and a second test-split run could not move a published test number without violating NN-16's budget. Dev evaluation is unlimited and was re-run for the §9.10 rows.
+
+## Safety
+
+1. **PII boundary (F49).** Detectors for VPAs, card fragments, phones and account tails. `CachedLLMClient` redacts then **raises** `PiiLeakError` on a residual hit. It does not warn-and-send. Raw VPA/card/phone count in the model egress log: `0`. Redacted-vs-raw entity-resolution accuracy delta: not estimable (Q2=C stub; both paths `0` model resolutions).
+2. **Injection corpus (F50).** 30 planted narration strings. Auto-clears: `0/30`. The model returns an id from a closed candidate set, never sees or emits an amount, and cannot authorise: auto-clear still needs UNIQUE + zero paise residual + an ordering score from observables.
+3. **Degradation ladder (F51).** Not in this tag (Phase 3). Named here so the safety section's order matches spec §15 rather than implying a rung we did not build.

@@ -43,6 +43,9 @@ TEMPLATES: dict[ExceptionClass, str] = {
     ExceptionClass.RATE_MISMATCH: (
         "Declared line deltas fully explain the residual {DELTA}. A configured rate does not match the posted line."
     ),
+    ExceptionClass.STRUCTURALLY_INFEASIBLE: (
+        "Arithmetic subsets exist but none survive structural constraints. This is a data defect, not a close match."
+    ),
 }
 
 

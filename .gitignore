@@ -10,6 +10,8 @@ data/**
 !data/seeds/**
 
 # artifacts/ is COMMITTED on purpose (§10) — do not ignore it.
+*.sqlite-wal
+*.sqlite-shm
 
 __pycache__/
 *.py[cod]

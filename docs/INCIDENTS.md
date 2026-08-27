@@ -54,3 +54,15 @@ Format:
 **Regression test.** (behaviour covered by the test-split eval completing)
 **What it changed about my thinking.** The rupee axis is a projection. Projections send some legal paise values to zero, and the DP must treat that as "cannot search", not as a crash.
 
+---
+
+## 2026-08-28T00:30:00+05:30 · F25 replay processed the *next* credits instead of no-opping
+**Symptom.** Second `run_split(..., limit=3)` with idempotency on wrote 3 new audit rows. Chain still verified; counts doubled.
+**First hypothesis.** `seen_ids` failed to parse audit payloads.
+**Actual cause.** `limit` counted newly written rows. Skipped credits did not increment `n`, so the loop walked past the original batch.
+**Fix.** `limit` is an index into the credit list. Skip-if-present is a no-op inside that prefix.
+**Commit.** (Phase 2 working tree)
+**Regression test.** `tests/test_idempotency.py::test_replay_does_not_duplicate_audit`
+**What it changed about my thinking.** "Same batch twice" is a set identity, not a count of successful writes.
+
+

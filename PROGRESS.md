@@ -339,3 +339,35 @@ A0/A1 exact 0/800. A2 exact 0/800.
 
 Tag: `v1-submittable`.
 
+---
+
+## Phase 2 · CP2.1–CP2.12 + Gate 2 · VERIFIED 2026-08-28
+
+Wrote `PLAN-P2.md` first (71h ladder). Then implemented F33→F49→F55→F31→F40→F37→F38→F52→F50→F54→F24→F25.
+
+**Gate 2 commands (all exit 0).**
+
+- `make eval` — A3 exact `129/239`, assignment `3339/3339` P / `3339/5973` R, cleared 0, flagged 239. Headline unchanged vs `v1-submittable`.
+- `make verify-books` — identity HOLDS both accounts; double_claimed=0; unreconciled `1,44,25,758.19`. Printed in `artifacts/dev/books.md` and `artifacts/p2/books.md`.
+- `make verify-audit` — `ok=True entries=248`.
+- `make reproduce` — `reproduce: ok`.
+- `python -m pytest -q tests/test_feature_flags_off.py` — 3 passed. Full suite 257 passed earlier this phase.
+- F54: [docs/diffs/20260828-v1-to-v2.md](docs/diffs/20260828-v1-to-v2.md) is empty (flags-on A3 still all `FLAGGED`).
+
+**§9.10 (dev, `artifacts/p2` / `artifacts/dev` unless noted).** F33 identity holds, unreconciled `1,44,25,758.19`, double_claimed 0. F37 compression 248/34, purity 159/248. F38 FP 0/45 instrument-weeks on undrifted dev. F40 trial balance exact, control residual 0, 496 lines. F49 egress PII 0; accuracy delta not estimable (Q2=C). F50 0/30 auto-clear. F52 248/248 traces. F54 self-diff + v1-to-v2 attached. F55 workflow + epsilon `129/239`. F31: **245/245** AMBIGUOUS credits capped at enumerate_cap 32; unique 0, infeasible 0, budget 0. F24: 8 attacks, 0 bad auto-clears. F25: replay no-ops; crash-resume chain verifies.
+
+**Test-split eval:** skipped (NN-16; 1 of 4 already spent; flags-off dispositions identical to v1; threshold unchanged; flags-on eval-diff empty).
+
+**Video:** first-screen numbers did not move. No re-record.
+
+**Deviations.**
+
+1. `ExceptionClass` grows by `STRUCTURALLY_INFEASIBLE` (Phase 1 had eleven).
+2. Journal posts unreconciled credits to suspense so bank control ties to all credits (PLAN-P2 §0.4).
+3. OR-Tools is declared in `pyproject.toml`; local `.venv` could not receive the wheel in this sandbox, so `disambiguate.py` falls back to the same enumerated Boolean domain in Python. CI install is the OR-Tools path.
+4. Class 24 exists on `phase2_drift_plan()` only; `data/dev` was not regenerated.
+5. `run_split` `limit` is an index into the credit list so F25 skip cannot walk past the batch.
+
+**Not done in this tag:** live GitHub Actions run history (needs a push); test-split evaluation 2 of 4; video re-record (script note in PLAN-P2 §3 only).
+
+

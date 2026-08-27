@@ -52,6 +52,7 @@ def test_one_case_per_class():
         ExceptionClass.ROUNDING_RESIDUE: _sig(nearest_delta_paise=100),
         ExceptionClass.SUSPECTED_WITHHOLDING: _sig(nearest_delta_paise=1_000),
         ExceptionClass.UNITEMISED_FEE: _sig(nearest_delta_paise=20_000),
+        ExceptionClass.STRUCTURALLY_INFEASIBLE: _sig(structurally_infeasible=True),
     }
     assert set(cases) == set(ExceptionClass)
     for expected, signals in cases.items():

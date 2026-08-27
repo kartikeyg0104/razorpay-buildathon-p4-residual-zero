@@ -16,6 +16,39 @@ from .bitset_dp import BudgetExceeded, ReachabilityIndex
 _STRICT = ConfigDict(frozen=True, extra="forbid")
 
 
+def collect_enumerated(
+    pool: CandidatePool,
+    target_paise: int,
+    cfg: SolverConfig,
+    cap: int,
+) -> tuple[tuple[int, ...], bool, bool]:
+    """Return (index tuples, capped, budgeted). Budgeted True means do not disambiguate."""
+    amounts = pool.amounts_rupees
+    n = len(amounts)
+    if n == 0 or n > cfg.search.max_pool or any(a == 0 for a in amounts):
+        return (), False, True
+    index = ReachabilityIndex(amounts)
+    if index.axis_width > cfg.search.max_axis_width_rupees:
+        return (), False, True
+    target_rupees = to_rupee_units(target_paise)
+    hits = index.hits_in_window(target_rupees, cfg.search.epsilon_rupees)
+    if not hits:
+        return (), False, True
+    try:
+        solutions = enumerate_solutions(
+            index,
+            amounts,
+            hits,
+            cap=cap,
+            max_nodes=cfg.search.max_enum_nodes,
+            require_nonempty=cfg.search.require_nonempty,
+        )
+    except BudgetExceeded:
+        return (), False, True
+    capped = len(solutions) >= cap
+    return solutions, capped, False
+
+
 class SolveResult(BaseModel):
     model_config = _STRICT
 

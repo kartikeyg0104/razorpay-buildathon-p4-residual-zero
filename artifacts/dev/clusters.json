@@ -1,0 +1,454 @@
+[
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|CARD|none|2025-W03",
+    "size": 2,
+    "ids": [
+      "crd_002_acc_00_2025-01-15",
+      "crd_003_acc_00_2025-01-15"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|CARD|none|2025-W04",
+    "size": 3,
+    "ids": [
+      "crd_001_acc_00_2025-01-21",
+      "crd_002_acc_00_2025-01-21",
+      "crd_003_acc_00_2025-01-21"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|CARD|none|2025-W05",
+    "size": 11,
+    "ids": [
+      "crd_001_acc_00_2025-01-27",
+      "crd_001_acc_00_2025-01-29",
+      "crd_001_acc_01_2025-01-28",
+      "crd_001_acc_01_2025-01-29",
+      "crd_002_acc_00_2025-01-27",
+      "crd_002_acc_00_2025-01-29",
+      "crd_002_acc_01_2025-01-28",
+      "crd_002_acc_01_2025-01-29",
+      "crd_003_acc_00_2025-01-27",
+      "crd_003_acc_00_2025-01-29",
+      "crd_003_acc_01_2025-01-28"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|CARD|none|2025-W07",
+    "size": 13,
+    "ids": [
+      "crd_001_acc_00_2025-02-10",
+      "crd_001_acc_01_2025-02-10",
+      "crd_001_acc_01_2025-02-13",
+      "crd_001_acc_01_2025-02-14",
+      "crd_002_acc_00_2025-02-10",
+      "crd_002_acc_01_2025-02-10",
+      "crd_002_acc_01_2025-02-13",
+      "crd_002_acc_01_2025-02-14",
+      "crd_003_acc_00_2025-02-10",
+      "crd_003_acc_01_2025-02-07",
+      "crd_003_acc_01_2025-02-10",
+      "crd_003_acc_01_2025-02-13",
+      "crd_003_acc_01_2025-02-14"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|CARD|none|2025-W08",
+    "size": 9,
+    "ids": [
+      "crd_001_acc_01_2025-02-19",
+      "crd_001_acc_01_2025-02-20",
+      "crd_001_acc_01_2025-02-21",
+      "crd_002_acc_01_2025-02-19",
+      "crd_002_acc_01_2025-02-20",
+      "crd_002_acc_01_2025-02-21",
+      "crd_003_acc_01_2025-02-19",
+      "crd_003_acc_01_2025-02-20",
+      "crd_003_acc_01_2025-02-21"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|CARD|none|2025-W09",
+    "size": 6,
+    "ids": [
+      "crd_001_acc_00_2025-02-24",
+      "crd_001_acc_00_2025-02-26",
+      "crd_002_acc_00_2025-02-24",
+      "crd_002_acc_00_2025-02-26",
+      "crd_003_acc_00_2025-02-24",
+      "crd_003_acc_00_2025-02-26"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|EMI|none|2025-W02",
+    "size": 6,
+    "ids": [
+      "crd_001_acc_00_2025-01-09",
+      "crd_001_acc_00_2025-01-10",
+      "crd_002_acc_00_2025-01-09",
+      "crd_002_acc_00_2025-01-10",
+      "crd_003_acc_00_2025-01-09",
+      "crd_003_acc_00_2025-01-10"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|EMI|none|2025-W04",
+    "size": 7,
+    "ids": [
+      "crd_001_acc_01_2025-01-20",
+      "crd_001_acc_01_2025-01-21",
+      "crd_001_acc_01_2025-01-21_dup",
+      "crd_002_acc_01_2025-01-17",
+      "crd_002_acc_01_2025-01-20",
+      "crd_003_acc_01_2025-01-20",
+      "crd_003_acc_01_2025-01-21"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|EMI|none|2025-W05",
+    "size": 7,
+    "ids": [
+      "crd_001_acc_01_2025-01-30",
+      "crd_001_acc_01_2025-01-30_dup",
+      "crd_001_acc_01_2025-01-31",
+      "crd_002_acc_01_2025-01-30",
+      "crd_003_acc_01_2025-01-29",
+      "crd_003_acc_01_2025-01-30",
+      "crd_003_acc_01_2025-01-31"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|EMI|none|2025-W06",
+    "size": 6,
+    "ids": [
+      "crd_001_acc_00_2025-02-06",
+      "crd_001_acc_00_2025-02-07",
+      "crd_002_acc_00_2025-02-06",
+      "crd_002_acc_00_2025-02-07",
+      "crd_003_acc_00_2025-02-06",
+      "crd_003_acc_00_2025-02-07"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|NETBANKING|none|2025-W03",
+    "size": 4,
+    "ids": [
+      "crd_001_acc_01_2025-01-13",
+      "crd_002_acc_01_2025-01-13",
+      "crd_002_acc_01_2025-01-13_dup",
+      "crd_003_acc_01_2025-01-13"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|NETBANKING|none|2025-W04",
+    "size": 4,
+    "ids": [
+      "crd_001_acc_01_2025-01-22",
+      "crd_002_acc_01_2025-01-21",
+      "crd_002_acc_01_2025-01-22",
+      "crd_003_acc_01_2025-01-22"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|NETBANKING|none|2025-W05",
+    "size": 3,
+    "ids": [
+      "crd_001_acc_01_2025-01-27",
+      "crd_002_acc_01_2025-01-27",
+      "crd_003_acc_01_2025-01-27"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|NETBANKING|none|2025-W06",
+    "size": 3,
+    "ids": [
+      "crd_001_acc_01_2025-02-05",
+      "crd_002_acc_01_2025-02-05",
+      "crd_003_acc_01_2025-02-05"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|NETBANKING|none|2025-W07",
+    "size": 3,
+    "ids": [
+      "crd_001_acc_00_2025-02-12",
+      "crd_002_acc_00_2025-02-12",
+      "crd_003_acc_00_2025-02-12"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|NETBANKING|none|2025-W08",
+    "size": 3,
+    "ids": [
+      "crd_001_acc_01_2025-02-17",
+      "crd_002_acc_01_2025-02-17",
+      "crd_003_acc_01_2025-02-17"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|NETBANKING|none|2025-W09",
+    "size": 6,
+    "ids": [
+      "crd_001_acc_00_2025-02-25",
+      "crd_001_acc_01_2025-02-24",
+      "crd_002_acc_00_2025-02-25",
+      "crd_002_acc_01_2025-02-24",
+      "crd_003_acc_00_2025-02-25",
+      "crd_003_acc_01_2025-02-24"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|NETBANKING|none|2025-W10",
+    "size": 2,
+    "ids": [
+      "crd_001_acc_00_2025-03-03",
+      "crd_002_acc_00_2025-03-03"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|UPI|none|2025-W02",
+    "size": 9,
+    "ids": [
+      "crd_001_acc_01_2025-01-08",
+      "crd_001_acc_01_2025-01-09",
+      "crd_001_acc_01_2025-01-10",
+      "crd_002_acc_01_2025-01-08",
+      "crd_002_acc_01_2025-01-09",
+      "crd_002_acc_01_2025-01-10",
+      "crd_003_acc_01_2025-01-08",
+      "crd_003_acc_01_2025-01-09",
+      "crd_003_acc_01_2025-01-10"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|UPI|none|2025-W03",
+    "size": 20,
+    "ids": [
+      "crd_001_acc_00_2025-01-13",
+      "crd_001_acc_00_2025-01-16",
+      "crd_001_acc_00_2025-01-17",
+      "crd_001_acc_01_2025-01-14",
+      "crd_001_acc_01_2025-01-15",
+      "crd_001_acc_01_2025-01-16",
+      "crd_001_acc_01_2025-01-17",
+      "crd_002_acc_00_2025-01-13",
+      "crd_002_acc_00_2025-01-16",
+      "crd_002_acc_00_2025-01-17",
+      "crd_002_acc_01_2025-01-14",
+      "crd_002_acc_01_2025-01-15",
+      "crd_002_acc_01_2025-01-16",
+      "crd_003_acc_00_2025-01-13",
+      "crd_003_acc_00_2025-01-16",
+      "crd_003_acc_00_2025-01-17",
+      "crd_003_acc_01_2025-01-14",
+      "crd_003_acc_01_2025-01-15",
+      "crd_003_acc_01_2025-01-16",
+      "crd_003_acc_01_2025-01-17"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|UPI|none|2025-W04",
+    "size": 15,
+    "ids": [
+      "crd_001_acc_00_2025-01-22",
+      "crd_001_acc_00_2025-01-23",
+      "crd_001_acc_00_2025-01-24",
+      "crd_001_acc_01_2025-01-23",
+      "crd_001_acc_01_2025-01-24",
+      "crd_002_acc_00_2025-01-22",
+      "crd_002_acc_00_2025-01-23",
+      "crd_002_acc_00_2025-01-24",
+      "crd_002_acc_01_2025-01-23",
+      "crd_002_acc_01_2025-01-24",
+      "crd_003_acc_00_2025-01-22",
+      "crd_003_acc_00_2025-01-23",
+      "crd_003_acc_00_2025-01-24",
+      "crd_003_acc_01_2025-01-23",
+      "crd_003_acc_01_2025-01-24"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|UPI|none|2025-W05",
+    "size": 9,
+    "ids": [
+      "crd_001_acc_00_2025-01-28",
+      "crd_001_acc_00_2025-01-30",
+      "crd_001_acc_00_2025-01-31",
+      "crd_002_acc_00_2025-01-28",
+      "crd_002_acc_00_2025-01-30",
+      "crd_002_acc_00_2025-01-31",
+      "crd_003_acc_00_2025-01-28",
+      "crd_003_acc_00_2025-01-30",
+      "crd_003_acc_00_2025-01-31"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|UPI|none|2025-W06",
+    "size": 12,
+    "ids": [
+      "crd_001_acc_00_2025-02-03",
+      "crd_001_acc_00_2025-02-04",
+      "crd_001_acc_00_2025-02-05",
+      "crd_001_acc_01_2025-02-04",
+      "crd_002_acc_00_2025-02-03",
+      "crd_002_acc_00_2025-02-04",
+      "crd_002_acc_00_2025-02-05",
+      "crd_002_acc_01_2025-02-04",
+      "crd_003_acc_00_2025-02-03",
+      "crd_003_acc_00_2025-02-04",
+      "crd_003_acc_00_2025-02-05",
+      "crd_003_acc_01_2025-02-04"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|UPI|none|2025-W07",
+    "size": 14,
+    "ids": [
+      "crd_001_acc_00_2025-02-11",
+      "crd_001_acc_00_2025-02-13",
+      "crd_001_acc_00_2025-02-14",
+      "crd_001_acc_01_2025-02-11",
+      "crd_002_acc_00_2025-02-11",
+      "crd_002_acc_00_2025-02-11_dup",
+      "crd_002_acc_00_2025-02-13",
+      "crd_002_acc_00_2025-02-14",
+      "crd_002_acc_01_2025-02-11",
+      "crd_002_acc_01_2025-02-11_dup",
+      "crd_003_acc_00_2025-02-11",
+      "crd_003_acc_00_2025-02-13",
+      "crd_003_acc_00_2025-02-14",
+      "crd_003_acc_01_2025-02-11"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|UPI|none|2025-W08",
+    "size": 19,
+    "ids": [
+      "crd_001_acc_00_2025-02-17",
+      "crd_001_acc_00_2025-02-18",
+      "crd_001_acc_00_2025-02-19",
+      "crd_001_acc_00_2025-02-20",
+      "crd_001_acc_00_2025-02-21",
+      "crd_001_acc_01_2025-02-18",
+      "crd_002_acc_00_2025-02-17",
+      "crd_002_acc_00_2025-02-18",
+      "crd_002_acc_00_2025-02-19",
+      "crd_002_acc_00_2025-02-20",
+      "crd_002_acc_00_2025-02-21",
+      "crd_002_acc_01_2025-02-18",
+      "crd_003_acc_00_2025-02-17",
+      "crd_003_acc_00_2025-02-18",
+      "crd_003_acc_00_2025-02-18_dup",
+      "crd_003_acc_00_2025-02-19",
+      "crd_003_acc_00_2025-02-20",
+      "crd_003_acc_00_2025-02-21",
+      "crd_003_acc_01_2025-02-18"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|UPI|none|2025-W09",
+    "size": 12,
+    "ids": [
+      "crd_001_acc_00_2025-02-27",
+      "crd_001_acc_00_2025-02-28",
+      "crd_001_acc_01_2025-02-25",
+      "crd_001_acc_01_2025-02-26",
+      "crd_002_acc_00_2025-02-27",
+      "crd_002_acc_00_2025-02-28",
+      "crd_002_acc_01_2025-02-25",
+      "crd_002_acc_01_2025-02-26",
+      "crd_003_acc_00_2025-02-27",
+      "crd_003_acc_00_2025-02-28",
+      "crd_003_acc_01_2025-02-25",
+      "crd_003_acc_01_2025-02-26"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|UPI|none|2025-W10",
+    "size": 8,
+    "ids": [
+      "crd_001_acc_00_2025-03-04",
+      "crd_001_acc_01_2025-03-03",
+      "crd_001_acc_01_2025-03-04",
+      "crd_002_acc_00_2025-03-04",
+      "crd_002_acc_01_2025-03-03",
+      "crd_003_acc_00_2025-03-03",
+      "crd_003_acc_00_2025-03-04",
+      "crd_003_acc_01_2025-03-03"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|WALLET|none|2025-W03",
+    "size": 3,
+    "ids": [
+      "crd_001_acc_00_2025-01-14",
+      "crd_002_acc_00_2025-01-14",
+      "crd_003_acc_00_2025-01-14"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|WALLET|none|2025-W04",
+    "size": 3,
+    "ids": [
+      "crd_001_acc_00_2025-01-20",
+      "crd_002_acc_00_2025-01-20",
+      "crd_003_acc_00_2025-01-20"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|WALLET|none|2025-W06",
+    "size": 11,
+    "ids": [
+      "crd_001_acc_01_2025-02-03",
+      "crd_001_acc_01_2025-02-06",
+      "crd_001_acc_01_2025-02-07",
+      "crd_001_acc_01_2025-02-07_dup",
+      "crd_002_acc_01_2025-01-31",
+      "crd_002_acc_01_2025-02-03",
+      "crd_002_acc_01_2025-02-06",
+      "crd_002_acc_01_2025-02-07",
+      "crd_003_acc_01_2025-02-03",
+      "crd_003_acc_01_2025-02-06",
+      "crd_003_acc_01_2025-02-06_dup"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|WALLET|none|2025-W07",
+    "size": 4,
+    "ids": [
+      "crd_001_acc_01_2025-02-12",
+      "crd_002_acc_01_2025-02-12",
+      "crd_003_acc_01_2025-02-12",
+      "crd_003_acc_01_2025-02-12_dup"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|WALLET|none|2025-W09",
+    "size": 6,
+    "ids": [
+      "crd_001_acc_01_2025-02-27",
+      "crd_001_acc_01_2025-02-28",
+      "crd_002_acc_01_2025-02-27",
+      "crd_002_acc_01_2025-02-28",
+      "crd_003_acc_01_2025-02-27",
+      "crd_003_acc_01_2025-02-28"
+    ]
+  },
+  {
+    "signature": "AMBIGUOUS_DECOMPOSITION|none|none|WALLET|none|2025-W10",
+    "size": 2,
+    "ids": [
+      "crd_002_acc_01_2025-03-04",
+      "crd_003_acc_01_2025-03-04"
+    ]
+  },
+  {
+    "signature": "MISSING_RECORD|none|none|EMI|none|2025-W02",
+    "size": 3,
+    "ids": [
+      "crd_001_acc_00_2025-01-08",
+      "crd_002_acc_00_2025-01-08",
+      "crd_003_acc_00_2025-01-08"
+    ]
+  }
+]

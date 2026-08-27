@@ -28,6 +28,7 @@ class ExceptionSignals(BaseModel):
     unresolved_entity_count: int = Field(ge=0)
     cross_window_member_count: int = Field(ge=0)
     max_resolution_tier: ResolutionTier
+    structurally_infeasible: bool = False
 
 
 class Classification(BaseModel):
@@ -65,6 +66,12 @@ def classify(
         return Classification(
             exception_class=ExceptionClass.BUDGET_EXCEEDED,
             matched_rule="budget_or_reduced",
+            rule_matched=True,
+        )
+    if signals.structurally_infeasible:
+        return Classification(
+            exception_class=ExceptionClass.STRUCTURALLY_INFEASIBLE,
+            matched_rule="cpsat_infeasible",
             rule_matched=True,
         )
     if signals.uniqueness == Uniqueness.AMBIGUOUS:

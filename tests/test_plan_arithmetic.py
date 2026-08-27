@@ -48,6 +48,23 @@ def test_plan_ladder_estimates_match_the_stated_total():
     assert sum(hours) == 146, f"ladder sums to {sum(hours)}h, not 146h"
 
 
+def test_plan_p2_ladder_estimates_sum_to_71():
+    """PLAN-P2.md checkpoint headings must sum to the spec's 71h."""
+    plan = Path("PLAN-P2.md")
+    if not plan.exists():
+        pytest.skip("PLAN-P2.md not present")
+    hours = [
+        int(h)
+        for h in re.findall(
+            r"^### CP2\.\d+ · .+? · (\d+)h · trip-wire",
+            plan.read_text(encoding="utf-8"),
+            re.M,
+        )
+    ]
+    assert len(hours) == 12, f"expected 12 Phase 2 checkpoints, found {len(hours)}"
+    assert sum(hours) == 71, f"P2 ladder sums to {sum(hours)}h, not 71h"
+
+
 def test_makefile_targets_match_the_documented_list():
     """A target named in a document and absent from the repo is the cheapest way to look careless.
 

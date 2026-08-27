@@ -9,7 +9,7 @@ from typing import Callable, NamedTuple
 
 from residual_zero.config import MerchantProfile
 from residual_zero.models import Kind
-from residual_zero.money import format_rupees, is_whole_rupee, to_rupee_units
+from residual_zero.money import apply_bps, format_rupees, is_whole_rupee, to_rupee_units
 from residual_zero.normalise import parse_rupee_display
 from residual_zero.tz import IST, IST_UTC_OFFSET_SECONDS, ensure_utc, to_ist_display
 
@@ -42,9 +42,10 @@ class CorruptionClass(IntEnum):
     RESERVE_HOLD_RELEASE = 21
     BANK_CHARGE = 22
     AMBIGUOUS_BY_CONSTRUCTION = 23
+    FEE_RATE_DRIFT = 24
 
 
-FORBIDDEN_PHASE1 = frozenset({24, 25, 26})
+FORBIDDEN_PHASE2 = frozenset({25, 26})
 
 # Parameter ranges. Range B strictly contains range A for every parameterised class (D4).
 RANGE_A: dict[int, dict[str, int | tuple[int, ...]]] = {
@@ -109,6 +110,19 @@ def plan_for_profile(profile: MerchantProfile) -> CorruptionPlan:
     )
 
 
+def phase2_drift_plan() -> CorruptionPlan:
+    """Class 24 only. Does not regenerate the Phase 1 corpus."""
+    return CorruptionPlan(
+        range_id="A",
+        apply_class_23=False,
+        class23_count=0,
+        stacked=False,
+        mutation_classes=(24,),
+        held_out_class=None,
+        per_class_target=3,
+    )
+
+
 def plan_for_range(range_id: str, *, stacked: bool, held_out_class: int | None) -> CorruptionPlan:
     # Targets are PER SEED. Dev has 3 seeds, test 5, and each seed has ~80–160 credits,
     # so a target of 8-per-seed would exhaust the seed before class 22.
@@ -134,8 +148,8 @@ def apply_corruptions(
     rng: Random,
 ) -> tuple[RenderedViews, tuple[TruthRecord, ...]]:
     """Mutate rendered views only. member_ids and total_paise of every record stay identical."""
-    if FORBIDDEN_PHASE1 & set(plan.mutation_classes):
-        raise ValueError("corruption classes 24, 25, 26 are forbidden in Phase 1")
+    if FORBIDDEN_PHASE2 & set(plan.mutation_classes):
+        raise ValueError("corruption classes 25 and 26 are forbidden in Phase 2")
     original = {r.bank_credit_id: (r.member_ids, r.total_paise) for r in truth.records}
     records = list(truth.records)
     ledger_rows = list(views.ledger_rows)
@@ -483,6 +497,29 @@ def _mutate(
         ledger_rows.append(_decoy_row(credit_id, "RESERVE_RELEASE", 25_000, rec, "c21rel"))
     elif class_id == 22:
         ledger_rows.append(_decoy_row(credit_id, "BANK_CHARGE", -1_180, rec, "c22bc"))
+    elif class_id == 24:
+        # Scale CARD fee lines of this credit. Truth member_ids unchanged (NN-7).
+        new_bps = 220
+        card_gross = 0
+        fee_ids: list[str] = []
+        items_by_id = {it.id: it for it in truth.items}
+        for mid in rec.member_ids:
+            item = items_by_id.get(mid)
+            if item is None:
+                continue
+            if item.kind == Kind.PAYMENT and item.instrument and item.instrument.value == "CARD":
+                card_gross += item.amount_paise
+            if item.kind == Kind.FEE and item.instrument and item.instrument.value == "CARD":
+                fee_ids.append(mid)
+        if card_gross > 0 and fee_ids:
+            new_fee = -apply_bps(card_gross, new_bps)
+            for row in ledger_rows:
+                if row["id"] == fee_ids[0]:
+                    row["amount"] = format_rupees(new_fee)
+                    break
+            for srow in settlement_rows:
+                if srow["item_id"] == fee_ids[0]:
+                    srow["amount"] = format_rupees(new_fee)
     return ledger_rows, bank_rows, settlement_rows
 
 
