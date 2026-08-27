@@ -64,6 +64,25 @@ def main(argv: list[str] | None = None) -> int:
         ]
         eval_md = Path("docs/EVALUATION.md")
         _append_tuning(eval_md, chosen, log)
+    if "a2" in wanted:
+        from residual_zero.config import load_fees, load_tax_rates
+        from .arms.a2_rules import run_a2
+        a2 = run_a2(items, credits, load_tax_rates(), load_fees(), cfg)
+        p, r = assignment_precision_recall_counted(pair_set(a2.predictions), truth_pairs)
+        exact = exact_decomposition_counted(a2.predictions, truth_members)
+        lines = [
+            "# CP4 A2 rules-only (dev)",
+            "",
+            "A2 measured with the real tax config, the same candidate pools, and no uniqueness check.",
+            "",
+            "## A2 rules-only greedy",
+            f"- assignment precision: {p.render()}",
+            f"- assignment recall: {r.render()}",
+            f"- exact decomposition: {exact.render()}",
+            "- exception path: present",
+            "- budget path: present",
+            "",
+        ]
     out.joinpath("baselines.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(out.joinpath("baselines.md").read_text(encoding="utf-8"))
     return 0

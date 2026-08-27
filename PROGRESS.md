@@ -232,3 +232,27 @@ bank charge. Residual zero at paise. The N:M shape is on the proof, not just in 
 **Numbers produced:** median 2 ms/credit, worst 14 ms/credit, 25-credit sample from `data/dev`.
 Not a quality metric.
 
+---
+
+## CP4 · Verifier, proof, hash-chained audit, A2 · VERIFIED 2026-08-27
+
+Command: `make test && make verify-audit && python -m eval.cli --split dev --arms a2 --out artifacts/dev/cp4`
+
+Exit: 0 — 141 passed (then 2 more A2 tests); `verify-audit ok=True entries=5`;
+A2 assignment precision 142/1213, recall 142/5973, exact 0/239.
+
+Commit: *(filled after commit)*
+
+Files: `src/residual_zero/{canonical,db,verify,proof,audit,orchestrator}.py`,
+`src/residual_zero/exceptions/__init__.py`, `eval/arms/a2_rules.py`, `eval/cli.py`,
+`Makefile`, `tests/test_{verify,proof,audit_chain,least_privilege,arithmetic_invariant,arms_rules}.py`,
+`artifacts/dev/cp4/baselines.md`.
+
+**A2 on dev.** Nearest-addition greedy on the same `build_pool` as the solver. Exact
+decomposition is 0/239 — greedy does not recover N:M member sets — but unlike A0/A1 it
+does emit pairs, so the uniqueness check has something to beat.
+
+**Deviations from plan:** `verify_declared` is reused by `verify_decomposition` rather than
+a second copy of the deduction stack (D10: sharing is deliberate). `exceptions/` exists only
+as the db-owner stub so the least-privilege importer set is the three declared owners at CP4.
+

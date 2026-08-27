@@ -15,7 +15,8 @@ eval:
 	@echo "make eval: not implemented until CP6 (needs the harness)"; exit 1
 
 verify-audit:
-	@echo "make verify-audit: not implemented until CP4 (needs the hash chain)"; exit 1
+	$(PY) -m residual_zero.cli run --split dev --limit 5 --out artifacts/dev
+	$(PY) -c "from pathlib import Path; from residual_zero.db import open_readonly; from residual_zero.audit import verify_chain; conn=open_readonly(Path('artifacts/dev/ledger.sqlite')); ok, broken, head=verify_chain(conn); n=conn.execute('SELECT COUNT(*) FROM audit_entry').fetchone()[0]; print(f'verify-audit ok={ok} entries={n} head={head}'); raise SystemExit(0 if ok else 1)"
 
 verify-books:
 	@echo "make verify-books: not implemented until Phase 2 (F33 conservation identity)"; exit 1

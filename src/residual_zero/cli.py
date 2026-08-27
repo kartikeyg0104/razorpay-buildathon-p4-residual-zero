@@ -121,9 +121,19 @@ def main(argv: list[str] | None = None) -> int:
     solve_p.add_argument("--class", dest="class_id", type=int, default=None)
     solve_p.add_argument("--limit", type=int, default=0)
     solve_p.add_argument("--show-proof", action="store_true")
+    run_p = sub.add_parser("run")
+    run_p.add_argument("--split", default="dev")
+    run_p.add_argument("--limit", type=int, default=0)
+    run_p.add_argument("--out", default="artifacts/dev")
     args = parser.parse_args(argv)
     if args.cmd == "solve":
         return _cmd_solve(args)
+    if args.cmd == "run":
+        from residual_zero.orchestrator import run_split
+        db = Path(args.out).joinpath("ledger.sqlite")
+        n = run_split(args.split, db, limit=args.limit)
+        print(f"processed {n} credits into {db}")
+        return 0
     raise SystemError(f"unhandled command {args.cmd}")
 
 

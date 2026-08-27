@@ -13,7 +13,6 @@ somebody picked.
 from __future__ import annotations
 
 import hashlib
-import json
 from datetime import date
 from pathlib import Path
 from typing import Any, Iterator
@@ -21,6 +20,7 @@ from typing import Any, Iterator
 import yaml
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from .canonical import canonical_json as _canonical_json
 from .models import Instrument
 
 _STRICT = ConfigDict(frozen=True, extra="forbid")
@@ -382,17 +382,10 @@ def load_profile(path: Path) -> MerchantProfile:
 
 
 def _canonical_bytes(payload: Any) -> bytes:
-    """Canonical JSON for digesting config.
-
-    TODO-CP4: ``canonical.py`` becomes the single implementation of canonical serialisation
-    (PLAN-P1 D11) and this must delegate to it, with a test asserting the two agree byte for
-    byte. Two implementations of canonical JSON that differ by one space is exactly the failure
-    D11 warns about, so this note is a commitment rather than an aside.
-    """
-    return json.dumps(
-        payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False,
-        default=str,
-    ).encode("utf-8")
+    """Canonical JSON for digesting config. Delegates to canonical.py (D11)."""
+    if not isinstance(payload, dict):
+        raise TypeError(f"canonical payload must be a mapping, got {type(payload).__name__}")
+    return _canonical_json(payload)
 
 
 def config_digest(*models: BaseModel) -> str:

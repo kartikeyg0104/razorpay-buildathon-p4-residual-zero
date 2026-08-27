@@ -31,7 +31,7 @@ class SolveResult(BaseModel):
     hit_totals: tuple[int, ...] = ()
     slack_rupees: int | None = None
     margin_rupees: int | None = None
-    enum_nodes: int = Field(ge=0)
+    enum_nodes: int = Field(ge=0, default=0)
 
 
 def enumerate_solutions(
