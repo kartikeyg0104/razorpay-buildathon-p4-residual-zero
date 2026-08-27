@@ -32,6 +32,16 @@ def test_source_root_cannot_escape(tmp_path: Path):
         root.open("escape.csv")
 
 
+def test_src_never_imports_truth_loader():
+    """No module under src/residual_zero/ imports eval.truth_loader (NN-6)."""
+    hits = []
+    for path in SRC_ROOT.rglob("*.py"):
+        text = path.read_text(encoding="utf-8")
+        if "eval.truth_loader" in text or "from eval" in text:
+            hits.append(str(path))
+    assert hits == []
+
+
 def test_src_never_references_truth():
     """No module under src/residual_zero/ can name truth.jsonl.
 

@@ -11,13 +11,13 @@ from random import Random
 
 from residual_zero.config import load_fees, load_profile, load_tax_rates
 from residual_zero.models import Kind
-from residual_zero.money import format_rupees, to_rupee_units
+from residual_zero.money import format_rupees
 
-from .corrupt import apply_corruptions, phase1_dev_plan
+from .corrupt import apply_corruptions, plan_for_profile
 from .profiles import SPLIT_SEEDS
 from .render import RenderedViews, render, write_split
 from .scenario import build_scenario
-from .truth import TruthRecord, TruthSet, build_truth
+from .truth import TruthRecord, build_truth
 
 
 def generate_split(
@@ -31,7 +31,6 @@ def generate_split(
     fees = load_fees()
     if seeds is None:
         seeds = SPLIT_SEEDS[split]
-    plan = phase1_dev_plan()
     all_items = []
     all_credits = []
     all_records: list[TruthRecord] = []
@@ -42,7 +41,7 @@ def generate_split(
         scenario = build_scenario(profile, seed)
         truth = build_truth(scenario, rates, fees)
         views = render(truth)
-        views, records = apply_corruptions(views, truth, plan, Random(seed + 23_000))
+        views, records = apply_corruptions(views, truth, plan_for_profile(profile), Random(seed + 23_000))
         all_items.extend(truth.items)
         all_credits.extend(truth.credits)
         all_records.extend(records)

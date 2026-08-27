@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-08-27T17:28:47.377960+00:00",
+  "n_credits": 825,
+  "n_items": 20487,
+  "n_ledger_rows": 20448,
+  "n_records": 800,
+  "profile_name": "phase1_test",
+  "seeds": [
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "split": "test"
+}

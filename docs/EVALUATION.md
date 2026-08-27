@@ -134,7 +134,7 @@ evaluation.
 
 | Item | Value |
 |---|---|
-| Held-out class | `TBD-CP2` |
+| Held-out class | `9 OVERPAYMENT` |
 | Selection criteria | not structural; no other class depends on it; not required to prove any Phase 1 feature; delta structure unlike anything in dev |
 
 ## 9 · Baseline tuning log
@@ -143,8 +143,8 @@ Recorded so that fairness is documented rather than asserted (§9.1).
 
 | Arm | Parameter | Swept over | Chosen | Criterion |
 |---|---|---|---|---|
-| A1 | similarity threshold | `TBD-CP2` | `TBD-CP2` | maximises A1's **own** exact-decomposition rate on dev |
-| A1 | amount tolerance | `TBD-CP2` | `TBD-CP2` | as above |
+| A1 | similarity threshold | `50,60,70,80,90` | `50` | maximises A1's **own** exact-decomposition rate on dev |
+| A1 | amount tolerance (paise) | `100,500,1000,5000,10000,50000` | `100` | as above |
 | tier 3 | rapidfuzz threshold | `TBD-CP5` | `TBD-CP5` | knee of the dev precision-vs-threshold curve at the declared entity-resolution error budget |
 
 ## 10 · Test-split evaluation log (NN-16)
@@ -163,3 +163,42 @@ Registered before the answer is knowable, so the answer counts either way.
 | # | Registered | Question | Answered |
 |---|---|---|---|
 | 1 | `TBD-CP5` | On the credits where the three raters disagreed with each other (any pairwise disposition disagreement), did the system flag rather than clear? | `TBD-CP6` |
+
+<!-- A1-SWEEP-START -->
+
+A1 exact-decomposition on each (sim, amount_tol_paise) cell, as exact Fractions:
+
+| sim_threshold | amount_tol_paise | exact_decomposition |
+|---|---:|---|
+| 50 | 100 | `0/239` |
+| 50 | 500 | `0/239` |
+| 50 | 1000 | `0/239` |
+| 50 | 5000 | `0/239` |
+| 50 | 10000 | `0/239` |
+| 50 | 50000 | `0/239` |
+| 60 | 100 | `0/239` |
+| 60 | 500 | `0/239` |
+| 60 | 1000 | `0/239` |
+| 60 | 5000 | `0/239` |
+| 60 | 10000 | `0/239` |
+| 60 | 50000 | `0/239` |
+| 70 | 100 | `0/239` |
+| 70 | 500 | `0/239` |
+| 70 | 1000 | `0/239` |
+| 70 | 5000 | `0/239` |
+| 70 | 10000 | `0/239` |
+| 70 | 50000 | `0/239` |
+| 80 | 100 | `0/239` |
+| 80 | 500 | `0/239` |
+| 80 | 1000 | `0/239` |
+| 80 | 5000 | `0/239` |
+| 80 | 10000 | `0/239` |
+| 80 | 50000 | `0/239` |
+| 90 | 100 | `0/239` |
+| 90 | 500 | `0/239` |
+| 90 | 1000 | `0/239` |
+| 90 | 5000 | `0/239` |
+| 90 | 10000 | `0/239` |
+| 90 | 50000 | `0/239` |
+
+<!-- A1-SWEEP-END -->

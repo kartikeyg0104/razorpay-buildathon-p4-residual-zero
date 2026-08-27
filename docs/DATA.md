@@ -18,10 +18,9 @@ python -m generator.cli --split dev --profile config/profiles/phase1.yaml
    stream and `config/{tax_rates,fees}.yaml`. The true member set is written to
    `data/{split}/truth.jsonl`. The system under test cannot open that path (NN-6,
    `SourceRoot`).
-3. **Corruption** (`generator/corrupt.py`). Mutate **rendered views only**. CP1 applies
-   structural classes 1–4 (properties of the scenario) and class 23
-   `AMBIGUOUS_BY_CONSTRUCTION` (decoy ledger rows whose rupee sum equals a swapped
-   two-payment subset). Classes 5–22 arrive at CP2. Classes 24–26 are forbidden.
+3. **Corruption** (`generator/corrupt.py`). Mutate **rendered views only**. CP1 applied
+   structural classes 1–4 and class 23. CP2 extends the same function with classes 5–22.
+   Classes 24–26 are forbidden.
 4. **Render** (`generator/render.py`). Emit bank / ledger / settlement CSVs with IST dates
    and rupee-display amounts.
 
@@ -86,3 +85,20 @@ line of the solver is written.
    business days under that definition.
 7. **Counterparty names are invented.** They are a closed pool so semantic resolution
    has something to resolve against, not a sample of real merchants.
+
+## Realised counts (test, seeds 101–105, frozen at CP2)
+
+Profile `config/profiles/phase1_test.yaml`: 4 accounts, range B, pool B, stacked
+corruptions, held-out class **9 OVERPAYMENT** (absent from dev, present on test). Recorded
+in `docs/EVALUATION.md` before this split was generated.
+
+| Quantity | Value |
+|---|---|
+| Credits | 825 |
+| Ledger items in the answer key | 20487 |
+| Rendered ledger rows | 20448 |
+| Truth records | 800 |
+
+Dev after CP2 regen: 248 credits, 5983 truth items, 5991 rendered ledger rows, 239 truth
+records. The extra bank credits over truth records are class-23 decoy *credits* that have
+no answer-key members of their own.

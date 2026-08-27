@@ -1,0 +1,38 @@
+# Test-split profile. Frozen at CP2 with the held-out class, before the split is generated.
+
+name: phase1_test
+split: test
+
+accounts: 4
+settlement_dates_per_horizon: 40
+horizon_days: 60
+settlement_cycle_days: 2
+business_days_only: true
+orders_per_day_per_account: 15
+
+order_amount_min_paise: 20000
+order_amount_max_paise: 900000
+
+instrument_mix_weights:
+  UPI: 42
+  CARD: 30
+  NETBANKING: 14
+  WALLET: 9
+  EMI: 5
+
+refund_rate_bps: 600
+cross_window_refund_fraction_bps: 3000
+dispute_rate_bps: 80
+representment_rate_bps: 6000
+representment_lag_days: [21, 40]
+adjustment_rate_bps: 150
+reserve_bps: 500
+reserve_release_lag_days: 30
+
+fee_itemisation: PER_SETTLEMENT_INSTRUMENT
+subrupee_member_max: 13
+
+counterparty_pool: B
+corruption_range: B
+stacked_corruptions: true
+held_out_class: 9

@@ -108,7 +108,7 @@ Command: `make test && python -m generator.cli --split dev --profile config/prof
 
 Exit: 0 — 74 passed; wrote 239 credits, 6058 ledger rows; class counts `{1: 22, 2: 140, 3: 42, 4: 35, 23: 36}`.
 
-Commit: *(filled after commit)*
+Commit: `5303c8b21bebcdb593e4d67a39d2c39051abb2c1`
 
 Files: `generator/{__init__,profiles,scenario,truth,corrupt,render,cli}.py`,
 `src/residual_zero/{normalise.py,ingest/*}`,
@@ -143,4 +143,49 @@ is exactly when that guard was supposed to fire. That is how deviation 3 was fou
 
 **Numbers produced:** 239 dev credits, 5986 truth items, 6058 rendered ledger rows.
 Not quality metrics.
+
+---
+
+## CP2 · Corruption 5–22, test-split config, A0/A1 baselines · VERIFIED 2026-08-27
+
+Command: `make test && python -m eval.cli --split dev --arms a0,a1 --out artifacts/dev/cp2 && cat artifacts/dev/cp2/baselines.md`
+
+Exit: 0 — 86 passed; wrote `artifacts/dev/cp2/baselines.md`.
+
+Commit: *(filled after commit)*
+
+Files: `generator/corrupt.py`, `generator/cli.py`, `config/profiles/phase1_test.yaml`,
+`eval/{__init__,cli,loader,metrics,truth_loader}.py`, `eval/arms/{__init__,a0_exact,a1_fuzzy}.py`,
+`tests/{conftest,test_corruption_classes,test_arms_baseline,test_metrics,test_no_leakage}.py`,
+`docs/EVALUATION.md`, `docs/DATA.md`, `artifacts/dev/cp2/baselines.md`,
+`data/{dev,test}/manifest.json`.
+
+**Held-out class.** `9 OVERPAYMENT`, frozen in `docs/EVALUATION.md` before the test split
+was generated (NN-16). Dev has zero instances; test has 25.
+
+**A0/A1 on dev (n=239 truth credits, 5973 truth pairs).** Both arms predict the empty set.
+That is the informative failure: a settlement credit is a net aggregate, so exact 1:1 amount
+match and fuzzy 1:1 assignment cannot express it. Exception and budget cells are dashes
+because `has_exception_path` and `has_budget_path` are False.
+
+- A0 assignment precision — (n=0); recall 0/5973; exact 0/239
+- A1 assignment precision — (n=0); recall 0/5973; exact 0/239
+- A1 sweep: sim `{50,60,70,80,90}` × amount_tol_paise `{100,500,1000,5000,10000,50000}`;
+  every cell is `0/239`. Chosen `(50, 100)` by the tighter-tolerance tie-break among equals.
+
+**Deviations from plan:**
+
+1. **Published ratios keep the unreduced denominator.** `Fraction(0, 239)` canonicalises to
+   `0/1`, which would have published n=1. `CountedRatio` is the display form; tests still
+   compare `Fraction`s.
+2. **A1 cost matrix is rectangular over eligible pairs**, not a square padded to
+   `max(n_credits, n_items)`. The padded form made Hungarian cubic in the ledger size and
+   hung the first sweep. `linear_sum_assignment` is still the resolver; it is not greedy.
+3. **A0 indexes by `(account, currency, amount)`** rather than scanning every item per credit.
+   Same predicate, cheaper.
+
+**Surprises:** A1's entire 30-cell sweep is identically zero. Widening amount tolerance to
+₹500 still never finds a 1:1 whose member set equals truth, because truth sets are N:M.
+That is NN-13 working: the baseline is weak on this problem, and we measured it before the
+solver exists.
 
