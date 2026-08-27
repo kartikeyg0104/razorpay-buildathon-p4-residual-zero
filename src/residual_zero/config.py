@@ -145,6 +145,9 @@ class SearchConfig(BaseModel):
 
     epsilon_rupees: int = Field(ge=0)
     epsilon_paise_equivalent: int = Field(ge=0)
+    derived_k: int | None = Field(default=None, ge=1)
+    derived_epsilon_paise: int | None = Field(default=None, ge=0)
+    derived_epsilon_rupees: int | None = Field(default=None, ge=0)
     max_pool: int = Field(gt=0)
     max_axis_width_rupees: int = Field(gt=0)
     max_enum_nodes: int = Field(gt=0)
@@ -160,6 +163,18 @@ class SearchConfig(BaseModel):
                 f"epsilon_rupees ({self.epsilon_rupees}). Mixed units in a tolerance config is an "
                 f"afternoon of phantom residuals."
             )
+        derived = (self.derived_k, self.derived_epsilon_paise, self.derived_epsilon_rupees)
+        if any(v is not None for v in derived) and any(v is None for v in derived):
+            raise ValueError(
+                "derived_k, derived_epsilon_paise and derived_epsilon_rupees must be set together"
+            )
+        if self.derived_epsilon_paise is not None and self.derived_epsilon_rupees is not None:
+            window = (self.derived_epsilon_paise + 99) // 100
+            if window != self.derived_epsilon_rupees:
+                raise ValueError(
+                    "derived_epsilon_rupees must equal ceil(derived_epsilon_paise/100) "
+                    f"({window}), not {self.derived_epsilon_rupees}"
+                )
         return self
 
 

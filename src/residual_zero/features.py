@@ -1,4 +1,4 @@
-"""Phase 2 feature flags. Every §6.2 feature is disable-able (P2-EXEC).
+"""Feature flags. Every §6.2 feature is disable-able (P2-EXEC / P3-EXEC).
 
 ``FeatureFlags.all_off()`` is the flags-off test's only input. It does not read
 ``config/features.yaml``, so a default-on product yaml cannot quietly change Phase 1
@@ -15,7 +15,7 @@ _STRICT = ConfigDict(frozen=True, extra="forbid")
 
 
 class FeatureFlags(BaseModel):
-    """One bool per Phase 2 feature, plus the F31 enumerate cap used only when that flag is on."""
+    """One bool per Phase 2/3 feature, plus the F31 enumerate cap used only when that flag is on."""
 
     model_config = _STRICT
 
@@ -32,6 +32,18 @@ class FeatureFlags(BaseModel):
     f54_eval_diff: bool = True
     f24_adversarial: bool = True
     f25_idempotency: bool = True
+    f32_derived_epsilon: bool = True
+    f30_cost_governor: bool = True
+    f51_degrade: bool = True
+    f39_leakage: bool = True
+    f45_bank_formats: bool = True
+    f48_fuzz: bool = True
+    f35_stream: bool = True
+    f41_reserve: bool = True
+    f42_disputes: bool = True
+    f57_latency: bool = True
+    f23_profiles: bool = True
+    f26_feedback: bool = True
 
     @classmethod
     def all_off(cls) -> "FeatureFlags":
@@ -50,6 +62,18 @@ class FeatureFlags(BaseModel):
             f54_eval_diff=False,
             f24_adversarial=False,
             f25_idempotency=False,
+            f32_derived_epsilon=False,
+            f30_cost_governor=False,
+            f51_degrade=False,
+            f39_leakage=False,
+            f45_bank_formats=False,
+            f48_fuzz=False,
+            f35_stream=False,
+            f41_reserve=False,
+            f42_disputes=False,
+            f57_latency=False,
+            f23_profiles=False,
+            f26_feedback=False,
         )
 
 

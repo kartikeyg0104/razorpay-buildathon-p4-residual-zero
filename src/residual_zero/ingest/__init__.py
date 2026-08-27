@@ -14,13 +14,23 @@ class IngestError(ValueError):
     continue; the adapter raises before returning any rows.
     """
 
-    def __init__(self, message: str, *, path: str | None = None, line: int | None = None) -> None:
+    def __init__(
+        self,
+        message: str,
+        *,
+        path: str | None = None,
+        line: int | None = None,
+        element: str | None = None,
+    ) -> None:
         self.path = path
         self.line = line
+        self.element = element
         where = []
         if path is not None:
             where.append(path)
         if line is not None:
             where.append(f"line {line}")
+        if element is not None:
+            where.append(element)
         prefix = ":".join(where)
         super().__init__(f"{prefix}: {message}" if prefix else message)

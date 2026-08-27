@@ -34,10 +34,13 @@ from residual_zero.money import format_rupees
 from residual_zero.ordering import ordering_score, render_ordering_score
 from residual_zero.proof import build_proof
 from residual_zero.rates import regress, triples_from_members
-from residual_zero.semantic.llm import CachedLLMClient, StubLLMClient
+from residual_zero.semantic.llm import CachedLLMClient, StubLLMClient, TokenBudgetExceeded
 from residual_zero.semantic.tiers import registry_from_items, resolve, tier_mix
 from residual_zero.solver import collect_enumerated, disambiguate, solve_search
 from residual_zero.solver.fastpath import DeclaredLine, verify_declared
+from residual_zero.solver.tolerance import apply_derived_epsilon
+from residual_zero.runtime.degrade import Rung, active_rung, policy_for
+from residual_zero.runtime.latency import StageClock, render_latency_md
 from residual_zero.trace import TraceBuilder
 from residual_zero.tz import to_ist_date_display
 from residual_zero.verify import open_verify, verify_decomposition, write_cleared
@@ -77,38 +80,49 @@ def run_split(
     offline: bool = False,
     flags: FeatureFlags | None = None,
     halt_after: int = 0,
+    rung: Rung | None = None,
 ) -> int:
     """Process a split into the sqlite ledger, exceptions, and audit chain."""
     init_db(db_path)
     flags = flags if flags is not None else load_features()
+    pol = policy_for(active_rung(flags, rung))
+    if not pol.process_credits:
+        return 0
+    clock = StageClock()
+    wall0 = __import__("time").perf_counter_ns()
     profile_path = Path("config").joinpath("profiles").joinpath(
         "phase1_test.yaml" if split == "test" else "phase1.yaml"
     )
     rates = load_tax_rates()
     fees = load_fees()
     cfg = load_solver_config()
+    cfg = apply_derived_epsilon(cfg, flags)
     llm_cfg = load_llm_config()
-    reserve_bps = load_profile(profile_path).reserve_bps
+    profile = load_profile(profile_path)
+    reserve_bps = profile.reserve_bps
     digest = config_digest(rates, fees)
     root = SourceRoot(Path("data").joinpath(split, "rendered"))
-    items = load_ledger_items(root)
-    credits = load_bank_credits(root)
-    declared_rows = load_settlement_report(root)
+    with clock.span("ingest"):
+        items = load_ledger_items(root)
+        credits = load_bank_credits(root)
+        declared_rows = load_settlement_report(root)
     ledger = {it.id: it for it in items}
     by_credit: dict[str, list] = {}
     for row in declared_rows:
         by_credit.setdefault(row.credit_id, []).append(row)
     registry = registry_from_items(items)
     provider = StubLLMClient()
-    client = CachedLLMClient(
-        provider,
-        Path(llm_cfg.cache_dir),
-        offline=offline,
-        token_budget=llm_cfg.token_budget if llm_cfg.token_budget > 0 else 10**9,
-        prompt_version=llm_cfg.prompt_version,
-        model_id=llm_cfg.model_id,
-        enforce_pii=flags.f49_pii,
-    )
+    client = None
+    if pol.allow_model:
+        client = CachedLLMClient(
+            provider,
+            Path(llm_cfg.cache_dir),
+            offline=offline,
+            token_budget=llm_cfg.token_budget if llm_cfg.token_budget > 0 else 10**9,
+            prompt_version=llm_cfg.prompt_version,
+            model_id=llm_cfg.model_id,
+            enforce_pii=flags.f49_pii,
+        )
     dupes = _duplicates(credits)
     audit = open_audit(db_path)
     verify_conn = open_verify(db_path)
@@ -160,7 +174,19 @@ def run_split(
                 pool = build_pool(credit, items, cfg)
                 if tracer:
                     tracer.gate("pool", True, f"size={len(pool.item_ids)} scope={pool.scope.value}")
-                solve = solve_search(pool, credit.amount_paise, cfg)
+                if pol.allow_search:
+                    with clock.span("dp"):
+                        solve = solve_search(pool, credit.amount_paise, cfg)
+                else:
+                    with clock.span("dp"):
+                        solve = solve_search(pool, credit.amount_paise, cfg)
+                    solve = solve.model_copy(
+                        update={
+                            "uniqueness": Uniqueness.NONE_FOUND,
+                            "member_ids": (),
+                            "alternates": 0,
+                        }
+                    )
                 if tracer:
                     tracer.gate("dp", True, solve.uniqueness.value)
                 structurally_infeasible = False
@@ -227,20 +253,29 @@ def run_split(
                 if limit and n >= limit:
                     break
                 continue
-            outcome = verify_decomposition(
-                credit, member_ids, ledger, regime, rates, fees, reserve_bps=reserve_bps,
-            )
+            with clock.span("verify"):
+                outcome = verify_decomposition(
+                    credit, member_ids, ledger, regime, rates, fees, reserve_bps=reserve_bps,
+                )
             pool_items = [ledger[i] for i in pool.item_ids if i in ledger]
             resolutions = []
             for item in pool_items:
-                res = resolve(
-                    item.counterparty_raw or "",
-                    item.narration_norm,
-                    None,
-                    registry,
-                    llm_cfg,
-                    client,
-                )
+                try:
+                    res = resolve(
+                        item.counterparty_raw or "",
+                        item.narration_norm,
+                        None,
+                        registry,
+                        llm_cfg,
+                        client,
+                        graceful_budget=flags.f30_cost_governor,
+                    )
+                except TokenBudgetExceeded:
+                    if flags.f30_cost_governor:
+                        from residual_zero.semantic.tiers import Resolution
+                        res = Resolution(None, ResolutionTier.UNRESOLVED, None)
+                    else:
+                        raise
                 resolutions.append(res)
             all_resolutions.extend(resolutions)
             unresolved = sum(1 for r in resolutions if r.tier == ResolutionTier.UNRESOLVED)
@@ -357,7 +392,8 @@ def run_split(
                     ordering_score=score,
                     proof=proof,
                 )
-                write_cleared(verify_conn, deco)
+                if pol.allow_writes:
+                    write_cleared(verify_conn, deco)
                 cleared_parents.update(member_ids)
 
             if flags.f37_clustering and disposition != Disposition.CLEARED:
@@ -401,7 +437,8 @@ def run_split(
                 payload["trace_gates"] = [g.name for g in tr.gates]
                 metrics["trace_error"] = tr.error
                 traces_complete += 1
-            append_entry(audit, payload, metrics)
+            if pol.allow_writes:
+                append_entry(audit, payload, metrics)
             seen_ids.add(credit.id)
             n += 1
             if halt_after and flags.f25_idempotency and n >= halt_after:
@@ -424,7 +461,7 @@ def run_split(
             points = regress(rate_points, fees)
             n_alert = sum(1 for p in points if p.alert)
             print(f"F38 instrument_weeks={len(points)} alerts={n_alert}")
-        if flags.f40_journal:
+        if flags.f40_journal and pol.allow_writes:
             chart = load_chart()
             cleared_map = {}
             for row in verify_conn.execute(
@@ -446,6 +483,68 @@ def run_split(
             print(f"F40 journal debits={dr} credits={cr} control_residual={residual} lines={len(lines)}")
         if flags.f52_trace:
             print(f"F52 traces_complete={traces_complete}")
+        if flags.f39_leakage:
+            from residual_zero.controller.leakage import sweep
+            as_of = max((c.value_date for c in credits), default=date(2025, 1, 6))
+            leak = sweep(
+                items, credits, as_of=as_of,
+                reserve_lag_days=profile.reserve_release_lag_days,
+            )
+            db_path.parent.joinpath("leakage.json").write_text(
+                leak.model_dump_json(indent=2) + "\n", encoding="utf-8"
+            )
+            print(f"F39 leakage_paise={leak.rupees_identified_paise} rows={len(leak.evidence)}")
+        if flags.f41_reserve:
+            from residual_zero.controller.reserve import subledger
+            as_of = max((c.value_date for c in credits), default=date(2025, 1, 6))
+            reserve = subledger(items, as_of=as_of, lag_days=profile.reserve_release_lag_days)
+            db_path.parent.joinpath("reserve.json").write_text(
+                reserve.model_dump_json(indent=2) + "\n", encoding="utf-8"
+            )
+            print(
+                f"F41 outstanding={reserve.outstanding_paise} "
+                f"overdue={reserve.overdue_count} identity={reserve.identity_holds}"
+            )
+        if flags.f42_disputes:
+            from residual_zero.controller.disputes import track
+            as_of = max((c.value_date for c in credits), default=date(2025, 1, 6))
+            disp = track(items, as_of=as_of)
+            db_path.parent.joinpath("disputes.json").write_text(
+                disp.model_dump_json(indent=2) + "\n", encoding="utf-8"
+            )
+            print(
+                f"F42 reconstructed={disp.reconstructed_end_to_end}/{disp.n_disputes} "
+                f"open_7d={disp.open_inside_7_days}"
+            )
+        if flags.f35_stream:
+            from residual_zero.stream.carry_forward import replay
+            stream = replay(
+                credits, items,
+                db_path=db_path.parent.joinpath("stream.sqlite"),
+                widened_days_before=cfg.windows.widened_days_before,
+            )
+            db_path.parent.joinpath("stream.json").write_text(
+                stream.model_dump_json(indent=2) + "\n", encoding="utf-8"
+            )
+            print(
+                f"F35 unsolvable_on_arrival={stream.unsolvable_on_arrival} "
+                f"eventually={stream.eventually_resolved} aged={stream.aged_out}"
+            )
+        if flags.f57_latency:
+            import platform
+            import time as _time
+            wall = _time.perf_counter_ns() - wall0
+            machine = f"{platform.system()} {platform.release()} ({platform.machine()})"
+            rows = clock.percentiles()
+            md = render_latency_md(
+                rows,
+                machine=machine,
+                n_credits=n if n else len(credits),
+                wall_ns=wall,
+                bottleneck=clock.bottleneck(),
+            )
+            db_path.parent.joinpath("latency.md").write_text(md, encoding="utf-8")
+            print(f"F57 bottleneck={clock.bottleneck()} wall_ns={wall}")
     finally:
         audit.close()
         verify_conn.close()

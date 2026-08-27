@@ -17,6 +17,7 @@ from residual_zero.config import (
     load_profile,
 )
 from residual_zero.features import FeatureFlags, load_features
+from residual_zero.solver.tolerance import apply_derived_epsilon
 from residual_zero.exceptions.classify import ExceptionSignals, classify
 from residual_zero.models import BankCredit, Disposition, LedgerItem, PoolScope, Regime, ResolutionTier, Uniqueness
 from residual_zero.ordering import ordering_score, render_ordering_score
@@ -52,6 +53,7 @@ def run_a3(
 ) -> A3Result:
     ledger = {it.id: it for it in items}
     flags = flags if flags is not None else load_features()
+    cfg = apply_derived_epsilon(cfg, flags)
     registry = registry_from_items(items)
     try:
         threshold = cfg.autonomy.derived_threshold

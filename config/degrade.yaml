@@ -1,0 +1,8 @@
+# F51 rung triggers. Names must match runtime.degrade.Rung.
+# One-way toward conservatism except `manual`, which an operator may set to any rung.
+
+token_budget_exhausted: NO_MODEL
+provider_unavailable: NO_MODEL
+manual: HALTED
+rolling_error_rate_bps: 100          # 1% rolling auto-clear error → NO_SEARCH
+verifier_failure_rate_bps: 500       # 5% verifier rejects → READ_ONLY

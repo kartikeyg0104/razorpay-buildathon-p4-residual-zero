@@ -1,0 +1,31 @@
+# High-refund D2C. Same solver config as phase1; only generator rates differ (F23).
+name: d2c
+split: dev
+accounts: 2
+settlement_dates_per_horizon: 40
+horizon_days: 60
+settlement_cycle_days: 2
+business_days_only: true
+orders_per_day_per_account: 15
+order_amount_min_paise: 20000
+order_amount_max_paise: 900000
+instrument_mix_weights:
+  UPI: 50
+  CARD: 30
+  NETBANKING: 10
+  WALLET: 5
+  EMI: 5
+refund_rate_bps: 1800
+cross_window_refund_fraction_bps: 4000
+dispute_rate_bps: 80
+representment_rate_bps: 6000
+representment_lag_days: [14, 21]
+adjustment_rate_bps: 150
+reserve_bps: 500
+reserve_release_lag_days: 30
+fee_itemisation: PER_SETTLEMENT_INSTRUMENT
+subrupee_member_max: 13
+counterparty_pool: A
+corruption_range: A
+stacked_corruptions: false
+held_out_class: null

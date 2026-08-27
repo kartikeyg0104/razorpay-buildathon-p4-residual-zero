@@ -1,0 +1,766 @@
+{
+  "evidence": [
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001136",
+      "paise": 6165,
+      "note": "scheduled 2025-02-07"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001542",
+      "paise": 388180,
+      "note": "scheduled 2025-02-07"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001139",
+      "paise": 30575,
+      "note": "scheduled 2025-02-07"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001551",
+      "paise": 284845,
+      "note": "scheduled 2025-02-07"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001138",
+      "paise": 11680,
+      "note": "scheduled 2025-02-07"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001550",
+      "paise": 362470,
+      "note": "scheduled 2025-02-07"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001141",
+      "paise": 39685,
+      "note": "scheduled 2025-02-08"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001553",
+      "paise": 355215,
+      "note": "scheduled 2025-02-08"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001144",
+      "paise": 3925,
+      "note": "scheduled 2025-02-08"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001564",
+      "paise": 418365,
+      "note": "scheduled 2025-02-08"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001143",
+      "paise": 6365,
+      "note": "scheduled 2025-02-08"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001561",
+      "paise": 392025,
+      "note": "scheduled 2025-02-08"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001146",
+      "paise": 3320,
+      "note": "scheduled 2025-02-09"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001564",
+      "paise": 339330,
+      "note": "scheduled 2025-02-09"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001149",
+      "paise": 42700,
+      "note": "scheduled 2025-02-09"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001575",
+      "paise": 370660,
+      "note": "scheduled 2025-02-09"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001148",
+      "paise": 20195,
+      "note": "scheduled 2025-02-09"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001572",
+      "paise": 351700,
+      "note": "scheduled 2025-02-09"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001151",
+      "paise": 22815,
+      "note": "scheduled 2025-02-12"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001575",
+      "paise": 374250,
+      "note": "scheduled 2025-02-12"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001154",
+      "paise": 3940,
+      "note": "scheduled 2025-02-12"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001588",
+      "paise": 288905,
+      "note": "scheduled 2025-02-12"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001153",
+      "paise": 13335,
+      "note": "scheduled 2025-02-12"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001581",
+      "paise": 370645,
+      "note": "scheduled 2025-02-12"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001156",
+      "paise": 3505,
+      "note": "scheduled 2025-02-13"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001588",
+      "paise": 312705,
+      "note": "scheduled 2025-02-13"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001159",
+      "paise": 32130,
+      "note": "scheduled 2025-02-13"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001601",
+      "paise": 417450,
+      "note": "scheduled 2025-02-13"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001158",
+      "paise": 6245,
+      "note": "scheduled 2025-02-13"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001590",
+      "paise": 455315,
+      "note": "scheduled 2025-02-13"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001161",
+      "paise": 9370,
+      "note": "scheduled 2025-02-14"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001601",
+      "paise": 327515,
+      "note": "scheduled 2025-02-14"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001164",
+      "paise": 20340,
+      "note": "scheduled 2025-02-14"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001612",
+      "paise": 300315,
+      "note": "scheduled 2025-02-14"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001163",
+      "paise": 3540,
+      "note": "scheduled 2025-02-14"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001599",
+      "paise": 360810,
+      "note": "scheduled 2025-02-14"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001166",
+      "paise": 50985,
+      "note": "scheduled 2025-02-15"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001612",
+      "paise": 375455,
+      "note": "scheduled 2025-02-15"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001169",
+      "paise": 12195,
+      "note": "scheduled 2025-02-15"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001625",
+      "paise": 354640,
+      "note": "scheduled 2025-02-15"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001168",
+      "paise": 35970,
+      "note": "scheduled 2025-02-15"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001610",
+      "paise": 415075,
+      "note": "scheduled 2025-02-15"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001171",
+      "paise": 18920,
+      "note": "scheduled 2025-02-16"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001625",
+      "paise": 318870,
+      "note": "scheduled 2025-02-16"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001174",
+      "paise": 15895,
+      "note": "scheduled 2025-02-16"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001636",
+      "paise": 376485,
+      "note": "scheduled 2025-02-16"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001173",
+      "paise": 30940,
+      "note": "scheduled 2025-02-16"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001621",
+      "paise": 298405,
+      "note": "scheduled 2025-02-16"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001180",
+      "paise": 454585,
+      "note": "scheduled 2025-02-19"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001638",
+      "paise": 361180,
+      "note": "scheduled 2025-02-19"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001185",
+      "paise": 291815,
+      "note": "scheduled 2025-02-19"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001647",
+      "paise": 320720,
+      "note": "scheduled 2025-02-19"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001182",
+      "paise": 296425,
+      "note": "scheduled 2025-02-19"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001634",
+      "paise": 293685,
+      "note": "scheduled 2025-02-19"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001191",
+      "paise": 319255,
+      "note": "scheduled 2025-02-20"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001649",
+      "paise": 407095,
+      "note": "scheduled 2025-02-20"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001196",
+      "paise": 331315,
+      "note": "scheduled 2025-02-20"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001658",
+      "paise": 385040,
+      "note": "scheduled 2025-02-20"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001193",
+      "paise": 393445,
+      "note": "scheduled 2025-02-20"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001645",
+      "paise": 359135,
+      "note": "scheduled 2025-02-20"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001204",
+      "paise": 374885,
+      "note": "scheduled 2025-02-21"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001658",
+      "paise": 304195,
+      "note": "scheduled 2025-02-21"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001205",
+      "paise": 399905,
+      "note": "scheduled 2025-02-21"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001667",
+      "paise": 291980,
+      "note": "scheduled 2025-02-21"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001206",
+      "paise": 399005,
+      "note": "scheduled 2025-02-21"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001656",
+      "paise": 410995,
+      "note": "scheduled 2025-02-21"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001213",
+      "paise": 285235,
+      "note": "scheduled 2025-02-22"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001671",
+      "paise": 319040,
+      "note": "scheduled 2025-02-22"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001218",
+      "paise": 386095,
+      "note": "scheduled 2025-02-22"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001680",
+      "paise": 408465,
+      "note": "scheduled 2025-02-22"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001217",
+      "paise": 282215,
+      "note": "scheduled 2025-02-22"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001665",
+      "paise": 399610,
+      "note": "scheduled 2025-02-22"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001224",
+      "paise": 360645,
+      "note": "scheduled 2025-02-23"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001682",
+      "paise": 402390,
+      "note": "scheduled 2025-02-23"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001229",
+      "paise": 350350,
+      "note": "scheduled 2025-02-23"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001693",
+      "paise": 316900,
+      "note": "scheduled 2025-02-23"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001228",
+      "paise": 395680,
+      "note": "scheduled 2025-02-23"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001676",
+      "paise": 313175,
+      "note": "scheduled 2025-02-23"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001237",
+      "paise": 390150,
+      "note": "scheduled 2025-02-26"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001693",
+      "paise": 347750,
+      "note": "scheduled 2025-02-26"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001240",
+      "paise": 425730,
+      "note": "scheduled 2025-02-26"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001702",
+      "paise": 308750,
+      "note": "scheduled 2025-02-26"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001239",
+      "paise": 384080,
+      "note": "scheduled 2025-02-26"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001689",
+      "paise": 350795,
+      "note": "scheduled 2025-02-26"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001248",
+      "paise": 320010,
+      "note": "scheduled 2025-02-27"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001704",
+      "paise": 381450,
+      "note": "scheduled 2025-02-27"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001251",
+      "paise": 355815,
+      "note": "scheduled 2025-02-27"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001715",
+      "paise": 340120,
+      "note": "scheduled 2025-02-27"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001250",
+      "paise": 376770,
+      "note": "scheduled 2025-02-27"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001702",
+      "paise": 383910,
+      "note": "scheduled 2025-02-27"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001259",
+      "paise": 341290,
+      "note": "scheduled 2025-02-28"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001717",
+      "paise": 346485,
+      "note": "scheduled 2025-02-28"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001262",
+      "paise": 368535,
+      "note": "scheduled 2025-02-28"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001728",
+      "paise": 376210,
+      "note": "scheduled 2025-02-28"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001261",
+      "paise": 327635,
+      "note": "scheduled 2025-02-28"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001713",
+      "paise": 374075,
+      "note": "scheduled 2025-02-28"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001270",
+      "paise": 394545,
+      "note": "scheduled 2025-03-01"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001728",
+      "paise": 403865,
+      "note": "scheduled 2025-03-01"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001273",
+      "paise": 407110,
+      "note": "scheduled 2025-03-01"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001741",
+      "paise": 359000,
+      "note": "scheduled 2025-03-01"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001274",
+      "paise": 309040,
+      "note": "scheduled 2025-03-01"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001726",
+      "paise": 299340,
+      "note": "scheduled 2025-03-01"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001283",
+      "paise": 293180,
+      "note": "scheduled 2025-03-02"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_001_001741",
+      "paise": 285740,
+      "note": "scheduled 2025-03-02"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001286",
+      "paise": 347360,
+      "note": "scheduled 2025-03-02"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_002_001752",
+      "paise": 419550,
+      "note": "scheduled 2025-03-02"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001283",
+      "paise": 367875,
+      "note": "scheduled 2025-03-02"
+    },
+    {
+      "kind": "overdue_reserve",
+      "subject_id": "itm_003_001737",
+      "paise": 418150,
+      "note": "scheduled 2025-03-02"
+    },
+    {
+      "kind": "chargeback_unrepresented",
+      "subject_id": "itm_c19cb_crd_001_acc_00_2025-03-04",
+      "paise": 50000,
+      "note": "deadline 2025-03-06"
+    },
+    {
+      "kind": "chargeback_unrepresented",
+      "subject_id": "itm_c19cb_crd_001_acc_01_2025-02-17",
+      "paise": 50000,
+      "note": "deadline 2025-03-06"
+    },
+    {
+      "kind": "chargeback_unrepresented",
+      "subject_id": "itm_c19cb_crd_001_acc_01_2025-02-26",
+      "paise": 50000,
+      "note": "deadline 2025-03-06"
+    },
+    {
+      "kind": "chargeback_unrepresented",
+      "subject_id": "itm_c19cb_crd_002_acc_00_2025-03-04",
+      "paise": 50000,
+      "note": "deadline 2025-03-06"
+    },
+    {
+      "kind": "chargeback_unrepresented",
+      "subject_id": "itm_c19cb_crd_002_acc_01_2025-01-24",
+      "paise": 50000,
+      "note": "deadline 2025-03-06"
+    },
+    {
+      "kind": "chargeback_unrepresented",
+      "subject_id": "itm_c19cb_crd_002_acc_01_2025-01-27",
+      "paise": 50000,
+      "note": "deadline 2025-03-06"
+    },
+    {
+      "kind": "chargeback_unrepresented",
+      "subject_id": "itm_c19cb_crd_003_acc_00_2025-01-16",
+      "paise": 50000,
+      "note": "deadline 2025-03-06"
+    },
+    {
+      "kind": "chargeback_unrepresented",
+      "subject_id": "itm_c19cb_crd_003_acc_01_2025-01-27",
+      "paise": 50000,
+      "note": "deadline 2025-03-06"
+    },
+    {
+      "kind": "chargeback_unrepresented",
+      "subject_id": "itm_c19cb_crd_003_acc_01_2025-02-18",
+      "paise": 50000,
+      "note": "deadline 2025-03-06"
+    },
+    {
+      "kind": "duplicate_credit",
+      "subject_id": "crd_002_acc_01_2025-01-13",
+      "paise": 5345874,
+      "note": "count=2"
+    },
+    {
+      "kind": "duplicate_credit",
+      "subject_id": "crd_001_acc_01_2025-01-21",
+      "paise": 7533335,
+      "note": "count=2"
+    },
+    {
+      "kind": "duplicate_credit",
+      "subject_id": "crd_001_acc_01_2025-01-30",
+      "paise": 7473553,
+      "note": "count=2"
+    },
+    {
+      "kind": "duplicate_credit",
+      "subject_id": "crd_003_acc_01_2025-02-06",
+      "paise": 5562325,
+      "note": "count=2"
+    },
+    {
+      "kind": "duplicate_credit",
+      "subject_id": "crd_001_acc_01_2025-02-07",
+      "paise": 7181404,
+      "note": "count=2"
+    },
+    {
+      "kind": "duplicate_credit",
+      "subject_id": "crd_002_acc_00_2025-02-11",
+      "paise": 7711752,
+      "note": "count=2"
+    },
+    {
+      "kind": "duplicate_credit",
+      "subject_id": "crd_002_acc_01_2025-02-11",
+      "paise": 5181985,
+      "note": "count=2"
+    },
+    {
+      "kind": "duplicate_credit",
+      "subject_id": "crd_003_acc_01_2025-02-12",
+      "paise": 5171409,
+      "note": "count=2"
+    },
+    {
+      "kind": "duplicate_credit",
+      "subject_id": "crd_003_acc_00_2025-02-18",
+      "paise": 7012520,
+      "note": "count=2"
+    }
+  ],
+  "rupees_identified_paise": 89097297,
+  "by_kind_paise": {
+    "overdue_reserve": 30473140,
+    "chargeback_unrepresented": 450000,
+    "duplicate_credit": 58174157
+  }
+}

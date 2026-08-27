@@ -14,3 +14,15 @@ f50_injection: true
 f54_eval_diff: true
 f24_adversarial: true
 f25_idempotency: true
+f32_derived_epsilon: true
+f30_cost_governor: true
+f51_degrade: true
+f39_leakage: true
+f45_bank_formats: true
+f48_fuzz: true
+f35_stream: true
+f41_reserve: true
+f42_disputes: true
+f57_latency: true
+f23_profiles: true
+f26_feedback: true

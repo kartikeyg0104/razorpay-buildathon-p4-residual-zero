@@ -370,4 +370,20 @@ Wrote `PLAN-P2.md` first (71h ladder). Then implemented F33→F49→F55→F31→
 
 **Not done in this tag:** live GitHub Actions run history (needs a push); test-split evaluation 2 of 4; video re-record (script note in PLAN-P2 §3 only).
 
+---
+
+## Phase 3 · CP3.1–CP3.12 + Gate 3 · VERIFIED 2026-08-28
+
+Wrote `PLAN-P3.md` after `v2`. Implemented F32→F30→F51→F39→F45→F48→F35→F41→F42→F57→F23→F26.
+
+Command: `python -m pytest -q` → **296 passed** including `tests/test_feature_flags_off.py`.
+
+**Gate 3.** `make eval` A3 exact still `129/239`, cleared 0. F32 window 2 vs D6 7; F54 empty. `make verify-books` identity HOLDS. Test-split eval skipped (NN-16; empty flags-on disposition diff).
+
+**§9.10.** See `docs/EVALUATION.md` §14. Fitted k=21. F51 coverage 0 at every rung. F39 89097297 paise detector (not incidence). F45 field-identical round-trip. F48 0 partial loads. F35 248/248 unsolvable on arrival, 0 eventually resolved. F41 outstanding 75882625 paise, identity HOLDS, overdue 108. F42 0/9 reconstructed. F57 bottleneck DP on Darwin 25.5.0 arm64 / CPython 3.13.7. F26 lift 0. F23 solver digest identical across three profiles.
+
+**Deviations.** Reserve identity uses holds−releases on signed paise totals, not per-hold parent matching (release `parent_id` is not always the hold id on this corpus). F57 5,000-credit point is a linear projection. F23 full generator eval not tripled.
+
+Tag: `v3`.
+
 

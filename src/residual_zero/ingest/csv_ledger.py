@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import io
 from datetime import datetime
 from typing import Iterable
 
@@ -11,6 +12,7 @@ from residual_zero.normalise import normalise_narration, parse_rupee_display
 from residual_zero.tz import IST, ensure_utc
 
 from . import IngestError
+from .guard import reject_malformed_text
 from .source_root import SourceRoot
 
 LEDGER_FIELDS = (
@@ -37,7 +39,9 @@ def load_ledger_items(root: SourceRoot, relative_name: str = "ledger.csv") -> tu
     except FileNotFoundError as exc:
         raise IngestError(str(exc), path=relative_name, line=None) from exc
     with handle:
-        reader = csv.DictReader(handle)
+        text = handle.read()
+        reject_malformed_text(text, path=relative_name)
+        reader = csv.DictReader(io.StringIO(text))
         if reader.fieldnames is None:
             raise IngestError("missing header", path=relative_name, line=1)
         missing = [f for f in LEDGER_FIELDS if f not in reader.fieldnames]

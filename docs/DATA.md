@@ -86,6 +86,16 @@ line of the solver is written.
 7. **Counterparty names are invented.** They are a closed pool so semantic resolution
    has something to resolve against, not a sample of real merchants.
 
+## MT940 `:86:` and class 16 (F45)
+
+SWIFT MT940's `:86:` information-to-account-owner field is where banks actually truncate
+narration — typically around 35 characters, with continuation lines for the overflow.
+Corruption class 16 in `generator/corrupt.py` models that truncation on the CSV path.
+The MT940 adapter round-trips the full `BankCredit` through `:86:` plus continuation
+lines so parse fidelity against CSV can be asserted field-by-field; the class-16
+generator still mutates the CSV narration independently. The two are the same real-world
+seam, two renderings of it.
+
 ## Realised counts (test, seeds 101–105, frozen at CP2)
 
 Profile `config/profiles/phase1_test.yaml`: 4 accounts, range B, pool B, stacked

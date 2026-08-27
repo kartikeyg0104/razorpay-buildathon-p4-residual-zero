@@ -89,16 +89,27 @@ Phase 1 auto-clear coverage remains `0/239` at threshold `1.000000`. Phase 2 doe
 - **Exceptions (F37).** Compression and purity are the measured pair in `docs/EVALUATION.md` §12, not an invented ratio.
 - **Fees (F38).** False-positive rate on the undrifted Phase 1 corpus is in §12. Class `24 FEE_RATE_DRIFT` exists; classes 25–26 do not.
 
+## Operational depth (Phase 3, below the fold)
+
+Phase 3 does not move auto-clear coverage (`0/239` at threshold `1.000000`) or A3 exact (`129/239`).
+
+- **Tolerance (F32).** Fitted `k=21`; applied rupee window 2 vs D6's 7. Two boundaries: the DP opens `ceil(ε_paise/100)` rupees; the verifier still demands residual 0. Empty F54 diff.
+- **Ladder (F51).** Coverage 0 at every rung; monotonicity is a test.
+- **Books-adjacent (F39/F41/F42).** Leakage rupees are a detector measurement on synthetic data. Reserve outstanding ties at paise and is arithmetic over known release dates, not a forecast. Dispute reconstruction on this corpus is 0/9.
+- **Formats (F45/F48).** CAMT.053 and MT940 round-trip the CSV path field-by-field. Malformed fixtures load nothing.
+
 ## Second-order results (§9.10)
 
-See `docs/EVALUATION.md` §12 for the live table (F33, F49, F55, F31, F40, F37, F38, F52, F50, F54). F24 and F25 are §6.1 carries, recorded in §13.
+See `docs/EVALUATION.md` §12–§14. Phase 3 rows: F32, F51, F39, F45, F48, F35, F41, F42, F57; F30/F23/F26 in the same table from §6.1.
 
-## Phase 2 test-split note (NN-16)
+## Phase 3 test-split note (NN-16)
 
-Evaluation **1 of 4** was spent at `v1-submittable`. Phase 2 did **not** spend evaluation 2 of 4: flags-off dispositions match the v1 map, the autonomy threshold is unchanged, and a second test-split run could not move a published test number without violating NN-16's budget. Dev evaluation is unlimited and was re-run for the §9.10 rows.
+Evaluation **1 of 4** remains the only test-split spend (`v1-submittable`). Phase 2 skipped evaluation 2 of 4. Phase 3 also skipped it: F32 narrowed the search window from 7 to 2 rupees, which could have moved uniqueness, but the flags-on A3 disposition map vs `artifacts/v1` is empty and auto-clear stayed 0. A test-split run could not publish a new headline number. Dev eval was re-run for Gate 3.
 
 ## Safety
 
 1. **PII boundary (F49).** Detectors for VPAs, card fragments, phones and account tails. `CachedLLMClient` redacts then **raises** `PiiLeakError` on a residual hit. It does not warn-and-send. Raw VPA/card/phone count in the model egress log: `0`. Redacted-vs-raw entity-resolution accuracy delta: not estimable (Q2=C stub; both paths `0` model resolutions).
 2. **Injection corpus (F50).** 30 planted narration strings. Auto-clears: `0/30`. The model returns an id from a closed candidate set, never sees or emits an amount, and cannot authorise: auto-clear still needs UNIQUE + zero paise residual + an ordering score from observables.
-3. **Degradation ladder (F51).** Not in this tag (Phase 3). Named here so the safety section's order matches spec §15 rather than implying a rung we did not build.
+3. **Degradation ladder (F51).** Coverage at every rung on this corpus: **0/239**. Error is not applicable (nothing auto-clears). The ladder is NORMAL → NO_MODEL → NO_SEARCH → READ_ONLY → HALTED. Monotonic conservatism is a test (`tests/test_degrade.py`).
+4. **Derived tolerance (F32).** Search ε is fitted `k=21` in `ε(n)=ceil(k·√n)` paise; the DP window is `ceil(ε/100)=2` rupees. The verifier still demands a zero paise residual. D6's flat 7 remains the flags-off window.
+5. **Leakage (F39).** Rupee totals in §14 measure the **detector on synthetic data**, not real-world incidence.

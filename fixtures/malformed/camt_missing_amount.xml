@@ -1,0 +1,12 @@
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.08">
+  <BkToCstmrStmt><Stmt>
+    <Ntry>
+      <CdtDbtInd>CRDT</CdtDbtInd>
+      <ValDt><Dt>2025-01-08</Dt></ValDt>
+      <NtryDtls><TxDtls>
+        <Refs><EndToEndId>crd_bad</EndToEndId></Refs>
+        <RmtInf><Ustrd>x</Ustrd></RmtInf>
+      </TxDtls></NtryDtls>
+    </Ntry>
+  </Stmt></BkToCstmrStmt>
+</Document>

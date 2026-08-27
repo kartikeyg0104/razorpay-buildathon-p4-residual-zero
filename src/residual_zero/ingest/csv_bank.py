@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import io
 from datetime import date
 from typing import Iterable
 
@@ -10,6 +11,7 @@ from residual_zero.models import BankCredit
 from residual_zero.normalise import normalise_narration, parse_rupee_display
 
 from . import IngestError
+from .guard import reject_malformed_text
 from .source_root import SourceRoot
 
 BANK_FIELDS = (
@@ -31,7 +33,9 @@ def load_bank_credits(root: SourceRoot, relative_name: str = "bank.csv") -> tupl
     except FileNotFoundError as exc:
         raise IngestError(str(exc), path=relative_name, line=None) from exc
     with handle:
-        reader = csv.DictReader(handle)
+        text = handle.read()
+        reject_malformed_text(text, path=relative_name)
+        reader = csv.DictReader(io.StringIO(text))
         if reader.fieldnames is None:
             raise IngestError("missing header", path=relative_name, line=1)
         missing = [f for f in BANK_FIELDS if f not in reader.fieldnames]

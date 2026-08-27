@@ -29,12 +29,19 @@ def test_all_off_is_all_false():
     assert flags.f38_drift is False
     assert flags.f52_trace is False
     assert flags.f25_idempotency is False
+    assert flags.f32_derived_epsilon is False
+    assert flags.f30_cost_governor is False
+    assert flags.f51_degrade is False
+    assert flags.f35_stream is False
+    assert flags.f26_feedback is False
 
 
 def test_product_yaml_defaults_on():
     loaded = load_features()
     assert loaded.f33_conservation is True
     assert loaded.f31_disambiguation is True
+    assert loaded.f32_derived_epsilon is True
+    assert loaded.f51_degrade is True
 
 
 def test_flags_off_matches_v1_baseline():

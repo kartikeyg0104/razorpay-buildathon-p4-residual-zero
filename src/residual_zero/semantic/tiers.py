@@ -11,7 +11,7 @@ from rapidfuzz import fuzz
 from residual_zero.config import LLMRuntimeConfig
 from residual_zero.models import LedgerItem, ResolutionTier
 from residual_zero.normalise import extract_reference_token, normalise_narration
-from residual_zero.semantic.llm import LLMClient, OfflineCacheMiss
+from residual_zero.semantic.llm import LLMClient, OfflineCacheMiss, TokenBudgetExceeded
 from residual_zero.semantic.schema import CandidateEntity, EntityResolutionRequest, bind_selection
 
 
@@ -79,6 +79,7 @@ def resolve(
     registry: EntityRegistry,
     cfg: LLMRuntimeConfig,
     client: LLMClient | None,
+    graceful_budget: bool = False,
 ) -> Resolution:
     """Tier 1 exact-normalised, tier 2 reference token, tier 3 rapidfuzz with a top-two margin,
     tier 4 model over a closed shortlist, tier 5 unresolved.
@@ -123,6 +124,10 @@ def resolve(
         return Resolution(bound.selected_id, ResolutionTier.MODEL, None)
     try:
         response = client.resolve_entity(request)
+    except TokenBudgetExceeded:
+        if graceful_budget:
+            return Resolution(None, ResolutionTier.UNRESOLVED, None)
+        raise
     except OfflineCacheMiss:
         return Resolution(None, ResolutionTier.UNRESOLVED, None)
     if response is None or response.selected_id is None:

@@ -4,8 +4,13 @@ search:
   epsilon_rupees: 7                 # DERIVED in PLAN-P1 D6 from the itemisation model, not chosen:
                                     # |sum r(a_i) - r(T)| <= floor((m+1)/2) where m is the count of
                                     # sub-rupee members, and the Phase 1 profile caps m at 13.
-                                    # Provisional; superseded by F32 in Phase 3.
+                                    # Flat D6 window used when features.f32_derived_epsilon is off.
   epsilon_paise_equivalent: 700     # documentary: the accumulated rounding residue the window covers
+  derived_k: 21                     # F32: smallest k s.t. ceil(k·√n)/100 covers rupee-axis error
+                                    # of paise-exact true decompositions (eval/fit_epsilon.py).
+  derived_epsilon_paise: 119        # ceil(21 · √32) at the largest exact member count on dev
+  derived_epsilon_rupees: 2         # ceil(119/100); applied search window when F32 is on. Confirms
+                                    # D6's 7 is a looser worst-case bound (empirical max error was 2).
   max_pool: 400                     # spec §5.5
   max_axis_width_rupees: 2000000    # deterministic memory/work cap. Snapshot memory is about
                                     # (n+1) * axis_width / 8 bytes; over this -> BUDGET_EXCEEDED.
