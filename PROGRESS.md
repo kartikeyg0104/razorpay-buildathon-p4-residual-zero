@@ -189,3 +189,46 @@ because `has_exception_path` and `has_budget_path` are False.
 That is NN-13 working: the baseline is weak on this problem, and we measured it before the
 solver exists.
 
+---
+
+## CP3 · Candidate generation and the solver · VERIFIED 2026-08-27
+
+Command: `make test && python -m residual_zero.cli solve --split dev --class 4 --limit 5 --show-proof && python -m tests.bench_solver --pools-from data/dev`
+
+Exit: 0 — 117 passed; five MIXED_N_M credits decomposed at residual `0.00`;
+benchmark `25 credits from data/dev: median 2 ms, worst 14 ms` on Darwin 25.5.0 (arm64),
+CPython 3.13.7. Well inside the 2 s/credit trip-wire.
+
+Commit: *(filled after commit)*
+
+Files: `src/residual_zero/{candidates,cli}.py`, `src/residual_zero/solver/{__init__,bitset_dp,enumerate,fastpath}.py`,
+`tests/{solver_helpers,test_solver_properties,test_uniqueness,test_candidates,test_fastpath,bench_solver}.py`,
+`tests/regressions/test_uniqueness_under_tolerance.py`, `docs/INCIDENTS.md`.
+
+**§0.1 incident.** The unmodified reference `solve([10, 11], 10, tol=1)` returns UNIQUE.
+The corrected oracle finds two subsets. Logged in `docs/INCIDENTS.md` the same hour.
+`enumerate_solutions` walks every hit total into one shared cap.
+
+**Class-4 E2E.** `crd_001_acc_01_2025-01-09` and four siblings decompose via Regime A
+(`verify_declared`): 15 payments, 2–3 refunds, per-instrument fee/GST, withholding, reserve,
+bank charge. Residual zero at paise. The N:M shape is on the proof, not just in the generator.
+
+**Deviations from plan:**
+
+1. **`--class 4` does not open the answer key.** It selects credits whose declared composition
+   (or candidate pool) contains ≥2 PAYMENTs and ≥1 REFUND. NN-6 forbids `truth.jsonl` in `src/`.
+2. **Regime B search on the full 5-day pool is AMBIGUOUS for essentially every credit.**
+   Pools are 60–380 items and `ε_R = 7` is wide enough for extra subsets. That is the cost
+   §0.1 named (coverage, not a wrong clear). The class-4 DoD command therefore uses the
+   Regime A fast path, which is the path declared settlement reports are supposed to take.
+3. **`verify_declared` takes `reserve_bps` as an argument.** `fees.reserve_bps` is the
+   synthetic 0 in `config/fees.yaml`; the live rate lives on the merchant profile (CP1).
+4. **Fee recomputation is per (declared-set, instrument), not per payment.** Matching the
+   generator's `PER_SETTLEMENT_INSTRUMENT` itemisation (D6). Per-payment `apply_bps` would
+   disagree with the emitted fee lines by rounding.
+5. **`CandidatePool` carries `kinds`, `occurred_on`, `value_date`.** `split_pool` cannot
+   suffix-grow without dates and kinds; the plan's type omitted them.
+
+**Numbers produced:** median 2 ms/credit, worst 14 ms/credit, 25-credit sample from `data/dev`.
+Not a quality metric.
+
