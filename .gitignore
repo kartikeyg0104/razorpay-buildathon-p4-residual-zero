@@ -1,0 +1,17 @@
+# Data: gitignored except manifests and seeds (§10)
+data/*
+!data/**/manifest.json
+!data/seeds/
+!data/.gitkeep
+
+# artifacts/ is COMMITTED on purpose (§10) — do not ignore it.
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+.hypothesis/
+.DS_Store
+*.egg-info/
