@@ -1,8 +1,13 @@
-# Data: gitignored except manifests and seeds (§10)
-data/*
+# Data: gitignored except manifests and seeds (§10).
+# Git does not re-include a file inside an ignored directory, so the directory
+# itself has to be un-ignored first. `data/*` hid `data/dev/` and the
+# `!data/**/manifest.json` rule never fired.
+data/**
+!data/**/
+!data/.gitkeep
 !data/**/manifest.json
 !data/seeds/
-!data/.gitkeep
+!data/seeds/**
 
 # artifacts/ is COMMITTED on purpose (§10) — do not ignore it.
 

@@ -10,7 +10,24 @@ venv is deliberately on 3.13 for wheel availability, per PLAN-P1 CP0 note 4.
 
 ---
 
+## CP0 · Foundation, config and the definition of success · VERIFIED 2026-08-27
+
+Command: `make test && python -c "from residual_zero.config import load_tax_rates, load_fees; load_tax_rates(); load_fees(); print('rates verified')"`
+
+Exit: 0 — 46 passed, then `rates verified`.
+
+Commit: `294eac0d68dcb61a5ae6d58594521e2916e68697`
+
+Files: `config/tax_rates.yaml`, `tests/test_config.py`, `PLAN-QUESTIONS.md`, `docs/DECISIONS.md` ADR-9, `README.md` stub.
+
+**How the blocker cleared.** PLAN-QUESTIONS.md Q1 answered **A'**. Withholding is s.194-O at **10 bps** of `GROSS_PAYMENTS`, sourced from Finance (No. 2) Bill 2024 clause 61 on the Income Tax Department host (the Act-text pages still 403 from this environment; the Bill PDF on the same host is the primary text that retrieved). The Phase 1 merchant is an e-commerce participant by stated assumption, not a claim about Razorpay's PA stack.
+
+**Deviations from plan:** none beyond those already recorded in the blocked entry below. The blocked entry is kept so a resume can see what the NN-8 guard actually did.
+
+---
+
 ## CP0 · Foundation, config and the definition of success · **BLOCKED** 2026-08-27
+*(superseded by the VERIFIED block above; left in place as the contemporaneous record of the NN-8 stop)*
 
 Command: `make test && python -c "from residual_zero.config import load_tax_rates, load_fees; load_tax_rates(); load_fees(); print('rates verified')"`
 
@@ -82,3 +99,48 @@ Files: `pyproject.toml`, `Makefile`, `.gitignore`, `docs/{INCIDENTS,EVALUATION,D
   CP3's 2 s/credit trip-wire. **This is the reference's own synthetic pool generator, not real
   generated pools — CP3 must re-measure from `data/dev` before this number means anything about
   the system.**
+
+---
+
+## CP1 · Generator stages 1–2, render, corruption 1–4 and 23 · VERIFIED 2026-08-27
+
+Command: `make test && python -m generator.cli --split dev --profile config/profiles/phase1.yaml && python -m generator.cli --print-class 4 --limit 3`
+
+Exit: 0 — 74 passed; wrote 239 credits, 6058 ledger rows; class counts `{1: 22, 2: 140, 3: 42, 4: 35, 23: 36}`.
+
+Commit: *(filled after commit)*
+
+Files: `generator/{__init__,profiles,scenario,truth,corrupt,render,cli}.py`,
+`src/residual_zero/{normalise.py,ingest/*}`,
+`tests/{test_no_leakage,test_generator,test_normalise,test_ingest}.py`,
+`docs/DATA.md`, `data/dev/manifest.json`, `.gitignore` (manifest un-ignore).
+
+**Class-4 inspection.** The N:M shape is real, not 1:1 with extra rows.
+
+- `crd_001_acc_00_2025-01-23`: 15 payments, 3 refunds, 27 members, ₹48,246.49.
+- `crd_001_acc_00_2025-02-06`: 16 payments, 3 refunds, 32 members; orders
+  `ord_001_acc_00_00198` and `ord_001_acc_00_00213` each settle across two consecutive credits.
+
+`m` min 4, max 13 (the D6 bound held).
+
+**Deviations from plan:**
+
+1. **`test_src_never_references_truth` greps for `truth.jsonl` and `load_truth`, not the
+   substrings `truth` and `member_ids`.** `models.py` carries `member_ids` on `Decomposition`,
+   which is the system's output. The literal grep is unsatisfiable given D1. NN-6 is what is
+   enforced.
+2. **Path concatenation uses `Path.joinpath`, never `/`.** The CP0 AST scan treats every
+   `ast.Div` as money division, including pathlib. Changing `test_no_floats.py` (a CP0 file)
+   to special-case pathlib would have been the other option; joinpath is local to CP1 files.
+3. **Reserve releases are not posted at CP1.** A release on a later settlement is a 14th
+   sub-rupee member and breaks `subrupee_member_max = 13`. Holds still deduct. Releases
+   belong with class 21 at CP2.
+4. **`.gitignore` updated** so `data/dev/manifest.json` is actually committable. The CP0 rule
+   `!data/**/manifest.json` never fired because `data/*` ignored the parent directory.
+
+**Surprises:** the D6 assertion firing at `m=14` when reserve releases were included — which
+is exactly when that guard was supposed to fire. That is how deviation 3 was found.
+
+**Numbers produced:** 239 dev credits, 5986 truth items, 6058 rendered ledger rows.
+Not quality metrics.
+
