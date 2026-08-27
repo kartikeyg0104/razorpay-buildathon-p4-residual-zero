@@ -126,6 +126,8 @@ def main(argv: list[str] | None = None) -> int:
     run_p.add_argument("--limit", type=int, default=0)
     run_p.add_argument("--out", default="artifacts/dev")
     run_p.add_argument("--offline", action="store_true")
+    challenge_p = sub.add_parser("challenge")
+    challenge_p.add_argument("file")
     args = parser.parse_args(argv)
     if args.cmd == "solve":
         return _cmd_solve(args)
@@ -136,6 +138,12 @@ def main(argv: list[str] | None = None) -> int:
         db = out.joinpath("ledger.sqlite")
         n = run_split(args.split, db, limit=args.limit, offline=args.offline)
         print(f"processed {n} credits into {db}")
+        return 0
+    if args.cmd == "challenge":
+        from residual_zero.challenge import run_challenge
+        from residual_zero.models import Disposition
+        disp = run_challenge(Path(args.file))
+        print(disp.value)
         return 0
     raise SystemError(f"unhandled command {args.cmd}")
 

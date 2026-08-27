@@ -46,6 +46,6 @@ ordering_score:
   weights: uniform                  # deliberately not fitted; see PLAN-P1 D14 and ADR-4
 
 autonomy:
-  error_budget: TBD-CP6-DECLARED    # declared first, in docs/EVALUATION.md
-  threshold: TBD-CP6-CURVE          # then READ OFF the §9.5 risk-coverage curve at that budget
-  threshold_source: TBD-CP6-CURVE   # the loader rejects a threshold without a curve artifact
+  error_budget: "1/100"             # declared in docs/EVALUATION.md at CP6, before the curve was read
+  threshold: "1.000000"             # READ OFF artifacts/dev/curve_a3.json at that budget
+  threshold_source: artifacts/dev/curve_a3.json

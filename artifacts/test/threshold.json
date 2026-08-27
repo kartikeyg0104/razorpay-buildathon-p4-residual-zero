@@ -1,0 +1,8 @@
+{
+  "error_budget": "1/100",
+  "threshold": "0.879596",
+  "coverage": "1/825",
+  "error": "0",
+  "n_cleared": 1,
+  "source": "artifacts/test/curve_a3.json"
+}

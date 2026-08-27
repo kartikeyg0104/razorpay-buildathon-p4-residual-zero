@@ -1,0 +1,1754 @@
+[
+  {
+    "threshold": "1.000001",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.883412",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.879596",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.688884",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.679146",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.678423",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.673365",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.672648",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.661039",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.658539",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.658118",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.657696",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.657272",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.656846",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.656420",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.655992",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.655131",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.654699",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.653830",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.653394",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.652956",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.652516",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.652075",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.651632",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.650743",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.650296",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.649397",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.648945",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.648492",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.648037",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.647122",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.646201",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.645738",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.645273",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.644807",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.643869",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.643397",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.642924",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.642449",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.641972",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.641494",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.641013",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.640047",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.639562",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.639074",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.638093",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.637600",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.636607",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.636108",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.635866",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.635456",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.635104",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.634780",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.634675",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.634599",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.634092",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.633583",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.633276",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.633072",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.632867",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.632558",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.632456",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.632404",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.632043",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.631526",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.631465",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.631353",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.631058",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.630859",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.630798",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.630650",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.630484",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.630240",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.629575",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.629434",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.629206",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.628906",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.628862",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.628800",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.628712",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.628597",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.628588",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.628393",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.628376",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.627985",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.627754",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.627683",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.627335",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.627308",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.627174",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.626339",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.626335",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.626231",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.626069",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.625508",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.625217",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.625090",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.624817",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.624790",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.624379",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.624360",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.624305",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.624251",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.623856",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.623677",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.623497",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.623221",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.623064",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.623054",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.622980",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.622791",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.622610",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.622554",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.622192",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.622164",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.622126",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.621716",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.621435",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.621267",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.621126",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.620891",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.620872",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.620834",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.620787",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.620665",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.620429",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.620401",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.620363",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.620278",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.620065",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.619984",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.619965",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.619909",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.619538",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.619281",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.619090",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.618995",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.618679",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.618651",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.618641",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.618536",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.618464",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.618435",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.618334",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.618209",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.618190",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.618074",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.617737",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.617539",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.617322",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.617278",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.617089",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.616875",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.616827",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.616510",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.616428",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.616369",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.616198",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.616037",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.615978",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.615910",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.615728",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.615552",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.615478",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.615448",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.615306",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.615271",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.615057",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.614995",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.614985",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.614798",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.614620",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.614521",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.614473",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.614322",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.614164",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.614084",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.614054",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.613890",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.613706",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.613246",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.613116",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.613046",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.612885",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.612785",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.612644",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.612403",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.612322",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.612024",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.611999",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.611918",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.611857",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.611718",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.611599",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.611431",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.611218",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.610943",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.610922",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.610906",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.610744",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.610739",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.610565",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.610452",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.610365",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.610083",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.610021",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.609980",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.609775",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.609290",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.609062",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.609031",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.608969",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.608803",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.608553",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.608470",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.608314",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.608074",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.608032",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.607719",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.607593",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.607467",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.607330",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.607231",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.607110",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.606836",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.606646",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.606625",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.606455",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.606339",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.606209",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.606138",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.605946",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.605521",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.605259",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.605157",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.604836",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.604331",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.604169",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.603921",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.603824",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.603315",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.603173",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.602882",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.602672",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.602437",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.602169",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.601663",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.601073",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.600802",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.599384",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.598352",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.597912",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.596064",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.595274",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.585752",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.583656",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.581522",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.578547",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.577741",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.573622",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.558565",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.556649",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.553711",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.552714",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.552681",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.548774",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.546767",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.527574",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.522349",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.519635",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.499722",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.498911",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.498319",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.498022",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.497126",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.442429",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.427014",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.424027",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.422494",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.375707",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.361990",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.360722",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.359432",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.312845",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.301423",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.299833",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.299293",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.292402",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.281727",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.280740",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.279227",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  },
+  {
+    "threshold": "0.000000",
+    "coverage": "1/825",
+    "error": "0",
+    "n_cleared": 1
+  }
+]

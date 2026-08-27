@@ -123,9 +123,9 @@ The threshold is **read off the risk-coverage curve at a declared error budget**
 
 | Item | Value |
 |---|---|
-| Declared error budget | `TBD-CP6-DECLARED` |
-| Threshold read off the curve | `TBD-CP6-CURVE` |
-| Curve artifact | `TBD-CP6-CURVE` |
+| Declared error budget | `1/100` (declared at CP6 **before** the curve was read) |
+| Threshold read off the curve | `1.000000` (never auto-clear: no eligible UNIQUE+FULL credit on dev) |
+| Curve artifact | `artifacts/dev/curve_a3.json` |
 
 ## 8 · Held-out class
 
@@ -154,7 +154,7 @@ prompt, tolerance and window is tuned on dev, always. Dev evaluation is unlimite
 
 | # | Timestamp | Commit | Tag | Phase | Notes |
 |---|---|---|---|---|---|
-| — | — | — | — | — | No test-split evaluation has been run. |
+| 1 | `2026-08-27T18:45:00+05:30` | (tag `v1-submittable`) | `v1-submittable` | 1 | Evaluation **1 of 4**. n=800. A0/A1 exact 0/800. A2 exact 0/800, greedy-cleared 510, budget 238. A3 exact 425/800, assignment 11467/11470 P / 11467/20487 R, auto-cleared 0, flagged 116, budget 684. Held-out class 9 present. Tuned on dev only. |
 
 ## 11 · Pre-registered questions
 
@@ -162,7 +162,7 @@ Registered before the answer is knowable, so the answer counts either way.
 
 | # | Registered | Question | Answered |
 |---|---|---|---|
-| 1 | `2026-08-27T18:15:00+05:30` (CP5, before the `--offline` dev run) | On the credits where the three raters disagreed with each other (any pairwise disposition disagreement), did the system flag rather than clear? | `TBD-CP6` |
+| 1 | `2026-08-27T18:15:00+05:30` (CP5, before the `--offline` dev run) | On the credits where the three raters disagreed with each other (any pairwise disposition disagreement), did the system flag rather than clear? | **Not estimable.** F56 was not run (Q3=C: no additional raters). There is no pairwise disagreement set. |
 
 <!-- A1-SWEEP-START -->
 

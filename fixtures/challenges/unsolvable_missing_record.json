@@ -1,0 +1,22 @@
+{
+  "comment": "Unsolvable: the member that would explain the credit is absent from every view. An honest refusal is a success.",
+  "credit": {
+    "id": "crd_ch_missing",
+    "amount_paise": 50000,
+    "value_date": "2025-01-15",
+    "account_id": "acc_00",
+    "narration_raw": "NEFT"
+  },
+  "items": [
+    {
+      "id": "itm_ch_unrelated",
+      "kind": "PAYMENT",
+      "amount_paise": 1200,
+      "occurred_at": "2025-01-12T10:00:00",
+      "account_id": "acc_00",
+      "instrument": "UPI",
+      "narration_raw": "PAY",
+      "counterparty_raw": "Acme"
+    }
+  ]
+}

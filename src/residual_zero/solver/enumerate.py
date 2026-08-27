@@ -129,6 +129,10 @@ def _solve_one(pool: CandidatePool, target_rupees: int, cfg: SolverConfig) -> So
         return _empty_result(Uniqueness.NONE_FOUND, pool)
     if n > cfg.search.max_pool:
         return _empty_result(Uniqueness.BUDGET_EXCEEDED, pool)
+    if any(a == 0 for a in amounts):
+        # A sub-rupee item rounded to 0 rupees is invisible on the search axis and illegal
+        # as a DP input. Do not auto-clear; the verifier still sees the paise.
+        return _empty_result(Uniqueness.NONE_FOUND, pool)
     index = ReachabilityIndex(amounts)
     if index.axis_width > cfg.search.max_axis_width_rupees:
         return _empty_result(Uniqueness.BUDGET_EXCEEDED, pool, axis_width=index.axis_width)

@@ -32,3 +32,25 @@ Format:
 **Regression test.** `tests/regressions/test_uniqueness_under_tolerance.py::test_two_totals_in_the_window_are_ambiguous` and `tests/test_solver_properties.py::test_reference_solver_misses_cross_total_ambiguity`.
 **What it changed about my thinking.** A green uniqueness test at `tol=0` is not a uniqueness test. The rounding bridge makes this the production case, not an edge case.
 
+---
+
+## 2026-08-27T18:30:00+05:30 · malformed LLM cache must not yield a selected_id
+**Symptom.** Injection 2: a `{not json` file in the cache directory.
+**First hypothesis.** Pydantic would throw a ValidationError the caller might catch and retry.
+**Actual cause.** `lookup_entity` now treats any parse failure as `OfflineCacheMiss`, so a corrupt entry is a miss, never a wrong id.
+**Fix.** Catch-all around `model_validate_json` in `CachedLLMClient.lookup_entity`.
+**Commit.** (this CP8 commit)
+**Regression test.** `tests/regressions/test_malformed_llm_cache.py::test_malformed_cache_entry_is_not_a_wrong_id`
+**What it changed about my thinking.** A cache is a second parser. If it is more permissive than the live path, it is a vulnerability.
+
+---
+
+## 2026-08-27T18:40:00+05:30 · test-split pool contains a 0-rupee DP input
+**Symptom.** `eval.cli --split test` raised `ValueError: zero amounts are not a legal DP input` inside `ReachabilityIndex`.
+**First hypothesis.** A zero-paise ledger item leaked past ingest. Ingest forbids amount_paise == 0.
+**Actual cause.** `to_rupee_units` maps |paise| < 50 to 0 rupees. The test split has sub-50-paise members (stacked corruptions / more fee lines). The DP axis is rupees, so those items are zeros.
+**Fix.** `solve_search` returns `NONE_FOUND` when the pool contains a 0-rupee amount, rather than crashing. Auto-clear stays impossible. The verifier still sees paise.
+**Commit.** (this commit)
+**Regression test.** (behaviour covered by the test-split eval completing)
+**What it changed about my thinking.** The rupee axis is a projection. Projections send some legal paise values to zero, and the DP must treat that as "cannot search", not as a crash.
+

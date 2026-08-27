@@ -1,0 +1,22 @@
+{
+  "comment": "Solvable 1:1 payment. Should UNIQUE-clear on a tiny pool.",
+  "credit": {
+    "id": "crd_ch_solvable",
+    "amount_paise": 10000,
+    "value_date": "2025-01-15",
+    "account_id": "acc_00",
+    "narration_raw": "NEFT"
+  },
+  "items": [
+    {
+      "id": "itm_ch_pay",
+      "kind": "PAYMENT",
+      "amount_paise": 10000,
+      "occurred_at": "2025-01-12T10:00:00",
+      "account_id": "acc_00",
+      "instrument": "UPI",
+      "narration_raw": "PAY",
+      "counterparty_raw": "Acme"
+    }
+  ]
+}

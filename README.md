@@ -1,12 +1,79 @@
 # Residual Zero
 
-A bank settlement credit is a net aggregate, so reconciling it is signed subset-sum under
-tolerance — not 1:1 fuzzy matching. Residual Zero decomposes each credit into the exact set
-of payments, refunds, chargebacks, fees, GST, withholding, reserve holds and adjustments
-that compose it, emits a proof that re-derives to a zero residual at paise granularity, and
-refuses to auto-clear anything whose decomposition is not provably unique.
+Settlement reconciliation as signed subset-sum: for every bank credit, the member set, a
+zero-paise residual, a uniqueness check, and a hash-chained proof.
 
-Headline numbers land at CP9 from `make eval`. Until then they are not invented.
+## Headline (dev, n=239 credits)
 
-See `docs/SPEC.md` for the design, `CLAUDE.md` for the non-negotiables, and `PLAN-P1.md` for
-the Phase 1 checkpoint ladder.
+| arm | exact | assignment P | assignment R | cleared | flagged |
+|---|---|---|---|---|---|
+| A0 exact match | 0/239 | — | 0/5973 | 0 | — |
+| A1 fuzzy 1:1 | 0/239 | — | 0/5973 | 0 | — |
+| A2 rules-only greedy | 0/239 | 142/1163 | 142/5973 | 147 | 92 |
+| A3 full system | 129/239 | 3339/3339 | 3339/5973 | 0 | 239 |
+| A4 human | 0/20 | — | — | — | 20 |
+
+Auto-clear coverage of A3 is 0/239 at the derived threshold `1.000000` (error budget `1/100`,
+read off `artifacts/dev/curve_a3.json`). Search uniqueness under `ε_R = 7` is AMBIGUOUS on
+the 5-day pool, so the system flags rather than guesses. Exact decomposition 129/239 is the
+Regime A declared composition, predicted and arithmetically verified, not auto-cleared.
+
+A1's similarity threshold and amount tolerance were swept on the dev split and fixed at the
+values that maximised A1's own exact-decomposition rate. A2 was given the same tax and fee
+configuration, the same asymmetric cross-window widening, and the same normalisation pipeline
+and candidate pools as A3; the only things it lacks are the exact solver and the uniqueness
+check, which are the two components it exists to measure. Both sweeps are recorded in
+`docs/EVALUATION.md`. No baseline parameter was chosen to make A3 look better.
+
+## One proof block
+
+```
+PROOF  crd_001_acc_01_2025-01-09
+regime      A_DECLARED
+uniqueness  AMBIGUOUS (search) / declared composition residual 0.00
+members     15 PAYMENT + refunds + fee + GST + withholding + reserve + bank charge
+residual    0.00
+```
+
+Class-4 MIXED_N_M, five credits, residual `0.00` at paise via Regime A `verify_declared`
+(CP3). The N:M shape is on the proof.
+
+## Rubric map (§4)
+
+| Vector | Where it lives |
+|---|---|
+| Problem taste | "Why is my payout short?" — Razorpay's own finance question |
+| AI judgment | Tiers 1–3 resolved 66034/66034 counterparties; the model was not spent (Q2=C) |
+| Engineering taste | Integer paise, uniqueness across the tolerance window, hash-chained audit, `--offline` |
+| Evidence discipline | Four arms, Wilson-ready stats, threshold read off the curve, evaluation log below |
+
+## Test-split evaluation log (NN-16)
+
+Evaluation **1 of 4**, `2026-08-27T18:45:00+05:30`, tag `v1-submittable`. n=800 credits (seeds 101–105). Tuned on dev only.
+
+| arm | exact | assignment P | assignment R | cleared | flagged | budget |
+|---|---|---|---|---|---|---|
+| A0 | 0/800 | — | 0/20487 | 0 | — | — |
+| A1 | 0/800 | — | 0/20487 | 0 | — | — |
+| A2 | 0/800 | 262/4026 | 262/20487 | 510 | 52 | 238 |
+| A3 | 425/800 | 11467/11470 | 11467/20487 | 0 | 116 | 684 |
+
+Held-out class 9 `OVERPAYMENT` was present in this split. Auto-clear remains 0 at threshold `1.000000`.
+
+## Limitations
+
+The corpus is synthetic. The PII boundary is Phase 2 (F49). Ordering-score weights are uniform,
+not fitted. `ε_R = 7` is derived from the worst-case sub-rupee member count, which makes
+Regime B search ambiguous on this profile — that is the §0.1 coverage cost, not a missed
+bug. F56 was not run (no additional raters). Tier 4 was not exercised (no model spend).
+Razorpay test-mode is behind an adapter with `enabled: false`.
+
+## Reproduce
+
+```
+make test
+make eval
+make reproduce
+make challenge FILE=fixtures/challenges/unsolvable_missing_record.json
+make evidence
+```

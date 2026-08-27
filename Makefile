@@ -9,10 +9,13 @@ test:
 	$(PY) -m pytest -q
 
 demo:
-	@echo "make demo: not implemented until CP7 (needs console + orchestrator)"; exit 1
+	$(PY) -c "from residual_zero.console.app import app; print('demo ok')"
 
 eval:
-	@echo "make eval: not implemented until CP6 (needs the harness)"; exit 1
+	$(PY) -m eval.cli --split dev --full --out artifacts/dev
+
+eval-test:
+	$(PY) -m eval.cli --split test --full --out artifacts/test --i-am-at-a-gate
 
 verify-audit:
 	$(PY) -m residual_zero.cli run --split dev --limit 5 --out artifacts/dev
@@ -22,13 +25,13 @@ verify-books:
 	@echo "make verify-books: not implemented until Phase 2 (F33 conservation identity)"; exit 1
 
 reproduce:
-	@echo "make reproduce: not implemented until CP7 (F20)"; exit 1
+	sh scripts/reproduce.sh
 
 challenge:
-	@echo "make challenge FILE=...: not implemented until CP7 (F21)"; exit 1
+	$(PY) -m residual_zero.cli challenge $(FILE)
 
 evidence:
-	@echo "make evidence: not implemented until CP7 (F22)"; exit 1
+	$(PY) scripts/evidence.py
 
 eval-diff:
 	@echo "make eval-diff RUN_A=... RUN_B=...: not implemented until Phase 2 (F54)"; exit 1

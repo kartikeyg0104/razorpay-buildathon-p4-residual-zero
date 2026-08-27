@@ -270,7 +270,7 @@ Tier mix on the pooled ledger items of the dev run (F6):
 Exception classes on the 248 credits: `AMBIGUOUS_DECOMPOSITION=245 MISSING_RECORD=3`.
 Auto-clear does not proceed: the autonomy threshold is still `TBD-CP6`.
 
-Commit: `TBD-CP5` (filled after this commit)
+Commit: `77d034a53d86939554f386955767d13b3a494535`
 
 Files: `config/llm.yaml`, `src/residual_zero/semantic/{__init__,schema,llm,tiers}.py`,
 `src/residual_zero/exceptions/{classify,narrate}.py`, `src/residual_zero/ordering.py`,
@@ -285,4 +285,57 @@ deterministic tiers resolved every counterparty in this corpus.
 honest `results.json`. F19 not scored: the executor had already seen CP3/CP4 output.
 
 **Pre-registered** in `docs/EVALUATION.md` at `2026-08-27T18:15:00+05:30`, before this run.
+
+---
+
+## CP6 · Evaluation harness, curve, threshold · VERIFIED 2026-08-27
+
+Command: `make eval && make test && cat artifacts/dev/headline.md artifacts/dev/per_class.md artifacts/dev/ablations.md`
+
+Exit: 0 — 183 passed; headline/per-class/ablations written from `data/dev`.
+
+**Declared error budget (before the curve was read):** `1/100`.
+**Threshold read off `artifacts/dev/curve_a3.json`:** `1.000000` (never auto-clear).
+No credit was UNIQUE+FULL+accepted on the 5-day search pool (`ε_R=7`), so coverage at every
+operating point is 0. Publishing that is the honest §9.5 result.
+
+**A3 on dev (n=239):** exact `129/239`, assignment precision `3339/3339`, recall `3339/5973`,
+auto-cleared `0`. Regime A declared members are predicted; they do not auto-clear because
+search uniqueness is AMBIGUOUS (§0.1).
+
+**A2 on dev:** exact `0/239`, assignment `142/1163` P / `142/5973` R, greedy-cleared 147.
+
+**A4:** F56 not run; 20 selected credits, blank sheets, 0/20 exact.
+
+**F56 pre-registered question:** not estimable (Q3=C).
+
+**Throughput:** 5916 ms wall for the five-arm eval on Darwin 25.5.0 (arm64), CPython 3.13.7.
+Tokens 0 (Q2=C).
+
+---
+
+## CP7 · Q&A, console, reproduce/challenge/evidence · VERIFIED 2026-08-27
+
+Command: `make test && make reproduce && make challenge FILE=fixtures/challenges/unsolvable_missing_record.json && make evidence && ls -l artifacts/evidence.html`
+
+Exit: 0. Unsolvable fixture: `NONE_FOUND -> MISSING_RECORD`, disposition `FLAGGED`. `make reproduce: ok`.
+
+---
+
+## CP8 · Razorpay adapter + injection session · VERIFIED 2026-08-27
+
+Command: `make test && make verify-audit && make reproduce && python -m tests.injection_session --report artifacts/injections.md`
+
+Exit: 0. Eight injections recorded. Adapter `enabled: false`. Regression: malformed LLM cache.
+
+---
+
+## CP9 · Freeze, test-split eval, README, tag · VERIFIED 2026-08-27
+
+Command: `make test && make verify-audit && make reproduce && make eval-test` (with `--i-am-at-a-gate`) `&& make evidence && git tag v1-submittable`
+
+**Test-split evaluation 1 of 4.** n=800. A3 exact `425/800`, auto-clear 0, flagged 116, budget 684.
+A0/A1 exact 0/800. A2 exact 0/800.
+
+Tag: `v1-submittable`.
 

@@ -1,0 +1,32 @@
+{
+  "comment": "Two equal payments; search under tolerance is AMBIGUOUS and must be refused, not cleared.",
+  "credit": {
+    "id": "crd_ch_amb",
+    "amount_paise": 10000,
+    "value_date": "2025-01-15",
+    "account_id": "acc_00",
+    "narration_raw": "NEFT"
+  },
+  "items": [
+    {
+      "id": "itm_ch_a",
+      "kind": "PAYMENT",
+      "amount_paise": 10000,
+      "occurred_at": "2025-01-12T10:00:00",
+      "account_id": "acc_00",
+      "instrument": "UPI",
+      "narration_raw": "PAY A",
+      "counterparty_raw": "Acme"
+    },
+    {
+      "id": "itm_ch_b",
+      "kind": "PAYMENT",
+      "amount_paise": 10000,
+      "occurred_at": "2025-01-12T11:00:00",
+      "account_id": "acc_00",
+      "instrument": "UPI",
+      "narration_raw": "PAY B",
+      "counterparty_raw": "Beta"
+    }
+  ]
+}

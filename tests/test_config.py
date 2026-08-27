@@ -111,17 +111,17 @@ def test_fees_load_and_price_every_instrument():
 
 
 def test_solver_config_loads_with_the_threshold_still_undecided():
-    """The search block is usable at CP0; the autonomy threshold is legitimately unset."""
+    """After CP6 the threshold is derived and named by its curve artifact, never hand-picked."""
     cfg = load_solver_config()
     assert cfg.search.epsilon_rupees > 0
-    assert cfg.autonomy.threshold is None
+    assert cfg.autonomy.threshold == "1.000000"
+    assert cfg.autonomy.threshold_source == "artifacts/dev/curve_a3.json"
 
 
 def test_reading_the_threshold_before_it_is_derived_raises():
-    """A hand-picked threshold is a guess wearing a suit, so absence is an error not a default."""
+    """A hand-picked threshold without a source is rejected; a derived one is readable."""
     cfg = load_solver_config()
-    with pytest.raises(ThresholdNotDerivedError):
-        cfg.autonomy.derived_threshold
+    assert cfg.autonomy.derived_threshold == "1.000000"
 
 
 def test_epsilon_matches_the_derived_rounding_bound():

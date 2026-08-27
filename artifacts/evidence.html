@@ -1,0 +1,88 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Residual Zero evidence</title></head><body><h1>Residual Zero — evidence</h1><h2>dev/headline.md</h2><pre># Headline (dev)
+
+| arm | n | exact | assignment P | assignment R | cleared | flagged | budget |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| a0 | 239 | 0/239 | — (n=0) | 0/5973 (0.0000) | 0 | — | — |
+| a1 | 239 | 0/239 | — (n=0) | 0/5973 (0.0000) | 0 | — | — |
+| a2 | 239 | 0/239 | 142/1163 (0.1221) | 142/5973 (0.0238) | 147 | 92 | 0 |
+| a3 | 239 | 129/239 | 3339/3339 (1.0000) | 3339/5973 (0.5590) | 0 | 239 | 0 |
+| a4 | 20 | 0/20 | — (n=0) | 0/393 (0.0000) | 0 | 20 | 0 |
+</pre><h2>dev/per_class.md</h2><pre># Per-class (dev)
+
+| class | n | exact | assignment P | assignment R | note |
+|---|---:|---:|---:|---:|---|
+| 1 | 13 | 13/13 (1.0000) | 78/78 (1.0000) | 78/78 (1.0000) |  |
+| 2 | 31 | 19/31 (0.6129) | 498/498 (1.0000) | 498/812 (0.6133) |  |
+| 3 | 17 | 15/17 (0.8824) | 377/377 (1.0000) | 377/434 (0.8687) |  |
+| 4 | 13 | 12/13 (0.9231) | 351/351 (1.0000) | 351/382 (0.9188) |  |
+| 5 | 9 | 0/9 (0.0000) | — (n=0) | 0/226 (0.0000) |  |
+| 6 | 9 | 5/9 (0.5556) | 108/108 (1.0000) | 108/212 (0.5094) |  |
+| 7 | 9 | 4/9 (0.4444) | 109/109 (1.0000) | 109/239 (0.4561) |  |
+| 8 | 9 | 0/9 (0.0000) | — (n=0) | 0/221 (0.0000) |  |
+| 9 | 0 | — | — | — | absent from this split |
+| 10 | 9 | 4/9 (0.4444) | 105/105 (1.0000) | 105/235 (0.4468) |  |
+| 11 | 9 | 5/9 (0.5556) | 114/114 (1.0000) | 114/234 (0.4872) |  |
+| 12 | 9 | 0/9 (0.0000) | 105/105 (1.0000) | 105/250 (0.4200) |  |
+| 13 | 9 | 0/9 (0.0000) | — (n=0) | 0/253 (0.0000) |  |
+| 14 | 9 | 0/9 (0.0000) | 202/202 (1.0000) | 202/242 (0.8347) |  |
+| 15 | 9 | 6/9 (0.6667) | 153/153 (1.0000) | 153/233 (0.6567) |  |
+| 16 | 9 | 6/9 (0.6667) | 124/124 (1.0000) | 124/204 (0.6078) |  |
+| 17 | 9 | 4/9 (0.4444) | 106/106 (1.0000) | 106/248 (0.4274) |  |
+| 18 | 9 | 0/9 (0.0000) | — (n=0) | 0/238 (0.0000) |  |
+| 19 | 9 | 6/9 (0.6667) | 140/140 (1.0000) | 140/220 (0.6364) |  |
+| 20 | 9 | 6/9 (0.6667) | 142/142 (1.0000) | 142/219 (0.6484) |  |
+| 21 | 9 | 6/9 (0.6667) | 146/146 (1.0000) | 146/226 (0.6460) |  |
+| 22 | 9 | 8/9 (0.8889) | 218/218 (1.0000) | 218/244 (0.8934) |  |
+| 23 | 12 | 10/12 (0.8333) | — | — | NA for class 23 (ambiguous by construction) |
+</pre><h2>dev/ablations.md</h2><pre># Ablations (dev)
+
+All ablations on the same dev batch. Δ is against A3.
+
+| ablation | what changed | A3 exact | ablated | note |
+|---|---|---|---|---|
+| `NO_LLM_TIER` | skip tier 4 | 129/239 | 129/239 | Q2=C: tier 4 was not exercised, so this ablation is a no-op |
+| `NO_UNIQUENESS` | treat AMBIGUOUS as clearable | 129/239 | n/a (not cleared: would violate §0.1) | not applied; uniqueness is the product |
+| `NO_CROSS_WINDOW` | base window only | 129/239 | not separately scored | widened kinds stay in the pool; cutting them is Phase-2 work |
+| `NO_PAISE_VERIFICATION` | trust rupee-axis residual | 129/239 | refused | NN-12: the verifier's acceptance never widens, including for an ablation |
+| `GREEDY_INSTEAD_OF_DP` | A2 greedy vs A3 | 129/239 | 0/239 | A2 is the greedy ablation |
+
+A3 auto-cleared 0 credits on this batch (threshold derived at CP6).
+</pre><h2>dev/cost.md</h2><pre># Cost and throughput
+
+- machine: Darwin 25.5.0 (arm64)
+- wall_clock_ms: 5916
+- tokens: 0 (Q2=C stub, --offline)
+- cost_paise: 0
+- cache_hit_rate: 0/0 (no model calls)
+</pre><h2>dev/threshold.json</h2><pre>{
+  "error_budget": "1/100",
+  "threshold": "1.000000",
+  "coverage": "0",
+  "error": null,
+  "n_cleared": 0,
+  "source": "artifacts/dev/curve_a3.json"
+}
+</pre><h2>human_study/results.json</h2><pre>{
+  "protocol": "artifacts/human_study/protocol.md",
+  "selected_credits": "artifacts/human_study/selected_credits.json",
+  "n_credits": 20,
+  "split": "dev",
+  "pre_registered_question": "On the credits where the raters disagreed with each other — any pairwise disposition disagreement — did the system flag rather than clear?",
+  "pre_registered_at": "2026-08-27T18:15:00+05:30",
+  "f19": {
+    "status": "not_scored",
+    "reason": "The executor had already seen system output at CP3/CP4. An honest human baseline no longer exists (§6.1)."
+  },
+  "f56": {
+    "status": "not_run",
+    "reason": "PLAN-QUESTIONS.md Q3 option C: no additional raters in the CP5 window. NN-21 minimum measurable version is the frozen protocol, selection, and sealed blank sheets."
+  },
+  "sheets": [
+    "artifacts/human_study/rater_1.csv",
+    "artifacts/human_study/rater_2.csv",
+    "artifacts/human_study/rater_3.csv"
+  ],
+  "pairwise_kappa": null,
+  "per_rater_exact": null
+}
+</pre></body></html>

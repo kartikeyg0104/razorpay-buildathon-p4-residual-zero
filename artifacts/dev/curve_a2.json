@@ -1,0 +1,4 @@
+{
+  "note": "A2 has no ordering_score. This curve is the greedy-clear step function: score 1.000000 if A2 cleared, else 0.000000.",
+  "comparison": "See artifacts/dev/headline.md. A2 cleared 147/239 with exact 0/239; A3 exact 129/239 with auto-clear 0/239 at the derived threshold."
+}

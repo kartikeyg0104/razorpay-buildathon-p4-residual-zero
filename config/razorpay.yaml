@@ -1,0 +1,5 @@
+# Cut without touching another line: enabled false means the adapter is a no-op.
+
+enabled: false
+key_id_env: RAZORPAY_KEY_ID
+key_secret_env: RAZORPAY_KEY_SECRET
