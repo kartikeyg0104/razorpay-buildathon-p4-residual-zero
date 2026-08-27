@@ -152,7 +152,7 @@ Command: `make test && python -m eval.cli --split dev --arms a0,a1 --out artifac
 
 Exit: 0 — 86 passed; wrote `artifacts/dev/cp2/baselines.md`.
 
-Commit: *(filled after commit)*
+Commit: `ffc8d5bb1021b6d153398a78d367f7fabc7d3b78`
 
 Files: `generator/corrupt.py`, `generator/cli.py`, `config/profiles/phase1_test.yaml`,
 `eval/{__init__,cli,loader,metrics,truth_loader}.py`, `eval/arms/{__init__,a0_exact,a1_fuzzy}.py`,
