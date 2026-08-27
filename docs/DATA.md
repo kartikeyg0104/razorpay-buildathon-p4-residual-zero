@@ -20,7 +20,9 @@ python -m generator.cli --split dev --profile config/profiles/phase1.yaml
    `SourceRoot`).
 3. **Corruption** (`generator/corrupt.py`). Mutate **rendered views only**. CP1 applied
    structural classes 1–4 and class 23. CP2 extends the same function with classes 5–22.
-   Classes 24–26 are forbidden.
+   Class 24 exists on `phase2_drift_plan()` only. Classes 25 and 26 exist on
+   `phase4_class25_plan()` / `phase4_fx_plan()` only. `data/dev` was not regenerated for
+   classes 24–26.
 4. **Render** (`generator/render.py`). Emit bank / ledger / settlement CSVs with IST dates
    and rupee-display amounts.
 

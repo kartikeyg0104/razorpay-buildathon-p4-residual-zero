@@ -245,3 +245,18 @@ A feature is not done until its row is populated from a real run. F24 and F25 ha
 | F23 cross-profile | §6.1: per-profile results, no re-tuning | `config/profiles/{d2c,saas,travel}.yaml`. `config_digest(solver.yaml)` identical across the three loads (`tests/test_profiles.py`). Full generator eval not re-run at n=239×3; the published number is the hash identity. |
 | F26 HITL learning curve | §6.1: after 50 simulated resolutions, coverage rise and error hold | Alias table is a dict (`src/residual_zero/semantic/aliases.py`), not a scorer. Tiers 1–3 already resolve 66034/66034 EXACT_NORM on this corpus, so simulated aliases cannot raise auto-clear coverage: lift **0**. Error holds (still 0 clears). |
 
+## 15 · Phase 4 second-order results (§9.10 and §6.1)
+
+| Feature | The number it owes | Measured |
+|---|---|---|
+| F53 provider swap | tier-4 accuracy, cost per credit, end-to-end coverage and error per backend | `artifacts/p4/providers.md`. Three backends (`stub-frontier`, `stub-small`, `stub-local-7b`), tuning effort `none` on all three (Q2=C, no live Ollama/API). MODEL calls **0/0/0**. Tokens **0**. Cost **0** paise/credit. e2e coverage **0/239** (A3, unchanged). Error **—**. Tier-4 accuracy **—** (denominator 0). |
+| F36 alternate diff | median symmetric-difference size vs median decomposition size | Live `data/dev`: **245/245** AMBIGUOUS credits cap-refused; uncapped pairs **0**; both medians **—**. Fixture (three feasible sets): median symdiff **3**, median decomposition size **1**. `artifacts/p4/alt_diff.md`. |
+| F34 deterministic parallelism | throughput at 1/4/8 workers; byte-identical output | n=16 slice. Payloads byte-identical (sha256 `3b8d8b9c…`). credits_per_1000s: 1w=87355, 4w=87469, 8w=55750. Threads; GIL; 8 workers did not win. `artifacts/p4/parallel.md`. |
+| F47 live webhooks | ledger-state equality across normal / duplicated / reversed / replayed | Identical. `tests/test_webhooks.py`. `artifacts/p4/webhooks.md`. Adapter `enabled: false`. |
+| F43 parameter recomputation | % of cleared credits reproduced at generator params (target 100%) | n_cleared=0. Stand-in: Regime A **accepted** declared sets. **136/136**. 31 further declared rows fail verify because their posted lines were corrupted; they are not in the stand-in. Declined capability: behavioural rail-counterfactuals. `artifacts/p4/whatif.md`. |
+| F44 multi-account + class 25 | class 25 detection rate; FP rate on legitimate multi-account batches | FP **first**: **0/248** on `data/dev` (two legitimate accounts). Detection **3/3** on `phase4_class25_plan()` seed 1. `data/dev` not regenerated. `artifacts/p4/accounts.md`. |
+| F46 bitemporal as-of | as-of view = audit-chain replay, 20 sampled timestamps | **20/20** seqs equal after `run_split(dev, limit=24)`. `tests/test_bitemporal.py`. `artifacts/p4/bitemporal.md`. |
+| F27 scale analysis | §6.1: what breaks at 100,000 credits/day | Prose in `docs/SCALE.md`, citing F57's table. DP is still the bottleneck; thread-parallelism (F34) did not lift it. |
+| F28 calibration note | §6.1: reliability diagram or a paragraph that none is owed | Gate audit: no model-derived score gates auto-clear. One paragraph: `docs/DECISIONS.md` ADR-11. |
+| F29 FX rounding + class 26 | §6.1: the class exists; full FX stays out of scope | `FX_ROUNDING_RESIDUE=26` on `phase4_fx_plan()`. Residue 1–99 paise on the rendered credit; truth members untouched. Classifier maps it to `ROUNDING_RESIDUE`. README keeps multi-currency FX out of scope. |
+

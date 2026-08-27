@@ -1,0 +1,15 @@
+# F53: three backends, equal tuning, no live spend (Q2=C).
+# Credentials never live here. Cache dirs are partitioned by model_id.
+
+tuning_effort: none
+
+backends:
+  - id: stub-frontier
+    model_id: stub-frontier
+    token_budget: 0
+  - id: stub-small
+    model_id: stub-small
+    token_budget: 0
+  - id: stub-local-7b
+    model_id: stub-local-7b
+    token_budget: 0

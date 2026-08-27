@@ -1,4 +1,4 @@
-# Phase 2 feature flags. Defaults ON for the v2 product.
+# Phase 2–4 feature flags. Defaults ON for the product.
 # tests/test_feature_flags_off.py never reads this file: it constructs FeatureFlags.all_off().
 
 f33_conservation: true
@@ -26,3 +26,13 @@ f42_disputes: true
 f57_latency: true
 f23_profiles: true
 f26_feedback: true
+f53_providers: true
+f36_alt_diff: true
+f34_parallel: true
+f47_webhooks: true
+f43_whatif: true
+f44_accounts: true
+f46_bitemporal: true
+f27_scale: true
+f28_calibration: true
+f29_fx: true

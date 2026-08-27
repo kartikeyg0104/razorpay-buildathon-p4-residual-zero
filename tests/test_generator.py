@@ -135,11 +135,13 @@ def test_class23_two_distinct_subsets_within_tolerance():
 
 
 def test_forbidden_classes_absent():
-    """Class ids 25 and 26 appear nowhere. Class 24 exists from CP2.7 but is not on the Phase 1 plan."""
+    """Classes 25/26 exist as enum members from Phase 4 but are not on the Phase 1 plan."""
     assert hasattr(CorruptionClass, "FEE_RATE_DRIFT")
+    assert hasattr(CorruptionClass, "CROSS_ACCOUNT_MISPOSTING")
+    assert hasattr(CorruptionClass, "FX_ROUNDING_RESIDUE")
     assert 24 in set(CorruptionClass)
-    assert 25 not in set(CorruptionClass)
-    assert 26 not in set(CorruptionClass)
+    assert 25 in set(CorruptionClass)
+    assert 26 in set(CorruptionClass)
     _, _, truth = _one_seed()
     _, records = apply_corruptions(render(truth), truth, phase1_dev_plan(), Random(7))
     seen = {c for r in records for c in r.corruption_classes}

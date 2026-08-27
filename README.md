@@ -87,7 +87,7 @@ Phase 1 auto-clear coverage remains `0/239` at threshold `1.000000`. Phase 2 doe
 - **Books (F33).** Period identity holds on both accounts. double_claimed=`0`. Unreconciled value `1,44,25,758.19` (all credits; nothing auto-cleared).
 - **Journal (F40).** Debits equal credits at paise. Bank control residual `0`. Uncleared credits post to suspense `2300`. No plug line. This is a file you import; nothing here holds accounting-system credentials.
 - **Exceptions (F37).** Compression and purity are the measured pair in `docs/EVALUATION.md` §12, not an invented ratio.
-- **Fees (F38).** False-positive rate on the undrifted Phase 1 corpus is in §12. Class `24 FEE_RATE_DRIFT` exists; classes 25–26 do not.
+- **Fees (F38).** False-positive rate on the undrifted Phase 1 corpus is in §12. Class `24 FEE_RATE_DRIFT` exists on `phase2_drift_plan()`. Classes 25 and 26 exist on Phase 4 fixture plans; `data/dev` was not regenerated.
 
 ## Operational depth (Phase 3, below the fold)
 
@@ -100,11 +100,28 @@ Phase 3 does not move auto-clear coverage (`0/239` at threshold `1.000000`) or A
 
 ## Second-order results (§9.10)
 
-See `docs/EVALUATION.md` §12–§14. Phase 3 rows: F32, F51, F39, F45, F48, F35, F41, F42, F57; F30/F23/F26 in the same table from §6.1.
+See `docs/EVALUATION.md` §12–§15. Phase 3 rows: F32, F51, F39, F45, F48, F35, F41, F42, F57; F30/F23/F26 in the same table from §6.1. Phase 4 rows: F53, F36, F34, F47, F43, F44, F46; F27/F28/F29 from §6.1.
 
 ## Phase 3 test-split note (NN-16)
 
 Evaluation **1 of 4** remains the only test-split spend (`v1-submittable`). Phase 2 skipped evaluation 2 of 4. Phase 3 also skipped it: F32 narrowed the search window from 7 to 2 rupees, which could have moved uniqueness, but the flags-on A3 disposition map vs `artifacts/v1` is empty and auto-clear stayed 0. A test-split run could not publish a new headline number. Dev eval was re-run for Gate 3.
+
+## Phase 4 (below the fold)
+
+Phase 4 does not move auto-clear coverage (`0/239` at threshold `1.000000`) or A3 exact (`129/239`).
+
+- **Providers (F53).** Three stub backends, equal tuning effort (`none`). Tier-4 calls: **0** on every backend. Cost: **0** paise/credit. The model is a commodity component this corpus never reaches.
+- **Alternate diff (F36).** Live corpus: every AMBIGUOUS credit hit the F31 cap, so both medians are N/A. Fixture (fully enumerated): median symmetric-difference size 3, median decomposition size 1.
+- **Parallelism (F34).** Byte-identical payloads at 1/4/8 workers. Throughput did not scale (CPython GIL on the Python DP).
+- **Webhooks (F47).** Normal / duplicated / reversed / replayed deliveries: identical ledger state. Razorpay adapter stays `enabled: false`.
+- **What-if (F43).** Parameter substitution over already-known member sets only. Of 136 Regime A accepted declared compositions, **136/136** reproduce under the generator's own tables. **Declined:** "would this payment have succeeded on a different rail." That is a behavioural counterfactual and is out of scope.
+- **Accounts (F44).** False-positive rate on the legitimate two-account `data/dev` batch: **0/248**. Class 25 detection on the fixture plan: **3/3**. `data/dev` was not regenerated.
+- **As-of (F46).** As-of view equals audit-chain replay at 20 sampled seqs.
+- **FX (F29).** Class 26 is a 1–99 paise conversion-rounding residue mapped to `ROUNDING_RESIDUE`. Multi-currency FX reconciliation beyond that residue stays out of scope (§1.3).
+
+## Phase 4 test-split note (NN-16)
+
+Evaluation **1 of 4** remains the only test-split spend (`v1-submittable`). Phase 4 skipped evaluation 4 of 4: no shipped feature regenerates a split or changes A3 dispositions (new flags are unused by `run_a3`). Spending the last permitted eval could not publish a new headline number.
 
 ## Safety
 

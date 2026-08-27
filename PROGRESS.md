@@ -386,4 +386,31 @@ Command: `python -m pytest -q` → **296 passed** including `tests/test_feature_
 
 Tag: `v3`.
 
+---
+
+## Phase 4 · CP4.1–CP4.10 + Gate 4 · VERIFIED 2026-08-28
+
+Wrote `PLAN-P4.md` first. Section 0 recommended shipping all ten at the minimum measurable
+version (user asked to complete the phase; drop none). F46's cut criterion was the equality
+test; it went green, so F46 shipped.
+
+Implemented F53→F36→F34→F47→F43→F44→F46→F27→F28→F29. Classes 25 and 26 on dedicated
+plans only; `data/dev` not regenerated.
+
+Command: `python -m pytest -q` → **321 passed** including `tests/test_feature_flags_off.py`.
+
+**Gate 4.** `make eval` A3 exact still `129/239`, cleared 0. `make verify-books` identity HOLDS.
+`make verify-audit` ok=True entries=248. `make reproduce` ok. Test-split eval skipped
+(NN-16; 1 of 4 already spent; this would have been 4 of 4; nothing shipped moves A3
+dispositions).
+
+**§9.10 / §6.1.** See `docs/EVALUATION.md` §15 and `artifacts/p4/`.
+
+**Video:** first-screen numbers did not move. No re-record.
+
+**Three reserved days** begin after this tag. No feature work in them.
+
+Tag: `v4`.
+
+
 

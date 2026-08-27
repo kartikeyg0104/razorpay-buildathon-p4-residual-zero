@@ -1,4 +1,4 @@
-"""Feature flags. Every §6.2 feature is disable-able (P2-EXEC / P3-EXEC).
+"""Feature flags. Every §6.2 feature is disable-able (P2-EXEC / P3-EXEC / P4-EXEC).
 
 ``FeatureFlags.all_off()`` is the flags-off test's only input. It does not read
 ``config/features.yaml``, so a default-on product yaml cannot quietly change Phase 1
@@ -44,6 +44,16 @@ class FeatureFlags(BaseModel):
     f57_latency: bool = True
     f23_profiles: bool = True
     f26_feedback: bool = True
+    f53_providers: bool = True
+    f36_alt_diff: bool = True
+    f34_parallel: bool = True
+    f47_webhooks: bool = True
+    f43_whatif: bool = True
+    f44_accounts: bool = True
+    f46_bitemporal: bool = True
+    f27_scale: bool = True
+    f28_calibration: bool = True
+    f29_fx: bool = True
 
     @classmethod
     def all_off(cls) -> "FeatureFlags":
@@ -74,6 +84,16 @@ class FeatureFlags(BaseModel):
             f57_latency=False,
             f23_profiles=False,
             f26_feedback=False,
+            f53_providers=False,
+            f36_alt_diff=False,
+            f34_parallel=False,
+            f47_webhooks=False,
+            f43_whatif=False,
+            f44_accounts=False,
+            f46_bitemporal=False,
+            f27_scale=False,
+            f28_calibration=False,
+            f29_fx=False,
         )
 
 

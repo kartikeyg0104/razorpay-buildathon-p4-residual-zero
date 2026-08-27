@@ -194,3 +194,27 @@ Weights stay `uniform` in `config/solver.yaml`; the loader rejects any other val
 the curve's *shape*, not the score's calibration. Geometric rather than arithmetic so one
 bad term cannot be compensated by five good ones: an unresolved entity drives the score to
 exactly zero and the credit can never auto-clear.
+
+---
+
+## ADR-11 · No calibration curve (F28)
+
+**Decision.** There is no reliability diagram. Auto-clear is gated only on observable
+quantities. A model-derived score does not authorise anything.
+
+**Gate audit (CP4.9).** Every gate that can produce `CLEARED`:
+
+1. `uniqueness == UNIQUE` — solver, over the enumerated DP set (F31 refuses UNIQUE on a cap-hit).
+2. `pool_scope == FULL` — candidate generation, not a model.
+3. Verifier residual `0` paise — `verify_declared` / `verify_decomposition`.
+4. `unresolved_entity_count == 0` — tiers 1–3 (and tier 4 if it were reached). The model may
+   *resolve a name*; it still cannot mark the credit cleared.
+5. Ordering score `>=` derived threshold — six observables, geometric mean, rendered to a
+   six-decimal string (`src/residual_zero/ordering.py`). `ExceptionSignals` has no
+   `confidence` field. `classify()` has no client parameter.
+6. Degradation / cost governor may *refuse* work; they cannot introduce a clear that NORMAL
+   did not (`tests/test_degrade.py`).
+
+**If a model-derived score had gated any of the above, that would be an NN-4 bug to fix, not
+a curve to draw.** It does not. One paragraph is the owed note.
+

@@ -43,9 +43,11 @@ class CorruptionClass(IntEnum):
     BANK_CHARGE = 22
     AMBIGUOUS_BY_CONSTRUCTION = 23
     FEE_RATE_DRIFT = 24
+    CROSS_ACCOUNT_MISPOSTING = 25
+    FX_ROUNDING_RESIDUE = 26
 
 
-FORBIDDEN_PHASE2 = frozenset({25, 26})
+FORBIDDEN_UNTIL_PHASE4 = frozenset({25, 26})
 
 # Parameter ranges. Range B strictly contains range A for every parameterised class (D4).
 RANGE_A: dict[int, dict[str, int | tuple[int, ...]]] = {
@@ -123,6 +125,32 @@ def phase2_drift_plan() -> CorruptionPlan:
     )
 
 
+def phase4_class25_plan() -> CorruptionPlan:
+    """Class 25 only. Does not regenerate data/dev."""
+    return CorruptionPlan(
+        range_id="P4",
+        apply_class_23=False,
+        class23_count=0,
+        stacked=False,
+        mutation_classes=(25,),
+        held_out_class=None,
+        per_class_target=3,
+    )
+
+
+def phase4_fx_plan() -> CorruptionPlan:
+    """Class 26 only. Does not regenerate data/dev."""
+    return CorruptionPlan(
+        range_id="P4",
+        apply_class_23=False,
+        class23_count=0,
+        stacked=False,
+        mutation_classes=(26,),
+        held_out_class=None,
+        per_class_target=3,
+    )
+
+
 def plan_for_range(range_id: str, *, stacked: bool, held_out_class: int | None) -> CorruptionPlan:
     # Targets are PER SEED. Dev has 3 seeds, test 5, and each seed has ~80–160 credits,
     # so a target of 8-per-seed would exhaust the seed before class 22.
@@ -148,8 +176,8 @@ def apply_corruptions(
     rng: Random,
 ) -> tuple[RenderedViews, tuple[TruthRecord, ...]]:
     """Mutate rendered views only. member_ids and total_paise of every record stay identical."""
-    if FORBIDDEN_PHASE2 & set(plan.mutation_classes):
-        raise ValueError("corruption classes 25 and 26 are forbidden in Phase 2")
+    if FORBIDDEN_UNTIL_PHASE4 & set(plan.mutation_classes) and plan.range_id != "P4":
+        raise ValueError("corruption classes 25 and 26 are forbidden outside a Phase 4 plan")
     original = {r.bank_credit_id: (r.member_ids, r.total_paise) for r in truth.records}
     records = list(truth.records)
     ledger_rows = list(views.ledger_rows)
@@ -520,6 +548,23 @@ def _mutate(
             for srow in settlement_rows:
                 if srow["item_id"] == fee_ids[0]:
                     srow["amount"] = format_rupees(new_fee)
+    elif class_id == 25:
+        accounts = sorted({row["account_id"] for row in bank_rows})
+        if len(accounts) >= 2:
+            for row in bank_rows:
+                if row["id"] != credit_id:
+                    continue
+                other = next(a for a in accounts if a != row["account_id"])
+                row["account_id"] = other
+                break
+    elif class_id == 26:
+        residue = 1 + rng.randrange(99)
+        for row in bank_rows:
+            if row["id"] != credit_id:
+                continue
+            amt = parse_rupee_display(row["amount"])
+            row["amount"] = format_rupees(amt + residue)
+            break
     return ledger_rows, bank_rows, settlement_rows
 
 
