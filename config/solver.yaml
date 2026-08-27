@@ -1,0 +1,51 @@
+# Every solver tunable in one file, with units in the key or the comment.
+
+search:
+  epsilon_rupees: 7                 # DERIVED in PLAN-P1 D6 from the itemisation model, not chosen:
+                                    # |sum r(a_i) - r(T)| <= floor((m+1)/2) where m is the count of
+                                    # sub-rupee members, and the Phase 1 profile caps m at 13.
+                                    # Provisional; superseded by F32 in Phase 3.
+  epsilon_paise_equivalent: 700     # documentary: the accumulated rounding residue the window covers
+  max_pool: 400                     # spec §5.5
+  max_axis_width_rupees: 2000000    # deterministic memory/work cap. Snapshot memory is about
+                                    # (n+1) * axis_width / 8 bytes; over this -> BUDGET_EXCEEDED.
+  max_enum_nodes: 200000            # deterministic backtracking cap
+  enumerate_cap: 2                  # 0 -> NONE_FOUND, 1 -> UNIQUE, 2+ -> AMBIGUOUS
+  require_nonempty: true            # the empty subset is never a decomposition
+  wallclock_backstop_ms: 5000       # BACKSTOP ONLY. Dispositions never depend on it. If it fires,
+                                    # report.py refuses to publish the run as reproducible.
+
+windows:
+  base_days_before: 5               # [D-5, D-1]
+  widened_days_before: 35           # [D-35, D-1], widened kinds only
+  widened_kinds:                    # the asymmetry that lets cross-window cases resolve at all
+    - REFUND
+    - CHARGEBACK
+    - REPRESENTMENT
+    - ADJUSTMENT
+    - RESERVE_RELEASE
+
+sub_window_split:
+  enabled: true
+  strategy: SUFFIX_GROWING_BY_DAY   # [D-1,D-1], [D-2,D-1], ... always retaining widened-kind items
+  max_attempts: 5
+  # A UNIQUE found on a reduced pool is NOT uniqueness over the full pool, so it never
+  # auto-clears. See PLAN-P1 §0.3.
+
+diagnosis:
+  rate_match_tolerance_bps: 15      # how close a delta ratio must sit to a configured rate
+  min_rate_delta_paise: 100         # below this, a percentage match is noise
+  rounding_delta_ceiling_paise: 700 # equals epsilon_paise_equivalent on purpose: it moves with D6
+                                    # rather than being an independent magic number. The percentage
+                                    # rules additionally require a delta ABOVE this, so the
+                                    # rounding rule and the rate rules can never overlap.
+
+ordering_score:
+  expected_max_members: 120
+  terms: [slack, margin, pool, tier, cross_window, size]
+  weights: uniform                  # deliberately not fitted; see PLAN-P1 D14 and ADR-4
+
+autonomy:
+  error_budget: TBD-CP6-DECLARED    # declared first, in docs/EVALUATION.md
+  threshold: TBD-CP6-CURVE          # then READ OFF the §9.5 risk-coverage curve at that budget
+  threshold_source: TBD-CP6-CURVE   # the loader rejects a threshold without a curve artifact

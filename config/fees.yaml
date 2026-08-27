@@ -1,0 +1,62 @@
+# Commercial terms. Public published pricing carries a source_url and an as_of date.
+# Private contract terms are marked `synthetic: true` with a note saying so — inventing a
+# source_url for a term that is genuinely private would be worse than admitting it.
+#
+# Units: `bps` is an integer count of basis points. `*_paise` is an integer count of paise.
+#
+# SCOPE, and see docs/DECISIONS.md ADR-7: this models Razorpay's PLATFORM FEE, which is what
+# is actually deducted from a settlement. It does not model MDR. UPI carries zero MDR under
+# RBI policy and still carries the platform fee; conflating the two is a mistake a payments
+# engineer would notice. Razorpay's published domestic schedule (fetched 2026-08-27) is
+# uniform across the five instruments modelled here. Corporate credit cards (higher) and
+# international cards (higher again) are real variation in that schedule but are out of
+# Phase 1 scope, which is domestic and non-corporate.
+
+per_instrument_bps:
+  CARD:
+    bps: 200
+    source_url: "https://razorpay.com/pricing/"
+    as_of: "2026-08-27"
+    note: "Published: 2% platform fee per successful transaction, domestic credit and debit."
+  UPI:
+    bps: 200
+    source_url: "https://razorpay.com/pricing/"
+    as_of: "2026-08-27"
+    note: >-
+      Published: zero MDR under RBI policy, 2% platform fee still applies. This entry is the
+      platform fee, not MDR. See ADR-7.
+  NETBANKING:
+    bps: 200
+    source_url: "https://razorpay.com/pricing/"
+    as_of: "2026-08-27"
+    note: "Published: 2% platform fee, 72+ banks."
+  WALLET:
+    bps: 200
+    source_url: "https://razorpay.com/pricing/"
+    as_of: "2026-08-27"
+    note: "Published: 2% platform fee."
+  EMI:
+    bps: 200
+    source_url: "https://razorpay.com/pricing/"
+    as_of: "2026-08-27"
+    note: "Published: 2% platform fee, credit/debit card EMI and cardless EMI."
+
+bank_charge_paise: 1180
+bank_charge:
+  source_url: "synthetic"
+  as_of: "2026-08-27"
+  synthetic: true
+  note: >-
+    Per-transfer rail charge levied by the merchant's own bank, not by the aggregator. A
+    private banking term, so it is synthetic rather than sourced. Corruption class 22 exists
+    because this debit arrives separately and is easily mistaken for a shortfall.
+
+reserve_bps:
+  bps: 0
+  source_url: "synthetic"
+  as_of: "2026-08-27"
+  synthetic: true
+  note: >-
+    A merchant's rolling-reserve percentage is private contract data between the merchant and
+    the aggregator, so it is declared synthetic. Set to 0 here and raised in the merchant
+    profile at CP1, where it is a scenario parameter rather than a rate.

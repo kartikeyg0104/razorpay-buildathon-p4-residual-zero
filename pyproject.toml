@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "residual-zero"
+version = "0.1.0"
+description = "Settlement reconciliation as signed subset-sum with a uniqueness guarantee and a checkable proof"
+requires-python = ">=3.11"
+
+# Phase 1 dependencies only. Deliberately absent, per PLAN-P1 §7 self-check:
+#   ortools      — F31 constraint disambiguation, Phase 2
+#   lxml         — F45 CAMT.053 ingestion, Phase 3
+#   scikit-learn — only if F38's rate regression outgrows a hand-written least-squares fit
+dependencies = [
+    "pydantic>=2.6",       # canonical model, validation at the boundary
+    "pyyaml>=6.0",         # config/*.yaml — entailed by spec §7's config requirement
+    "pandas>=2.1",         # tabular work; familiarity over novelty, per spec §7
+    "rapidfuzz>=3.6",      # resolution tier 3 and the A1 baseline
+    "scipy>=1.11",         # optimize.linear_sum_assignment — makes A1 OPTIMAL, not greedy
+    "fastapi>=0.110",      # console, CP7
+    "uvicorn>=0.27",       # console, CP7
+    "jinja2>=3.1",         # server-rendered HTML; no frontend build
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "hypothesis>=6.98",    # property tests on the arithmetic invariant
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+filterwarnings = ["error"]
+
+[tool.setuptools.package-data]
+"residual_zero" = ["console/templates/*.html", "console/static/*"]

@@ -1,0 +1,38 @@
+# Statutory rates. NN-8: every entry carries an integer basis-point value, a primary
+# source_url, and the as_of date it was read. The loader RAISES UnverifiedRateError on
+# any TBD-VERIFY value, so nothing in this system can run against an unverified rate.
+#
+# Units: `bps` is an integer count of basis points. 1800 bps = 18.00%. A rate needing
+# finer resolution than one basis point gets a `_micro_bps` key rather than a float.
+
+gst_on_fee:
+  bps: 1800
+  source_url: "https://razorpay.com/pricing/"
+  as_of: "2026-08-27"
+  note: >-
+    GST is levied on the platform FEE, not on the transaction value. Razorpay's published
+    pricing states "GST on platform fee | 18%" and clarifies it "applies on Razorpay's
+    service fee, not on the underlying transaction amount". The compounding
+    gst = fee x rate is the step spec §3.2 notes spreadsheets drift on.
+    Source is Razorpay's own published fee and tax documentation, which spec §3.2
+    explicitly sanctions as a primary source.
+
+withholding:
+  bps: TBD-VERIFY
+  base: TBD-VERIFY            # GROSS_PAYMENTS | PLATFORM_FEE — see PLAN-QUESTIONS.md Q1
+  source_url: TBD-VERIFY
+  as_of: TBD-VERIFY
+  note: >-
+    BLOCKED, deliberately. Two things are unresolved and neither may be guessed.
+    (1) WHICH PROVISION. Razorpay's own settlement documentation (fetched 2026-08-27,
+    https://razorpay.com/docs/payments/settlements/) states that the only deduction from a
+    settlement is Razorpay's fee, and mentions no tax withheld at source. Section 194-O
+    withholding is performed by an e-commerce OPERATOR on a participant's gross sales; a
+    merchant collecting through a payment aggregator on their own storefront is not such a
+    participant. So for the structure spec §3.2 most naturally describes, withholding may be
+    absent from the settlement stack entirely, and modelling it as present would be a
+    generator assumption rather than a fact.
+    (2) THE RATE. incometaxindia.gov.in returned HTTP 403 and no primary CBDT document could
+    be reached from this environment, so no rate is recorded here. Per NN-8 and PLAN-P1 CP0
+    note 3, a plausible number is not an acceptable substitute for a sourced one.
+    Corruption class 13 WITHHOLDING_GAP depends on this entry, so CP1 is blocked on it.

@@ -1,0 +1,41 @@
+# The single Phase 1 merchant profile. Parameterised now even though F23's three profiles are
+# Phase 3, because retrofitting a parameterisation onto a hardcoded generator costs more than
+# writing it once.
+
+name: phase1
+split: dev
+
+accounts: 2                          # dev 2, test 4, devscale 4 — see PLAN-P1 D3
+settlement_dates_per_horizon: 40      # chosen so credit counts land on spec §8.4's targets
+horizon_days: 60                      # spec §8.2 stage 1
+settlement_cycle_days: 2              # T+2
+business_days_only: true
+orders_per_day_per_account: 15        # the knob for the ~18,000 ledger-item target
+
+order_amount_min_paise: 20000         # whole rupees only; a validator asserts % 100 == 0
+order_amount_max_paise: 900000
+
+instrument_mix_weights:               # integer weights summing to 100
+  UPI: 42
+  CARD: 30
+  NETBANKING: 14
+  WALLET: 9
+  EMI: 5
+
+refund_rate_bps: 600
+cross_window_refund_fraction_bps: 3000   # of refunds, the share relating to earlier windows
+dispute_rate_bps: 80
+representment_rate_bps: 6000             # of disputes, the share represented
+representment_lag_days: [14, 21]
+adjustment_rate_bps: 150
+reserve_bps: 500                         # scenario parameter, not a rate — see fees.yaml note
+reserve_release_lag_days: 30
+
+fee_itemisation: PER_SETTLEMENT_INSTRUMENT   # D6 depends on this. PER_PAYMENT breaks the m bound.
+subrupee_member_max: 13                     # 2 lines per instrument x 5, plus withholding,
+                                            # reserve and bank charge. Asserted at CP1.
+
+counterparty_pool: A
+corruption_range: A
+stacked_corruptions: false
+held_out_class: null                        # dev holds nothing out; set on the test profile at CP2
