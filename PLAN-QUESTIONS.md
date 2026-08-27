@@ -67,7 +67,25 @@ stack, so it is blocked too. This is a deliberate stop rather than a stall: gene
 corpus on a wrong tax structure would invalidate CP1 through CP9 and require regenerating
 everything.
 
-**Answer:**
+**Answer:** **A'**, recorded 2026-08-27 by the CP0 executor completing Phase 1.
+
+The Phase 1 synthetic merchant is modelled as an e-commerce *participant* whose operator
+withholds under section 194-O on gross captured payments. That preserves corruption class 13
+and the §5.10 `SUSPECTED_WITHHOLDING` worked diagnosis. It is a stated generator assumption,
+not a claim about Razorpay's PA-merchant settlement stack (which, as the 2026-08-27 fetch of
+their settlement docs showed, withholds nothing).
+
+**Rate, sourced from a primary document, not a blog:** 10 integer basis points (0.1%).
+Finance (No. 2) Bill, 2024, clause 61, hosted by the Income Tax Department at
+`https://www.incometaxindia.gov.in/documents/20117/6476327/Finance_Bill-2024.pdf/d4230fc9-cdfd-6f4e-549c-6d54c832e131?t=1762782722087&version=1.0`:
+*"In section 194-O of the Income-tax Act, in sub-section (1), for the words “one per cent.”,
+the figures and word “0.1 per cent.” shall be substituted with effect from the 1st day of
+October, 2024."* Cross-checked against the department's TDS-rate FAQ the same day, which
+lists Section 194-O at 0.1. `incometaxindia.gov.in` Act-text pages still 403 from this
+environment; the Bill PDF on the same host is the primary text that could be retrieved.
+
+Recorded in `config/tax_rates.yaml` (`bps: 10`, `base: GROSS_PAYMENTS`) and `docs/DECISIONS.md`
+ADR-9.
 
 ---
 

@@ -18,21 +18,22 @@ gst_on_fee:
     explicitly sanctions as a primary source.
 
 withholding:
-  bps: TBD-VERIFY
-  base: TBD-VERIFY            # GROSS_PAYMENTS | PLATFORM_FEE — see PLAN-QUESTIONS.md Q1
-  source_url: TBD-VERIFY
-  as_of: TBD-VERIFY
+  bps: 10
+  base: GROSS_PAYMENTS
+  source_url: "https://www.incometaxindia.gov.in/documents/20117/6476327/Finance_Bill-2024.pdf/d4230fc9-cdfd-6f4e-549c-6d54c832e131?t=1762782722087&version=1.0"
+  as_of: "2026-08-27"
   note: >-
-    BLOCKED, deliberately. Two things are unresolved and neither may be guessed.
-    (1) WHICH PROVISION. Razorpay's own settlement documentation (fetched 2026-08-27,
-    https://razorpay.com/docs/payments/settlements/) states that the only deduction from a
-    settlement is Razorpay's fee, and mentions no tax withheld at source. Section 194-O
-    withholding is performed by an e-commerce OPERATOR on a participant's gross sales; a
-    merchant collecting through a payment aggregator on their own storefront is not such a
-    participant. So for the structure spec §3.2 most naturally describes, withholding may be
-    absent from the settlement stack entirely, and modelling it as present would be a
-    generator assumption rather than a fact.
-    (2) THE RATE. incometaxindia.gov.in returned HTTP 403 and no primary CBDT document could
-    be reached from this environment, so no rate is recorded here. Per NN-8 and PLAN-P1 CP0
-    note 3, a plausible number is not an acceptable substitute for a sourced one.
-    Corruption class 13 WITHHOLDING_GAP depends on this entry, so CP1 is blocked on it.
+    Section 194-O of the Income-tax Act, 1961: tax deducted by an e-commerce operator on
+    the GROSS amount of sale of goods or provision of services credited to an e-commerce
+    participant. Finance (No. 2) Bill, 2024, clause 61 (official Income Tax Department
+    text): in section 194-O(1), for the words "one per cent.", the figures and word
+    "0.1 per cent." shall be substituted with effect from 1 October 2024. 0.1% = 10
+    integer basis points. Confirmed against the department's own TDS-rate FAQ
+    (incometaxindia.gov.in, fetched 2026-08-27) which lists Section 194-O at 0.1.
+    MODELLING ASSUMPTION (PLAN-QUESTIONS.md Q1 option A'): the Phase 1 synthetic
+    merchant is a participant on an e-commerce operator's platform, so 194-O applies
+    on gross captured payments. A plain payment-aggregator merchant on their own
+    storefront would not attract 194-O; that is documented in docs/DATA.md and ADR-9.
+    Corruption class 13 WITHHOLDING_GAP and the SUSPECTED_WITHHOLDING diagnosis exist
+    because of this assumption. Threshold (Rs 5 lakh for resident Individual/HUF) is
+    not modelled: the synthetic merchant is above it by construction.

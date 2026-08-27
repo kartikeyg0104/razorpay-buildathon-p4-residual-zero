@@ -159,3 +159,26 @@ trade that comes out in the learned matcher's favour.
 This argument is only available to us *because* the deterministic core is strong enough to make the
 model unnecessary — which is the point worth making. It is the purest instance of the rubric's
 "and where you chose not to use one".
+
+---
+
+## ADR-9 · Withholding is modelled as s.194-O on gross, as a stated assumption
+
+**Decision.** The Phase 1 synthetic merchant is an e-commerce participant. An e-commerce
+operator withholds under section 194-O of the Income-tax Act at 10 bps of gross captured
+payments. The rate is sourced from Finance (No. 2) Bill, 2024, clause 61 (Income Tax
+Department host). The base is `GROSS_PAYMENTS`, keyed so a `PLATFORM_FEE` base can be added
+later without a migration.
+
+**Argument.** Spec §3.2 lists withholding in the deduction stack and §5.10's worked
+diagnosis is "a clean percentage of the subset gross" — that is 194-O's shape, not
+withholding on commission. Razorpay's own settlement documentation (fetched 2026-08-27)
+states that a payment-aggregator merchant on their own storefront has *no* tax withheld at
+source. Modelling 194-O anyway, without saying so, would be a silent lie about the stack.
+Modelling it as a **named assumption** keeps class 13 and the diagnosis, and tells a
+reviewer exactly which statute to check the 10 bps against.
+
+**What we are not claiming.** We are not claiming Razorpay withholds 194-O on standard
+PA settlements. We are claiming our synthetic merchant sells through a marketplace that
+does, so the deduction is in the ground-truth stack and dropping it from the ledger
+(class 13) produces the percentage-of-gross delta the classifier is built to see.

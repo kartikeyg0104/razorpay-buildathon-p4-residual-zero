@@ -67,16 +67,19 @@ def test_tbd_verify_raises(tmp_path: Path):
     assert "gst_on_fee.bps" in str(excinfo.value), "the error must name the offending key"
 
 
-def test_the_real_tax_rates_file_is_currently_unverified():
-    """Documents the CP0 state honestly: withholding is unsourced, so the loader refuses.
+def test_the_real_tax_rates_file_loads_now_that_q1_is_sourced():
+    """Q1 is answered: 194-O at 10 bps on GROSS_PAYMENTS, from Finance (No. 2) Bill 2024.
 
-    When PLAN-QUESTIONS.md Q1 is answered and the rate is sourced, this test flips to asserting
-    load_tax_rates() succeeds. Until then it asserts the guard is doing its job rather than
-    pretending the config is complete.
+    The previous form of this test asserted the loader *refused* because withholding was
+    TBD-VERIFY. That was the NN-8 mechanism working. The rate is now sourced from a primary
+    document, so the loader must succeed — and the withholding entry must name the provision
+    and the base, so a reviewer can check the number against the right statute.
     """
-    with pytest.raises(UnverifiedRateError) as excinfo:
-        load_tax_rates()
-    assert "withholding" in str(excinfo.value)
+    rates = load_tax_rates()
+    assert rates.withholding.bps == 10
+    assert rates.withholding.base == "GROSS_PAYMENTS"
+    assert "194-O" in (rates.withholding.note or "")
+    assert "incometaxindia.gov.in" in rates.withholding.source_url
 
 
 def test_rates_are_integer_bps(tmp_path: Path):
