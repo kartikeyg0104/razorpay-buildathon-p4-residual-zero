@@ -256,3 +256,33 @@ does emit pairs, so the uniqueness check has something to beat.
 a second copy of the deduction stack (D10: sharing is deliberate). `exceptions/` exists only
 as the db-owner stub so the least-privilege importer set is the three declared owners at CP4.
 
+---
+
+## CP5 · Semantic cascade, exceptions, F19/F56 protocol · VERIFIED 2026-08-27
+
+Command: `make test && python -m residual_zero.cli run --split dev --offline --out artifacts/dev/cp5 && ls artifacts/human_study/results.json`
+
+Exit: 0 — 169 passed; 248 credits processed; `ls` shows `artifacts/human_study/results.json`.
+
+Tier mix on the pooled ledger items of the dev run (F6):
+`EXACT_NORM=66034 REFERENCE_TOKEN=0 FUZZY=0 MODEL=0 UNRESOLVED=0`.
+
+Exception classes on the 248 credits: `AMBIGUOUS_DECOMPOSITION=245 MISSING_RECORD=3`.
+Auto-clear does not proceed: the autonomy threshold is still `TBD-CP6`.
+
+Commit: `TBD-CP5` (filled after this commit)
+
+Files: `config/llm.yaml`, `src/residual_zero/semantic/{__init__,schema,llm,tiers}.py`,
+`src/residual_zero/exceptions/{classify,narrate}.py`, `src/residual_zero/ordering.py`,
+`src/residual_zero/{orchestrator,cli,config,db}.py`, `eval/human_study.py`,
+`tests/test_{tiers,no_amounts_to_model,classify,ordering_score}.py`,
+`artifacts/human_study/`, `artifacts/dev/cp5/`.
+
+**Q2 = C.** Stub client, `--offline`, no spend. Tier 4 unexercised. That is a real F6 number:
+deterministic tiers resolved every counterparty in this corpus.
+
+**Q3 = C.** F56 not run. Protocol, frozen 20-credit selection, three sealed blank sheets,
+honest `results.json`. F19 not scored: the executor had already seen CP3/CP4 output.
+
+**Pre-registered** in `docs/EVALUATION.md` at `2026-08-27T18:15:00+05:30`, before this run.
+

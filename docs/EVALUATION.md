@@ -145,7 +145,7 @@ Recorded so that fairness is documented rather than asserted (§9.1).
 |---|---|---|---|---|
 | A1 | similarity threshold | `50,60,70,80,90` | `50` | maximises A1's **own** exact-decomposition rate on dev |
 | A1 | amount tolerance (paise) | `100,500,1000,5000,10000,50000` | `100` | as above |
-| tier 3 | rapidfuzz threshold | `TBD-CP5` | `TBD-CP5` | knee of the dev precision-vs-threshold curve at the declared entity-resolution error budget |
+| tier 3 | rapidfuzz threshold | `85` (config default; not swept) | `85` | Q2=C, tier 4 unexercised; 85 is the declared default, not a fitted knee |
 
 ## 10 · Test-split evaluation log (NN-16)
 
@@ -162,7 +162,7 @@ Registered before the answer is knowable, so the answer counts either way.
 
 | # | Registered | Question | Answered |
 |---|---|---|---|
-| 1 | `TBD-CP5` | On the credits where the three raters disagreed with each other (any pairwise disposition disagreement), did the system flag rather than clear? | `TBD-CP6` |
+| 1 | `2026-08-27T18:15:00+05:30` (CP5, before the `--offline` dev run) | On the credits where the three raters disagreed with each other (any pairwise disposition disagreement), did the system flag rather than clear? | `TBD-CP6` |
 
 <!-- A1-SWEEP-START -->
 

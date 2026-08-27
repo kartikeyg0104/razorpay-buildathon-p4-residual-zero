@@ -1,0 +1,27 @@
+{
+  "split": "dev",
+  "n": 20,
+  "credit_ids": [
+    "crd_001_acc_00_2025-02-21",
+    "crd_001_acc_01_2025-01-15",
+    "crd_001_acc_00_2025-01-23",
+    "crd_001_acc_00_2025-01-29",
+    "crd_001_acc_00_2025-01-08",
+    "crd_001_acc_00_2025-01-09",
+    "crd_001_acc_00_2025-01-10",
+    "crd_001_acc_00_2025-01-13",
+    "crd_001_acc_00_2025-01-14",
+    "crd_001_acc_00_2025-01-16",
+    "crd_001_acc_00_2025-01-17",
+    "crd_001_acc_00_2025-01-20",
+    "crd_001_acc_00_2025-01-21",
+    "crd_001_acc_00_2025-01-22",
+    "crd_001_acc_00_2025-01-24",
+    "crd_001_acc_00_2025-01-27",
+    "crd_001_acc_00_2025-01-28",
+    "crd_001_acc_00_2025-01-30",
+    "crd_001_acc_00_2025-01-31",
+    "crd_001_acc_00_2025-02-03"
+  ],
+  "selection": "D18: sort (seed, account_id, value_date, credit_id); stratified 2x class-23, 2x class-4, 2x class-1, >=1 Regime A; remainder by sort key. Reproducible via eval.human_study.select_credits."
+}

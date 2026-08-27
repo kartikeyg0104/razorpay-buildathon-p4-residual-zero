@@ -125,13 +125,16 @@ def main(argv: list[str] | None = None) -> int:
     run_p.add_argument("--split", default="dev")
     run_p.add_argument("--limit", type=int, default=0)
     run_p.add_argument("--out", default="artifacts/dev")
+    run_p.add_argument("--offline", action="store_true")
     args = parser.parse_args(argv)
     if args.cmd == "solve":
         return _cmd_solve(args)
     if args.cmd == "run":
         from residual_zero.orchestrator import run_split
-        db = Path(args.out).joinpath("ledger.sqlite")
-        n = run_split(args.split, db, limit=args.limit)
+        out = Path(args.out)
+        out.mkdir(parents=True, exist_ok=True)
+        db = out.joinpath("ledger.sqlite")
+        n = run_split(args.split, db, limit=args.limit, offline=args.offline)
         print(f"processed {n} credits into {db}")
         return 0
     raise SystemError(f"unhandled command {args.cmd}")

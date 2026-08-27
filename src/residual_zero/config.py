@@ -245,6 +245,21 @@ class AutonomyConfig(BaseModel):
         return self.threshold
 
 
+class LLMRuntimeConfig(BaseModel):
+    """Provider-agnostic LLM settings. Credentials never live here (NN-9 / §12)."""
+
+    model_config = _STRICT
+
+    model_id: str
+    effort: str
+    prompt_version: int = Field(ge=1)
+    token_budget: int = Field(ge=0)
+    rapidfuzz_threshold: int = Field(ge=0, le=100)
+    top_two_margin: int = Field(ge=0)
+    shortlist_k: int = Field(gt=0)
+    cache_dir: str
+
+
 class SolverConfig(BaseModel):
     model_config = _STRICT
 
@@ -379,6 +394,13 @@ def load_profile(path: Path) -> MerchantProfile:
     raw = _load_yaml(path)
     _reject_unverified(raw, path)
     return MerchantProfile.model_validate(raw)
+
+
+def load_llm_config(path: Path = Path("config/llm.yaml")) -> LLMRuntimeConfig:
+    """Load LLM runtime settings. No credentials. Unverified-rate scan still applies."""
+    raw = _load_yaml(path)
+    _reject_unverified(raw, path)
+    return LLMRuntimeConfig.model_validate(raw)
 
 
 def _canonical_bytes(payload: Any) -> bytes:

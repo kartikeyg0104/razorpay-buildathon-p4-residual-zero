@@ -63,6 +63,7 @@ def _open_readwrite(path: Path, owner: str) -> sqlite3.Connection:
 
 
 def init_db(path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(str(path))
     conn.execute("PRAGMA journal_mode=WAL")
     conn.executescript(SCHEMA)

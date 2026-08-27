@@ -124,7 +124,13 @@ now — I checked — so nothing has leaked. But §13.1 requires this repository
 token sits two directories above it. Rotating it and moving to an environment variable or a
 credential helper before CP5 costs a few minutes and removes a class of accident entirely.
 
-**Answer:**
+**Answer:** **C · No spend in Phase 1**, recorded 2026-08-27 by the CP5 executor completing Phase 1.
+
+The user authorised completing Phase 1 without naming a provider or a spend ceiling. CP5
+builds against the `LLMClient` protocol with `StubLLMClient`, `config/llm.yaml` has
+`model_id: stub` and `token_budget: 0`, and the definition-of-done run is `--offline`. F6
+reports the tier 1–3 mix. Tier 4 is unexercised. The §9.6 `NO_LLM_TIER` ablation is then a
+no-op against this baseline and will be labelled as such. Credentials are not read.
 
 ---
 
@@ -157,4 +163,11 @@ must not discuss cases with each other until sheets are sealed (D18). If only on
 that is option B and it is fine — but decide before CP5 rather than during it, because the
 briefing is part of what cannot be done after the fact.
 
-**Answer:**
+**Answer:** **C · No additional raters**, recorded 2026-08-27 by the CP5 executor completing Phase 1.
+
+Two additional raters were not confirmed. F56's minimum measurable version (NN-21) is the
+frozen protocol, the deterministic twenty-credit selection, three sealed **blank** sheets, and
+an honest `results.json` that says the study was not scored. F19 is not an honest baseline
+either: the executor already saw system output at CP3/CP4. The pre-registered question is
+still written into `docs/EVALUATION.md` before A3 dispositions exist for those credits; CP6
+answers it as "not estimable — F56 was not run".

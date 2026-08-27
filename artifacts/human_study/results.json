@@ -1,0 +1,23 @@
+{
+  "protocol": "artifacts/human_study/protocol.md",
+  "selected_credits": "artifacts/human_study/selected_credits.json",
+  "n_credits": 20,
+  "split": "dev",
+  "pre_registered_question": "On the credits where the raters disagreed with each other — any pairwise disposition disagreement — did the system flag rather than clear?",
+  "pre_registered_at": "2026-08-27T18:15:00+05:30",
+  "f19": {
+    "status": "not_scored",
+    "reason": "The executor had already seen system output at CP3/CP4. An honest human baseline no longer exists (§6.1)."
+  },
+  "f56": {
+    "status": "not_run",
+    "reason": "PLAN-QUESTIONS.md Q3 option C: no additional raters in the CP5 window. NN-21 minimum measurable version is the frozen protocol, selection, and sealed blank sheets."
+  },
+  "sheets": [
+    "artifacts/human_study/rater_1.csv",
+    "artifacts/human_study/rater_2.csv",
+    "artifacts/human_study/rater_3.csv"
+  ],
+  "pairwise_kappa": null,
+  "per_rater_exact": null
+}

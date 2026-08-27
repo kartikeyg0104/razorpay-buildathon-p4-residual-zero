@@ -182,3 +182,15 @@ reviewer exactly which statute to check the 10 bps against.
 PA settlements. We are claiming our synthetic merchant sells through a marketplace that
 does, so the deduction is in the ground-truth stack and dropping it from the ledger
 (class 13) produces the percentage-of-gross delta the classifier is built to see.
+
+---
+
+## ADR-10 · Uniform ordering-score weights
+
+**Decision.** The six `ordering_score` terms are combined as an unweighted geometric mean.
+Weights stay `uniform` in `config/solver.yaml`; the loader rejects any other value.
+
+**Argument.** Fitting six weights on a few hundred dev credits would overfit, and §9.5 uses
+the curve's *shape*, not the score's calibration. Geometric rather than arithmetic so one
+bad term cannot be compensated by five good ones: an unresolved entity drives the score to
+exactly zero and the credit can never auto-clear.
