@@ -31,6 +31,42 @@ Phase 1 should match the spec's own worked example rather than diverge from it. 
 `tax_rates.yaml` must name the provision explicitly whichever you choose, so a reviewer can check
 the rate against the right source.
 
+**Update, 2026-08-27, after attempting to source it at CP0 — this changes my recommendation.**
+
+I tried to verify the rate and learned something that reframes the question:
+
+1. **Razorpay's own settlement documentation** (fetched 2026-08-27,
+   `https://razorpay.com/docs/payments/settlements/`) states that the only deduction from a
+   settlement is Razorpay's fee. It mentions no tax withheld at source anywhere.
+2. **Section 194-O withholding is performed by an e-commerce *operator*** on a participant's
+   gross sales. A merchant collecting through a payment aggregator on their own storefront is
+   not such a participant, so 194-O would not apply to them at all.
+3. `incometaxindia.gov.in` returned **HTTP 403** from this environment and no primary CBDT
+   document could be reached, so no rate is recorded. Per NN-8 a plausible number is not an
+   acceptable substitute for a sourced one.
+
+**So the live question is no longer only "which rate" — it is "is withholding in this stack at
+all".** My original recommendation of option A now looks wrong for the structure spec §3.2 most
+naturally describes. Three ways forward:
+
+| Option | Consequence |
+|---|---|
+| **A' · Model the merchant as a participant on an e-commerce operator's platform** | Withholding is present on gross. Keeps corruption class 13 and `SUSPECTED_WITHHOLDING` exactly as spec §8.3 and §5.10 list them. Requires sourcing the 194-O rate from a primary CBDT document — which I could not reach, so you would need to supply it or run the fetch yourself. |
+| **B' · Withholding on the aggregator's commission** | Smaller, compounding deduction. Also needs a sourced rate, and needs a stated reason the merchant's structure attracts it. |
+| **C' · No withholding in the Phase 1 stack, documented as a scope decision** | Honest for a plain PA-merchant structure, and defensible in the README. **But it drops corruption class 13 `WITHHOLDING_GAP` from the 23 Phase 1 classes and leaves `SUSPECTED_WITHHOLDING` as an exception class nothing generates** — which is spec §8.3's "hole in your own results table", arriving from the opposite direction. I am not willing to make that cut unilaterally. |
+
+**Recommendation: A'**, on the grounds that it preserves the spec's own class list and its §5.10
+worked diagnosis, and that "our synthetic merchant sells through a marketplace that withholds on
+gross" is a coherent, statable scenario. I need the rate from a primary source to proceed, and
+`docs/DATA.md` will name the assumption explicitly.
+
+**What is blocked, concretely.** CP0's definition-of-done command exits 1 because
+`load_tax_rates()` refuses an unverified rate — the NN-8 mechanism working as intended.
+Everything else in CP0 is built and green (46 tests). CP1's ground truth needs the full deduction
+stack, so it is blocked too. This is a deliberate stop rather than a stall: generating an 800-credit
+corpus on a wrong tax structure would invalidate CP1 through CP9 and require regenerating
+everything.
+
 **Answer:**
 
 ---
