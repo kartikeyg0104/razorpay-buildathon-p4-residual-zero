@@ -241,7 +241,7 @@ Command: `make test && make verify-audit && python -m eval.cli --split dev --arm
 Exit: 0 — 141 passed (then 2 more A2 tests); `verify-audit ok=True entries=5`;
 A2 assignment precision 142/1213, recall 142/5973, exact 0/239.
 
-Commit: *(filled after commit)*
+Commit: `4e99e6d94fac8c0457d2f29fc961ba106f80fb56`
 
 Files: `src/residual_zero/{canonical,db,verify,proof,audit,orchestrator}.py`,
 `src/residual_zero/exceptions/__init__.py`, `eval/arms/a2_rules.py`, `eval/cli.py`,
