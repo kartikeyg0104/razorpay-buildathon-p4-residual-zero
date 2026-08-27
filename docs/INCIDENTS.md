@@ -28,7 +28,7 @@ Format:
 **First hypothesis.** The brute-force tests would have caught this. They would not: `test_matches_brute_force_on_signed_instances` uses `tol=0`, and `test_tolerance_mode` only asserts reachability, not uniqueness.
 **Actual cause.** Lines 93–115 of `solver.py` pick one hit total (`target` if reachable, else the closest) and enumerate *inside that total*. Uniqueness-under-tolerance was untested. PLAN-P1 §0.1.
 **Fix.** `enumerate_solutions` walks every hit in ascending order into one shared solution list with one shared cap. Empty subsets are never solutions.
-**Commit.** *(filled with the CP3 commit)*
+**Commit.** `0d45ad6820e902e4e9c69379ea13048618311c9d`
 **Regression test.** `tests/regressions/test_uniqueness_under_tolerance.py::test_two_totals_in_the_window_are_ambiguous` and `tests/test_solver_properties.py::test_reference_solver_misses_cross_total_ambiguity`.
 **What it changed about my thinking.** A green uniqueness test at `tol=0` is not a uniqueness test. The rounding bridge makes this the production case, not an edge case.
 

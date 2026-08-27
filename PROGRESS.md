@@ -199,7 +199,7 @@ Exit: 0 — 117 passed; five MIXED_N_M credits decomposed at residual `0.00`;
 benchmark `25 credits from data/dev: median 2 ms, worst 14 ms` on Darwin 25.5.0 (arm64),
 CPython 3.13.7. Well inside the 2 s/credit trip-wire.
 
-Commit: *(filled after commit)*
+Commit: `0d45ad6820e902e4e9c69379ea13048618311c9d`
 
 Files: `src/residual_zero/{candidates,cli}.py`, `src/residual_zero/solver/{__init__,bitset_dp,enumerate,fastpath}.py`,
 `tests/{solver_helpers,test_solver_properties,test_uniqueness,test_candidates,test_fastpath,bench_solver}.py`,
