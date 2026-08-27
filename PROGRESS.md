@@ -412,5 +412,21 @@ dispositions).
 
 Tag: `v4`.
 
+---
+
+## U5 · Freeze, README, video, submission · 2026-08-28
+
+Feature work stayed frozen. Rewrote README to spec §15 order (first screen numbers
+unchanged). `docs/VIDEO.md` is a timed script; every command in it was run and matched.
+`docs/SUBMISSION.md` drafts the form fields from `docs/INCIDENTS.md` only.
+`docs/FUTURE.md` lists what we refused to start. `make demo` prints the MIXED_N_M proof.
+
+Test-split eval 4 of 4 still skipped. Freeze commit follows `v4`.
+
+**Could not reproduce:** regenerating `data/dev` does not match the tagged corpus.
+Frozen `data/dev/rendered` + `truth.jsonl` are committed so `make eval` from a clone
+hits the published numbers.
+
+
 
 

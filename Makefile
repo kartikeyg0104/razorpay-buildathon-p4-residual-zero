@@ -9,7 +9,7 @@ test:
 	$(PY) -m pytest -q
 
 demo:
-	$(PY) -c "from residual_zero.console.app import app; print('demo ok')"
+	$(PY) -m residual_zero.cli solve --split dev --class 4 --show-proof --limit 1
 
 eval:
 	$(PY) -m eval.cli --split dev --full --out artifacts/dev

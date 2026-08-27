@@ -1,13 +1,16 @@
-# Data: gitignored except manifests and seeds (§10).
-# Git does not re-include a file inside an ignored directory, so the directory
-# itself has to be un-ignored first. `data/*` hid `data/dev/` and the
-# `!data/**/manifest.json` rule never fired.
+# Data: gitignored except manifests, seeds, and the frozen Phase 1 *dev* corpus.
+# Dev rendered views + truth.jsonl are committed so `make demo` / `make eval` work
+# from a clean clone (NN-14). Regenerating them does not reproduce the tagged numbers.
+# The test split stays gitignored; it is spent once (`artifacts/test/`).
 data/**
 !data/**/
 !data/.gitkeep
 !data/**/manifest.json
 !data/seeds/
 !data/seeds/**
+!data/dev/rendered/
+!data/dev/rendered/**
+!data/dev/truth.jsonl
 
 # artifacts/ is COMMITTED on purpose (§10) — do not ignore it.
 *.sqlite-wal
