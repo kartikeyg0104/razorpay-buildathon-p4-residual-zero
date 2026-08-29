@@ -1,0 +1,21 @@
+{
+  "provider": "nvidia",
+  "model": "openai/gpt-oss-20b",
+  "endpoint": "https://integrate.api.nvidia.com/v1/chat/completions",
+  "provider_key": "present",
+  "ai_key": "missing",
+  "live_enabled": true,
+  "latency_s": 14.8268,
+  "error": null,
+  "prose_len": 514,
+  "prose_prefix": "**Batch Summary**\n\n- **Reconciliation Status:** FLAGGED  \n- **Uniqueness:** AMBIGUOUS  \n- **Residual (in paise):** 0  \n\n**Statistics (from evidence):**\n\n- Residual\u2011zero transactions: 159 out of 239  \n- Ambiguous cases: 236  \n- Auto\u2011clear at",
+  "usage": {
+    "prompt_tokens": 334,
+    "completion_tokens": 445
+  },
+  "fallback_used": false,
+  "LIVE_PROVIDER": "YES",
+  "LIVE_LLM_TOOL_LOOP": "UNAVAILABLE",
+  "DETERMINISTIC_CONTROLLER": "PASS",
+  "writes_cleared": false
+}

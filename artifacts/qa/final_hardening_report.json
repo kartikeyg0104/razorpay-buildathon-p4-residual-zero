@@ -1,0 +1,280 @@
+{
+  "timestamp": "2026-09-01T10:39:43.746589+00:00",
+  "environment": {
+    "python": "3.13.7",
+    "os": "Darwin 25.5.0",
+    "pytest": "pytest 9.1.1",
+    "GROQ_API_KEY_PRESENT": true
+  },
+  "git_commit": "75cef5067474ceb5dff1119f0a445c896c1c7601",
+  "pytest": {
+    "unit": {
+      "passed": 586,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASS",
+      "tail": [
+        "586 passed in 37.00s"
+      ]
+    },
+    "e2e": {
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASS",
+      "tail": [
+        "............                                                             [100%]",
+        "12 passed in 34.61s"
+      ]
+    }
+  },
+  "dev": {
+    "n_scored": "239",
+    "residual-zero": "159/239",
+    "settlement-linked / member-identified": "148/239",
+    "verified-linked (ids + residual 0)": "142/239",
+    "unique": "0",
+    "ambiguous": "236",
+    "none_found": "3",
+    "budget_exceeded_search": "0",
+    "auto-clear": "0",
+    "flagged": "239",
+    "budget_exceeded_disposition": "0",
+    "false_clears": "0",
+    "search_coverage": "239/239",
+    "ops_source": "{'LEDGER': 154, 'SETTLEMENT_OPS': 13}",
+    "wall_clock_ms": "10066"
+  },
+  "test": {
+    "n_scored": "800",
+    "residual-zero": "521/800",
+    "settlement-linked / member-identified": "501/800",
+    "verified-linked (ids + residual 0)": "464/800",
+    "unique": "0",
+    "ambiguous": "779",
+    "none_found": "21",
+    "budget_exceeded_search": "0",
+    "auto-clear": "0",
+    "flagged": "800",
+    "budget_exceeded_disposition": "0",
+    "false_clears": "0",
+    "search_coverage": "800/800",
+    "ops_source": "{'LEDGER': 521, 'SETTLEMENT_OPS': 39}",
+    "wall_clock_ms": "68299"
+  },
+  "financial_regression": {
+    "snapshot_n": 248,
+    "cleared": 0,
+    "official_evaluation": "OFFICIAL EVALUATION NOT RERUN \u2014 BUDGET EXHAUSTED"
+  },
+  "groq": {
+    "LIVE_GROQ": "UNAVAILABLE",
+    "LIVE_GROQ_TOOL_CALLING": "NOT TESTABLE",
+    "LOCAL_AGENT_HARNESS": "PASS",
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "error": "groq http 403",
+    "latency_s": 0.3013,
+    "HTTP": "groq http 403"
+  },
+  "hallucination": {
+    "rows": [
+      {
+        "claim_type": "wrong transaction ID",
+        "injected_value": "crd_001_acc_01_2025-01-09 and crd_FAKE_999",
+        "expected": "reject",
+        "actual": "reject:invented id",
+        "passed": true
+      },
+      {
+        "claim_type": "wrong amount",
+        "injected_value": "Bank credit is \u20b912,345.67",
+        "expected": "reject",
+        "actual": "reject:invented amount",
+        "passed": true
+      },
+      {
+        "claim_type": "wrong residual",
+        "injected_value": "residual of \u20b90.00",
+        "expected": "reject",
+        "actual": "reject:invented residual",
+        "passed": true
+      },
+      {
+        "claim_type": "wrong count",
+        "injected_value": "999 transactions are ambiguous",
+        "expected": "reject",
+        "actual": "reject:invented count",
+        "passed": true
+      },
+      {
+        "claim_type": "wrong status CLEARED",
+        "injected_value": "crd_001_acc_01_2025-01-09 is CLEARED",
+        "expected": "reject",
+        "actual": "reject:cleared claim",
+        "passed": true
+      },
+      {
+        "claim_type": "fake UNIQUE",
+        "injected_value": "uniqueness is UNIQUE so we can proceed",
+        "expected": "reject",
+        "actual": "reject:invented uniqueness",
+        "passed": true
+      },
+      {
+        "claim_type": "fake VERIFIED",
+        "injected_value": "this credit is VERIFIED by the model",
+        "expected": "reject",
+        "actual": "reject:invented verified",
+        "passed": true
+      },
+      {
+        "claim_type": "fake CLEARED",
+        "injected_value": "crd_001_acc_01_2025-01-09 is CLEARED",
+        "expected": "reject",
+        "actual": "reject:cleared claim",
+        "passed": true
+      },
+      {
+        "claim_type": "fake solution count",
+        "injected_value": "solution count of 99 on this credit",
+        "expected": "reject",
+        "actual": "reject:invented count",
+        "passed": true
+      },
+      {
+        "claim_type": "grounded residual-zero",
+        "injected_value": "residual-zero 159/239. Overlay does not write CLEARED.",
+        "expected": "accept",
+        "actual": "accept",
+        "passed": true
+      }
+    ],
+    "fabricated_displayed": 0,
+    "writes_cleared": false
+  },
+  "ui_consistency": {
+    "api_t04": {
+      "n_scored": 239,
+      "residual_zero": "159/239",
+      "ambiguous": 236,
+      "none_found": 3,
+      "unique": 0,
+      "auto_clear": 0,
+      "false_clears": 0,
+      "search_coverage": "239/239"
+    },
+    "test": {
+      "n_scored": "800",
+      "residual-zero": "521/800",
+      "settlement-linked / member-identified": "501/800",
+      "verified-linked (ids + residual 0)": "464/800",
+      "unique": "0",
+      "ambiguous": "779",
+      "none_found": "21",
+      "budget_exceeded_search": "0",
+      "auto-clear": "0",
+      "flagged": "800",
+      "budget_exceeded_disposition": "0",
+      "false_clears": "0",
+      "search_coverage": "800/800",
+      "ops_source": "{'LEDGER': 521, 'SETTLEMENT_OPS': 39}",
+      "wall_clock_ms": "68299"
+    },
+    "ui_contains_521_800": true,
+    "ui_contains_159_239": true,
+    "mismatches": [],
+    "writes_cleared": false
+  },
+  "restart": {
+    "preexisting_console": false,
+    "health_writes_cleared": false,
+    "cleared_before": 0,
+    "cleared_after": 0,
+    "t04_same": true,
+    "listeners": 1,
+    "routes_ok": true
+  },
+  "demo": {
+    "api_t04": {
+      "n_scored": "800",
+      "residual-zero": "521/800",
+      "settlement-linked / member-identified": "501/800",
+      "verified-linked (ids + residual 0)": "464/800",
+      "unique": "0",
+      "ambiguous": "779",
+      "none_found": "21",
+      "budget_exceeded_search": "0",
+      "auto-clear": "0",
+      "flagged": "800",
+      "budget_exceeded_disposition": "0",
+      "false_clears": "0",
+      "search_coverage": "800/800",
+      "ops_source": "{'LEDGER': 521, 'SETTLEMENT_OPS': 39}",
+      "wall_clock_ms": "68299"
+    },
+    "health_writes_cleared": false,
+    "cleared_before": 0,
+    "steps": [
+      {
+        "step": 1,
+        "path": "/",
+        "ok": true
+      },
+      {
+        "step": 10,
+        "refuse_clear": true
+      }
+    ],
+    "cleared_after": 0,
+    "writes_cleared": false
+  },
+  "screenshots": {
+    "dashboard.png": true,
+    "credit.png": true,
+    "investigation.png": true,
+    "proof-explorer.png": true,
+    "source-comparison.png": true,
+    "candidate-comparison.png": true,
+    "human-review.png": true,
+    "refuse-clear.png": true
+  },
+  "source_hashes": {
+    "before": {
+      "bank.csv": "3f0a5ecd20a05a056ced677eed1bc8402a10ab1235c1eb567e9d86289c64543c",
+      "ledger.csv": "43d5ec48ec035ca57b90b9dad68ee560005a0e3512ad4cb8371d76ab0ba2a47b",
+      "settlement.csv": "24a40ea6680721ddf0ebd9e69c7eea340c337a4c63147493ea2f73cb5a743b69",
+      "tax_rates.yaml": "9fec32a6765242e2e148d5e588bdbf4205294b94a6719fef57ad0ceebbcc6e71",
+      "fees.yaml": "2ad02483d7f4ba905c29da54ee7746100a59fb14cffac4859dbf0b8a4a316a40",
+      "solver.yaml": "cc77380f6b90b84023ca9519d86314d84d946054244f91f350d8924ad49d291f"
+    },
+    "after": {
+      "after": {
+        "bank.csv": "3f0a5ecd20a05a056ced677eed1bc8402a10ab1235c1eb567e9d86289c64543c",
+        "ledger.csv": "43d5ec48ec035ca57b90b9dad68ee560005a0e3512ad4cb8371d76ab0ba2a47b",
+        "settlement.csv": "24a40ea6680721ddf0ebd9e69c7eea340c337a4c63147493ea2f73cb5a743b69",
+        "tax_rates.yaml": "9fec32a6765242e2e148d5e588bdbf4205294b94a6719fef57ad0ceebbcc6e71",
+        "fees.yaml": "2ad02483d7f4ba905c29da54ee7746100a59fb14cffac4859dbf0b8a4a316a40",
+        "solver.yaml": "cc77380f6b90b84023ca9519d86314d84d946054244f91f350d8924ad49d291f"
+      },
+      "changed": []
+    }
+  },
+  "gates": {
+    "financial_regression": "PASS",
+    "existing_tests": "PASS",
+    "no_false_clears": "PASS",
+    "no_fabricated_financial_facts": "PASS",
+    "no_llm_financial_decisions": "PASS",
+    "no_ai_mutation": "PASS",
+    "source_data_unchanged": "PASS",
+    "browser_e2e": "PASS",
+    "demo": "PASS",
+    "restart": "PASS",
+    "hallucination": "PASS",
+    "mcp": "PASS",
+    "cache": "PASS"
+  },
+  "FINAL_STATUS": "PASS",
+  "ai_recovery_statement": "AI evidence discovery recovered zero additional financial reconciliations on this dataset. The AI nevertheless provides genuine multi-step investigation, source comparison, candidate-equation analysis, root-cause analysis, prioritization, and finance-operations assistance."
+}

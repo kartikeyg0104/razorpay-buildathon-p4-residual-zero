@@ -1,0 +1,12 @@
+{
+  "n_credits": 248,
+  "predicted_fields": 983,
+  "gold_fields": 992,
+  "correct_fields": 974,
+  "false_fields": 9,
+  "precision": "974/983",
+  "recall": "974/992",
+  "false_extraction_rate": "9/983",
+  "candidate_only": true,
+  "writes_cleared": false
+}

@@ -1,0 +1,106 @@
+{
+  "same_transaction_repeats": {
+    "n": 12,
+    "distinct_results": 1,
+    "stable": true,
+    "sample": {
+      "status": "REVIEW_REQUIRED",
+      "residual_paise": 0,
+      "uniqueness": "AMBIGUOUS",
+      "verification": null,
+      "matched_record_ids": [
+        "itm_001_000017",
+        "itm_001_000018",
+        "itm_001_000019",
+        "itm_001_000020",
+        "itm_001_000021",
+        "itm_001_000022",
+        "itm_001_000023",
+        "itm_001_000024",
+        "itm_001_000025",
+        "itm_001_000026",
+        "itm_001_000027",
+        "itm_001_000028",
+        "itm_001_000029",
+        "itm_001_000030",
+        "itm_001_000031",
+        "itm_001_001124",
+        "itm_001_001125",
+        "itm_001_001545",
+        "itm_001_001546",
+        "itm_001_001547",
+        "itm_001_001548",
+        "itm_001_001549",
+        "itm_001_001550",
+        "itm_001_001551",
+        "itm_001_001552",
+        "itm_001_001553",
+        "itm_001_001554"
+      ],
+      "solution_count": 2,
+      "disposition": "FLAGGED"
+    }
+  },
+  "same_batch_repeats": {
+    "n": 8,
+    "distinct": 1,
+    "stable": true
+  },
+  "official_cards_stable": true,
+  "snapshot_stable": true,
+  "permuted_candidate_order": {
+    "cases": [
+      {
+        "amounts": [
+          100,
+          200,
+          700,
+          900
+        ],
+        "target": 300,
+        "distinct_signatures": 1,
+        "stable": true
+      },
+      {
+        "amounts": [
+          500,
+          -200,
+          700
+        ],
+        "target": 300,
+        "distinct_signatures": 1,
+        "stable": true
+      },
+      {
+        "amounts": [
+          100,
+          200,
+          300,
+          900
+        ],
+        "target": 300,
+        "distinct_signatures": 1,
+        "stable": true
+      },
+      {
+        "amounts": [
+          12,
+          34,
+          56,
+          78,
+          90
+        ],
+        "target": 90,
+        "distinct_signatures": 1,
+        "stable": true
+      }
+    ],
+    "stable": true
+  },
+  "api_t04_repeats_identical": true,
+  "console_reachable": true,
+  "nondeterminism_signals_in_financial_modules": [],
+  "solver_returns_tuples_not_sets": true,
+  "failures": [],
+  "pass": true
+}

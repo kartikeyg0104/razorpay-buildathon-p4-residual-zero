@@ -1,0 +1,109 @@
+{
+  "dev_n_scored": 239,
+  "current_window_truth_fully_contained": 9,
+  "current_pool": {
+    "min": 6,
+    "p50": 287,
+    "p95": 375,
+    "max": 385,
+    "over_max_pool": 0,
+    "max_pool": 400
+  },
+  "asymmetric_D_minus_k_to_D_minus_1": [
+    {
+      "window": "same_day_value_date",
+      "scored": 239,
+      "truth_fully_contained": 0
+    },
+    {
+      "window": "D_minus_1_to_D_minus_1",
+      "scored": 239,
+      "truth_fully_contained": 0
+    },
+    {
+      "window": "D_minus_2_to_D_minus_1",
+      "scored": 239,
+      "truth_fully_contained": 0
+    },
+    {
+      "window": "D_minus_3_to_D_minus_1",
+      "scored": 239,
+      "truth_fully_contained": 2
+    },
+    {
+      "window": "D_minus_5_to_D_minus_1",
+      "scored": 239,
+      "truth_fully_contained": 9
+    },
+    {
+      "window": "D_minus_35_to_D_minus_1",
+      "scored": 239,
+      "truth_fully_contained": 9
+    }
+  ],
+  "asymmetric_include_value_date": [
+    {
+      "window": "D_minus_1_to_D_inclusive",
+      "scored": 239,
+      "truth_fully_contained": 0
+    },
+    {
+      "window": "D_minus_2_to_D_inclusive",
+      "scored": 239,
+      "truth_fully_contained": 101
+    },
+    {
+      "window": "D_minus_3_to_D_inclusive",
+      "scored": 239,
+      "truth_fully_contained": 111
+    },
+    {
+      "window": "D_minus_5_to_D_inclusive",
+      "scored": 239,
+      "truth_fully_contained": 191
+    },
+    {
+      "window": "D_minus_35_to_D_inclusive",
+      "scored": 239,
+      "truth_fully_contained": 208
+    }
+  ],
+  "symmetric_plus_minus_k": [
+    {
+      "window": "plus_minus_1",
+      "scored": 239,
+      "truth_fully_contained": 0
+    },
+    {
+      "window": "plus_minus_2",
+      "scored": 239,
+      "truth_fully_contained": 101
+    },
+    {
+      "window": "plus_minus_3",
+      "scored": 239,
+      "truth_fully_contained": 111
+    },
+    {
+      "window": "plus_minus_5",
+      "scored": 239,
+      "truth_fully_contained": 191
+    }
+  ],
+  "full_account": {
+    "window": "full_account_no_date",
+    "scored": 239,
+    "truth_fully_contained": 209
+  },
+  "test_pool": {
+    "n_credits": 825,
+    "min": 0,
+    "p50": 436,
+    "p95": 576,
+    "max": 597,
+    "over_max_pool": 706,
+    "max_pool": 400,
+    "reason": "BUDGET_EXCEEDED fires when n_pool > max_pool before DP. Do not raise max_pool; shrink pools."
+  },
+  "adopt": "Keep production PAYMENT window [D-5, D-1] and widened kinds [D-35, D-1]. Including value_date raises full-stack containment from 9/239 to 191/239, but those extra members sit on settlement day and would enlarge already-p50-287 pools toward max_pool 400. Search uniqueness is already AMBIGUOUS; a wider pool would not create unique auto-clears. Do not adopt plus-minus windows (post-credit items are not in the credit)."
+}

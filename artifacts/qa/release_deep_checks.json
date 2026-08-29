@@ -1,0 +1,30 @@
+{
+  "checks": {
+    "contamination": {
+      "pass": true,
+      "failures": []
+    },
+    "agent": {
+      "pass": true,
+      "failures": []
+    },
+    "dev_regression": {
+      "pass": true,
+      "failures": []
+    },
+    "cache": {
+      "pass": true,
+      "failures": []
+    },
+    "mcp": {
+      "pass": true,
+      "failures": []
+    }
+  },
+  "reconciliation_rows_before": 0,
+  "reconciliation_rows_after": 0,
+  "cleared_rows": 0,
+  "elapsed_s": 7.023,
+  "failures": [],
+  "pass": true
+}

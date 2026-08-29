@@ -1,0 +1,76 @@
+{
+  "rows": [
+    {
+      "claim_type": "wrong transaction ID",
+      "injected_value": "crd_001_acc_01_2025-01-09 and crd_FAKE_999",
+      "expected": "reject",
+      "actual": "reject:invented id",
+      "passed": true
+    },
+    {
+      "claim_type": "wrong amount",
+      "injected_value": "Bank credit is \u20b912,345.67",
+      "expected": "reject",
+      "actual": "reject:invented amount",
+      "passed": true
+    },
+    {
+      "claim_type": "wrong residual",
+      "injected_value": "residual of \u20b90.00",
+      "expected": "reject",
+      "actual": "reject:invented residual",
+      "passed": true
+    },
+    {
+      "claim_type": "wrong count",
+      "injected_value": "999 transactions are ambiguous",
+      "expected": "reject",
+      "actual": "reject:invented count",
+      "passed": true
+    },
+    {
+      "claim_type": "wrong status CLEARED",
+      "injected_value": "crd_001_acc_01_2025-01-09 is CLEARED",
+      "expected": "reject",
+      "actual": "reject:cleared claim",
+      "passed": true
+    },
+    {
+      "claim_type": "fake UNIQUE",
+      "injected_value": "uniqueness is UNIQUE so we can proceed",
+      "expected": "reject",
+      "actual": "reject:invented uniqueness",
+      "passed": true
+    },
+    {
+      "claim_type": "fake VERIFIED",
+      "injected_value": "this credit is VERIFIED by the model",
+      "expected": "reject",
+      "actual": "reject:invented verified",
+      "passed": true
+    },
+    {
+      "claim_type": "fake CLEARED",
+      "injected_value": "crd_001_acc_01_2025-01-09 is CLEARED",
+      "expected": "reject",
+      "actual": "reject:cleared claim",
+      "passed": true
+    },
+    {
+      "claim_type": "fake solution count",
+      "injected_value": "solution count of 99 on this credit",
+      "expected": "reject",
+      "actual": "reject:invented count",
+      "passed": true
+    },
+    {
+      "claim_type": "grounded residual-zero",
+      "injected_value": "residual-zero 159/239. Overlay does not write CLEARED.",
+      "expected": "accept",
+      "actual": "accept",
+      "passed": true
+    }
+  ],
+  "fabricated_displayed": 0,
+  "writes_cleared": false
+}

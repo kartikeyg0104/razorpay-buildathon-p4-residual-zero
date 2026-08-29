@@ -1,0 +1,89 @@
+{
+  "groq_live_enabled": false,
+  "limits": {
+    "MAX_TOOLS": 8,
+    "MAX_REPEAT": 2,
+    "MAX_NS": 30000000000
+  },
+  "single_tool": {
+    "n_tools": 1,
+    "tool": "get_transaction",
+    "pass": true
+  },
+  "multi_tool": {
+    "sequence": [
+      "get_transaction",
+      "get_reconciliation",
+      "get_settlement_details",
+      "get_match_candidates",
+      "compare_sources",
+      "get_candidate_equations",
+      "exception_intelligence"
+    ],
+    "n_tools": 7,
+    "evidence_aggregated": [
+      "compare_sources",
+      "exception_intelligence",
+      "get_candidate_equations",
+      "get_match_candidates",
+      "get_reconciliation",
+      "get_settlement_details",
+      "get_transaction",
+      "intel",
+      "reconciliation",
+      "transaction"
+    ],
+    "writes_cleared": false,
+    "pass": true
+  },
+  "eight_tools_then_ninth_rejected": {
+    "requested": 9,
+    "executed": 8,
+    "stopped": "tool_limit",
+    "pass": true
+  },
+  "duplicate_then_third_rejected": {
+    "requested": 3,
+    "executed": 2,
+    "max_repeat": 2,
+    "pass": true
+  },
+  "invalid_arguments": {
+    "unknown_id_found": false,
+    "empty_args_found": false,
+    "writes_cleared": false,
+    "pass": true
+  },
+  "unknown_tool": {
+    "ok": false,
+    "error": "unknown_tool",
+    "pass": true
+  },
+  "tool_exception": {
+    "propagated_out_of_agent_loop": "RuntimeError: injected tool failure",
+    "contained_by_controller": true,
+    "controller_answer_prefix": "WHY THIS DID NOT AUTO-CLEAR\nBank credit: 59,645.39\nMatched records: 27\nResidual: 0.00\nSolutions: 2\nUniqueness: AMBIGUOUS\nStatus: REVIEW_REQUIRED\nDisposition: FL",
+    "note": "agent_loop intentionally does not swallow tool exceptions; finance_ask is the containment boundary and degrades to deterministic engine output",
+    "pass": true
+  },
+  "timeout": {
+    "ns_budget": 1,
+    "executed": 0,
+    "stopped": "time_limit",
+    "pass": true
+  },
+  "checks": {
+    "single_tool": true,
+    "multi_tool": true,
+    "eight_tools_then_ninth_rejected": true,
+    "duplicate_then_third_rejected": true,
+    "invalid_arguments": true,
+    "unknown_tool": true,
+    "tool_exception": true,
+    "timeout": true
+  },
+  "failures": [],
+  "LOCAL_AGENT_HARNESS": "PASS",
+  "pass": true,
+  "writes_cleared": false
+}

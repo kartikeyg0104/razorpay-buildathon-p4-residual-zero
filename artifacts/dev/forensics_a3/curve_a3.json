@@ -1,0 +1,860 @@
+[
+  {
+    "threshold": "1.000001",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.817125",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.810471",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.805879",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.805490",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.803926",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.802746",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.777018",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.768915",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.766222",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.764193",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.763480",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.744289",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.739028",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.732260",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.727209",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.725900",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.723246",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.710982",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.699203",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.699022",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.698188",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.696701",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.696503",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.695909",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.694670",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.693938",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.688149",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.687941",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.683831",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.683078",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.682626",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.681292",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.680533",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.680184",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.679002",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.678149",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.676477",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.675723",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.675080",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.674501",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.674302",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.671890",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.671483",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.671144",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.669536",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.669433",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.669226",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.668959",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.668742",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.668396",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.668344",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.667525",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.665235",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.664701",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.664594",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.664165",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.663086",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.662289",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.661998",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.661725",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.660331",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.658679",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.657968",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.657705",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.657554",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.657157",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.656894",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.656542",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.656420",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.655275",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.655026",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.654584",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.654121",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.652956",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.652682",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.652291",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.652252",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.651780",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.650594",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.649957",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.648774",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.648340",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.647841",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.647173",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.646969",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.645985",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.644991",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.644703",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.643722",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.643555",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.642396",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.642228",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.641911",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.640177",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.639724",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.638802",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.638704",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.638584",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.637885",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.637830",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.637677",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.637435",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.635730",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.635596",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.634345",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.634239",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.633322",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.632410",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.631353",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.631283",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.630240",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.628483",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.627514",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.625689",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.623497",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.610288",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.585949",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.583852",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.570830",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.569813",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.568788",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.558389",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.557426",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.553486",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.547535",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.544675",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.537695",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.534560",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.527489",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.526549",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.525601",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.507147",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.505407",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.503637",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.501835",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.501105",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.500922",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.481746",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.480263",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.479398",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.468116",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  },
+  {
+    "threshold": "0.000000",
+    "coverage": "0",
+    "error": null,
+    "n_cleared": 0
+  }
+]

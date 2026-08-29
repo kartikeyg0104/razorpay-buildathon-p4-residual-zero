@@ -1,0 +1,1744 @@
+{
+  "lags": [
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-08",
+      "value_date": "2025-01-08",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-08",
+      "value_date": "2025-01-08",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-08",
+      "value_date": "2025-01-08",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-08",
+      "value_date": "2025-01-08",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-08",
+      "value_date": "2025-01-08",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-08",
+      "value_date": "2025-01-08",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-09",
+      "value_date": "2025-01-09",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-09",
+      "value_date": "2025-01-09",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-09",
+      "value_date": "2025-01-09",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-09",
+      "value_date": "2025-01-09",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-09",
+      "value_date": "2025-01-09",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-09",
+      "value_date": "2025-01-09",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-10",
+      "value_date": "2025-01-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-10",
+      "value_date": "2025-01-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-10",
+      "value_date": "2025-01-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-10",
+      "value_date": "2025-01-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-10",
+      "value_date": "2025-01-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-10",
+      "value_date": "2025-01-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-13",
+      "value_date": "2025-01-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-13",
+      "value_date": "2025-01-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-13",
+      "value_date": "2025-01-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-13",
+      "value_date": "2025-01-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-13_dup",
+      "value_date": "2025-01-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-13",
+      "value_date": "2025-01-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-13",
+      "value_date": "2025-01-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-14",
+      "value_date": "2025-01-14",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-14",
+      "value_date": "2025-01-14",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-14",
+      "value_date": "2025-01-14",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-14",
+      "value_date": "2025-01-14",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-14",
+      "value_date": "2025-01-14",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-14",
+      "value_date": "2025-01-14",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-15",
+      "value_date": "2025-01-15",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-15",
+      "value_date": "2025-01-15",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-15",
+      "value_date": "2025-01-15",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-15",
+      "value_date": "2025-01-15",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-15",
+      "value_date": "2025-01-15",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-16",
+      "value_date": "2025-01-16",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-16",
+      "value_date": "2025-01-16",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-16",
+      "value_date": "2025-01-16",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-16",
+      "value_date": "2025-01-16",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-16",
+      "value_date": "2025-01-16",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-16",
+      "value_date": "2025-01-16",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-17",
+      "value_date": "2025-01-17",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-17",
+      "value_date": "2025-01-17",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-17",
+      "value_date": "2025-01-17",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-17",
+      "value_date": "2025-01-17",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-17",
+      "value_date": "2025-01-17",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-20",
+      "value_date": "2025-01-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-20",
+      "value_date": "2025-01-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-20",
+      "value_date": "2025-01-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-17",
+      "value_date": "2025-01-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-20",
+      "value_date": "2025-01-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-20",
+      "value_date": "2025-01-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-20",
+      "value_date": "2025-01-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-21",
+      "value_date": "2025-01-21",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-21",
+      "value_date": "2025-01-21",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-21_dup",
+      "value_date": "2025-01-21",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-21",
+      "value_date": "2025-01-21",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-21",
+      "value_date": "2025-01-21",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-21",
+      "value_date": "2025-01-21",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-22",
+      "value_date": "2025-01-22",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-22",
+      "value_date": "2025-01-22",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-22",
+      "value_date": "2025-01-22",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-21",
+      "value_date": "2025-01-22",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-22",
+      "value_date": "2025-01-22",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-22",
+      "value_date": "2025-01-22",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-22",
+      "value_date": "2025-01-22",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-23",
+      "value_date": "2025-01-23",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-23",
+      "value_date": "2025-01-23",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-23",
+      "value_date": "2025-01-23",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-23",
+      "value_date": "2025-01-23",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-23",
+      "value_date": "2025-01-23",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-23",
+      "value_date": "2025-01-23",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-24",
+      "value_date": "2025-01-24",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-24",
+      "value_date": "2025-01-24",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-24",
+      "value_date": "2025-01-24",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-24",
+      "value_date": "2025-01-24",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-24",
+      "value_date": "2025-01-24",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-24",
+      "value_date": "2025-01-24",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-27",
+      "value_date": "2025-01-27",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-27",
+      "value_date": "2025-01-27",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-27",
+      "value_date": "2025-01-27",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-27",
+      "value_date": "2025-01-27",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-27",
+      "value_date": "2025-01-27",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-27",
+      "value_date": "2025-01-27",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-28",
+      "value_date": "2025-01-28",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-28",
+      "value_date": "2025-01-28",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-28",
+      "value_date": "2025-01-28",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-28",
+      "value_date": "2025-01-28",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-28",
+      "value_date": "2025-01-28",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-28",
+      "value_date": "2025-01-28",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-29",
+      "value_date": "2025-01-29",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-29",
+      "value_date": "2025-01-29",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-29",
+      "value_date": "2025-01-29",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-29",
+      "value_date": "2025-01-29",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-29",
+      "value_date": "2025-01-29",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-30",
+      "value_date": "2025-01-30",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-30",
+      "value_date": "2025-01-30",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-30_dup",
+      "value_date": "2025-01-30",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-30",
+      "value_date": "2025-01-30",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-30",
+      "value_date": "2025-01-30",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-30",
+      "value_date": "2025-01-30",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-29",
+      "value_date": "2025-01-30",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-30",
+      "value_date": "2025-01-30",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-01-31",
+      "value_date": "2025-01-31",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-01-31",
+      "value_date": "2025-01-31",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-01-31",
+      "value_date": "2025-01-31",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-01-31",
+      "value_date": "2025-01-31",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-01-31",
+      "value_date": "2025-01-31",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-03",
+      "value_date": "2025-02-03",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-03",
+      "value_date": "2025-02-03",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-03",
+      "value_date": "2025-02-03",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-01-31",
+      "value_date": "2025-02-03",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-03",
+      "value_date": "2025-02-03",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-03",
+      "value_date": "2025-02-03",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-03",
+      "value_date": "2025-02-03",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-04",
+      "value_date": "2025-02-04",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-04",
+      "value_date": "2025-02-04",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-04",
+      "value_date": "2025-02-04",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-04",
+      "value_date": "2025-02-04",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-04",
+      "value_date": "2025-02-04",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-04",
+      "value_date": "2025-02-04",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-05",
+      "value_date": "2025-02-05",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-05",
+      "value_date": "2025-02-05",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-05",
+      "value_date": "2025-02-05",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-05",
+      "value_date": "2025-02-05",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-05",
+      "value_date": "2025-02-05",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-05",
+      "value_date": "2025-02-05",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-06",
+      "value_date": "2025-02-06",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-06",
+      "value_date": "2025-02-06",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-06",
+      "value_date": "2025-02-06",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-06",
+      "value_date": "2025-02-06",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-06",
+      "value_date": "2025-02-06",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-06",
+      "value_date": "2025-02-06",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-06_dup",
+      "value_date": "2025-02-06",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-07",
+      "value_date": "2025-02-07",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-07",
+      "value_date": "2025-02-07",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-07_dup",
+      "value_date": "2025-02-07",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-07",
+      "value_date": "2025-02-07",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-07",
+      "value_date": "2025-02-07",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-07",
+      "value_date": "2025-02-07",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-10",
+      "value_date": "2025-02-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-10",
+      "value_date": "2025-02-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-10",
+      "value_date": "2025-02-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-10",
+      "value_date": "2025-02-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-10",
+      "value_date": "2025-02-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-07",
+      "value_date": "2025-02-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-10",
+      "value_date": "2025-02-10",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-11",
+      "value_date": "2025-02-11",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-11",
+      "value_date": "2025-02-11",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-11",
+      "value_date": "2025-02-11",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-11_dup",
+      "value_date": "2025-02-11",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-11",
+      "value_date": "2025-02-11",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-11_dup",
+      "value_date": "2025-02-11",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-11",
+      "value_date": "2025-02-11",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-11",
+      "value_date": "2025-02-11",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-12",
+      "value_date": "2025-02-12",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-12",
+      "value_date": "2025-02-12",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-12",
+      "value_date": "2025-02-12",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-12",
+      "value_date": "2025-02-12",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-12",
+      "value_date": "2025-02-12",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-12",
+      "value_date": "2025-02-12",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-12_dup",
+      "value_date": "2025-02-12",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-13",
+      "value_date": "2025-02-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-13",
+      "value_date": "2025-02-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-13",
+      "value_date": "2025-02-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-13",
+      "value_date": "2025-02-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-13",
+      "value_date": "2025-02-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-13",
+      "value_date": "2025-02-13",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-14",
+      "value_date": "2025-02-14",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-14",
+      "value_date": "2025-02-14",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-14",
+      "value_date": "2025-02-14",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-14",
+      "value_date": "2025-02-14",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-14",
+      "value_date": "2025-02-14",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-14",
+      "value_date": "2025-02-14",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-17",
+      "value_date": "2025-02-17",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-17",
+      "value_date": "2025-02-17",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-17",
+      "value_date": "2025-02-17",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-17",
+      "value_date": "2025-02-17",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-17",
+      "value_date": "2025-02-17",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-17",
+      "value_date": "2025-02-17",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-18",
+      "value_date": "2025-02-18",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-18",
+      "value_date": "2025-02-18",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-18",
+      "value_date": "2025-02-18",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-18",
+      "value_date": "2025-02-18",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-18",
+      "value_date": "2025-02-18",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-18_dup",
+      "value_date": "2025-02-18",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-18",
+      "value_date": "2025-02-18",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-19",
+      "value_date": "2025-02-19",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-19",
+      "value_date": "2025-02-19",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-19",
+      "value_date": "2025-02-19",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-19",
+      "value_date": "2025-02-19",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-19",
+      "value_date": "2025-02-19",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-20",
+      "value_date": "2025-02-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-19",
+      "value_date": "2025-02-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-20",
+      "value_date": "2025-02-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-20",
+      "value_date": "2025-02-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-20",
+      "value_date": "2025-02-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-20",
+      "value_date": "2025-02-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-20",
+      "value_date": "2025-02-20",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-21",
+      "value_date": "2025-02-21",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-21",
+      "value_date": "2025-02-21",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-21",
+      "value_date": "2025-02-21",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-21",
+      "value_date": "2025-02-21",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-21",
+      "value_date": "2025-02-21",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-21",
+      "value_date": "2025-02-21",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-24",
+      "value_date": "2025-02-24",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-24",
+      "value_date": "2025-02-24",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-24",
+      "value_date": "2025-02-24",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-24",
+      "value_date": "2025-02-24",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-24",
+      "value_date": "2025-02-24",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-24",
+      "value_date": "2025-02-24",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-25",
+      "value_date": "2025-02-25",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-25",
+      "value_date": "2025-02-25",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-25",
+      "value_date": "2025-02-25",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-25",
+      "value_date": "2025-02-25",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-25",
+      "value_date": "2025-02-25",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-26",
+      "value_date": "2025-02-26",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-25",
+      "value_date": "2025-02-26",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-26",
+      "value_date": "2025-02-26",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-26",
+      "value_date": "2025-02-26",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-26",
+      "value_date": "2025-02-26",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-26",
+      "value_date": "2025-02-26",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-26",
+      "value_date": "2025-02-26",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-27",
+      "value_date": "2025-02-27",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-27",
+      "value_date": "2025-02-27",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-27",
+      "value_date": "2025-02-27",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-27",
+      "value_date": "2025-02-27",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-27",
+      "value_date": "2025-02-27",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-27",
+      "value_date": "2025-02-27",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-02-28",
+      "value_date": "2025-02-28",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-02-28",
+      "value_date": "2025-02-28",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-02-28",
+      "value_date": "2025-02-28",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-02-28",
+      "value_date": "2025-02-28",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-02-28",
+      "value_date": "2025-02-28",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-02-28",
+      "value_date": "2025-02-28",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-03-03",
+      "value_date": "2025-03-03",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-03-03",
+      "value_date": "2025-03-03",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-03-03",
+      "value_date": "2025-03-03",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-03-03",
+      "value_date": "2025-03-03",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-03-03",
+      "value_date": "2025-03-03",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_00_2025-03-04",
+      "value_date": "2025-03-04",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_00_2025-03-04",
+      "value_date": "2025-03-04",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_002_acc_01_2025-03-04",
+      "value_date": "2025-03-04",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-03-03",
+      "value_date": "2025-03-04",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_00_2025-03-04",
+      "value_date": "2025-03-04",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_003_acc_01_2025-03-04",
+      "value_date": "2025-03-04",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    },
+    {
+      "bank_credit_id": "crd_001_acc_01_2025-03-04",
+      "value_date": "2025-03-05",
+      "resolved_on": null,
+      "lag_days": null,
+      "unsolvable_on_arrival": true
+    }
+  ],
+  "n_credits": 248,
+  "unsolvable_on_arrival": 248,
+  "eventually_resolved": 0,
+  "aged_out": 0
+}

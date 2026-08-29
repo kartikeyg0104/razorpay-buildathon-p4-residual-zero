@@ -1,0 +1,34 @@
+{
+  "data/dev/rendered/bank.csv": {
+    "sha256": "3f0a5ecd20a05a056ced677eed1bc8402a10ab1235c1eb567e9d86289c64543c",
+    "bytes": 30034
+  },
+  "data/dev/rendered/ledger.csv": {
+    "sha256": "43d5ec48ec035ca57b90b9dad68ee560005a0e3512ad4cb8371d76ab0ba2a47b",
+    "bytes": 942247
+  },
+  "data/dev/rendered/settlement.csv": {
+    "sha256": "24a40ea6680721ddf0ebd9e69c7eea340c337a4c63147493ea2f73cb5a743b69",
+    "bytes": 306879
+  },
+  "data/dev/truth.jsonl": {
+    "sha256": "ee9d474ef47aa8251c0fae4374018025aa984331aa52cb00ac5b0f1e8eca3b18",
+    "bytes": 147471
+  },
+  "data/test/rendered/bank.csv": {
+    "sha256": "ae86a7a70e7f19bacf114fac9fd061d7912f6bcda3cfac61a9a8586067a32a23",
+    "bytes": 99741
+  },
+  "data/test/rendered/ledger.csv": {
+    "sha256": "72783daedcc54e726046d0295e150142102fecda08a5d391c7e1fedeb8fd150d",
+    "bytes": 3214403
+  },
+  "data/test/rendered/settlement.csv": {
+    "sha256": "069cc3d16b587131b3670b2afdbc4588107b72ddd15e5019a4a4c76b95297568",
+    "bytes": 1075194
+  },
+  "data/test/truth.jsonl": {
+    "sha256": "4861a8bbaad5b1076466530a08b6f5cb94d03a5efdc4cc83b733e2e5085e02d3",
+    "bytes": 504135
+  }
+}

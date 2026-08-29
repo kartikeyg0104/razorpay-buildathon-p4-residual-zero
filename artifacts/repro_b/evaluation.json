@@ -1,0 +1,19 @@
+{
+  "evaluation_type": "OFFICIAL",
+  "split": "dev",
+  "dataset_hash": {
+    "bank.csv": "3f0a5ecd20a05a056ced677eed1bc8402a10ab1235c1eb567e9d86289c64543c",
+    "ledger.csv": "43d5ec48ec035ca57b90b9dad68ee560005a0e3512ad4cb8371d76ab0ba2a47b",
+    "settlement.csv": "24a40ea6680721ddf0ebd9e69c7eea340c337a4c63147493ea2f73cb5a743b69"
+  },
+  "truth_hash": "ee9d474ef47aa8251c0fae4374018025aa984331aa52cb00ac5b0f1e8eca3b18",
+  "git_commit": "75cef5067474ceb5dff1119f0a445c896c1c7601",
+  "timestamp": "2026-09-03T09:34:17+0530",
+  "command": "python -m eval.cli",
+  "configuration_digest": "6d8af0982e0ab398c559c58f2c260a18b22532f1571ce45f9f68173f816bfd7a",
+  "feature_flags_digest": "7e753b9cdc85d3e9a6f707b5898e8a43b7d64b086ef1e03819478e6b4e58a0e7",
+  "python": "3.13.7",
+  "wall_clock_ms": 8118,
+  "writes_cleared": false,
+  "note": "OFFICIAL is artifacts/{split}/. QA_REPLAY is artifacts/qa/ and must not overwrite artifacts/test/t04.md. Test-split official budget is 4/4 spent."
+}

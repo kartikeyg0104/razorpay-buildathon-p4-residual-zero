@@ -1,0 +1,122 @@
+{
+  "note": "Layers are measured independently. AI latency is never added to reconciliation runtime.",
+  "deterministic": {
+    "get_reconciliation": {
+      "n": 30,
+      "mean_ms": 1.837,
+      "p50_ms": 1.711,
+      "p95_ms": 2.918,
+      "p99_ms": 3.623,
+      "max_ms": 3.623
+    },
+    "get_reconciliation_statistics": {
+      "n": 12,
+      "mean_ms": 0.239,
+      "p50_ms": 0.231,
+      "p95_ms": 0.305,
+      "p99_ms": 0.305,
+      "max_ms": 0.305
+    },
+    "track04_snapshot": {
+      "n": 30,
+      "mean_ms": 0.112,
+      "p50_ms": 0.112,
+      "p95_ms": 0.115,
+      "p99_ms": 0.119,
+      "max_ms": 0.119
+    },
+    "committed_batch_card": {
+      "machine": "Darwin 25.5.0 (arm64)",
+      "n_credits": "248",
+      "wall_ns": "160053542",
+      "bottleneck": "ingest",
+      "throughput_credits_per_1000s": "1549481",
+      "projected_5000_credit_wall_ns_if_linear": "3226885927"
+    }
+  },
+  "ai": {
+    "finance_ask_investigate": {
+      "n": 8,
+      "mean_ms": 10.219,
+      "p50_ms": 8.626,
+      "p95_ms": 19.646,
+      "p99_ms": 19.646,
+      "max_ms": 19.646
+    },
+    "finance_ask_refuse_clear": {
+      "n": 8,
+      "mean_ms": 2.79,
+      "p50_ms": 2.534,
+      "p95_ms": 4.588,
+      "p99_ms": 4.588,
+      "max_ms": 4.588
+    },
+    "live_groq": "UNAVAILABLE",
+    "live_groq_error": "groq http 403",
+    "fallback_used": true
+  },
+  "mcp": {
+    "tools_list": {
+      "n": 30,
+      "mean_ms": 0.001,
+      "p50_ms": 0.001,
+      "p95_ms": 0.005,
+      "p99_ms": 0.006,
+      "max_ms": 0.006
+    },
+    "finance_tool_get_transaction": {
+      "n": 12,
+      "mean_ms": 93.629,
+      "p50_ms": 90.195,
+      "p95_ms": 118.026,
+      "p99_ms": 118.026,
+      "max_ms": 118.026
+    }
+  },
+  "browser": {
+    "root": {
+      "n": 8,
+      "mean_ms": 16.899,
+      "p50_ms": 15.23,
+      "p95_ms": 32.759,
+      "p99_ms": 32.759,
+      "max_ms": 32.759
+    },
+    "credit": {
+      "n": 8,
+      "mean_ms": 44.762,
+      "p50_ms": 43.42,
+      "p95_ms": 50.333,
+      "p99_ms": 50.333,
+      "max_ms": 50.333
+    },
+    "api_t04": {
+      "n": 8,
+      "mean_ms": 1.213,
+      "p50_ms": 1.112,
+      "p95_ms": 1.82,
+      "p99_ms": 1.82,
+      "max_ms": 1.82
+    },
+    "suite": {
+      "browser": "chromium",
+      "target": "http://127.0.0.1:8765",
+      "transport": "live HTTP (not TestClient)",
+      "suite_total_collected": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASS",
+      "tracing": "retain-on-failure",
+      "screenshots": "only-on-failure",
+      "failure_artifacts_present": [],
+      "server_log": null,
+      "timestamp": "2026-09-01T12:37:30.620841+00:00"
+    }
+  },
+  "process": {
+    "max_rss_bytes": 92471296,
+    "max_rss_mb": 88.19
+  },
+  "pass": true
+}

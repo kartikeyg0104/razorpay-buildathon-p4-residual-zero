@@ -1,0 +1,1927 @@
+{
+  "holds": [
+    {
+      "item_id": "itm_001_001136",
+      "held_paise": 6165,
+      "held_on": "2025-01-08",
+      "scheduled_release": "2025-02-07",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001542",
+      "held_paise": 388180,
+      "held_on": "2025-01-08",
+      "scheduled_release": "2025-02-07",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001139",
+      "held_paise": 30575,
+      "held_on": "2025-01-08",
+      "scheduled_release": "2025-02-07",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001551",
+      "held_paise": 284845,
+      "held_on": "2025-01-08",
+      "scheduled_release": "2025-02-07",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001138",
+      "held_paise": 11680,
+      "held_on": "2025-01-08",
+      "scheduled_release": "2025-02-07",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001550",
+      "held_paise": 362470,
+      "held_on": "2025-01-08",
+      "scheduled_release": "2025-02-07",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001141",
+      "held_paise": 39685,
+      "held_on": "2025-01-09",
+      "scheduled_release": "2025-02-08",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001553",
+      "held_paise": 355215,
+      "held_on": "2025-01-09",
+      "scheduled_release": "2025-02-08",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001144",
+      "held_paise": 3925,
+      "held_on": "2025-01-09",
+      "scheduled_release": "2025-02-08",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001564",
+      "held_paise": 418365,
+      "held_on": "2025-01-09",
+      "scheduled_release": "2025-02-08",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001143",
+      "held_paise": 6365,
+      "held_on": "2025-01-09",
+      "scheduled_release": "2025-02-08",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001561",
+      "held_paise": 392025,
+      "held_on": "2025-01-09",
+      "scheduled_release": "2025-02-08",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001146",
+      "held_paise": 3320,
+      "held_on": "2025-01-10",
+      "scheduled_release": "2025-02-09",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001564",
+      "held_paise": 339330,
+      "held_on": "2025-01-10",
+      "scheduled_release": "2025-02-09",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001149",
+      "held_paise": 42700,
+      "held_on": "2025-01-10",
+      "scheduled_release": "2025-02-09",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001575",
+      "held_paise": 370660,
+      "held_on": "2025-01-10",
+      "scheduled_release": "2025-02-09",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001148",
+      "held_paise": 20195,
+      "held_on": "2025-01-10",
+      "scheduled_release": "2025-02-09",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001572",
+      "held_paise": 351700,
+      "held_on": "2025-01-10",
+      "scheduled_release": "2025-02-09",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001151",
+      "held_paise": 22815,
+      "held_on": "2025-01-13",
+      "scheduled_release": "2025-02-12",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001575",
+      "held_paise": 374250,
+      "held_on": "2025-01-13",
+      "scheduled_release": "2025-02-12",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001154",
+      "held_paise": 3940,
+      "held_on": "2025-01-13",
+      "scheduled_release": "2025-02-12",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001588",
+      "held_paise": 288905,
+      "held_on": "2025-01-13",
+      "scheduled_release": "2025-02-12",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001153",
+      "held_paise": 13335,
+      "held_on": "2025-01-13",
+      "scheduled_release": "2025-02-12",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001581",
+      "held_paise": 370645,
+      "held_on": "2025-01-13",
+      "scheduled_release": "2025-02-12",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001156",
+      "held_paise": 3505,
+      "held_on": "2025-01-14",
+      "scheduled_release": "2025-02-13",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001588",
+      "held_paise": 312705,
+      "held_on": "2025-01-14",
+      "scheduled_release": "2025-02-13",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001159",
+      "held_paise": 32130,
+      "held_on": "2025-01-14",
+      "scheduled_release": "2025-02-13",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001601",
+      "held_paise": 417450,
+      "held_on": "2025-01-14",
+      "scheduled_release": "2025-02-13",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001158",
+      "held_paise": 6245,
+      "held_on": "2025-01-14",
+      "scheduled_release": "2025-02-13",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001590",
+      "held_paise": 455315,
+      "held_on": "2025-01-14",
+      "scheduled_release": "2025-02-13",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001161",
+      "held_paise": 9370,
+      "held_on": "2025-01-15",
+      "scheduled_release": "2025-02-14",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001601",
+      "held_paise": 327515,
+      "held_on": "2025-01-15",
+      "scheduled_release": "2025-02-14",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001164",
+      "held_paise": 20340,
+      "held_on": "2025-01-15",
+      "scheduled_release": "2025-02-14",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001612",
+      "held_paise": 300315,
+      "held_on": "2025-01-15",
+      "scheduled_release": "2025-02-14",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001163",
+      "held_paise": 3540,
+      "held_on": "2025-01-15",
+      "scheduled_release": "2025-02-14",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001599",
+      "held_paise": 360810,
+      "held_on": "2025-01-15",
+      "scheduled_release": "2025-02-14",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001166",
+      "held_paise": 50985,
+      "held_on": "2025-01-16",
+      "scheduled_release": "2025-02-15",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001612",
+      "held_paise": 375455,
+      "held_on": "2025-01-16",
+      "scheduled_release": "2025-02-15",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001169",
+      "held_paise": 12195,
+      "held_on": "2025-01-16",
+      "scheduled_release": "2025-02-15",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001625",
+      "held_paise": 354640,
+      "held_on": "2025-01-16",
+      "scheduled_release": "2025-02-15",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001168",
+      "held_paise": 35970,
+      "held_on": "2025-01-16",
+      "scheduled_release": "2025-02-15",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001610",
+      "held_paise": 415075,
+      "held_on": "2025-01-16",
+      "scheduled_release": "2025-02-15",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001171",
+      "held_paise": 18920,
+      "held_on": "2025-01-17",
+      "scheduled_release": "2025-02-16",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001625",
+      "held_paise": 318870,
+      "held_on": "2025-01-17",
+      "scheduled_release": "2025-02-16",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001174",
+      "held_paise": 15895,
+      "held_on": "2025-01-17",
+      "scheduled_release": "2025-02-16",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001636",
+      "held_paise": 376485,
+      "held_on": "2025-01-17",
+      "scheduled_release": "2025-02-16",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001173",
+      "held_paise": 30940,
+      "held_on": "2025-01-17",
+      "scheduled_release": "2025-02-16",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001621",
+      "held_paise": 298405,
+      "held_on": "2025-01-17",
+      "scheduled_release": "2025-02-16",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001180",
+      "held_paise": 454585,
+      "held_on": "2025-01-20",
+      "scheduled_release": "2025-02-19",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001638",
+      "held_paise": 361180,
+      "held_on": "2025-01-20",
+      "scheduled_release": "2025-02-19",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001185",
+      "held_paise": 291815,
+      "held_on": "2025-01-20",
+      "scheduled_release": "2025-02-19",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001647",
+      "held_paise": 320720,
+      "held_on": "2025-01-20",
+      "scheduled_release": "2025-02-19",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001182",
+      "held_paise": 296425,
+      "held_on": "2025-01-20",
+      "scheduled_release": "2025-02-19",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001634",
+      "held_paise": 293685,
+      "held_on": "2025-01-20",
+      "scheduled_release": "2025-02-19",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001191",
+      "held_paise": 319255,
+      "held_on": "2025-01-21",
+      "scheduled_release": "2025-02-20",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001649",
+      "held_paise": 407095,
+      "held_on": "2025-01-21",
+      "scheduled_release": "2025-02-20",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001196",
+      "held_paise": 331315,
+      "held_on": "2025-01-21",
+      "scheduled_release": "2025-02-20",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001658",
+      "held_paise": 385040,
+      "held_on": "2025-01-21",
+      "scheduled_release": "2025-02-20",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001193",
+      "held_paise": 393445,
+      "held_on": "2025-01-21",
+      "scheduled_release": "2025-02-20",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001645",
+      "held_paise": 359135,
+      "held_on": "2025-01-21",
+      "scheduled_release": "2025-02-20",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001204",
+      "held_paise": 374885,
+      "held_on": "2025-01-22",
+      "scheduled_release": "2025-02-21",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001658",
+      "held_paise": 304195,
+      "held_on": "2025-01-22",
+      "scheduled_release": "2025-02-21",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001205",
+      "held_paise": 399905,
+      "held_on": "2025-01-22",
+      "scheduled_release": "2025-02-21",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001667",
+      "held_paise": 291980,
+      "held_on": "2025-01-22",
+      "scheduled_release": "2025-02-21",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001206",
+      "held_paise": 399005,
+      "held_on": "2025-01-22",
+      "scheduled_release": "2025-02-21",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001656",
+      "held_paise": 410995,
+      "held_on": "2025-01-22",
+      "scheduled_release": "2025-02-21",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001213",
+      "held_paise": 285235,
+      "held_on": "2025-01-23",
+      "scheduled_release": "2025-02-22",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001671",
+      "held_paise": 319040,
+      "held_on": "2025-01-23",
+      "scheduled_release": "2025-02-22",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001218",
+      "held_paise": 386095,
+      "held_on": "2025-01-23",
+      "scheduled_release": "2025-02-22",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001680",
+      "held_paise": 408465,
+      "held_on": "2025-01-23",
+      "scheduled_release": "2025-02-22",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001217",
+      "held_paise": 282215,
+      "held_on": "2025-01-23",
+      "scheduled_release": "2025-02-22",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001665",
+      "held_paise": 399610,
+      "held_on": "2025-01-23",
+      "scheduled_release": "2025-02-22",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001224",
+      "held_paise": 360645,
+      "held_on": "2025-01-24",
+      "scheduled_release": "2025-02-23",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001682",
+      "held_paise": 402390,
+      "held_on": "2025-01-24",
+      "scheduled_release": "2025-02-23",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001229",
+      "held_paise": 350350,
+      "held_on": "2025-01-24",
+      "scheduled_release": "2025-02-23",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001693",
+      "held_paise": 316900,
+      "held_on": "2025-01-24",
+      "scheduled_release": "2025-02-23",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001228",
+      "held_paise": 395680,
+      "held_on": "2025-01-24",
+      "scheduled_release": "2025-02-23",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001676",
+      "held_paise": 313175,
+      "held_on": "2025-01-24",
+      "scheduled_release": "2025-02-23",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001237",
+      "held_paise": 390150,
+      "held_on": "2025-01-27",
+      "scheduled_release": "2025-02-26",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001693",
+      "held_paise": 347750,
+      "held_on": "2025-01-27",
+      "scheduled_release": "2025-02-26",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001240",
+      "held_paise": 425730,
+      "held_on": "2025-01-27",
+      "scheduled_release": "2025-02-26",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001702",
+      "held_paise": 308750,
+      "held_on": "2025-01-27",
+      "scheduled_release": "2025-02-26",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001239",
+      "held_paise": 384080,
+      "held_on": "2025-01-27",
+      "scheduled_release": "2025-02-26",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001689",
+      "held_paise": 350795,
+      "held_on": "2025-01-27",
+      "scheduled_release": "2025-02-26",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001248",
+      "held_paise": 320010,
+      "held_on": "2025-01-28",
+      "scheduled_release": "2025-02-27",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001704",
+      "held_paise": 381450,
+      "held_on": "2025-01-28",
+      "scheduled_release": "2025-02-27",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001251",
+      "held_paise": 355815,
+      "held_on": "2025-01-28",
+      "scheduled_release": "2025-02-27",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001715",
+      "held_paise": 340120,
+      "held_on": "2025-01-28",
+      "scheduled_release": "2025-02-27",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001250",
+      "held_paise": 376770,
+      "held_on": "2025-01-28",
+      "scheduled_release": "2025-02-27",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001702",
+      "held_paise": 383910,
+      "held_on": "2025-01-28",
+      "scheduled_release": "2025-02-27",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001259",
+      "held_paise": 341290,
+      "held_on": "2025-01-29",
+      "scheduled_release": "2025-02-28",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001717",
+      "held_paise": 346485,
+      "held_on": "2025-01-29",
+      "scheduled_release": "2025-02-28",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001262",
+      "held_paise": 368535,
+      "held_on": "2025-01-29",
+      "scheduled_release": "2025-02-28",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001728",
+      "held_paise": 376210,
+      "held_on": "2025-01-29",
+      "scheduled_release": "2025-02-28",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001261",
+      "held_paise": 327635,
+      "held_on": "2025-01-29",
+      "scheduled_release": "2025-02-28",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001713",
+      "held_paise": 374075,
+      "held_on": "2025-01-29",
+      "scheduled_release": "2025-02-28",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001270",
+      "held_paise": 394545,
+      "held_on": "2025-01-30",
+      "scheduled_release": "2025-03-01",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001728",
+      "held_paise": 403865,
+      "held_on": "2025-01-30",
+      "scheduled_release": "2025-03-01",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001273",
+      "held_paise": 407110,
+      "held_on": "2025-01-30",
+      "scheduled_release": "2025-03-01",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001741",
+      "held_paise": 359000,
+      "held_on": "2025-01-30",
+      "scheduled_release": "2025-03-01",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001274",
+      "held_paise": 309040,
+      "held_on": "2025-01-30",
+      "scheduled_release": "2025-03-01",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001726",
+      "held_paise": 299340,
+      "held_on": "2025-01-30",
+      "scheduled_release": "2025-03-01",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001283",
+      "held_paise": 293180,
+      "held_on": "2025-01-31",
+      "scheduled_release": "2025-03-02",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001741",
+      "held_paise": 285740,
+      "held_on": "2025-01-31",
+      "scheduled_release": "2025-03-02",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001286",
+      "held_paise": 347360,
+      "held_on": "2025-01-31",
+      "scheduled_release": "2025-03-02",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_002_001752",
+      "held_paise": 419550,
+      "held_on": "2025-01-31",
+      "scheduled_release": "2025-03-02",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001283",
+      "held_paise": 367875,
+      "held_on": "2025-01-31",
+      "scheduled_release": "2025-03-02",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_003_001737",
+      "held_paise": 418150,
+      "held_on": "2025-01-31",
+      "scheduled_release": "2025-03-02",
+      "released_paise": 0,
+      "overdue": true
+    },
+    {
+      "item_id": "itm_001_001294",
+      "held_paise": 360500,
+      "held_on": "2025-02-03",
+      "scheduled_release": "2025-03-05",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001752",
+      "held_paise": 262345,
+      "held_on": "2025-02-03",
+      "scheduled_release": "2025-03-05",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001299",
+      "held_paise": 246920,
+      "held_on": "2025-02-03",
+      "scheduled_release": "2025-03-05",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001765",
+      "held_paise": 345450,
+      "held_on": "2025-02-03",
+      "scheduled_release": "2025-03-05",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001296",
+      "held_paise": 255710,
+      "held_on": "2025-02-03",
+      "scheduled_release": "2025-03-05",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001748",
+      "held_paise": 298715,
+      "held_on": "2025-02-03",
+      "scheduled_release": "2025-03-05",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001307",
+      "held_paise": 398630,
+      "held_on": "2025-02-04",
+      "scheduled_release": "2025-03-06",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001765",
+      "held_paise": 346180,
+      "held_on": "2025-02-04",
+      "scheduled_release": "2025-03-06",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001308",
+      "held_paise": 413515,
+      "held_on": "2025-02-04",
+      "scheduled_release": "2025-03-06",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001778",
+      "held_paise": 419710,
+      "held_on": "2025-02-04",
+      "scheduled_release": "2025-03-06",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001307",
+      "held_paise": 371835,
+      "held_on": "2025-02-04",
+      "scheduled_release": "2025-03-06",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001761",
+      "held_paise": 342405,
+      "held_on": "2025-02-04",
+      "scheduled_release": "2025-03-06",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001320",
+      "held_paise": 387170,
+      "held_on": "2025-02-05",
+      "scheduled_release": "2025-03-07",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001774",
+      "held_paise": 350070,
+      "held_on": "2025-02-05",
+      "scheduled_release": "2025-03-07",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001319",
+      "held_paise": 392600,
+      "held_on": "2025-02-05",
+      "scheduled_release": "2025-03-07",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001791",
+      "held_paise": 396635,
+      "held_on": "2025-02-05",
+      "scheduled_release": "2025-03-07",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001320",
+      "held_paise": 306390,
+      "held_on": "2025-02-05",
+      "scheduled_release": "2025-03-07",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001774",
+      "held_paise": 390135,
+      "held_on": "2025-02-05",
+      "scheduled_release": "2025-03-07",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001333",
+      "held_paise": 293440,
+      "held_on": "2025-02-06",
+      "scheduled_release": "2025-03-08",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001783",
+      "held_paise": 367590,
+      "held_on": "2025-02-06",
+      "scheduled_release": "2025-03-08",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001328",
+      "held_paise": 293105,
+      "held_on": "2025-02-06",
+      "scheduled_release": "2025-03-08",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001802",
+      "held_paise": 379145,
+      "held_on": "2025-02-06",
+      "scheduled_release": "2025-03-08",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001331",
+      "held_paise": 264880,
+      "held_on": "2025-02-06",
+      "scheduled_release": "2025-03-08",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001785",
+      "held_paise": 300600,
+      "held_on": "2025-02-06",
+      "scheduled_release": "2025-03-08",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001346",
+      "held_paise": 309250,
+      "held_on": "2025-02-07",
+      "scheduled_release": "2025-03-09",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001794",
+      "held_paise": 388080,
+      "held_on": "2025-02-07",
+      "scheduled_release": "2025-03-09",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001341",
+      "held_paise": 360195,
+      "held_on": "2025-02-07",
+      "scheduled_release": "2025-03-09",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001815",
+      "held_paise": 360835,
+      "held_on": "2025-02-07",
+      "scheduled_release": "2025-03-09",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001342",
+      "held_paise": 333020,
+      "held_on": "2025-02-07",
+      "scheduled_release": "2025-03-09",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001798",
+      "held_paise": 383845,
+      "held_on": "2025-02-07",
+      "scheduled_release": "2025-03-09",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001355",
+      "held_paise": 311000,
+      "held_on": "2025-02-10",
+      "scheduled_release": "2025-03-12",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001807",
+      "held_paise": 416615,
+      "held_on": "2025-02-10",
+      "scheduled_release": "2025-03-12",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001354",
+      "held_paise": 343235,
+      "held_on": "2025-02-10",
+      "scheduled_release": "2025-03-12",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001826",
+      "held_paise": 347760,
+      "held_on": "2025-02-10",
+      "scheduled_release": "2025-03-12",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001353",
+      "held_paise": 283625,
+      "held_on": "2025-02-10",
+      "scheduled_release": "2025-03-12",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001809",
+      "held_paise": 269955,
+      "held_on": "2025-02-10",
+      "scheduled_release": "2025-03-12",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001366",
+      "held_paise": 364825,
+      "held_on": "2025-02-11",
+      "scheduled_release": "2025-03-13",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001820",
+      "held_paise": 324000,
+      "held_on": "2025-02-11",
+      "scheduled_release": "2025-03-13",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001365",
+      "held_paise": 416735,
+      "held_on": "2025-02-11",
+      "scheduled_release": "2025-03-13",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001835",
+      "held_paise": 280050,
+      "held_on": "2025-02-11",
+      "scheduled_release": "2025-03-13",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001362",
+      "held_paise": 353230,
+      "held_on": "2025-02-11",
+      "scheduled_release": "2025-03-13",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001822",
+      "held_paise": 260525,
+      "held_on": "2025-02-11",
+      "scheduled_release": "2025-03-13",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001377",
+      "held_paise": 351315,
+      "held_on": "2025-02-12",
+      "scheduled_release": "2025-03-14",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001829",
+      "held_paise": 407930,
+      "held_on": "2025-02-12",
+      "scheduled_release": "2025-03-14",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001378",
+      "held_paise": 273470,
+      "held_on": "2025-02-12",
+      "scheduled_release": "2025-03-14",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001846",
+      "held_paise": 314540,
+      "held_on": "2025-02-12",
+      "scheduled_release": "2025-03-14",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001375",
+      "held_paise": 378855,
+      "held_on": "2025-02-12",
+      "scheduled_release": "2025-03-14",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001831",
+      "held_paise": 329430,
+      "held_on": "2025-02-12",
+      "scheduled_release": "2025-03-14",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001388",
+      "held_paise": 289840,
+      "held_on": "2025-02-13",
+      "scheduled_release": "2025-03-15",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001838",
+      "held_paise": 260975,
+      "held_on": "2025-02-13",
+      "scheduled_release": "2025-03-15",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001391",
+      "held_paise": 321435,
+      "held_on": "2025-02-13",
+      "scheduled_release": "2025-03-15",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001859",
+      "held_paise": 487335,
+      "held_on": "2025-02-13",
+      "scheduled_release": "2025-03-15",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001384",
+      "held_paise": 346780,
+      "held_on": "2025-02-13",
+      "scheduled_release": "2025-03-15",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001842",
+      "held_paise": 297900,
+      "held_on": "2025-02-13",
+      "scheduled_release": "2025-03-15",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001401",
+      "held_paise": 303400,
+      "held_on": "2025-02-14",
+      "scheduled_release": "2025-03-16",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001851",
+      "held_paise": 295265,
+      "held_on": "2025-02-14",
+      "scheduled_release": "2025-03-16",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001404",
+      "held_paise": 316060,
+      "held_on": "2025-02-14",
+      "scheduled_release": "2025-03-16",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001870",
+      "held_paise": 399095,
+      "held_on": "2025-02-14",
+      "scheduled_release": "2025-03-16",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001397",
+      "held_paise": 369285,
+      "held_on": "2025-02-14",
+      "scheduled_release": "2025-03-16",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001853",
+      "held_paise": 338820,
+      "held_on": "2025-02-14",
+      "scheduled_release": "2025-03-16",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001412",
+      "held_paise": 362420,
+      "held_on": "2025-02-17",
+      "scheduled_release": "2025-03-19",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001862",
+      "held_paise": 354855,
+      "held_on": "2025-02-17",
+      "scheduled_release": "2025-03-19",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001415",
+      "held_paise": 245965,
+      "held_on": "2025-02-17",
+      "scheduled_release": "2025-03-19",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001881",
+      "held_paise": 380245,
+      "held_on": "2025-02-17",
+      "scheduled_release": "2025-03-19",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001406",
+      "held_paise": 299030,
+      "held_on": "2025-02-17",
+      "scheduled_release": "2025-03-19",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001866",
+      "held_paise": 380145,
+      "held_on": "2025-02-17",
+      "scheduled_release": "2025-03-19",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001423",
+      "held_paise": 301520,
+      "held_on": "2025-02-18",
+      "scheduled_release": "2025-03-20",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001873",
+      "held_paise": 338790,
+      "held_on": "2025-02-18",
+      "scheduled_release": "2025-03-20",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001428",
+      "held_paise": 379095,
+      "held_on": "2025-02-18",
+      "scheduled_release": "2025-03-20",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001892",
+      "held_paise": 418110,
+      "held_on": "2025-02-18",
+      "scheduled_release": "2025-03-20",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001415",
+      "held_paise": 378955,
+      "held_on": "2025-02-18",
+      "scheduled_release": "2025-03-20",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001877",
+      "held_paise": 334155,
+      "held_on": "2025-02-18",
+      "scheduled_release": "2025-03-20",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001434",
+      "held_paise": 357765,
+      "held_on": "2025-02-19",
+      "scheduled_release": "2025-03-21",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001886",
+      "held_paise": 350795,
+      "held_on": "2025-02-19",
+      "scheduled_release": "2025-03-21",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001439",
+      "held_paise": 371930,
+      "held_on": "2025-02-19",
+      "scheduled_release": "2025-03-21",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001901",
+      "held_paise": 432540,
+      "held_on": "2025-02-19",
+      "scheduled_release": "2025-03-21",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001428",
+      "held_paise": 391785,
+      "held_on": "2025-02-19",
+      "scheduled_release": "2025-03-21",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001890",
+      "held_paise": 467380,
+      "held_on": "2025-02-19",
+      "scheduled_release": "2025-03-21",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001445",
+      "held_paise": 312770,
+      "held_on": "2025-02-20",
+      "scheduled_release": "2025-03-22",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001897",
+      "held_paise": 398185,
+      "held_on": "2025-02-20",
+      "scheduled_release": "2025-03-22",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001450",
+      "held_paise": 310945,
+      "held_on": "2025-02-20",
+      "scheduled_release": "2025-03-22",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001912",
+      "held_paise": 343955,
+      "held_on": "2025-02-20",
+      "scheduled_release": "2025-03-22",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001441",
+      "held_paise": 317715,
+      "held_on": "2025-02-20",
+      "scheduled_release": "2025-03-22",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001903",
+      "held_paise": 308335,
+      "held_on": "2025-02-20",
+      "scheduled_release": "2025-03-22",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001454",
+      "held_paise": 248045,
+      "held_on": "2025-02-21",
+      "scheduled_release": "2025-03-23",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001908",
+      "held_paise": 322250,
+      "held_on": "2025-02-21",
+      "scheduled_release": "2025-03-23",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001461",
+      "held_paise": 372445,
+      "held_on": "2025-02-21",
+      "scheduled_release": "2025-03-23",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001925",
+      "held_paise": 266225,
+      "held_on": "2025-02-21",
+      "scheduled_release": "2025-03-23",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001452",
+      "held_paise": 358495,
+      "held_on": "2025-02-21",
+      "scheduled_release": "2025-03-23",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001916",
+      "held_paise": 285550,
+      "held_on": "2025-02-21",
+      "scheduled_release": "2025-03-23",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001467",
+      "held_paise": 395050,
+      "held_on": "2025-02-24",
+      "scheduled_release": "2025-03-26",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001917",
+      "held_paise": 397110,
+      "held_on": "2025-02-24",
+      "scheduled_release": "2025-03-26",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001470",
+      "held_paise": 423285,
+      "held_on": "2025-02-24",
+      "scheduled_release": "2025-03-26",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001936",
+      "held_paise": 421935,
+      "held_on": "2025-02-24",
+      "scheduled_release": "2025-03-26",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001463",
+      "held_paise": 303080,
+      "held_on": "2025-02-24",
+      "scheduled_release": "2025-03-26",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001929",
+      "held_paise": 387320,
+      "held_on": "2025-02-24",
+      "scheduled_release": "2025-03-26",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001480",
+      "held_paise": 333985,
+      "held_on": "2025-02-25",
+      "scheduled_release": "2025-03-27",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001928",
+      "held_paise": 360910,
+      "held_on": "2025-02-25",
+      "scheduled_release": "2025-03-27",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001481",
+      "held_paise": 395240,
+      "held_on": "2025-02-25",
+      "scheduled_release": "2025-03-27",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001949",
+      "held_paise": 347280,
+      "held_on": "2025-02-25",
+      "scheduled_release": "2025-03-27",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001476",
+      "held_paise": 364065,
+      "held_on": "2025-02-25",
+      "scheduled_release": "2025-03-27",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001938",
+      "held_paise": 326265,
+      "held_on": "2025-02-25",
+      "scheduled_release": "2025-03-27",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001491",
+      "held_paise": 442955,
+      "held_on": "2025-02-26",
+      "scheduled_release": "2025-03-28",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001941",
+      "held_paise": 334305,
+      "held_on": "2025-02-26",
+      "scheduled_release": "2025-03-28",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001492",
+      "held_paise": 307860,
+      "held_on": "2025-02-26",
+      "scheduled_release": "2025-03-28",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001960",
+      "held_paise": 351310,
+      "held_on": "2025-02-26",
+      "scheduled_release": "2025-03-28",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001489",
+      "held_paise": 355985,
+      "held_on": "2025-02-26",
+      "scheduled_release": "2025-03-28",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001951",
+      "held_paise": 324330,
+      "held_on": "2025-02-26",
+      "scheduled_release": "2025-03-28",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001502",
+      "held_paise": 435110,
+      "held_on": "2025-02-27",
+      "scheduled_release": "2025-03-29",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001954",
+      "held_paise": 357910,
+      "held_on": "2025-02-27",
+      "scheduled_release": "2025-03-29",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001503",
+      "held_paise": 378930,
+      "held_on": "2025-02-27",
+      "scheduled_release": "2025-03-29",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001969",
+      "held_paise": 325660,
+      "held_on": "2025-02-27",
+      "scheduled_release": "2025-03-29",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001502",
+      "held_paise": 379810,
+      "held_on": "2025-02-27",
+      "scheduled_release": "2025-03-29",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001962",
+      "held_paise": 339455,
+      "held_on": "2025-02-27",
+      "scheduled_release": "2025-03-29",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001511",
+      "held_paise": 393455,
+      "held_on": "2025-02-28",
+      "scheduled_release": "2025-03-30",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001965",
+      "held_paise": 334660,
+      "held_on": "2025-02-28",
+      "scheduled_release": "2025-03-30",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001516",
+      "held_paise": 281215,
+      "held_on": "2025-02-28",
+      "scheduled_release": "2025-03-30",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001980",
+      "held_paise": 384060,
+      "held_on": "2025-02-28",
+      "scheduled_release": "2025-03-30",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001513",
+      "held_paise": 414110,
+      "held_on": "2025-02-28",
+      "scheduled_release": "2025-03-30",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001973",
+      "held_paise": 313385,
+      "held_on": "2025-02-28",
+      "scheduled_release": "2025-03-30",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001522",
+      "held_paise": 316005,
+      "held_on": "2025-03-03",
+      "scheduled_release": "2025-04-02",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001978",
+      "held_paise": 351305,
+      "held_on": "2025-03-03",
+      "scheduled_release": "2025-04-02",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001529",
+      "held_paise": 379625,
+      "held_on": "2025-03-03",
+      "scheduled_release": "2025-04-02",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001991",
+      "held_paise": 351395,
+      "held_on": "2025-03-03",
+      "scheduled_release": "2025-04-02",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001526",
+      "held_paise": 274070,
+      "held_on": "2025-03-03",
+      "scheduled_release": "2025-04-02",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001984",
+      "held_paise": 272325,
+      "held_on": "2025-03-03",
+      "scheduled_release": "2025-04-02",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001533",
+      "held_paise": 361500,
+      "held_on": "2025-03-04",
+      "scheduled_release": "2025-04-03",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_001_001985",
+      "held_paise": 325020,
+      "held_on": "2025-03-04",
+      "scheduled_release": "2025-04-03",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_001540",
+      "held_paise": 349540,
+      "held_on": "2025-03-04",
+      "scheduled_release": "2025-04-03",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_002_002000",
+      "held_paise": 334370,
+      "held_on": "2025-03-04",
+      "scheduled_release": "2025-04-03",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001537",
+      "held_paise": 298240,
+      "held_on": "2025-03-04",
+      "scheduled_release": "2025-04-03",
+      "released_paise": 0,
+      "overdue": false
+    },
+    {
+      "item_id": "itm_003_001995",
+      "held_paise": 348480,
+      "held_on": "2025-03-04",
+      "scheduled_release": "2025-04-03",
+      "released_paise": 0,
+      "overdue": false
+    }
+  ],
+  "outstanding_paise": 75882625,
+  "overdue_count": 108,
+  "identity_holds": true
+}

@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-09-01T17:49:09.699343+00:00",
+  "provider": "nvidia",
+  "endpoint": "https://integrate.api.nvidia.com/v1/chat/completions",
+  "model": "openai/gpt-oss-20b",
+  "key_present": true,
+  "live_enabled": true,
+  "timeout_s": 30,
+  "allowlist_size": 43,
+  "architecture": "model proposes -> application validates against allowlist -> application executes read-only tool -> result to model",
+  "next_tool": {
+    "latency_s": 7.75,
+    "pick": {
+      "tool": "get_transaction",
+      "arguments": {},
+      "stop": false
+    },
+    "error": null,
+    "tool_in_allowlist": true
+  },
+  "agent_loop": {
+    "latency_s": 4.39,
+    "tools_executed": [
+      "get_transaction",
+      "get_reconciliation",
+      "get_settlement_details",
+      "get_match_candidates",
+      "compare_sources",
+      "get_candidate_equations",
+      "exception_intelligence",
+      "get_transaction"
+    ],
+    "sources": [
+      "llm",
+      "playbook"
+    ],
+    "llm_picks": 1,
+    "rejected_tools": [],
+    "stopped": "tool_limit",
+    "within_tool_cap": true,
+    "every_executed_tool_allowlisted": true,
+    "writes_cleared": false
+  },
+  "reconciliation_rows_before": 0,
+  "reconciliation_rows_after": 0,
+  "financial_state_unchanged": true,
+  "LIVE_PROVIDER": "YES",
+  "LIVE_TOOL_CALLING": "YES",
+  "provider_error": null,
+  "failures": [],
+  "pass": true
+}

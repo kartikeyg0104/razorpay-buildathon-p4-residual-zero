@@ -1,0 +1,175 @@
+{
+  "tools_list_count": 13,
+  "tools_list": [
+    "ask_controller",
+    "close_ops",
+    "credit_proof",
+    "desk_status",
+    "fetch_all_instant_settlements",
+    "fetch_all_settlements",
+    "fetch_instant_settlement_with_id",
+    "fetch_settlement_recon_details",
+    "fetch_settlement_with_id",
+    "finance_tool",
+    "lookup_credit",
+    "match_recon",
+    "standup"
+  ],
+  "allowlist_declared": [
+    "fetch_all_instant_settlements",
+    "fetch_all_settlements",
+    "fetch_instant_settlement_with_id",
+    "fetch_settlement_recon_details",
+    "fetch_settlement_with_id"
+  ],
+  "refused_declared": [
+    "capture_payment",
+    "create_instant_settlement",
+    "create_order",
+    "create_payment_link",
+    "create_refund",
+    "initiate_payment",
+    "resend_otp",
+    "submit_otp"
+  ],
+  "refused_exposed_in_tools_list": [],
+  "declared_refused_probe": {
+    "capture_payment": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "create_instant_settlement": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "create_order": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "create_payment_link": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "create_refund": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "initiate_payment": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "resend_otp": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "submit_otp": {
+      "rejected": true,
+      "error": "ValueError"
+    }
+  },
+  "declared_refused_all_rejected": true,
+  "write_like_probe": {
+    "clear_transaction": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "mark_cleared": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "set_disposition": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "write_ledger": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "update_reconciliation": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "delete_transaction": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "insert_settlement": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "execute_sql": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "run_sql": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "write_file": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "shell": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "post_journal": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "approve_clear": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "override_gate": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "force_clear": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "commit_reconciliation": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "mutate_state": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "auto_clear": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "resolve_exception": {
+      "rejected": true,
+      "error": "ValueError"
+    },
+    "settle": {
+      "rejected": true,
+      "error": "ValueError"
+    }
+  },
+  "write_like_all_rejected": true,
+  "writes_cleared_per_tool": {
+    "ask_controller": false,
+    "close_ops": false,
+    "credit_proof": "raised:ValueError",
+    "desk_status": false,
+    "fetch_all_instant_settlements": "absent",
+    "fetch_all_settlements": "absent",
+    "fetch_instant_settlement_with_id": "raised:ValueError",
+    "fetch_settlement_recon_details": "raised:ValueError",
+    "fetch_settlement_with_id": "raised:ValueError",
+    "finance_tool": false,
+    "lookup_credit": "absent",
+    "match_recon": "raised:ValueError",
+    "standup": false
+  },
+  "any_writes_cleared_true": false,
+  "reconciliation_rows_before": 0,
+  "reconciliation_rows_after": 0,
+  "db_unchanged": true,
+  "failures": [],
+  "pass": true
+}

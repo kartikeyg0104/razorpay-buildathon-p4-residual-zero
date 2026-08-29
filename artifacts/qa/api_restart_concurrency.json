@@ -1,0 +1,40 @@
+{
+  "routes_after_restart": {
+    "/": [
+      200,
+      157604,
+      0.10704212496057153
+    ],
+    "/credit/crd_001_acc_01_2025-01-09": [
+      200,
+      24123,
+      0.7682510419981554
+    ],
+    "/explorer": [
+      200,
+      15003,
+      1.8572307089925744
+    ],
+    "/ask": [
+      200,
+      6861,
+      0.02085441700182855
+    ]
+  },
+  "clear_status": 200,
+  "clear_intent_or_flag": "REFUSE_CLEAR",
+  "concurrency_10_statuses": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
+  "contamination_b_has_a_id": false,
+  "b_answer_prefix": "0 credits in the local queue are RATE_MISMATCH. Declared line deltas fully explain the residual \u2014. A configured rate does not match the posted line. Overlay doe"
+}

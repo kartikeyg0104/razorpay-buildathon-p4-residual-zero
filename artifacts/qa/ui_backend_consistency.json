@@ -1,0 +1,33 @@
+{
+  "api_t04": {
+    "n_scored": 239,
+    "residual_zero": "159/239",
+    "ambiguous": 236,
+    "none_found": 3,
+    "unique": 0,
+    "auto_clear": 0,
+    "false_clears": 0,
+    "search_coverage": "239/239"
+  },
+  "test": {
+    "n_scored": "800",
+    "residual-zero": "521/800",
+    "settlement-linked / member-identified": "501/800",
+    "verified-linked (ids + residual 0)": "464/800",
+    "unique": "0",
+    "ambiguous": "779",
+    "none_found": "21",
+    "budget_exceeded_search": "0",
+    "auto-clear": "0",
+    "flagged": "800",
+    "budget_exceeded_disposition": "0",
+    "false_clears": "0",
+    "search_coverage": "800/800",
+    "ops_source": "{'LEDGER': 521, 'SETTLEMENT_OPS': 39}",
+    "wall_clock_ms": "68299"
+  },
+  "ui_contains_521_800": true,
+  "ui_contains_159_239": true,
+  "mismatches": [],
+  "writes_cleared": false
+}

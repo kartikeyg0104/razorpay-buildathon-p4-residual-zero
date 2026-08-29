@@ -1,0 +1,34 @@
+{
+  "CLEAN_ENVIRONMENT_TEST": "PASS",
+  "venv_path": "/tmp/residual-zero-clean-venv",
+  "created_with": "python3 -m venv",
+  "python": "Python 3.14.6",
+  "install_command": "pip install -e \".[dev]\"",
+  "install_source": "pyproject.toml (no requirements.txt in this repo)",
+  "pip_check": "No broken requirements found.",
+  "installed_package_count": 36,
+  "pytest": {
+    "command": "pytest -q",
+    "passed": 971,
+    "skipped": 12,
+    "failed": 0,
+    "runtime_s": 96.71,
+    "note": "12 skipped are the browser E2E tests; playwright is a separate `e2e` extra"
+  },
+  "application_smoke": {
+    "served_by": "clean venv uvicorn on 127.0.0.1:8765",
+    "GET /": 200,
+    "GET /api/health": 200,
+    "GET /credit/crd_001_acc_01_2025-01-09": 200,
+    "GET /api/t04": 200,
+    "POST /api/finance/tool get_reconciliation": "200, returned deterministic evidence",
+    "GET /ask investigation": "200, rendered AMBIGUOUS + residual from the engine",
+    "GET /ask clear request": "200, refused: 'cannot authorize a financial clear'"
+  },
+  "multi_step_investigation": "verified in the clean environment via pytest (tests/invariants/test_release_regressions.py::test_ambiguity_investigation_with_a_credit_runs_multiple_tools)",
+  "packaging_gap_found_and_fixed": "playwright was required by tests/e2e but declared in no extra; added a separate `e2e` optional-dependency group so browser deps stay out of runtime and dev",
+  "notes": [
+    "Dev interpreter is 3.13.7; the clean environment used 3.14.6, so the suite is verified on two interpreter versions.",
+    "The existing .venv was not modified."
+  ]
+}

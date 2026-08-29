@@ -1,0 +1,34 @@
+{
+  "n_scored": 239,
+  "n_posted_credits": 248,
+  "residual_zero": 159,
+  "a3_exact_today": 142,
+  "a3_exact_verify_gated": 142,
+  "named_declared_eq_truth": 148,
+  "recovered_if_f58": 6,
+  "remaining_unmatched": 91,
+  "buckets": {
+    "EXACT_DECLARED_OK": 142,
+    "DECLARED_OK_BUT_NOT_TRUTH": 17,
+    "DECLARED_EQ_TRUTH_VERIFY_FAIL": 6,
+    "NO_DECLARED_WINDOW_MISS": 56,
+    "NO_DECLARED_TRUTH_MISSING": 11,
+    "NO_DECLARED_SEARCH_PATH": 5,
+    "DECLARED_NE_TRUTH_VERIFY_FAIL": 2
+  },
+  "if_always_use_declared_when_eq_truth": 148,
+  "pool_sizes": {
+    "min": 6,
+    "max": 385,
+    "sum": 63302
+  },
+  "window_miss_credits": 230,
+  "account_miss_credits": 0,
+  "no_declared": 72,
+  "dev_max_pool": 385,
+  "dev_budget_from_max_pool": 0,
+  "test_budget_exceeded": "0/800",
+  "false_clears": 0,
+  "auto_clear": 0,
+  "unique_search": "search UNIQUE is not exact; auto-clear stays 0"
+}

@@ -1,0 +1,58 @@
+{
+  "split": "dev",
+  "new_unique_matches": 0,
+  "false_clears": 0,
+  "implemented": [],
+  "constraints": [
+    {
+      "constraint": "same_account",
+      "already_in_engine": true,
+      "candidate_solutions_removed": 0,
+      "ground_truth_solutions_removed": 0,
+      "false_alternatives_removed": 0,
+      "new_unique_matches": 0,
+      "new_verified_matches": 0,
+      "false_clears": 0,
+      "runtime_impact": "none",
+      "decision": "KEEP_EXISTING"
+    },
+    {
+      "constraint": "same_currency",
+      "already_in_engine": true,
+      "candidate_solutions_removed": 0,
+      "ground_truth_solutions_removed": 0,
+      "false_alternatives_removed": 0,
+      "new_unique_matches": 0,
+      "new_verified_matches": 0,
+      "false_clears": 0,
+      "runtime_impact": "none",
+      "decision": "KEEP_EXISTING"
+    },
+    {
+      "constraint": "narration_text_similarity",
+      "already_in_engine": false,
+      "candidate_solutions_removed": 0,
+      "ground_truth_solutions_removed": "unknown_unsafe",
+      "false_alternatives_removed": 0,
+      "new_unique_matches": 0,
+      "new_verified_matches": 0,
+      "false_clears": 0,
+      "runtime_impact": "n/a",
+      "decision": "DO_NOT_IMPLEMENT \u2014 text is not an explicit relationship"
+    },
+    {
+      "constraint": "extracted_date_widens_window",
+      "already_in_engine": false,
+      "candidate_solutions_removed": 0,
+      "ground_truth_solutions_removed": "would retain window-miss truth but change semantics",
+      "false_alternatives_removed": 0,
+      "new_unique_matches": 0,
+      "new_verified_matches": 0,
+      "false_clears": 0,
+      "runtime_impact": "n/a",
+      "decision": "DO_NOT_IMPLEMENT \u2014 extracted date must not redefine [D-5, D-1]"
+    }
+  ],
+  "writes_cleared": false,
+  "note": "No new hard filter passed 100% ground-truth retention AND new UNIQUE."
+}

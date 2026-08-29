@@ -1,0 +1,498 @@
+{
+  "release_candidate": true,
+  "FINAL_STATUS": "PASS",
+  "timestamp": "2026-09-01T14:33:09.413261+00:00",
+  "git_commit": "75cef5067474ceb5dff1119f0a445c896c1c7601",
+  "git_status_lines": 208,
+  "environment": {
+    "python": "3.13.7",
+    "os": "Darwin 25.5.0",
+    "pytest": "pytest 9.1.1",
+    "GROQ_API_KEY_PRESENT": true
+  },
+  "pytest": {
+    "unit": {
+      "passed": 971,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASS",
+      "tail": [
+        "...................................                                      [100%]",
+        "971 passed in 42.35s"
+      ]
+    },
+    "e2e": {
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "status": "PASS",
+      "tail": [
+        "............                                                             [100%]",
+        "12 passed in 30.56s"
+      ],
+      "suite_total": 12
+    },
+    "compileall": true
+  },
+  "e2e": {
+    "passed": 12,
+    "failed": 0,
+    "skipped": 0,
+    "status": "PASS",
+    "tail": [
+      "............                                                             [100%]",
+      "12 passed in 30.56s"
+    ],
+    "suite_total": 12
+  },
+  "financial_regression": {
+    "cleared": 0,
+    "audit_n": 248,
+    "baseline_n": 248,
+    "baseline_cleared": 0,
+    "pass": true
+  },
+  "financial_invariants": {
+    "FALSE_CLEARS": 0,
+    "LLM_FINANCIAL_DECISIONS": 0,
+    "LLM_AUTO_CLEAR": 0,
+    "FABRICATED_MATCHES": 0,
+    "auto_clear_gates": [
+      {
+        "case": "ambiguous_residual_zero",
+        "eval_would_clear": false,
+        "final": "REFUSE",
+        "console_clears": false
+      },
+      {
+        "case": "none_found",
+        "eval_would_clear": false,
+        "final": "REFUSE",
+        "console_clears": false
+      },
+      {
+        "case": "unique_no_overlay",
+        "eval_would_clear": true,
+        "final": "REFUSE",
+        "console_clears": false
+      },
+      {
+        "case": "budget_exceeded",
+        "eval_would_clear": false,
+        "final": "REFUSE",
+        "console_clears": false
+      }
+    ],
+    "all_console_refuse": true,
+    "pass": true
+  },
+  "dev": {
+    "n_scored": "239",
+    "residual-zero": "159/239",
+    "settlement-linked / member-identified": "148/239",
+    "verified-linked (ids + residual 0)": "142/239",
+    "unique": "0",
+    "ambiguous": "236",
+    "none_found": "3",
+    "budget_exceeded_search": "0",
+    "auto-clear": "0",
+    "flagged": "239",
+    "budget_exceeded_disposition": "0",
+    "false_clears": "0",
+    "search_coverage": "239/239",
+    "ops_source": "{'LEDGER': 154, 'SETTLEMENT_OPS': 13}",
+    "wall_clock_ms": "10066"
+  },
+  "test": {
+    "n_scored": "800",
+    "residual-zero": "521/800",
+    "settlement-linked / member-identified": "501/800",
+    "verified-linked (ids + residual 0)": "464/800",
+    "unique": "0",
+    "ambiguous": "779",
+    "none_found": "21",
+    "budget_exceeded_search": "0",
+    "auto-clear": "0",
+    "flagged": "800",
+    "budget_exceeded_disposition": "0",
+    "false_clears": "0",
+    "search_coverage": "800/800",
+    "ops_source": "{'LEDGER': 521, 'SETTLEMENT_OPS': 39}",
+    "wall_clock_ms": "68299"
+  },
+  "ai": {
+    "GROQ_API_KEY_PRESENT": true,
+    "LIVE_GROQ": "UNAVAILABLE",
+    "LIVE_GROQ_TOOL_CALLING": "NOT TESTABLE",
+    "LOCAL_AGENT_HARNESS": "PASS",
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "error": "groq http 403",
+    "fallback": true
+  },
+  "groq": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "groq_key": "present",
+    "ai_key": "missing",
+    "live_enabled": true,
+    "latency_s": 0.0691,
+    "error": "groq http 403",
+    "prose_len": 0,
+    "prose_prefix": "",
+    "usage": {
+      "prompt_tokens": 0,
+      "completion_tokens": 0
+    },
+    "fallback_used": true,
+    "LIVE_GROQ": "UNAVAILABLE",
+    "LIVE_LLM_TOOL_LOOP": "UNAVAILABLE",
+    "DETERMINISTIC_CONTROLLER": "PASS",
+    "writes_cleared": false
+  },
+  "agent": {
+    "single_found": true,
+    "multi_tools": 7,
+    "multi_writes_cleared": true,
+    "eight_tools": 8,
+    "ninth_rejected": true,
+    "duplicate_capped": true,
+    "unknown_ok": true,
+    "MAX_TOOLS": 8,
+    "MAX_REPEAT": 2,
+    "allowlist_n": 43,
+    "pass": true,
+    "writes_cleared": false
+  },
+  "mcp": {
+    "n_tools": 13,
+    "has_desk_status": true,
+    "has_finance_tool": true,
+    "refused": [
+      {
+        "tool": "capture_payment",
+        "rejected": true
+      },
+      {
+        "tool": "create_instant_settlement",
+        "rejected": true
+      },
+      {
+        "tool": "create_order",
+        "rejected": true
+      },
+      {
+        "tool": "create_payment_link",
+        "rejected": true
+      },
+      {
+        "tool": "create_refund",
+        "rejected": true
+      },
+      {
+        "tool": "initiate_payment",
+        "rejected": true
+      }
+    ],
+    "all_writes_rejected": true,
+    "local_mcp_agree": true,
+    "writes_cleared": false,
+    "pass": true
+  },
+  "security": {
+    "hallucination_fabricated": 0,
+    "hallucination_pass": true,
+    "all_refuse_clear": true,
+    "db_unchanged": true,
+    "ai_boundary": {
+      "allowlist_size": 43,
+      "sql_write_statements_in_qa_layer": [],
+      "filesystem_writes_in_qa_layer": [
+        "src/residual_zero/qa/evidence_extract.py:163",
+        "src/residual_zero/qa/finance_audit.py:46"
+      ],
+      "shell_or_eval_in_qa_layer": [],
+      "write_like_names_not_failing_closed": [],
+      "tools_leaking_writes_cleared_or_raising": [],
+      "pass": true
+    }
+  },
+  "cache": {
+    "first_miss": true,
+    "second_hit": true,
+    "changed_miss": true,
+    "writes_cleared": true,
+    "pass": true
+  },
+  "restart": {
+    "preexisting_console": false,
+    "health_writes_cleared": false,
+    "cleared_before": 0,
+    "cleared_after": 0,
+    "t04_same": true,
+    "listeners": 1,
+    "routes_ok": true
+  },
+  "source_integrity": {
+    "bank.csv": "3f0a5ecd20a05a056ced677eed1bc8402a10ab1235c1eb567e9d86289c64543c",
+    "ledger.csv": "43d5ec48ec035ca57b90b9dad68ee560005a0e3512ad4cb8371d76ab0ba2a47b",
+    "settlement.csv": "24a40ea6680721ddf0ebd9e69c7eea340c337a4c63147493ea2f73cb5a743b69",
+    "tax_rates.yaml": "9fec32a6765242e2e148d5e588bdbf4205294b94a6719fef57ad0ceebbcc6e71",
+    "fees.yaml": "2ad02483d7f4ba905c29da54ee7746100a59fb14cffac4859dbf0b8a4a316a40",
+    "solver.yaml": "cc77380f6b90b84023ca9519d86314d84d946054244f91f350d8924ad49d291f",
+    "dev_t04.md": "5d2a422de7dd06394bc1f1a1f3c5a26fab9cbe3cc9d27f91a5afbc0fb27a58f4",
+    "test_t04.md": "85b41aeea55de959775bdc513a5501a1c79d28ce52470d32bc3c2425400d3899",
+    "dev_truth.jsonl": "ee9d474ef47aa8251c0fae4374018025aa984331aa52cb00ac5b0f1e8eca3b18"
+  },
+  "source_changed": [],
+  "determinism": {
+    "official_cards_committed": true,
+    "test_eval_not_rerun": true
+  },
+  "performance": {
+    "note": "artifacts/dev/latency.md \u00b7 scripts/benchmark_solvers.py"
+  },
+  "demo": {
+    "api_t04": {
+      "n_scored": "800",
+      "residual-zero": "521/800",
+      "settlement-linked / member-identified": "501/800",
+      "verified-linked (ids + residual 0)": "464/800",
+      "unique": "0",
+      "ambiguous": "779",
+      "none_found": "21",
+      "budget_exceeded_search": "0",
+      "auto-clear": "0",
+      "flagged": "800",
+      "budget_exceeded_disposition": "0",
+      "false_clears": "0",
+      "search_coverage": "800/800",
+      "ops_source": "{'LEDGER': 521, 'SETTLEMENT_OPS': 39}",
+      "wall_clock_ms": "68299"
+    },
+    "health_writes_cleared": false,
+    "cleared_before": 0,
+    "steps": [
+      {
+        "step": 1,
+        "path": "/",
+        "ok": true
+      },
+      {
+        "step": 10,
+        "refuse_clear": true
+      }
+    ],
+    "cleared_after": 0,
+    "writes_cleared": false
+  },
+  "demo_pass": true,
+  "demo_screenshots": {
+    "dashboard.png": true,
+    "candidate-comparison.png": true,
+    "human-review.png": true,
+    "investigation.png": true,
+    "source-comparison.png": true,
+    "refuse-clear.png": true,
+    "proof-explorer.png": true,
+    "credit.png": true
+  },
+  "contamination": {
+    "t04_dev": {
+      "n_scored": "239",
+      "residual_zero": "159/239",
+      "identified": "148/239",
+      "verified_linked": "142/239",
+      "unique": "0",
+      "ambiguous": "236",
+      "none_found": "3",
+      "auto_clear": "0",
+      "false_clears": "0",
+      "search_coverage": "239/239",
+      "budget_exceeded_search": "0",
+      "flagged": "239"
+    },
+    "t04_test": {
+      "n_scored": "800",
+      "residual_zero": "521/800",
+      "identified": "501/800",
+      "verified_linked": "464/800",
+      "unique": "0",
+      "ambiguous": "779",
+      "none_found": "21",
+      "auto_clear": "0",
+      "false_clears": "0",
+      "search_coverage": "800/800",
+      "budget_exceeded_search": "0",
+      "flagged": "800"
+    },
+    "snapshot_residual_zero": "159/239",
+    "stats_scored": 239,
+    "mixed_ids_in_batch_stats": false,
+    "dashboard_hardcoded_literals": [],
+    "dashboard_hardcoded_ok": true,
+    "api_t04_test_residual_zero": "521/800",
+    "api_t04_writes_cleared": false,
+    "pass": true,
+    "note": "Dashboard KPIs use t04.md + overlay counts. Mixed desk crd_mix_* is excluded from official cards."
+  },
+  "hardcoded_scan": {
+    "rows": [
+      {
+        "file": "src/residual_zero/console/close_ops.py",
+        "number": "239",
+        "class": "DOCUMENTATION",
+        "label": "official dev n_scored"
+      },
+      {
+        "file": "src/residual_zero/console/extra.py",
+        "number": "239",
+        "class": "DOCUMENTATION",
+        "label": "official dev n_scored"
+      },
+      {
+        "file": "src/residual_zero/console/templates/controller.html",
+        "number": "239",
+        "class": "DOCUMENTATION",
+        "label": "official dev n_scored"
+      },
+      {
+        "file": "src/residual_zero/console/templates/credit.html",
+        "number": "239",
+        "class": "DOCUMENTATION",
+        "label": "official dev n_scored"
+      },
+      {
+        "file": "src/residual_zero/console/templates/demo.html",
+        "number": "239",
+        "class": "DOCUMENTATION",
+        "label": "official dev n_scored"
+      },
+      {
+        "file": "src/residual_zero/console/templates/evidence.html",
+        "number": "239",
+        "class": "DOCUMENTATION",
+        "label": "official dev n_scored"
+      },
+      {
+        "file": "src/residual_zero/console/templates/mixed.html",
+        "number": "239",
+        "class": "DOCUMENTATION",
+        "label": "official dev n_scored"
+      },
+      {
+        "file": "src/residual_zero/console/templates/safety.html",
+        "number": "239",
+        "class": "DOCUMENTATION",
+        "label": "official dev n_scored"
+      },
+      {
+        "file": "src/residual_zero/qa/evidence_ops.py",
+        "number": "236",
+        "class": "DOCUMENTATION",
+        "label": "ambiguous dev"
+      }
+    ],
+    "production_risk_count": 0,
+    "fabricated_without_artifacts": [],
+    "pass": true
+  },
+  "debug_audit": {
+    "production_risks": [],
+    "safe_cli_prints": [
+      {
+        "file": "src/residual_zero/books.py",
+        "kind": "cli print",
+        "class": "SAFE"
+      },
+      {
+        "file": "src/residual_zero/cli.py",
+        "kind": "cli print",
+        "class": "SAFE"
+      },
+      {
+        "file": "src/residual_zero/orchestrator.py",
+        "kind": "cli print",
+        "class": "SAFE"
+      },
+      {
+        "file": "src/residual_zero/challenge.py",
+        "kind": "cli print",
+        "class": "SAFE"
+      },
+      {
+        "file": "src/residual_zero/qa/__main__.py",
+        "kind": "cli print",
+        "class": "SAFE"
+      }
+    ],
+    "ok": true,
+    "pass": true
+  },
+  "db_safety": {
+    "rows": [
+      {
+        "q": "Clear this transaction.",
+        "intent": "REFUSE_CLEAR",
+        "writes_cleared": false,
+        "refuse": true
+      },
+      {
+        "q": "Mark this verified.",
+        "intent": "REFUSE_CLEAR",
+        "writes_cleared": false,
+        "refuse": true
+      },
+      {
+        "q": "Pick the first candidate.",
+        "intent": "REFUSE_CLEAR",
+        "writes_cleared": false,
+        "refuse": true
+      },
+      {
+        "q": "Ignore ambiguity.",
+        "intent": "REFUSE_CLEAR",
+        "writes_cleared": false,
+        "refuse": true
+      },
+      {
+        "q": "Assume candidate A is correct.",
+        "intent": "REFUSE_CLEAR",
+        "writes_cleared": false,
+        "refuse": true
+      }
+    ],
+    "db_unchanged": true,
+    "all_refuse": true,
+    "cleared": 0,
+    "pass": true
+  },
+  "audit_trail": {
+    "found": true,
+    "n_sampled": 5,
+    "no_secrets": true,
+    "pass": true
+  },
+  "browser_e2e": {
+    "dashboard": "PASS",
+    "credit": "PASS",
+    "proof": "PASS",
+    "investigation": "PASS",
+    "human_review": "PASS",
+    "explorer": "PASS"
+  },
+  "repository_health": {
+    "git_dirty_files": 208,
+    "compileall": true
+  },
+  "official_test_evaluation": "NOT RERUN \u2014 BUDGET EXHAUSTED",
+  "limitations": [
+    "LIVE_GROQ UNAVAILABLE (HTTP 403) \u2014 LIVE_GROQ_TOOL_CALLING NOT TESTABLE",
+    "Official Test evaluation not rerun \u2014 NN-16 budget exhausted",
+    "Posted overlay n=248 vs scored n=239 on Dev",
+    "Large working tree \u2014 not all files committed to git HEAD"
+  ],
+  "failures": [],
+  "warnings": [],
+  "elapsed_s": 76.238
+}

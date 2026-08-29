@@ -1,0 +1,3307 @@
+{
+  "base": "http://127.0.0.1:8765",
+  "n": 26,
+  "results": [
+    {
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "latency_s": 6.6093,
+      "bytes": 157604,
+      "content_type": "text/html; charset=utf-8",
+      "json": null,
+      "html_has": {
+        "has_html": true,
+        "has_residual": true,
+        "has_ambiguous": true,
+        "has_ask": true,
+        "has_ai": true,
+        "has_credit": true,
+        "has_why": true
+      },
+      "error": null,
+      "text_prefix": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>batch \u00b7 Residual Zero</title>\n  <li"
+    },
+    {
+      "method": "GET",
+      "path": "/ask",
+      "status": 200,
+      "latency_s": 0.2511,
+      "bytes": 6861,
+      "content_type": "text/html; charset=utf-8",
+      "json": null,
+      "html_has": {
+        "has_html": true,
+        "has_residual": true,
+        "has_ambiguous": true,
+        "has_ask": true,
+        "has_ai": true,
+        "has_credit": true,
+        "has_why": true
+      },
+      "error": null,
+      "text_prefix": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>AI finance controller \u00b7 Residual Ze"
+    },
+    {
+      "method": "GET",
+      "path": "/ask?credit_id=crd_001_acc_01_2025-01-09&question=Why+was+this+not+cleared",
+      "status": 200,
+      "latency_s": 2.4012,
+      "bytes": 11950,
+      "content_type": "text/html; charset=utf-8",
+      "json": null,
+      "html_has": {
+        "has_html": true,
+        "has_residual": true,
+        "has_ambiguous": true,
+        "has_ask": true,
+        "has_ai": true,
+        "has_credit": true,
+        "has_why": true
+      },
+      "error": null,
+      "text_prefix": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>AI finance controller \u00b7 Residual Ze"
+    },
+    {
+      "method": "GET",
+      "path": "/explorer",
+      "status": 200,
+      "latency_s": 13.2776,
+      "bytes": 15003,
+      "content_type": "text/html; charset=utf-8",
+      "json": null,
+      "html_has": {
+        "has_html": true,
+        "has_residual": true,
+        "has_ambiguous": true,
+        "has_ask": true,
+        "has_ai": true,
+        "has_credit": true,
+        "has_why": true
+      },
+      "error": null,
+      "text_prefix": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>AI reconciliation explorer \u00b7 Residu"
+    },
+    {
+      "method": "GET",
+      "path": "/explorer?kind=AMBIGUOUS",
+      "status": 200,
+      "latency_s": 4.2124,
+      "bytes": 6085,
+      "content_type": "text/html; charset=utf-8",
+      "json": null,
+      "html_has": {
+        "has_html": true,
+        "has_residual": true,
+        "has_ambiguous": true,
+        "has_ask": true,
+        "has_ai": true,
+        "has_credit": false,
+        "has_why": true
+      },
+      "error": null,
+      "text_prefix": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>AI reconciliation explorer \u00b7 Residu"
+    },
+    {
+      "method": "GET",
+      "path": "/credit/crd_001_acc_01_2025-01-09",
+      "status": 200,
+      "latency_s": 0.2584,
+      "bytes": 24123,
+      "content_type": "text/html; charset=utf-8",
+      "json": null,
+      "html_has": {
+        "has_html": true,
+        "has_residual": true,
+        "has_ambiguous": true,
+        "has_ask": true,
+        "has_ai": true,
+        "has_credit": true,
+        "has_why": true
+      },
+      "error": null,
+      "text_prefix": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>crd_001_acc_01_2025-01-09 \u00b7 Residua"
+    },
+    {
+      "method": "GET",
+      "path": "/exceptions",
+      "status": 200,
+      "latency_s": 0.0516,
+      "bytes": 49682,
+      "content_type": "text/html; charset=utf-8",
+      "json": null,
+      "html_has": {
+        "has_html": true,
+        "has_residual": true,
+        "has_ambiguous": true,
+        "has_ask": true,
+        "has_ai": true,
+        "has_credit": true,
+        "has_why": false
+      },
+      "error": null,
+      "text_prefix": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>queue \u00b7 Residual Zero</title>\n  <li"
+    },
+    {
+      "method": "GET",
+      "path": "/audit",
+      "status": 200,
+      "latency_s": 0.0294,
+      "bytes": 18190,
+      "content_type": "text/html; charset=utf-8",
+      "json": null,
+      "html_has": {
+        "has_html": true,
+        "has_residual": true,
+        "has_ambiguous": true,
+        "has_ask": true,
+        "has_ai": true,
+        "has_credit": true,
+        "has_why": false
+      },
+      "error": null,
+      "text_prefix": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>audit \u00b7 Residual Zero</title>\n  <li"
+    },
+    {
+      "method": "GET",
+      "path": "/demo",
+      "status": 200,
+      "latency_s": 0.0218,
+      "bytes": 6299,
+      "content_type": "text/html; charset=utf-8",
+      "json": null,
+      "html_has": {
+        "has_html": true,
+        "has_residual": true,
+        "has_ambiguous": true,
+        "has_ask": true,
+        "has_ai": true,
+        "has_credit": true,
+        "has_why": true
+      },
+      "error": null,
+      "text_prefix": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>demo \u00b7 Residual Zero</title>\n  <lin"
+    },
+    {
+      "method": "GET",
+      "path": "/safety",
+      "status": 200,
+      "latency_s": 0.007,
+      "bytes": 5101,
+      "content_type": "text/html; charset=utf-8",
+      "json": null,
+      "html_has": {
+        "has_html": true,
+        "has_residual": true,
+        "has_ambiguous": false,
+        "has_ask": true,
+        "has_ai": true,
+        "has_credit": false,
+        "has_why": false
+      },
+      "error": null,
+      "text_prefix": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>safety \u00b7 Residual Zero</title>\n  <l"
+    },
+    {
+      "method": "GET",
+      "path": "/human",
+      "status": 200,
+      "latency_s": 0.0987,
+      "bytes": 9064,
+      "content_type": "text/html; charset=utf-8",
+      "json": null,
+      "html_has": {
+        "has_html": true,
+        "has_residual": true,
+        "has_ambiguous": false,
+        "has_ask": true,
+        "has_ai": true,
+        "has_credit": true,
+        "has_why": false
+      },
+      "error": null,
+      "text_prefix": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>human study \u00b7 Residual Zero</title>"
+    },
+    {
+      "method": "GET",
+      "path": "/api/credits",
+      "status": 200,
+      "latency_s": 0.0594,
+      "bytes": 48376,
+      "content_type": "application/json",
+      "json": [
+        {
+          "id": "crd_001_acc_00_2025-01-08",
+          "cls": "MISSING_RECORD",
+          "amount": "1,129.22",
+          "account": "acc_00",
+          "date": "2025-01-08",
+          "uniqueness": "NONE_FOUND",
+          "href": "/credit/crd_001_acc_00_2025-01-08"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-09",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "7,333.10",
+          "account": "acc_00",
+          "date": "2025-01-09",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-09"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-10",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "602.67",
+          "account": "acc_00",
+          "date": "2025-01-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-10"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-13",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "4,210.80",
+          "account": "acc_00",
+          "date": "2025-01-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-13"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-14",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "636.91",
+          "account": "acc_00",
+          "date": "2025-01-14",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-14"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-16",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "9,424.50",
+          "account": "acc_00",
+          "date": "2025-01-16",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-16"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-17",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "3,489.92",
+          "account": "acc_00",
+          "date": "2025-01-17",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-17"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-20",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "84,122.79",
+          "account": "acc_00",
+          "date": "2025-01-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-20"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-21",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "59,075.91",
+          "account": "acc_00",
+          "date": "2025-01-21",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-21"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-22",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "69,371.91",
+          "account": "acc_00",
+          "date": "2025-01-22",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-22"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-23",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "40,561.49",
+          "account": "acc_00",
+          "date": "2025-01-23",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-23"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-24",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "66,736.37",
+          "account": "acc_00",
+          "date": "2025-01-24",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-24"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-27",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "72,197.16",
+          "account": "acc_00",
+          "date": "2025-01-27",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-27"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-28",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "59,215.65",
+          "account": "acc_00",
+          "date": "2025-01-28",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-28"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-29",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "54,785.15",
+          "account": "acc_00",
+          "date": "2025-01-29",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-29"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-30",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "65,528.58",
+          "account": "acc_00",
+          "date": "2025-01-30",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-30"
+        },
+        {
+          "id": "crd_001_acc_00_2025-01-31",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "54,249.94",
+          "account": "acc_00",
+          "date": "2025-01-31",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-01-31"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-03",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "66,709.54",
+          "account": "acc_00",
+          "date": "2025-02-03",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-03"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-04",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "73,766.64",
+          "account": "acc_00",
+          "date": "2025-02-04",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-04"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-05",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "71,645.63",
+          "account": "acc_00",
+          "date": "2025-02-05",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-05"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-06",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "51,179.08",
+          "account": "acc_00",
+          "date": "2025-02-06",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-06"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-07",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "57,224.18",
+          "account": "acc_00",
+          "date": "2025-02-07",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-07"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-10",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "57,548.08",
+          "account": "acc_00",
+          "date": "2025-02-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-10"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-11",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "67,510.00",
+          "account": "acc_00",
+          "date": "2025-02-11",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-11"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-12",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "65,009.58",
+          "account": "acc_00",
+          "date": "2025-02-12",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-12"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-13",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "53,631.78",
+          "account": "acc_00",
+          "date": "2025-02-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-13"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-14",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "56,141.48",
+          "account": "acc_00",
+          "date": "2025-02-14",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-14"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-17",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "67,064.90",
+          "account": "acc_00",
+          "date": "2025-02-17",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-17"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-18",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "55,793.52",
+          "account": "acc_00",
+          "date": "2025-02-18",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-18"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-19",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "66,203.34",
+          "account": "acc_00",
+          "date": "2025-02-19",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-19"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-20",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "57,875.68",
+          "account": "acc_00",
+          "date": "2025-02-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-20"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-21",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "45,896.37",
+          "account": "acc_00",
+          "date": "2025-02-21",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-21"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-24",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "73,104.06",
+          "account": "acc_00",
+          "date": "2025-02-24",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-24"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-25",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "53,057.15",
+          "account": "acc_00",
+          "date": "2025-02-25",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-25"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-26",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "81,970.30",
+          "account": "acc_00",
+          "date": "2025-02-26",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-26"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-27",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "75,435.36",
+          "account": "acc_00",
+          "date": "2025-02-27",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-27"
+        },
+        {
+          "id": "crd_001_acc_00_2025-02-28",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "72,808.86",
+          "account": "acc_00",
+          "date": "2025-02-28",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-02-28"
+        },
+        {
+          "id": "crd_001_acc_00_2025-03-03",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "58,474.41",
+          "account": "acc_00",
+          "date": "2025-03-03",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-03-03"
+        },
+        {
+          "id": "crd_001_acc_00_2025-03-04",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "62,404.61",
+          "account": "acc_00",
+          "date": "2025-03-04",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_00_2025-03-04"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-08",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "71,832.55",
+          "account": "acc_01",
+          "date": "2025-01-08",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-08"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-09",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "59,645.39",
+          "account": "acc_01",
+          "date": "2025-01-09",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-09"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-10",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "62,791.38",
+          "account": "acc_01",
+          "date": "2025-01-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-10"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-13",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "69,254.39",
+          "account": "acc_01",
+          "date": "2025-01-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-13"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-14",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "57,863.65",
+          "account": "acc_01",
+          "date": "2025-01-14",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-14"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-15",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "60,604.68",
+          "account": "acc_01",
+          "date": "2025-01-15",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-15"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-16",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "69,477.41",
+          "account": "acc_01",
+          "date": "2025-01-16",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-16"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-17",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "59,004.65",
+          "account": "acc_01",
+          "date": "2025-01-17",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-17"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-20",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "66,835.39",
+          "account": "acc_01",
+          "date": "2025-01-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-20"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-21",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "75,333.35",
+          "account": "acc_01",
+          "date": "2025-01-21",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-21"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-21_dup",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "75,333.35",
+          "account": "acc_01",
+          "date": "2025-01-21",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-21_dup"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-22",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "56,288.61",
+          "account": "acc_01",
+          "date": "2025-01-22",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-22"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-23",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "59,036.12",
+          "account": "acc_01",
+          "date": "2025-01-23",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-23"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-24",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "74,462.54",
+          "account": "acc_01",
+          "date": "2025-01-24",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-24"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-27",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,349.77",
+          "account": "acc_01",
+          "date": "2025-01-27",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-27"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-28",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "70,586.96",
+          "account": "acc_01",
+          "date": "2025-01-28",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-28"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-29",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,115.63",
+          "account": "acc_01",
+          "date": "2025-01-29",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-29"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-30",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "74,735.53",
+          "account": "acc_01",
+          "date": "2025-01-30",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-30"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-30_dup",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "74,735.53",
+          "account": "acc_01",
+          "date": "2025-01-30",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-30_dup"
+        },
+        {
+          "id": "crd_001_acc_01_2025-01-31",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "52,872.96",
+          "account": "acc_01",
+          "date": "2025-01-31",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-01-31"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-03",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "39,365.01",
+          "account": "acc_01",
+          "date": "2025-02-03",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-03"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-04",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,059.20",
+          "account": "acc_01",
+          "date": "2025-02-04",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-04"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-05",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,779.16",
+          "account": "acc_01",
+          "date": "2025-02-05",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-05"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-06",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "62,299.75",
+          "account": "acc_01",
+          "date": "2025-02-06",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-06"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-07",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "71,814.04",
+          "account": "acc_01",
+          "date": "2025-02-07",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-07"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-07_dup",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "71,814.04",
+          "account": "acc_01",
+          "date": "2025-02-07",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-07_dup"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-10",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "77,095.31",
+          "account": "acc_01",
+          "date": "2025-02-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-10"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-11",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "59,954.11",
+          "account": "acc_01",
+          "date": "2025-02-11",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-11"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-12",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "75,487.88",
+          "account": "acc_01",
+          "date": "2025-02-12",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-12"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-13",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "48,289.45",
+          "account": "acc_01",
+          "date": "2025-02-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-13"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-14",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "54,635.84",
+          "account": "acc_01",
+          "date": "2025-02-14",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-14"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-17",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "65,664.77",
+          "account": "acc_01",
+          "date": "2025-02-17",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-17"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-18",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "62,691.45",
+          "account": "acc_01",
+          "date": "2025-02-18",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-18"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-19",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,913.33",
+          "account": "acc_01",
+          "date": "2025-02-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-19"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-20",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "73,684.27",
+          "account": "acc_01",
+          "date": "2025-02-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-20"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-21",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "59,630.24",
+          "account": "acc_01",
+          "date": "2025-02-21",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-21"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-24",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "73,485.32",
+          "account": "acc_01",
+          "date": "2025-02-24",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-24"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-25",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "66,785.42",
+          "account": "acc_01",
+          "date": "2025-02-26",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-25"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-26",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "61,861.36",
+          "account": "acc_01",
+          "date": "2025-02-26",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-26"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-27",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "66,230.19",
+          "account": "acc_01",
+          "date": "2025-02-27",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-27"
+        },
+        {
+          "id": "crd_001_acc_01_2025-02-28",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "58,070.07",
+          "account": "acc_01",
+          "date": "2025-02-28",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-02-28"
+        },
+        {
+          "id": "crd_001_acc_01_2025-03-03",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "65,007.73",
+          "account": "acc_01",
+          "date": "2025-03-03",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-03-03"
+        },
+        {
+          "id": "crd_001_acc_01_2025-03-04",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "60,142.90",
+          "account": "acc_01",
+          "date": "2025-03-05",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_001_acc_01_2025-03-04"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-08",
+          "cls": "MISSING_RECORD",
+          "amount": "5,647.02",
+          "account": "acc_00",
+          "date": "2025-01-08",
+          "uniqueness": "NONE_FOUND",
+          "href": "/credit/crd_002_acc_00_2025-01-08"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-09",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "714.63",
+          "account": "acc_00",
+          "date": "2025-01-09",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-09"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-10",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "7,891.12",
+          "account": "acc_00",
+          "date": "2025-01-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-10"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-13",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "717.41",
+          "account": "acc_00",
+          "date": "2025-01-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-13"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-14",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "5,934.82",
+          "account": "acc_00",
+          "date": "2025-01-14",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-14"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-15",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "3,752.73",
+          "account": "acc_00",
+          "date": "2025-01-15",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-15"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-16",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "2,245.25",
+          "account": "acc_00",
+          "date": "2025-01-16",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-16"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-17",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "2,930.05",
+          "account": "acc_00",
+          "date": "2025-01-17",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-17"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-20",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "50,435.33",
+          "account": "acc_00",
+          "date": "2025-01-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-20"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-21",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "61,307.99",
+          "account": "acc_00",
+          "date": "2025-01-21",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-21"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-22",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "74,002.62",
+          "account": "acc_00",
+          "date": "2025-01-22",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-22"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-23",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "69,353.67",
+          "account": "acc_00",
+          "date": "2025-01-23",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-23"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-24",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,830.98",
+          "account": "acc_00",
+          "date": "2025-01-24",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-24"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-27",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "78,782.31",
+          "account": "acc_00",
+          "date": "2025-01-27",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-27"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-28",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "65,842.45",
+          "account": "acc_00",
+          "date": "2025-01-28",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-28"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-29",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "68,196.66",
+          "account": "acc_00",
+          "date": "2025-01-29",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-29"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-30",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "75,336.12",
+          "account": "acc_00",
+          "date": "2025-01-30",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-30"
+        },
+        {
+          "id": "crd_002_acc_00_2025-01-31",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,277.58",
+          "account": "acc_00",
+          "date": "2025-01-31",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-01-31"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-03",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "45,688.15",
+          "account": "acc_00",
+          "date": "2025-02-03",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-03"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-04",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "69,124.56",
+          "account": "acc_00",
+          "date": "2025-02-04",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-04"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-05",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "72,650.61",
+          "account": "acc_00",
+          "date": "2025-02-05",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-05"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-06",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "54,236.08",
+          "account": "acc_00",
+          "date": "2025-02-06",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-06"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-07",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "66,653.08",
+          "account": "acc_00",
+          "date": "2025-02-07",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-07"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-10",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "63,514.12",
+          "account": "acc_00",
+          "date": "2025-02-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-10"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-11",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "77,117.52",
+          "account": "acc_00",
+          "date": "2025-02-11",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-11"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-11_dup",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "77,117.52",
+          "account": "acc_00",
+          "date": "2025-02-11",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-11_dup"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-12",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "50,602.03",
+          "account": "acc_00",
+          "date": "2025-02-12",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-12"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-13",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "59,479.39",
+          "account": "acc_00",
+          "date": "2025-02-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-13"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-14",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "51,828.59",
+          "account": "acc_00",
+          "date": "2025-02-14",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-14"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-17",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "45,511.42",
+          "account": "acc_00",
+          "date": "2025-02-17",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-17"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-18",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "70,151.10",
+          "account": "acc_00",
+          "date": "2025-02-18",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-18"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-19",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "68,825.00",
+          "account": "acc_00",
+          "date": "2025-02-19",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-19"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-20",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "57,537.90",
+          "account": "acc_00",
+          "date": "2025-02-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-20"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-21",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "68,920.31",
+          "account": "acc_00",
+          "date": "2025-02-21",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-21"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-24",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "78,329.79",
+          "account": "acc_00",
+          "date": "2025-02-24",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-24"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-25",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "73,139.22",
+          "account": "acc_00",
+          "date": "2025-02-25",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-25"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-26",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "56,966.93",
+          "account": "acc_00",
+          "date": "2025-02-26",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-26"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-27",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "67,189.56",
+          "account": "acc_00",
+          "date": "2025-02-27",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-27"
+        },
+        {
+          "id": "crd_002_acc_00_2025-02-28",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "52,035.47",
+          "account": "acc_00",
+          "date": "2025-02-28",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-02-28"
+        },
+        {
+          "id": "crd_002_acc_00_2025-03-03",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "65,299.19",
+          "account": "acc_00",
+          "date": "2025-03-03",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-03-03"
+        },
+        {
+          "id": "crd_002_acc_00_2025-03-04",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,681.06",
+          "account": "acc_00",
+          "date": "2025-03-04",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_00_2025-03-04"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-08",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "52,707.31",
+          "account": "acc_01",
+          "date": "2025-01-08",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-08"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-09",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "77,419.20",
+          "account": "acc_01",
+          "date": "2025-01-09",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-09"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-10",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "68,589.96",
+          "account": "acc_01",
+          "date": "2025-01-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-10"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-13",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "53,458.74",
+          "account": "acc_01",
+          "date": "2025-01-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-13"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-13_dup",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "53,458.74",
+          "account": "acc_01",
+          "date": "2025-01-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-13_dup"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-14",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "77,249.84",
+          "account": "acc_01",
+          "date": "2025-01-14",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-14"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-15",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "55,570.51",
+          "account": "acc_01",
+          "date": "2025-01-15",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-15"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-16",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "56,613.97",
+          "account": "acc_01",
+          "date": "2025-01-16",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-16"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-17",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "63,947.05",
+          "account": "acc_01",
+          "date": "2025-01-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-17"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-20",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "59,347.06",
+          "account": "acc_01",
+          "date": "2025-01-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-20"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-21",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "71,251.40",
+          "account": "acc_01",
+          "date": "2025-01-22",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-21"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-22",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "54,027.85",
+          "account": "acc_01",
+          "date": "2025-01-22",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-22"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-23",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "75,586.90",
+          "account": "acc_01",
+          "date": "2025-01-23",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-23"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-24",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "58,640.06",
+          "account": "acc_01",
+          "date": "2025-01-24",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-24"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-27",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "57,131.65",
+          "account": "acc_01",
+          "date": "2025-01-27",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-27"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-28",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "62,937.62",
+          "account": "acc_01",
+          "date": "2025-01-28",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-28"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-29",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "69,617.15",
+          "account": "acc_01",
+          "date": "2025-01-29",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-29"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-30",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "59,572.92",
+          "account": "acc_01",
+          "date": "2025-01-30",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-30"
+        },
+        {
+          "id": "crd_002_acc_01_2025-01-31",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "77,638.52",
+          "account": "acc_01",
+          "date": "2025-02-03",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-01-31"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-03",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "51,051.08",
+          "account": "acc_01",
+          "date": "2025-02-03",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-03"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-04",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "69,694.13",
+          "account": "acc_01",
+          "date": "2025-02-04",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-04"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-05",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "73,397.40",
+          "account": "acc_01",
+          "date": "2025-02-05",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-05"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-06",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "70,160.35",
+          "account": "acc_01",
+          "date": "2025-02-06",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-06"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-07",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "66,771.54",
+          "account": "acc_01",
+          "date": "2025-02-07",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-07"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-10",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,351.62",
+          "account": "acc_01",
+          "date": "2025-02-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-10"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-11",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "51,819.85",
+          "account": "acc_01",
+          "date": "2025-02-11",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-11"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-11_dup",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "51,819.85",
+          "account": "acc_01",
+          "date": "2025-02-11",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-11_dup"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-12",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "58,203.26",
+          "account": "acc_01",
+          "date": "2025-02-12",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-12"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-13",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "90,184.16",
+          "account": "acc_01",
+          "date": "2025-02-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-13"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-14",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "73,852.71",
+          "account": "acc_01",
+          "date": "2025-02-14",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-14"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-17",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "70,363.94",
+          "account": "acc_01",
+          "date": "2025-02-17",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-17"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-18",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "69,280.01",
+          "account": "acc_01",
+          "date": "2025-02-18",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-18"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-19",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "80,042.70",
+          "account": "acc_01",
+          "date": "2025-02-19",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-19"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-20",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "63,647.39",
+          "account": "acc_01",
+          "date": "2025-02-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-20"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-21",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "49,261.13",
+          "account": "acc_01",
+          "date": "2025-02-21",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-21"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-24",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "78,079.92",
+          "account": "acc_01",
+          "date": "2025-02-24",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-24"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-25",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,262.78",
+          "account": "acc_01",
+          "date": "2025-02-25",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-25"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-26",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "65,008.66",
+          "account": "acc_01",
+          "date": "2025-02-26",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-26"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-27",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "60,261.35",
+          "account": "acc_01",
+          "date": "2025-02-27",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-27"
+        },
+        {
+          "id": "crd_002_acc_01_2025-02-28",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "71,070.02",
+          "account": "acc_01",
+          "date": "2025-02-28",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-02-28"
+        },
+        {
+          "id": "crd_002_acc_01_2025-03-03",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "65,024.38",
+          "account": "acc_01",
+          "date": "2025-03-03",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-03-03"
+        },
+        {
+          "id": "crd_002_acc_01_2025-03-04",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "61,873.41",
+          "account": "acc_01",
+          "date": "2025-03-04",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_002_acc_01_2025-03-04"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-08",
+          "cls": "MISSING_RECORD",
+          "amount": "2,149.93",
+          "account": "acc_00",
+          "date": "2025-01-08",
+          "uniqueness": "NONE_FOUND",
+          "href": "/credit/crd_003_acc_00_2025-01-08"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-09",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "1,166.24",
+          "account": "acc_00",
+          "date": "2025-01-09",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-09"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-10",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "3,725.89",
+          "account": "acc_00",
+          "date": "2025-01-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-10"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-13",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "2,456.24",
+          "account": "acc_00",
+          "date": "2025-01-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-13"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-14",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "1,144.02",
+          "account": "acc_00",
+          "date": "2025-01-14",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-14"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-15",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "643.38",
+          "account": "acc_00",
+          "date": "2025-01-15",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-15"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-16",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "6,645.53",
+          "account": "acc_00",
+          "date": "2025-01-16",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-16"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-17",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "5,714.57",
+          "account": "acc_00",
+          "date": "2025-01-17",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-17"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-20",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "54,850.53",
+          "account": "acc_00",
+          "date": "2025-01-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-20"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-21",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "72,807.01",
+          "account": "acc_00",
+          "date": "2025-01-21",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-21"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-22",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "73,836.04",
+          "account": "acc_00",
+          "date": "2025-01-22",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-22"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-23",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "52,220.56",
+          "account": "acc_00",
+          "date": "2025-01-23",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-23"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-24",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "71,824.65",
+          "account": "acc_00",
+          "date": "2025-01-24",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-24"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-27",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "71,073.72",
+          "account": "acc_00",
+          "date": "2025-01-27",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-27"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-28",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "69,720.80",
+          "account": "acc_00",
+          "date": "2025-01-28",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-28"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-29",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "60,626.88",
+          "account": "acc_00",
+          "date": "2025-01-29",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-29"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-30",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "50,162.32",
+          "account": "acc_00",
+          "date": "2025-01-30",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-30"
+        },
+        {
+          "id": "crd_003_acc_00_2025-01-31",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "68,074.50",
+          "account": "acc_00",
+          "date": "2025-01-31",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-01-31"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-03",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "47,315.01",
+          "account": "acc_00",
+          "date": "2025-02-03",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-03"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-04",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "68,807.42",
+          "account": "acc_00",
+          "date": "2025-02-04",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-04"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-05",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "52,864.85",
+          "account": "acc_00",
+          "date": "2025-02-05",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-05"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-06",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "49,012.19",
+          "account": "acc_00",
+          "date": "2025-02-06",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-06"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-07",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "61,623.55",
+          "account": "acc_00",
+          "date": "2025-02-07",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-07"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-10",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "40,825.51",
+          "account": "acc_00",
+          "date": "2025-02-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-10"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-11",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "65,364.00",
+          "account": "acc_00",
+          "date": "2025-02-11",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-11"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-12",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "70,106.68",
+          "account": "acc_00",
+          "date": "2025-02-12",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-12"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-13",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,170.24",
+          "account": "acc_00",
+          "date": "2025-02-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-13"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-14",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "68,335.46",
+          "account": "acc_00",
+          "date": "2025-02-14",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-14"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-17",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "55,332.66",
+          "account": "acc_00",
+          "date": "2025-02-17",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-17"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-18",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "70,125.20",
+          "account": "acc_00",
+          "date": "2025-02-18",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-18"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-18_dup",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "70,125.20",
+          "account": "acc_00",
+          "date": "2025-02-18",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-18_dup"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-19",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "72,499.76",
+          "account": "acc_00",
+          "date": "2025-02-19",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-19"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-20",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "58,790.89",
+          "account": "acc_00",
+          "date": "2025-02-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-20"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-21",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "66,338.45",
+          "account": "acc_00",
+          "date": "2025-02-21",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-21"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-24",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "56,082.24",
+          "account": "acc_00",
+          "date": "2025-02-24",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-24"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-25",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "67,369.34",
+          "account": "acc_00",
+          "date": "2025-02-25",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-25"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-26",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "57,948.90",
+          "account": "acc_00",
+          "date": "2025-02-26",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-26"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-27",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "63,518.44",
+          "account": "acc_00",
+          "date": "2025-02-27",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-27"
+        },
+        {
+          "id": "crd_003_acc_00_2025-02-28",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "76,631.68",
+          "account": "acc_00",
+          "date": "2025-02-28",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-02-28"
+        },
+        {
+          "id": "crd_003_acc_00_2025-03-03",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "50,713.08",
+          "account": "acc_00",
+          "date": "2025-03-04",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-03-03"
+        },
+        {
+          "id": "crd_003_acc_00_2025-03-04",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "55,186.47",
+          "account": "acc_00",
+          "date": "2025-03-04",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_00_2025-03-04"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-08",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "67,074.15",
+          "account": "acc_01",
+          "date": "2025-01-08",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-08"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-09",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "68,150.19",
+          "account": "acc_01",
+          "date": "2025-01-09",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-09"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-10",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "57,574.83",
+          "account": "acc_01",
+          "date": "2025-01-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-10"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-13",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "68,587.17",
+          "account": "acc_01",
+          "date": "2025-01-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-13"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-14",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "84,257.91",
+          "account": "acc_01",
+          "date": "2025-01-14",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-14"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-15",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "66,766.92",
+          "account": "acc_01",
+          "date": "2025-01-15",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-15"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-16",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "76,810.27",
+          "account": "acc_01",
+          "date": "2025-01-16",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-16"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-17",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "55,217.00",
+          "account": "acc_01",
+          "date": "2025-01-17",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-17"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-20",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "54,343.41",
+          "account": "acc_01",
+          "date": "2025-01-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-20"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-21",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "66,456.90",
+          "account": "acc_01",
+          "date": "2025-01-21",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-21"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-22",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "76,055.15",
+          "account": "acc_01",
+          "date": "2025-01-22",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-22"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-23",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "73,948.02",
+          "account": "acc_01",
+          "date": "2025-01-23",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-23"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-24",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "57,950.61",
+          "account": "acc_01",
+          "date": "2025-01-24",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-24"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-27",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,913.33",
+          "account": "acc_01",
+          "date": "2025-01-27",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-27"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-28",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "71,042.27",
+          "account": "acc_01",
+          "date": "2025-01-28",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-28"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-29",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "69,222.00",
+          "account": "acc_01",
+          "date": "2025-01-30",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-29"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-30",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "44,253.04",
+          "account": "acc_01",
+          "date": "2025-01-30",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-30"
+        },
+        {
+          "id": "crd_003_acc_01_2025-01-31",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "77,379.41",
+          "account": "acc_01",
+          "date": "2025-01-31",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-01-31"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-03",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "55,274.37",
+          "account": "acc_01",
+          "date": "2025-02-03",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-03"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-04",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "63,360.52",
+          "account": "acc_01",
+          "date": "2025-02-04",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-04"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-05",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "72,194.38",
+          "account": "acc_01",
+          "date": "2025-02-05",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-05"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-06",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "55,623.25",
+          "account": "acc_01",
+          "date": "2025-02-06",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-06"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-06_dup",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "55,623.25",
+          "account": "acc_01",
+          "date": "2025-02-06",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-06_dup"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-07",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "71,030.23",
+          "account": "acc_01",
+          "date": "2025-02-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-07"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-10",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "49,951.47",
+          "account": "acc_01",
+          "date": "2025-02-10",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-10"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-11",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "48,206.17",
+          "account": "acc_01",
+          "date": "2025-02-11",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-11"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-12",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "51,714.09",
+          "account": "acc_01",
+          "date": "2025-02-12",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-12"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-12_dup",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "51,714.09",
+          "account": "acc_01",
+          "date": "2025-02-12",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-12_dup"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-13",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "55,123.52",
+          "account": "acc_01",
+          "date": "2025-02-13",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-13"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-14",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "62,697.02",
+          "account": "acc_01",
+          "date": "2025-02-14",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-14"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-17",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "70,345.44",
+          "account": "acc_01",
+          "date": "2025-02-17",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-17"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-18",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "61,833.61",
+          "account": "acc_01",
+          "date": "2025-02-18",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-18"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-19",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "86,490.88",
+          "account": "acc_01",
+          "date": "2025-02-19",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-19"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-20",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "57,054.85",
+          "account": "acc_01",
+          "date": "2025-02-20",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-20"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-21",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "52,837.79",
+          "account": "acc_01",
+          "date": "2025-02-21",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-21"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-24",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "71,673.39",
+          "account": "acc_01",
+          "date": "2025-02-24",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-24"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-25",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "52,971.33",
+          "account": "acc_01",
+          "date": "2025-02-25",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-25"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-26",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "60,015.19",
+          "account": "acc_01",
+          "date": "2025-02-26",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-26"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-27",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "62,814.54",
+          "account": "acc_01",
+          "date": "2025-02-27",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-27"
+        },
+        {
+          "id": "crd_003_acc_01_2025-02-28",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "51,308.49",
+          "account": "acc_01",
+          "date": "2025-02-28",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-02-28"
+        },
+        {
+          "id": "crd_003_acc_01_2025-03-03",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "50,390.11",
+          "account": "acc_01",
+          "date": "2025-03-03",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-03-03"
+        },
+        {
+          "id": "crd_003_acc_01_2025-03-04",
+          "cls": "AMBIGUOUS_DECOMPOSITION",
+          "amount": "64,484.87",
+          "account": "acc_01",
+          "date": "2025-03-04",
+          "uniqueness": "AMBIGUOUS",
+          "href": "/credit/crd_003_acc_01_2025-03-04"
+        }
+      ],
+      "html_has": null,
+      "error": null,
+      "text_prefix": "[{\"id\":\"crd_001_acc_00_2025-01-08\",\"cls\":\"MISSING_RECORD\",\"amount\":\"1,129.22\",\"account\":\"acc_00\",\"date\":\"2025-01-08\",\"uniqueness\":\"NONE_FOUND\",\"href\":\"/credit/crd_001_acc_00_2025-0"
+    },
+    {
+      "method": "GET",
+      "path": "/api/desk",
+      "status": 200,
+      "latency_s": 0.0175,
+      "bytes": 649,
+      "content_type": "application/json",
+      "json": {
+        "ok": true,
+        "cleared": 0,
+        "gate_a": 159,
+        "journalable": 123,
+        "mismatch": 36,
+        "human": 89,
+        "posted": 248,
+        "demo_credit": "crd_001_acc_01_2025-01-09",
+        "honesty": "Eval A3 (n=239 scored): residual-zero 159/239, settlement-linked 148/239, search-cleared 0, assignment R 3977/5973 (0.6658). Console overlay (n=248 posted): Gate A 159 is verify_declared.ok, not the exact cell; journalable 123; posted-mismatch 36; human 89. Overlay does not write CLEARED. Synthetic corpus. F56 not run. Test A3: settlement-linked 501/800, budget-exceeded 0, residual-zero 521/800, cleared 0. Threshold 1.000000 is refuse-all. F36 live pairs 245/245 cap-refused.",
+        "writes_cleared": false
+      },
+      "html_has": null,
+      "error": null,
+      "text_prefix": "{\"ok\":true,\"cleared\":0,\"gate_a\":159,\"journalable\":123,\"mismatch\":36,\"human\":89,\"posted\":248,\"demo_credit\":\"crd_001_acc_01_2025-01-09\",\"honesty\":\"Eval A3 (n=239 scored): residual-ze"
+    },
+    {
+      "method": "GET",
+      "path": "/api/credit/crd_001_acc_01_2025-01-09",
+      "status": 200,
+      "latency_s": 0.0122,
+      "bytes": 322,
+      "content_type": "application/json",
+      "json": {
+        "ok": true,
+        "id": "crd_001_acc_01_2025-01-09",
+        "amount": "59,645.39",
+        "account": "acc_01",
+        "date": "2025-01-09",
+        "uniqueness": "AMBIGUOUS",
+        "gate": "GATE_A",
+        "cls": "AMBIGUOUS_DECOMPOSITION",
+        "gate_a_ok": true,
+        "residual_paise": 0,
+        "journalable": false,
+        "posted_mismatch": true,
+        "href": "/credit/crd_001_acc_01_2025-01-09",
+        "writes_cleared": false
+      },
+      "html_has": null,
+      "error": null,
+      "text_prefix": "{\"ok\":true,\"id\":\"crd_001_acc_01_2025-01-09\",\"amount\":\"59,645.39\",\"account\":\"acc_01\",\"date\":\"2025-01-09\",\"uniqueness\":\"AMBIGUOUS\",\"gate\":\"GATE_A\",\"cls\":\"AMBIGUOUS_DECOMPOSITION\",\"ga"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ask?question=Give+me+a+summary+of+this+batch",
+      "status": 200,
+      "latency_s": 0.82,
+      "bytes": 3176,
+      "content_type": "application/json",
+      "json": {
+        "ok": true,
+        "intent": "BATCH_SUMMARY",
+        "legacy_intent": "UNRECOGNISED",
+        "answer": "BATCH SUMMARY\n239 transactions processed on the official dev split.\n159/239 have residual-zero explanations.\n148/239 are settlement/member-linked.\n236 remain ambiguous under current uniqueness rules.\n3 have no valid explanation.\n0 exceeded the search budget.\n0 were auto-cleared.\n0 false clears were recorded.\nSearch coverage 239/239. Unreconciled 1,44,25,758.19. The system deliberately routed ambiguous cases to review rather than guessing. Official test: residual-zero 521/800, ambiguous 779, auto-clear 0, false clears 0, search coverage 800/800. Exact is not auto-clear. Overlay does not write CLEARED. Search auto-clear 0.",
+        "citations": [
+          "dev",
+          "batch"
+        ],
+        "doc_id": "batch",
+        "doc_title": "Track 04 batch",
+        "source": "artifacts/dev/headline.md",
+        "fit_score": 27,
+        "n_docs": 22,
+        "n_labels": 28,
+        "n_train": 60,
+        "n_holdout": 14,
+        "n_holdout_ok": 13,
+        "n_credits": 248,
+        "holdout": "13/14",
+        "writes_cleared": false,
+        "trained": true,
+        "groq": true,
+        "groq_used": false,
+        "groq_error": "groq http 403",
+        "groq_model": "openai/gpt-oss-20b",
+        "provider": "fallback",
+        "mode": "fallback",
+        "llm_used": false,
+        "evidence": {
+          "stats": {
+            "split": "dev",
+            "scored": 239,
+            "residual_zero": "159/239",
+            "settlement_linked": "148/239",
+            "verified_linked": "142/239",
+            "unique": 0,
+            "ambiguous": 236,
+            "none_found": 3,
+            "budget_exceeded": 0,
+            "auto_clear": 0,
+            "false_clears": 0,
+            "search_coverage": "239/239",
+            "flagged": 239,
+            "unreconciled_display": "1,44,25,758.19",
+            "throughput_per_1000s": "1549481",
+            "wall_ns": "160053542",
+            "wall_clock_ms": "10066",
+            "overlay_gate_a": 159,
+            "overlay_residual_zero": 159,
+            "writes_cleared": false,
+            "test": {
+              "scored": 800,
+              "residual_zero": "521/800",
+              "settlement_linked": "501/800",
+              "ambiguous": 779,
+              "none_found": 21,
+              "auto_clear": 0,
+              "false_clears": 0,
+              "search_coverage": "800/800",
+              "budget_exceeded": 0,
+              "wall_clock_ms": "68299"
+            },
+            "evidence": [
+              {
+                "evidence_id": "batch.residual_zero",
+                "source_type": "t04.md",
+                "source_record_id": "dev",
+                "field": "residual-zero",
+                "value": "159/239"
+              },
+              {
+                "evidence_id": "batch.ambiguous",
+                "source_type": "t04.md",
+                "source_record_id": "dev",
+                "field": "ambiguous",
+                "value": 236
+              },
+              {
+                "evidence_id": "batch.auto_clear",
+                "source_type": "t04.md",
+                "source_record_id": "dev",
+                "field": "auto-clear",
+                "value": 0
+              },
+              {
+                "evidence_id": "batch.false_clears",
+                "source_type": "t04.md",
+                "source_record_id": "dev",
+                "field": "false_clears",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "evidence_refs": [
+          {
+            "evidence_id": "batch.residual_zero",
+            "source_type": "t04.md",
+            "source_record_id": "dev",
+            "field": "residual-zero",
+            "value": "159/239"
+          },
+          {
+            "evidence_id": "batch.ambiguous",
+            "source_type": "t04.md",
+            "source_record_id": "dev",
+            "field": "ambiguous",
+            "value": 236
+          },
+          {
+            "evidence_id": "batch.auto_clear",
+            "source_type": "t04.md",
+            "source_record_id": "dev",
+            "field": "auto-clear",
+            "value": 0
+          },
+          {
+            "evidence_id": "batch.false_clears",
+            "source_type": "t04.md",
+            "source_record_id": "dev",
+            "field": "false_clears",
+            "value": 0
+          }
+        ],
+        "checks": [],
+        "decision": "NO_AUTO_CLEAR",
+        "recommended_action": "Keep uniqueness refuse-all. Do not treat residual-zero as CLEARED.",
+        "tools_called": [
+          "get_batch_summary"
+        ],
+        "investigation_steps": [
+          {
+            "n": 1,
+            "label": "get_batch_summary",
+            "tool": "get_batch_summary",
+            "ok": true,
+            "source": "controller"
+          }
+        ],
+        "latency_ns": 436528083,
+        "usage": {
+          "prompt_tokens": 0,
+          "completion_tokens": 0
+        },
+        "found": true,
+        "credit_id": ""
+      },
+      "html_has": null,
+      "error": null,
+      "text_prefix": "{\"ok\":true,\"intent\":\"BATCH_SUMMARY\",\"legacy_intent\":\"UNRECOGNISED\",\"answer\":\"BATCH SUMMARY\\n239 transactions processed on the official dev split.\\n159/239 have residual-zero explan"
+    },
+    {
+      "method": "POST",
+      "path": "/api/ask",
+      "status": 200,
+      "latency_s": 0.8477,
+      "bytes": 3176,
+      "content_type": "application/json",
+      "json": {
+        "ok": true,
+        "intent": "BATCH_SUMMARY",
+        "legacy_intent": "UNRECOGNISED",
+        "answer": "BATCH SUMMARY\n239 transactions processed on the official dev split.\n159/239 have residual-zero explanations.\n148/239 are settlement/member-linked.\n236 remain ambiguous under current uniqueness rules.\n3 have no valid explanation.\n0 exceeded the search budget.\n0 were auto-cleared.\n0 false clears were recorded.\nSearch coverage 239/239. Unreconciled 1,44,25,758.19. The system deliberately routed ambiguous cases to review rather than guessing. Official test: residual-zero 521/800, ambiguous 779, auto-clear 0, false clears 0, search coverage 800/800. Exact is not auto-clear. Overlay does not write CLEARED. Search auto-clear 0.",
+        "citations": [
+          "dev",
+          "batch"
+        ],
+        "doc_id": "batch",
+        "doc_title": "Track 04 batch",
+        "source": "artifacts/dev/headline.md",
+        "fit_score": 27,
+        "n_docs": 22,
+        "n_labels": 28,
+        "n_train": 60,
+        "n_holdout": 14,
+        "n_holdout_ok": 13,
+        "n_credits": 248,
+        "holdout": "13/14",
+        "writes_cleared": false,
+        "trained": true,
+        "groq": true,
+        "groq_used": false,
+        "groq_error": "groq http 403",
+        "groq_model": "openai/gpt-oss-20b",
+        "provider": "fallback",
+        "mode": "fallback",
+        "llm_used": false,
+        "evidence": {
+          "stats": {
+            "split": "dev",
+            "scored": 239,
+            "residual_zero": "159/239",
+            "settlement_linked": "148/239",
+            "verified_linked": "142/239",
+            "unique": 0,
+            "ambiguous": 236,
+            "none_found": 3,
+            "budget_exceeded": 0,
+            "auto_clear": 0,
+            "false_clears": 0,
+            "search_coverage": "239/239",
+            "flagged": 239,
+            "unreconciled_display": "1,44,25,758.19",
+            "throughput_per_1000s": "1549481",
+            "wall_ns": "160053542",
+            "wall_clock_ms": "10066",
+            "overlay_gate_a": 159,
+            "overlay_residual_zero": 159,
+            "writes_cleared": false,
+            "test": {
+              "scored": 800,
+              "residual_zero": "521/800",
+              "settlement_linked": "501/800",
+              "ambiguous": 779,
+              "none_found": 21,
+              "auto_clear": 0,
+              "false_clears": 0,
+              "search_coverage": "800/800",
+              "budget_exceeded": 0,
+              "wall_clock_ms": "68299"
+            },
+            "evidence": [
+              {
+                "evidence_id": "batch.residual_zero",
+                "source_type": "t04.md",
+                "source_record_id": "dev",
+                "field": "residual-zero",
+                "value": "159/239"
+              },
+              {
+                "evidence_id": "batch.ambiguous",
+                "source_type": "t04.md",
+                "source_record_id": "dev",
+                "field": "ambiguous",
+                "value": 236
+              },
+              {
+                "evidence_id": "batch.auto_clear",
+                "source_type": "t04.md",
+                "source_record_id": "dev",
+                "field": "auto-clear",
+                "value": 0
+              },
+              {
+                "evidence_id": "batch.false_clears",
+                "source_type": "t04.md",
+                "source_record_id": "dev",
+                "field": "false_clears",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "evidence_refs": [
+          {
+            "evidence_id": "batch.residual_zero",
+            "source_type": "t04.md",
+            "source_record_id": "dev",
+            "field": "residual-zero",
+            "value": "159/239"
+          },
+          {
+            "evidence_id": "batch.ambiguous",
+            "source_type": "t04.md",
+            "source_record_id": "dev",
+            "field": "ambiguous",
+            "value": 236
+          },
+          {
+            "evidence_id": "batch.auto_clear",
+            "source_type": "t04.md",
+            "source_record_id": "dev",
+            "field": "auto-clear",
+            "value": 0
+          },
+          {
+            "evidence_id": "batch.false_clears",
+            "source_type": "t04.md",
+            "source_record_id": "dev",
+            "field": "false_clears",
+            "value": 0
+          }
+        ],
+        "checks": [],
+        "decision": "NO_AUTO_CLEAR",
+        "recommended_action": "Keep uniqueness refuse-all. Do not treat residual-zero as CLEARED.",
+        "tools_called": [
+          "get_batch_summary"
+        ],
+        "investigation_steps": [
+          {
+            "n": 1,
+            "label": "get_batch_summary",
+            "tool": "get_batch_summary",
+            "ok": true,
+            "source": "controller"
+          }
+        ],
+        "latency_ns": 299162166,
+        "usage": {
+          "prompt_tokens": 0,
+          "completion_tokens": 0
+        },
+        "found": true,
+        "credit_id": ""
+      },
+      "html_has": null,
+      "error": null,
+      "text_prefix": "{\"ok\":true,\"intent\":\"BATCH_SUMMARY\",\"legacy_intent\":\"UNRECOGNISED\",\"answer\":\"BATCH SUMMARY\\n239 transactions processed on the official dev split.\\n159/239 have residual-zero explan"
+    },
+    {
+      "method": "POST",
+      "path": "/api/ask",
+      "status": 200,
+      "latency_s": 0.5685,
+      "bytes": 5433,
+      "content_type": "application/json",
+      "json": {
+        "ok": true,
+        "intent": "REFUSE_CLEAR",
+        "legacy_intent": "UNRECOGNISED",
+        "answer": "Credit crd_001_acc_01_2025-01-09, itm_001_000017, itm_001_000018, itm_001_000019: disposition FLAGGED, uniqueness AMBIGUOUS, computed total 59,645.39, residual 0.00. Overlay: declared stack re-derives (Gate A). Search uniqueness stays AMBIGUOUS. Overlay does not write CLEARED.",
+        "citations": [
+          "crd_001_acc_01_2025-01-09",
+          "itm_001_000017",
+          "itm_001_000018",
+          "itm_001_000019",
+          "dev",
+          "a3_cleared"
+        ],
+        "doc_id": "a3_cleared",
+        "doc_title": "search auto-clear",
+        "source": "artifacts/dev/headline.md",
+        "fit_score": 17,
+        "n_docs": 22,
+        "n_labels": 28,
+        "n_train": 60,
+        "n_holdout": 14,
+        "n_holdout_ok": 13,
+        "n_credits": 248,
+        "holdout": "13/14",
+        "writes_cleared": false,
+        "trained": true,
+        "groq": true,
+        "groq_used": false,
+        "groq_error": "groq http 403",
+        "groq_model": "openai/gpt-oss-20b",
+        "provider": "fitted",
+        "mode": "fallback",
+        "llm_used": false,
+        "evidence": {
+          "stats": {
+            "split": "dev",
+            "scored": 239,
+            "residual_zero": "159/239",
+            "settlement_linked": "148/239",
+            "verified_linked": "142/239",
+            "unique": 0,
+            "ambiguous": 236,
+            "none_found": 3,
+            "budget_exceeded": 0,
+            "auto_clear": 0,
+            "false_clears": 0,
+            "search_coverage": "239/239",
+            "flagged": 239,
+            "unreconciled_display": "1,44,25,758.19",
+            "throughput_per_1000s": "1549481",
+            "wall_ns": "160053542",
+            "wall_clock_ms": "10066",
+            "overlay_gate_a": 159,
+            "overlay_residual_zero": 159,
+            "writes_cleared": false,
+            "test": {
+              "scored": 800,
+              "residual_zero": "521/800",
+              "settlement_linked": "501/800",
+              "ambiguous": 779,
+              "none_found": 21,
+              "auto_clear": 0,
+              "false_clears": 0,
+              "search_coverage": "800/800",
+              "budget_exceeded": 0,
+              "wall_clock_ms": "68299"
+            },
+            "evidence": [
+              {
+                "evidence_id": "batch.residual_zero",
+                "source_type": "t04.md",
+                "source_record_id": "dev",
+                "field": "residual-zero",
+                "value": "159/239"
+              },
+              {
+                "evidence_id": "batch.ambiguous",
+                "source_type": "t04.md",
+                "source_record_id": "dev",
+                "field": "ambiguous",
+                "value": 236
+              },
+              {
+                "evidence_id": "batch.auto_clear",
+                "source_type": "t04.md",
+                "source_record_id": "dev",
+                "field": "auto-clear",
+                "value": 0
+              },
+              {
+                "evidence_id": "batch.false_clears",
+                "source_type": "t04.md",
+                "source_record_id": "dev",
+                "field": "false_clears",
+                "value": 0
+              }
+            ]
+          },
+          "reconciliation": {
+            "found": true,
+            "transaction_id": "crd_001_acc_01_2025-01-09",
+            "bank_amount_paise": 5964539,
+            "bank_amount_display": "59,645.39",
+            "matched_record_ids": [
+              "itm_001_000017",
+              "itm_001_000018",
+              "itm_001_000019",
+              "itm_001_000020",
+              "itm_001_000021",
+              "itm_001_000022",
+              "itm_001_000023",
+              "itm_001_000024",
+              "itm_001_000025",
+              "itm_001_000026",
+              "itm_001_000027",
+              "itm_001_000028",
+              "itm_001_000029",
+              "itm_001_000030",
+              "itm_001_000031",
+              "itm_001_001124",
+              "itm_001_001125",
+              "itm_001_001545",
+              "itm_001_001546",
+              "itm_001_001547",
+              "itm_001_001548",
+              "itm_001_001549",
+              "itm_001_001550",
+              "itm_001_001551",
+              "itm_001_001552",
+              "itm_001_001553",
+              "itm_001_001554"
+            ],
+            "matched_count": 27,
+            "residual_paise": 0,
+            "residual_display": "0.00",
+            "solution_count": 2,
+            "uniqueness": "AMBIGUOUS",
+            "disposition": "FLAGGED",
+            "status": "REVIEW_REQUIRED",
+            "verification_method": "verify_declared",
+            "gate_a_ok": true,
+            "auto_cleared": false,
+            "writes_cleared": false,
+            "recovery": "GENUINELY_UNMATCHED",
+            "exception_class": "AMBIGUOUS_DECOMPOSITION",
+            "evidence": [
+              {
+                "evidence_id": "recon.residual",
+                "source_type": "overlay",
+                "source_record_id": "crd_001_acc_01_2025-01-09",
+                "field": "residual_paise",
+                "value": 0
+              },
+              {
+                "evidence_id": "recon.uniqueness",
+                "source_type": "audit",
+                "source_record_id": "crd_001_acc_01_2025-01-09",
+                "field": "uniqueness",
+                "value": "AMBIGUOUS"
+              },
+              {
+                "evidence_id": "recon.disposition",
+                "source_type": "audit",
+                "source_record_id": "crd_001_acc_01_2025-01-09",
+                "field": "disposition",
+                "value": "FLAGGED"
+              },
+              {
+                "evidence_id": "recon.solutions",
+                "source_type": "search",
+                "source_record_id": "crd_001_acc_01_2025-01-09",
+                "field": "solution_count",
+                "value": 2
+              },
+              {
+                "evidence_id": "recon.gate_a",
+                "source_type": "overlay",
+                "source_record_id": "crd_001_acc_01_2025-01-09",
+                "field": "ok",
+                "value": true
+              }
+            ]
+          }
+        },
+        "evidence_refs": [
+          {
+            "evidence_id": "batch.residual_zero",
+            "source_type": "t04.md",
+            "source_record_id": "dev",
+            "field": "residual-zero",
+            "value": "159/239"
+          },
+          {
+            "evidence_id": "batch.ambiguous",
+            "source_type": "t04.md",
+            "source_record_id": "dev",
+            "field": "ambiguous",
+            "value": 236
+          },
+          {
+            "evidence_id": "batch.auto_clear",
+            "source_type": "t04.md",
+            "source_record_id": "dev",
+            "field": "auto-clear",
+            "value": 0
+          },
+          {
+            "evidence_id": "batch.false_clears",
+            "source_type": "t04.md",
+            "source_record_id": "dev",
+            "field": "false_clears",
+            "value": 0
+          },
+          {
+            "evidence_id": "recon.residual",
+            "source_type": "overlay",
+            "source_record_id": "crd_001_acc_01_2025-01-09",
+            "field": "residual_paise",
+            "value": 0
+          },
+          {
+            "evidence_id": "recon.uniqueness",
+            "source_type": "audit",
+            "source_record_id": "crd_001_acc_01_2025-01-09",
+            "field": "uniqueness",
+            "value": "AMBIGUOUS"
+          },
+          {
+            "evidence_id": "recon.disposition",
+            "source_type": "audit",
+            "source_record_id": "crd_001_acc_01_2025-01-09",
+            "field": "disposition",
+            "value": "FLAGGED"
+          },
+          {
+            "evidence_id": "recon.solutions",
+            "source_type": "search",
+            "source_record_id": "crd_001_acc_01_2025-01-09",
+            "field": "solution_count",
+            "value": 2
+          },
+          {
+            "evidence_id": "recon.gate_a",
+            "source_type": "overlay",
+            "source_record_id": "crd_001_acc_01_2025-01-09",
+            "field": "ok",
+            "value": true
+          }
+        ],
+        "checks": [],
+        "decision": "REFUSED",
+        "recommended_action": "Human review only. The AI finance controller cannot clear.",
+        "tools_called": [
+          "get_reconciliation_statistics",
+          "get_reconciliation"
+        ],
+        "investigation_steps": [
+          {
+            "n": 1,
+            "label": "get_reconciliation_statistics",
+            "tool": "get_reconciliation_statistics",
+            "ok": true,
+            "source": "controller"
+          },
+          {
+            "n": 2,
+            "label": "get_reconciliation",
+            "tool": "get_reconciliation",
+            "ok": true,
+            "source": "controller"
+          }
+        ],
+        "latency_ns": 459931666,
+        "usage": {
+          "prompt_tokens": 0,
+          "completion_tokens": 0
+        },
+        "found": true,
+        "credit_id": "crd_001_acc_01_2025-01-09"
+      },
+      "html_has": null,
+      "error": null,
+      "text_prefix": "{\"ok\":true,\"intent\":\"REFUSE_CLEAR\",\"legacy_intent\":\"UNRECOGNISED\",\"answer\":\"Credit crd_001_acc_01_2025-01-09, itm_001_000017, itm_001_000018, itm_001_000019: disposition FLAGGED, u"
+    },
+    {
+      "method": "GET",
+      "path": "/api/finance/evidence?transaction_id=crd_001_acc_01_2025-01-09",
+      "status": 200,
+      "latency_s": 0.0958,
+      "bytes": 78,
+      "content_type": "application/json",
+      "json": {
+        "found": false,
+        "transaction_id": "",
+        "error": "not_found",
+        "writes_cleared": false
+      },
+      "html_has": null,
+      "error": null,
+      "text_prefix": "{\"found\":false,\"transaction_id\":\"\",\"error\":\"not_found\",\"writes_cleared\":false}"
+    },
+    {
+      "method": "POST",
+      "path": "/api/finance/tool",
+      "status": 200,
+      "latency_s": 0.027,
+      "bytes": 68,
+      "content_type": "application/json",
+      "json": {
+        "ok": false,
+        "error": "unknown_tool",
+        "tool": "",
+        "writes_cleared": false
+      },
+      "html_has": null,
+      "error": null,
+      "text_prefix": "{\"ok\":false,\"error\":\"unknown_tool\",\"tool\":\"\",\"writes_cleared\":false}"
+    },
+    {
+      "method": "POST",
+      "path": "/api/finance/tool",
+      "status": 200,
+      "latency_s": 0.0051,
+      "bytes": 68,
+      "content_type": "application/json",
+      "json": {
+        "ok": false,
+        "error": "unknown_tool",
+        "tool": "",
+        "writes_cleared": false
+      },
+      "html_has": null,
+      "error": null,
+      "text_prefix": "{\"ok\":false,\"error\":\"unknown_tool\",\"tool\":\"\",\"writes_cleared\":false}"
+    },
+    {
+      "method": "POST",
+      "path": "/api/finance/tool",
+      "status": 200,
+      "latency_s": 0.0034,
+      "bytes": 68,
+      "content_type": "application/json",
+      "json": {
+        "ok": false,
+        "error": "unknown_tool",
+        "tool": "",
+        "writes_cleared": false
+      },
+      "html_has": null,
+      "error": null,
+      "text_prefix": "{\"ok\":false,\"error\":\"unknown_tool\",\"tool\":\"\",\"writes_cleared\":false}"
+    },
+    {
+      "method": "POST",
+      "path": "/api/finance/tool",
+      "status": 200,
+      "latency_s": 0.0029,
+      "bytes": 68,
+      "content_type": "application/json",
+      "json": {
+        "ok": false,
+        "error": "unknown_tool",
+        "tool": "",
+        "writes_cleared": false
+      },
+      "html_has": null,
+      "error": null,
+      "text_prefix": "{\"ok\":false,\"error\":\"unknown_tool\",\"tool\":\"\",\"writes_cleared\":false}"
+    },
+    {
+      "method": "POST",
+      "path": "/api/ask",
+      "status": 200,
+      "latency_s": 0.0087,
+      "bytes": 689,
+      "content_type": "application/json",
+      "json": {
+        "ok": true,
+        "intent": "",
+        "legacy_intent": "",
+        "answer": "I cannot answer that from the fitted corpus or the reconciled ledger.",
+        "citations": [],
+        "doc_id": "",
+        "doc_title": "",
+        "source": "",
+        "fit_score": 0,
+        "n_docs": 22,
+        "n_labels": 28,
+        "n_train": 60,
+        "n_holdout": 14,
+        "n_holdout_ok": 13,
+        "n_credits": 248,
+        "holdout": "13/14",
+        "writes_cleared": false,
+        "trained": true,
+        "groq": true,
+        "groq_used": false,
+        "groq_error": "",
+        "groq_model": "openai/gpt-oss-20b",
+        "provider": "fitted",
+        "mode": "fallback",
+        "llm_used": false,
+        "evidence": {},
+        "evidence_refs": [],
+        "checks": [],
+        "decision": "",
+        "recommended_action": "",
+        "tools_called": [],
+        "investigation_steps": [],
+        "latency_ns": 0,
+        "usage": {
+          "prompt_tokens": 0,
+          "completion_tokens": 0
+        },
+        "found": true,
+        "credit_id": ""
+      },
+      "html_has": null,
+      "error": null,
+      "text_prefix": "{\"ok\":true,\"intent\":\"\",\"legacy_intent\":\"\",\"answer\":\"I cannot answer that from the fitted corpus or the reconciled ledger.\",\"citations\":[],\"doc_id\":\"\",\"doc_title\":\"\",\"source\":\"\",\"fi"
+    },
+    {
+      "method": "POST",
+      "path": "/api/ask",
+      "status": 400,
+      "error": "malformed json",
+      "latency_s": 0.0052
+    },
+    {
+      "method": "GET",
+      "path": "/credit/../../../etc/passwd",
+      "status": 404,
+      "latency_s": 0.0095,
+      "bytes": 22,
+      "error": "http 404",
+      "text_prefix": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "method": "GET",
+      "path": "/credit/crd_001_acc_01_2025-01-09%00",
+      "status": 200,
+      "latency_s": 0.1115,
+      "bytes": 8581,
+      "content_type": "text/html; charset=utf-8",
+      "json": null,
+      "html_has": {
+        "has_html": true,
+        "has_residual": true,
+        "has_ambiguous": true,
+        "has_ask": true,
+        "has_ai": true,
+        "has_credit": true,
+        "has_why": true
+      },
+      "error": null,
+      "text_prefix": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>crd_001_acc_01_2025-01-09\u0000 \u00b7 Residu"
+    }
+  ],
+  "browser_tested": false,
+  "dom_tested": false,
+  "route_tested": true,
+  "note": "HTTP 200 does not prove visual correctness."
+}

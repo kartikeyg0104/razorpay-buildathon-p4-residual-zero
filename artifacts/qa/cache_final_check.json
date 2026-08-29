@@ -1,0 +1,29 @@
+{
+  "isolated_cache_file": "artifacts/qa/_probe_extract_cache.jsonl",
+  "request_A_first_cache_hit": false,
+  "request_A_repeat_cache_hit": true,
+  "repeat_identical_fields": true,
+  "key_changes": {
+    "change_source_text": true,
+    "change_dataset_transaction": true,
+    "change_prompt_version": true,
+    "change_model_method": true
+  },
+  "question_not_part_of_key": true,
+  "all_variants_distinct_keys": true,
+  "changed_source_text_is_miss": true,
+  "cached_row_count": 2,
+  "cached_top_level_keys": [
+    "fields",
+    "key",
+    "prompt_version"
+  ],
+  "cached_payload_financial_leak": [],
+  "cached_payload_is_candidate_only": true,
+  "result_candidate_only": true,
+  "result_writes_cleared": false,
+  "engine_drift_after_cache_write": {},
+  "engine_unaffected_by_cache": true,
+  "failures": [],
+  "pass": true
+}

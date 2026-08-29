@@ -1,0 +1,70 @@
+{
+  "t04_dev": {
+    "n_scored": "239",
+    "residual_zero": "159/239",
+    "identified": "148/239",
+    "verified_linked": "142/239",
+    "unique": "0",
+    "ambiguous": "236",
+    "none_found": "3",
+    "auto_clear": "0",
+    "false_clears": "0",
+    "search_coverage": "239/239",
+    "budget_exceeded_search": "0",
+    "flagged": "239"
+  },
+  "t04_test": {
+    "n_scored": "800",
+    "residual_zero": "521/800",
+    "identified": "501/800",
+    "verified_linked": "464/800",
+    "unique": "0",
+    "ambiguous": "779",
+    "none_found": "21",
+    "auto_clear": "0",
+    "false_clears": "0",
+    "search_coverage": "800/800",
+    "budget_exceeded_search": "0",
+    "flagged": "800"
+  },
+  "snapshot_residual_zero": "159/239",
+  "stats_scored": 239,
+  "mixed_ids_in_batch_stats": false,
+  "dashboard_hardcoded_literals": [],
+  "dashboard_hardcoded_ok": true,
+  "api_t04_test_residual_zero": "521/800",
+  "api_t04_writes_cleared": false,
+  "pass": true,
+  "note": "Dashboard KPIs use t04.md + overlay counts. Mixed desk crd_mix_* is excluded from official cards.",
+  "independent_probe": {
+    "api_t04_matches_committed_cards": true,
+    "api_t04_drift": [],
+    "metric_endpoint_marker_scan": {
+      "/api/t04": {
+        "status": 200,
+        "markers": []
+      },
+      "/api/ops": {
+        "status": 200,
+        "markers": []
+      },
+      "/api/credits": {
+        "status": 200,
+        "markers": []
+      },
+      "/api/health": {
+        "status": 200,
+        "markers": []
+      }
+    },
+    "stats_contains_mixed_desk_ids": false,
+    "stats_residual_zero": "159/239",
+    "stats_writes_cleared": false,
+    "mixed_desk_declares_non_official": true,
+    "audit_sink_test_guarded": true,
+    "extract_cache_test_guarded": true,
+    "failures": [],
+    "pass": true,
+    "note": "Official cards are parsed from committed artifacts/{split}/t04.md. The mixed/demo desk (crd_mix_*) is a constructed teaching pool excluded from official statistics; it appears in HTML only as navigation. The AI audit log and extract cache are suppressed under pytest unless explicitly opted in."
+  }
+}

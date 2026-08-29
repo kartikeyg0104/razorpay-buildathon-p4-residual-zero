@@ -1,0 +1,74 @@
+{
+  "as_of": "2026-09-01",
+  "projects": [
+    "Residual Zero",
+    "europeanplaice/subset_sum",
+    "sebastienrousseau/reconcile-mcp",
+    "opensyndicate/reconcile",
+    "razorpay/razorpay-mcp-server",
+    "juspay/hyperswitch"
+  ],
+  "disclaimer": "Not a leaderboard. Other-project cells are documented public capability, not a Track 04 rerun.",
+  "rows": [
+    {
+      "feature": "N:M reconciliation",
+      "Residual Zero": "signed subset-sum + declared stacks",
+      "project_1": "dpss many-to-many DP",
+      "project_2": "ISO 1:N / N:1",
+      "project_3": "mostly 1:1 then leftovers",
+      "project_4": "settlement fetch",
+      "project_5": "PSP to bank N:1",
+      "engineering_value": "high",
+      "safe_to_adopt": "already present",
+      "implementation_priority": "none"
+    },
+    {
+      "feature": "uniqueness",
+      "Residual Zero": "threshold 1.000000",
+      "project_1": "not Track 04 uniqueness",
+      "project_2": "scores",
+      "project_3": "optional LLM propose_match",
+      "project_4": "n/a",
+      "project_5": "n/a",
+      "engineering_value": "critical",
+      "safe_to_adopt": false,
+      "implementation_priority": "do_not_weaken"
+    },
+    {
+      "feature": "proof explorer / candidate equations",
+      "Residual Zero": "Proof Explorer A/B, choose_one false",
+      "project_1": "multiple subsets",
+      "project_2": "explain_match",
+      "project_3": "leftover propose",
+      "project_4": "n/a",
+      "project_5": "n/a",
+      "engineering_value": "high",
+      "safe_to_adopt": true,
+      "implementation_priority": "P0"
+    },
+    {
+      "feature": "source comparison",
+      "Residual Zero": "BANK x SETTLEMENT x LEDGER matrix",
+      "project_1": "n/a",
+      "project_2": "expected vs observed",
+      "project_3": "settlement vs ledger",
+      "project_4": "settlement payloads",
+      "project_5": "multi-leg ids",
+      "engineering_value": "high",
+      "safe_to_adopt": true,
+      "implementation_priority": "P0"
+    },
+    {
+      "feature": "LLM as financial truth",
+      "Residual Zero": "forbidden",
+      "project_1": "solver stays deterministic",
+      "project_2": "deterministic engine + scores",
+      "project_3": "optional propose_match",
+      "project_4": "n/a",
+      "project_5": "n/a",
+      "engineering_value": "critical",
+      "safe_to_adopt": false,
+      "implementation_priority": "rejected"
+    }
+  ]
+}

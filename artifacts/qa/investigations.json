@@ -1,0 +1,180 @@
+{
+  "cases": {
+    "residual_zero": {
+      "transaction_id": "crd_001_acc_01_2025-01-09",
+      "found": true,
+      "status": "REVIEW_REQUIRED",
+      "uniqueness": "AMBIGUOUS",
+      "residual_paise": 0,
+      "residual_display": "0.00",
+      "solution_count": 2,
+      "matched_count": 27,
+      "auto_cleared": false,
+      "writes_cleared": false,
+      "investigation_found": true,
+      "bank_minus_settlement": "-103.28",
+      "missing": null,
+      "equations": 2,
+      "tax_found": true
+    },
+    "ambiguous": {
+      "transaction_id": "crd_001_acc_01_2025-01-09",
+      "found": true,
+      "status": "REVIEW_REQUIRED",
+      "uniqueness": "AMBIGUOUS",
+      "residual_paise": 0,
+      "residual_display": "0.00",
+      "solution_count": 2,
+      "matched_count": 27,
+      "auto_cleared": false,
+      "writes_cleared": false,
+      "investigation_found": true,
+      "bank_minus_settlement": "-103.28",
+      "missing": null,
+      "equations": 2,
+      "tax_found": true
+    },
+    "none_found_dev": {
+      "transaction_id": "crd_001_acc_00_2025-01-08",
+      "found": true,
+      "status": "UNMATCHED",
+      "uniqueness": "NONE_FOUND",
+      "residual_paise": 0,
+      "residual_display": "0.00",
+      "solution_count": 0,
+      "matched_count": 6,
+      "auto_cleared": false,
+      "writes_cleared": false,
+      "investigation_found": true,
+      "bank_minus_settlement": "0.00",
+      "missing": null,
+      "equations": 2,
+      "tax_found": true
+    },
+    "none_found_test_open": {
+      "transaction_id": "crd_101_acc_00_2025-01-08",
+      "found": false,
+      "status": null,
+      "uniqueness": null,
+      "residual_paise": null,
+      "residual_display": null,
+      "solution_count": null,
+      "matched_count": null,
+      "auto_cleared": null,
+      "writes_cleared": false,
+      "investigation_found": false,
+      "bank_minus_settlement": null,
+      "missing": null,
+      "equations": 0,
+      "tax_found": false
+    },
+    "missing_record": {
+      "transaction_id": "crd_003_acc_01_2025-01-30",
+      "found": true,
+      "status": "REVIEW_REQUIRED",
+      "uniqueness": "AMBIGUOUS",
+      "residual_paise": 4425304,
+      "residual_display": "44,253.04",
+      "solution_count": 2,
+      "matched_count": 0,
+      "auto_cleared": false,
+      "writes_cleared": false,
+      "investigation_found": true,
+      "bank_minus_settlement": "44,253.04",
+      "missing": null,
+      "equations": 2,
+      "tax_found": true
+    },
+    "settlement_linked": {
+      "transaction_id": "crd_001_acc_01_2025-01-09",
+      "found": true,
+      "status": "REVIEW_REQUIRED",
+      "uniqueness": "AMBIGUOUS",
+      "residual_paise": 0,
+      "residual_display": "0.00",
+      "solution_count": 2,
+      "matched_count": 27,
+      "auto_cleared": false,
+      "writes_cleared": false,
+      "investigation_found": true,
+      "bank_minus_settlement": "-103.28",
+      "missing": null,
+      "equations": 2,
+      "tax_found": true
+    }
+  },
+  "explorer": {
+    "UNRESOLVED": {
+      "n": 0,
+      "writes_cleared": false,
+      "sample": []
+    },
+    "AMBIGUOUS": {
+      "n": 0,
+      "writes_cleared": false,
+      "sample": []
+    },
+    "HIGH_VALUE_AMBIGUOUS": {
+      "n": 5,
+      "writes_cleared": false,
+      "sample": [
+        "crd_001_acc_01_2025-01-08",
+        "crd_002_acc_01_2025-01-08",
+        "crd_003_acc_01_2025-01-08"
+      ]
+    },
+    "MISSING_SETTLEMENT": {
+      "n": 5,
+      "writes_cleared": false,
+      "sample": [
+        "crd_002_acc_01_2025-01-13_dup",
+        "crd_001_acc_01_2025-01-21_dup",
+        "crd_001_acc_01_2025-01-30"
+      ]
+    },
+    "MISSING_LEDGER": {
+      "n": 5,
+      "writes_cleared": false,
+      "sample": [
+        "crd_001_acc_01_2025-01-09",
+        "crd_002_acc_01_2025-01-10",
+        "crd_001_acc_00_2025-01-21"
+      ]
+    },
+    "TAX_MISMATCH": {
+      "n": 0,
+      "writes_cleared": false,
+      "sample": []
+    },
+    "REFUND_MISMATCH": {
+      "n": 2,
+      "writes_cleared": false,
+      "sample": [
+        "crd_001_acc_00_2025-02-25",
+        "crd_003_acc_00_2025-02-26"
+      ]
+    },
+    "LEDGER_SETTLEMENT_DISAGREE": {
+      "n": 5,
+      "writes_cleared": false,
+      "sample": [
+        "crd_002_acc_01_2025-01-09",
+        "crd_001_acc_01_2025-01-16",
+        "crd_003_acc_01_2025-01-16"
+      ]
+    },
+    "POTENTIALLY_RECOVERABLE": {
+      "n": 0,
+      "writes_cleared": false,
+      "sample": []
+    },
+    "HIGH_VALUE_UNRESOLVED": {
+      "n": 0,
+      "writes_cleared": false,
+      "sample": []
+    }
+  },
+  "root_cause_prefix": "239 scored credits. Residual-zero 159/239. Search ambiguous 236. None found 3. 72 have no settlement rows. Dominant blockers: missing settlement / date-window population 56, missing ledger ids 11, search-path ambiguity 5, corrupted dual-source 2. Most unresolved transactions are not caused by search",
+  "writes_cleared": false,
+  "ai_selected_winner": false
+}

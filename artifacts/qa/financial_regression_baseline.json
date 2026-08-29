@@ -1,0 +1,2487 @@
+{
+  "n": 248,
+  "cleared": 0,
+  "rows": [
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-08",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "NONE_FOUND",
+      "verification": "FLAGGED",
+      "uniqueness": "NONE_FOUND"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-08",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-08",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "NONE_FOUND",
+      "verification": "FLAGGED",
+      "uniqueness": "NONE_FOUND"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-08",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-08",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "NONE_FOUND",
+      "verification": "FLAGGED",
+      "uniqueness": "NONE_FOUND"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-08",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-09",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-09",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-09",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-09",
+      "status": "FLAGGED",
+      "residual": 7741920,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-09",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-09",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-10",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-10",
+      "status": "FLAGGED",
+      "residual": 6279138,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-10",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-10",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-10",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-10",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-13",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-13",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-13",
+      "status": "FLAGGED",
+      "residual": 71741,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-13",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-13_dup",
+      "status": "FLAGGED",
+      "residual": 5345874,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-13",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-13",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-14",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-14",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-14",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-14",
+      "status": "FLAGGED",
+      "residual": 7724984,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-14",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-14",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-15",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-15",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-15",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-15",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-15",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-16",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-16",
+      "status": "FLAGGED",
+      "residual": 6947741,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-16",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-16",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-16",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-16",
+      "status": "FLAGGED",
+      "residual": 7681027,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-17",
+      "status": "FLAGGED",
+      "residual": 348992,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-17",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-17",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-17",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-17",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-20",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-20",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-20",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-17",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-20",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-20",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-20",
+      "status": "FLAGGED",
+      "residual": 5434341,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-21",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-21",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-21_dup",
+      "status": "FLAGGED",
+      "residual": 7533335,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-21",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-21",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-21",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-22",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-22",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-22",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-21",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-22",
+      "status": "FLAGGED",
+      "residual": 5402785,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-22",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-22",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-23",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-23",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-23",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-23",
+      "status": "FLAGGED",
+      "residual": 7558690,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-23",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-23",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-24",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-24",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-24",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-24",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-24",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-24",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-27",
+      "status": "FLAGGED",
+      "residual": 7219716,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-27",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-27",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-27",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-27",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-27",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-28",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-28",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-28",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-28",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-28",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-28",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-29",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-29",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-29",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-29",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-29",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-30",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-30",
+      "status": "FLAGGED",
+      "residual": 7473553,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-30_dup",
+      "status": "FLAGGED",
+      "residual": 7473553,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-30",
+      "status": "FLAGGED",
+      "residual": 7533612,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-30",
+      "status": "FLAGGED",
+      "residual": 5957292,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-30",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-29",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-30",
+      "status": "FLAGGED",
+      "residual": 4425304,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-01-31",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-01-31",
+      "status": "FLAGGED",
+      "residual": 5287296,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-01-31",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-01-31",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-01-31",
+      "status": "FLAGGED",
+      "residual": 7737941,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-03",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-03",
+      "status": "FLAGGED",
+      "residual": 3936501,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-03",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-01-31",
+      "status": "FLAGGED",
+      "residual": 7763852,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-03",
+      "status": "FLAGGED",
+      "residual": 5105108,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-03",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-03",
+      "status": "FLAGGED",
+      "residual": 5527437,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-04",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-04",
+      "status": "FLAGGED",
+      "residual": 6405920,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-04",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-04",
+      "status": "FLAGGED",
+      "residual": 6969413,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-04",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-04",
+      "status": "FLAGGED",
+      "residual": 6336052,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-05",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-05",
+      "status": "FLAGGED",
+      "residual": 6477916,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-05",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-05",
+      "status": "FLAGGED",
+      "residual": 7339740,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-05",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-05",
+      "status": "FLAGGED",
+      "residual": 7219438,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-06",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-06",
+      "status": "FLAGGED",
+      "residual": 6229975,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-06",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-06",
+      "status": "FLAGGED",
+      "residual": 7016035,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-06",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-06",
+      "status": "FLAGGED",
+      "residual": 5562325,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-06_dup",
+      "status": "FLAGGED",
+      "residual": 5562325,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-07",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-07",
+      "status": "FLAGGED",
+      "residual": 7181404,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-07_dup",
+      "status": "FLAGGED",
+      "residual": 7181404,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-07",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-07",
+      "status": "FLAGGED",
+      "residual": 6677154,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-07",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-10",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-10",
+      "status": "FLAGGED",
+      "residual": 7709531,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-10",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-10",
+      "status": "FLAGGED",
+      "residual": 6435162,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-10",
+      "status": "FLAGGED",
+      "residual": 4082551,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-07",
+      "status": "FLAGGED",
+      "residual": 7103023,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-10",
+      "status": "FLAGGED",
+      "residual": 4995147,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-11",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-11",
+      "status": "FLAGGED",
+      "residual": 5995411,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-11",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-11_dup",
+      "status": "FLAGGED",
+      "residual": 7711752,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-11",
+      "status": "FLAGGED",
+      "residual": 5181985,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-11_dup",
+      "status": "FLAGGED",
+      "residual": 5181985,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-11",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-11",
+      "status": "FLAGGED",
+      "residual": 4820617,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-12",
+      "status": "FLAGGED",
+      "residual": 6500958,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-12",
+      "status": "FLAGGED",
+      "residual": 7548788,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-12",
+      "status": "FLAGGED",
+      "residual": 5060203,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-12",
+      "status": "FLAGGED",
+      "residual": 5820326,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-12",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-12",
+      "status": "FLAGGED",
+      "residual": 5171409,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-12_dup",
+      "status": "FLAGGED",
+      "residual": 5171409,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-13",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-13",
+      "status": "FLAGGED",
+      "residual": 4828945,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-13",
+      "status": "FLAGGED",
+      "residual": 5947939,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-13",
+      "status": "FLAGGED",
+      "residual": 9018416,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-13",
+      "status": "FLAGGED",
+      "residual": 6417024,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-13",
+      "status": "FLAGGED",
+      "residual": 5512352,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-14",
+      "status": "FLAGGED",
+      "residual": 5614148,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-14",
+      "status": "FLAGGED",
+      "residual": 5463584,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-14",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-14",
+      "status": "FLAGGED",
+      "residual": 7385271,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-14",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-14",
+      "status": "FLAGGED",
+      "residual": 6269702,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-17",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-17",
+      "status": "FLAGGED",
+      "residual": 6566477,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-17",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-17",
+      "status": "FLAGGED",
+      "residual": 7036394,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-17",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-17",
+      "status": "FLAGGED",
+      "residual": 7034544,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-18",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-18",
+      "status": "FLAGGED",
+      "residual": 6269145,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-18",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-18",
+      "status": "FLAGGED",
+      "residual": 6928001,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-18",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-18_dup",
+      "status": "FLAGGED",
+      "residual": 7012520,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-18",
+      "status": "FLAGGED",
+      "residual": 6183361,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-19",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-19",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-19",
+      "status": "FLAGGED",
+      "residual": 8004270,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-19",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-19",
+      "status": "FLAGGED",
+      "residual": 8649088,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-20",
+      "status": "FLAGGED",
+      "residual": 5787568,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-19",
+      "status": "FLAGGED",
+      "residual": 6491333,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-20",
+      "status": "FLAGGED",
+      "residual": 7368427,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-20",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-20",
+      "status": "FLAGGED",
+      "residual": 6364739,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-20",
+      "status": "FLAGGED",
+      "residual": 5879089,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-20",
+      "status": "FLAGGED",
+      "residual": 5705485,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-21",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-21",
+      "status": "FLAGGED",
+      "residual": 5963024,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-21",
+      "status": "FLAGGED",
+      "residual": 6892031,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-21",
+      "status": "FLAGGED",
+      "residual": 4926113,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-21",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-21",
+      "status": "FLAGGED",
+      "residual": 5283779,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-24",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-24",
+      "status": "FLAGGED",
+      "residual": 7348532,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-24",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-24",
+      "status": "FLAGGED",
+      "residual": 7807992,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-24",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-24",
+      "status": "FLAGGED",
+      "residual": 7167339,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-25",
+      "status": "FLAGGED",
+      "residual": 5305715,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-25",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-25",
+      "status": "FLAGGED",
+      "residual": 6426278,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-25",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-25",
+      "status": "FLAGGED",
+      "residual": 5297133,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-26",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-25",
+      "status": "FLAGGED",
+      "residual": 6678542,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-26",
+      "status": "FLAGGED",
+      "residual": 6186136,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-26",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-26",
+      "status": "FLAGGED",
+      "residual": 6500866,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-26",
+      "status": "FLAGGED",
+      "residual": 5794890,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-26",
+      "status": "FLAGGED",
+      "residual": 6001519,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-27",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-27",
+      "status": "FLAGGED",
+      "residual": 6623019,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-27",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-27",
+      "status": "FLAGGED",
+      "residual": 6026135,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-27",
+      "status": "FLAGGED",
+      "residual": 6351844,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-27",
+      "status": "FLAGGED",
+      "residual": 6281454,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-02-28",
+      "status": "FLAGGED",
+      "residual": 7280886,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-02-28",
+      "status": "FLAGGED",
+      "residual": 5807007,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-02-28",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-02-28",
+      "status": "FLAGGED",
+      "residual": 7107002,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-02-28",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-02-28",
+      "status": "FLAGGED",
+      "residual": 5130849,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-03-03",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-03-03",
+      "status": "FLAGGED",
+      "residual": 6500773,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-03-03",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-03-03",
+      "status": "FLAGGED",
+      "residual": 6502438,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-03-03",
+      "status": "FLAGGED",
+      "residual": 5039011,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_00_2025-03-04",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_00_2025-03-04",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_002_acc_01_2025-03-04",
+      "status": "FLAGGED",
+      "residual": 6187341,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-03-03",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_00_2025-03-04",
+      "status": "FLAGGED",
+      "residual": 0,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_003_acc_01_2025-03-04",
+      "status": "FLAGGED",
+      "residual": 6448487,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    },
+    {
+      "transaction_id": "crd_001_acc_01_2025-03-04",
+      "status": "FLAGGED",
+      "residual": 6014290,
+      "solution_count": null,
+      "matched_ids": [],
+      "search_status": "AMBIGUOUS",
+      "verification": "FLAGGED",
+      "uniqueness": "AMBIGUOUS"
+    }
+  ],
+  "note": "Snapshot of artifacts/dev/ledger.sqlite. Official Test eval not rerun."
+}

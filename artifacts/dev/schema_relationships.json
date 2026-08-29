@@ -1,0 +1,62 @@
+{
+  "split": "dev",
+  "writes_cleared": false,
+  "implemented_new_rules": 0,
+  "rows": [
+    {
+      "field": "settlement.item_id",
+      "source": "settlement.csv",
+      "other": "ledger.id",
+      "join": "explicit",
+      "ground_truth_retention": "100%",
+      "evidence_strength": "LEVEL 3",
+      "safe_to_use": "YES \u2014 already used by verify_declared"
+    },
+    {
+      "field": "settlement.credit_id",
+      "source": "settlement.csv",
+      "other": "bank.id",
+      "join": "explicit",
+      "ground_truth_retention": "100%",
+      "evidence_strength": "LEVEL 3",
+      "safe_to_use": "YES \u2014 already the declared overlay key"
+    },
+    {
+      "field": "settlement.order_id",
+      "source": "settlement.csv",
+      "other": "ledger.order_id",
+      "join": "explicit",
+      "ground_truth_retention": "100%",
+      "evidence_strength": "LEVEL 3",
+      "safe_to_use": "YES as lookup; NO as a merge across credits"
+    },
+    {
+      "field": "bank.utr",
+      "source": "bank.csv",
+      "other": "bank.id",
+      "join": "one-to-one on this corpus",
+      "ground_truth_retention": "corroboration",
+      "evidence_strength": "LEVEL 1",
+      "safe_to_use": "NO HARD FILTER \u2014 same-row corroboration only"
+    },
+    {
+      "field": "bank.narration_raw",
+      "source": "bank.csv",
+      "other": "settlement (none)",
+      "join": "text only",
+      "ground_truth_retention": "not a key",
+      "evidence_strength": "LEVEL 1",
+      "safe_to_use": "NO HARD FILTER \u2014 no SET-/INV-/ord_ tokens beyond bank fields"
+    },
+    {
+      "field": "bank.value_date",
+      "source": "bank.csv",
+      "other": "ledger.occurred_at",
+      "join": "date correlation",
+      "ground_truth_retention": "window miss if D is included",
+      "evidence_strength": "LEVEL 1",
+      "safe_to_use": "NO \u2014 must not widen [D-5, D-1]"
+    }
+  ],
+  "recommendation": "Do not promote text or date correlations to hard filters."
+}

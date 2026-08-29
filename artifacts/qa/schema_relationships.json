@@ -1,0 +1,128 @@
+{
+  "dev": {
+    "split": "dev",
+    "n_bank": 248,
+    "n_ledger": 5991,
+    "n_settlement": 3983,
+    "n_truth": 239,
+    "rows": [
+      {
+        "field": "settlement.item_id -> ledger.id",
+        "support_count": 3977,
+        "coverage": "3977/3983",
+        "exists": true,
+        "ground_truth_retention": "167/239",
+        "false_alternatives": 0
+      },
+      {
+        "field": "settlement.credit_id -> bank.id",
+        "support_count": 3983,
+        "coverage": "3983/3983",
+        "exists": true
+      },
+      {
+        "field": "settlement.member_id -> ledger.member_id",
+        "support_count": 0,
+        "coverage": "field_absent/field_absent",
+        "exists": false,
+        "note": "DeclaredLine and settlement.csv have no member_id. Join is item_id."
+      },
+      {
+        "field": "settlement.account_id -> account",
+        "support_count": 3977,
+        "coverage": "3977/3983",
+        "exists": false,
+        "note": "No settlement.account_id column. Measured via ledger.account_id == bank.account_id on item/credit join."
+      },
+      {
+        "field": "settlement.order_id -> ledger.order_id",
+        "support_count": 2272,
+        "coverage": "2272/2272",
+        "exists": true
+      },
+      {
+        "field": "bank.id -> truth.bank_credit_id",
+        "support_count": 239,
+        "coverage": "239/248",
+        "exists": true
+      },
+      {
+        "field": "truth credits with settlement rows",
+        "support_count": 167,
+        "coverage": "167/239",
+        "exists": true
+      },
+      {
+        "field": "ledger.account_id / bank.account_id",
+        "support_count": 2,
+        "coverage": "ledger=2 bank=2",
+        "exists": true
+      }
+    ],
+    "writes_cleared": false,
+    "implemented_new_rules": 0
+  },
+  "test": {
+    "split": "test",
+    "n_bank": 825,
+    "n_ledger": 20448,
+    "n_settlement": 13938,
+    "n_truth": 800,
+    "rows": [
+      {
+        "field": "settlement.item_id -> ledger.id",
+        "support_count": 13912,
+        "coverage": "13912/13938",
+        "exists": true,
+        "ground_truth_retention": "560/800",
+        "false_alternatives": 0
+      },
+      {
+        "field": "settlement.credit_id -> bank.id",
+        "support_count": 13938,
+        "coverage": "13938/13938",
+        "exists": true
+      },
+      {
+        "field": "settlement.member_id -> ledger.member_id",
+        "support_count": 0,
+        "coverage": "field_absent/field_absent",
+        "exists": false,
+        "note": "DeclaredLine and settlement.csv have no member_id. Join is item_id."
+      },
+      {
+        "field": "settlement.account_id -> account",
+        "support_count": 13912,
+        "coverage": "13912/13938",
+        "exists": false,
+        "note": "No settlement.account_id column. Measured via ledger.account_id == bank.account_id on item/credit join."
+      },
+      {
+        "field": "settlement.order_id -> ledger.order_id",
+        "support_count": 7992,
+        "coverage": "7992/7992",
+        "exists": true
+      },
+      {
+        "field": "bank.id -> truth.bank_credit_id",
+        "support_count": 800,
+        "coverage": "800/825",
+        "exists": true
+      },
+      {
+        "field": "truth credits with settlement rows",
+        "support_count": 560,
+        "coverage": "560/800",
+        "exists": true
+      },
+      {
+        "field": "ledger.account_id / bank.account_id",
+        "support_count": 4,
+        "coverage": "ledger=4 bank=4",
+        "exists": true
+      }
+    ],
+    "writes_cleared": false,
+    "implemented_new_rules": 0
+  }
+}

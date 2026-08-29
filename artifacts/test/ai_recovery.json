@@ -1,0 +1,192 @@
+{
+  "split": "test",
+  "n_credits": 825,
+  "baseline_residual_zero_overlay": 521,
+  "after_residual_zero_overlay": 521,
+  "recovered_n": 0,
+  "recovered": [],
+  "extract_credits": 825,
+  "verified_order_lookups": 0,
+  "foreign_hits": 0,
+  "extracted_added_rows": 0,
+  "elapsed_ms": 368,
+  "t04": {
+    "n_scored": "800",
+    "residual-zero": "521/800",
+    "settlement-linked / member-identified": "501/800",
+    "verified-linked (ids + residual 0)": "464/800",
+    "unique": "0",
+    "ambiguous": "779",
+    "none_found": "21",
+    "budget_exceeded_search": "0",
+    "auto-clear": "0",
+    "flagged": "800",
+    "budget_exceeded_disposition": "0",
+    "false_clears": "0",
+    "search_coverage": "800/800",
+    "ops_source": "{'LEDGER': 521, 'SETTLEMENT_OPS': 39}",
+    "wall_clock_ms": "68299"
+  },
+  "none_like_sample": [
+    {
+      "transaction_id": "crd_101_acc_03_2025-01-08",
+      "extracted_fields": [
+        "source",
+        "member_id",
+        "payment_type",
+        "reference"
+      ],
+      "new_rows": 0,
+      "foreign": 0
+    },
+    {
+      "transaction_id": "crd_102_acc_03_2025-01-08",
+      "extracted_fields": [
+        "source",
+        "date",
+        "member_id",
+        "payment_type",
+        "reference"
+      ],
+      "new_rows": 0,
+      "foreign": 0
+    },
+    {
+      "transaction_id": "crd_103_acc_03_2025-01-08",
+      "extracted_fields": [
+        "source",
+        "date",
+        "member_id",
+        "payment_type",
+        "reference"
+      ],
+      "new_rows": 0,
+      "foreign": 0
+    },
+    {
+      "transaction_id": "crd_104_acc_03_2025-01-08",
+      "extracted_fields": [
+        "source",
+        "date",
+        "member_id",
+        "payment_type",
+        "reference"
+      ],
+      "new_rows": 0,
+      "foreign": 0
+    },
+    {
+      "transaction_id": "crd_105_acc_03_2025-01-08",
+      "extracted_fields": [
+        "source",
+        "date",
+        "member_id",
+        "payment_type",
+        "reference"
+      ],
+      "new_rows": 0,
+      "foreign": 0
+    },
+    {
+      "transaction_id": "crd_105_acc_03_2025-01-09",
+      "extracted_fields": [
+        "source",
+        "date",
+        "member_id",
+        "payment_type",
+        "reference"
+      ],
+      "new_rows": 0,
+      "foreign": 0
+    },
+    {
+      "transaction_id": "crd_101_acc_03_2025-01-09",
+      "extracted_fields": [
+        "source",
+        "date",
+        "member_id",
+        "payment_type",
+        "reference"
+      ],
+      "new_rows": 0,
+      "foreign": 0
+    },
+    {
+      "transaction_id": "crd_102_acc_01_2025-01-09_dup",
+      "extracted_fields": [
+        "source",
+        "date",
+        "member_id",
+        "payment_type",
+        "reference"
+      ],
+      "new_rows": 0,
+      "foreign": 0
+    },
+    {
+      "transaction_id": "crd_102_acc_02_2025-01-09_dup",
+      "extracted_fields": [
+        "source",
+        "date",
+        "member_id",
+        "payment_type",
+        "reference"
+      ],
+      "new_rows": 0,
+      "foreign": 0
+    },
+    {
+      "transaction_id": "crd_102_acc_03_2025-01-09",
+      "extracted_fields": [
+        "source",
+        "date",
+        "member_id",
+        "payment_type",
+        "reference"
+      ],
+      "new_rows": 0,
+      "foreign": 0
+    },
+    {
+      "transaction_id": "crd_103_acc_03_2025-01-09",
+      "extracted_fields": [
+        "source",
+        "date",
+        "member_id",
+        "payment_type",
+        "reference"
+      ],
+      "new_rows": 0,
+      "foreign": 0
+    },
+    {
+      "transaction_id": "crd_104_acc_03_2025-01-09",
+      "extracted_fields": [
+        "source",
+        "date",
+        "member_id",
+        "payment_type",
+        "reference"
+      ],
+      "new_rows": 0,
+      "foreign": 0
+    }
+  ],
+  "none_found_n": 0,
+  "none_found_ids": [],
+  "none_found_extract": [],
+  "false_clears": 0,
+  "auto_clear": 0,
+  "writes_cleared": false,
+  "experiment": {
+    "baseline": "deterministic overlay + official t04",
+    "proposal": "AI-extracted identifiers lookup same-credit settlement rows then verify_declared",
+    "ground_truth_retained": true,
+    "matches_recovered": 0,
+    "ambiguity_change": 0,
+    "false_clears": 0,
+    "runtime_ms": 368,
+    "decision": "DO_NOT_IMPLEMENT_ENGINE_CHANGE"
+  },
+  "note": "Recovery counts only extracted identifiers that look up this credit's settlement rows not already declared, then verify_declared. Search uniqueness is unchanged."
+}

@@ -1,0 +1,57 @@
+{
+  "timestamp": "2026-09-01T14:35:30.896463+00:00",
+  "git_commit": "75cef5067474ceb5dff1119f0a445c896c1c7601",
+  "git_branch": "main",
+  "git_status_short_lines": 208,
+  "git_diff_stat_tail": [
+    " 49 files changed, 3075 insertions(+), 1917 deletions(-)"
+  ],
+  "environment": {
+    "python": "3.13.7",
+    "implementation": "CPython",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "interpreter": "/Users/kartikey0104/Desktop/outputs/residual-zero/.venv/bin/python",
+    "pip_check": "No broken requirements found.",
+    "installed_package_count": 34
+  },
+  "pytest_default_invocation": {
+    "command": "pytest -q",
+    "note": "browser E2E gated off unless RZ_E2E=1",
+    "passed": 971,
+    "failed": 0,
+    "skipped": 12,
+    "errors": 0,
+    "status": "PASS",
+    "tail": [
+      "971 passed, 12 skipped in 39.28s"
+    ],
+    "runtime_s": 39.858,
+    "exit_code": 0
+  },
+  "pytest_full_invocation": {
+    "command": "RZ_E2E=1 pytest -q",
+    "note": "whole suite including Chromium browser tests",
+    "passed": 983,
+    "failed": 0,
+    "skipped": 0,
+    "errors": 0,
+    "status": "PASS",
+    "tail": [
+      "983 passed in 76.39s (0:01:16)"
+    ],
+    "runtime_s": 77.007,
+    "exit_code": 0
+  },
+  "collected": {
+    "total": 983,
+    "e2e": 12,
+    "unit_and_integration": 971
+  },
+  "consistency": {
+    "default_passed_plus_skipped_equals_collected": true,
+    "full_passed_equals_collected": true,
+    "default_skipped_equals_e2e_collected": true
+  },
+  "pass": true
+}

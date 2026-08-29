@@ -1,0 +1,183 @@
+{
+  "timestamp": "2026-09-01T17:48:25.021656+00:00",
+  "git_head": "75cef5067474ceb5dff1119f0a445c896c1c7601",
+  "git_branch": "main",
+  "git_uncommitted_entries": 213,
+  "git_diff_check_clean": true,
+  "code_freeze": true,
+  "committed_by_this_phase": false,
+  "environment": {
+    "python": "3.13.7",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "pip_check": "No broken requirements found.",
+    "clean_environment_python": "Python 3.14.6",
+    "clean_environment_result": "PASS"
+  },
+  "pytest": {
+    "command": "pytest -q",
+    "passed": 971,
+    "failed": 0,
+    "skipped": 12,
+    "errors": 0,
+    "runtime_s": 39.858,
+    "make_test_equivalent": true,
+    "collected_total": 983,
+    "note": "skipped are the browser tests, gated behind RZ_E2E=1"
+  },
+  "pytest_full": {
+    "command": "RZ_E2E=1 pytest -q",
+    "passed": 983,
+    "failed": 0,
+    "runtime_s": 77.007
+  },
+  "playwright": {
+    "browser": "chromium",
+    "target": "http://127.0.0.1:8765",
+    "transport": "live HTTP (not TestClient)",
+    "passed": 12,
+    "collected": 12,
+    "status": "PASS"
+  },
+  "financial_regression": {
+    "mechanism": "scripts/qa_release_deep_checks.py dev_regression",
+    "rows_compared": 248,
+    "baseline_rows": 248,
+    "changed_rows": 0,
+    "changed_by_field": {
+      "status": 0,
+      "residual": 0,
+      "solution_count": 0,
+      "matched_ids": 0,
+      "search_status": 0,
+      "verification": 0,
+      "uniqueness": 0
+    },
+    "exact_equality": true,
+    "cleared_rows": 0,
+    "verdict": "PRESERVED"
+  },
+  "dev_result": {
+    "source": "committed artifacts/dev/t04.md",
+    "residual_zero": "159/239",
+    "unique": "0",
+    "auto_clear": "0",
+    "false_clears": "0",
+    "search_coverage": "239/239",
+    "rerun_in_this_phase": false
+  },
+  "test_artifact_result": {
+    "source": "committed artifacts/test/t04.md",
+    "residual_zero": "521/800",
+    "unique": "0",
+    "auto_clear": "0",
+    "false_clears": "0",
+    "search_coverage": "800/800",
+    "official_evaluation": "NOT RERUN \u2014 BUDGET EXHAUSTED"
+  },
+  "false_clears": 0,
+  "fabricated_financial_facts": 0,
+  "llm_financial_decisions": 0,
+  "ai_safety": {
+    "write_path_audit": "PASS",
+    "financial_table_writers": [
+      "src/residual_zero/verify.py"
+    ],
+    "allowlist_size": 43,
+    "write_like_names_not_failing_closed": [],
+    "ai_layer_write_sql": [],
+    "ai_layer_shell_or_eval": [],
+    "cleared_before_probe": 0,
+    "cleared_after_probe": 0,
+    "tool_limits": {
+      "MAX_TOOLS": 8,
+      "MAX_REPEAT": 2,
+      "MAX_NS": 30000000000
+    },
+    "local_agent_harness": "PASS",
+    "all_clear_requests_refused": true
+  },
+  "mcp": {
+    "tools_listed": 13,
+    "refused_exposed": [],
+    "write_like_all_rejected": true,
+    "any_writes_cleared_true": false,
+    "status": "PASS"
+  },
+  "api": {
+    "contamination_probe": "PASS",
+    "api_t04_matches_committed_cards": true
+  },
+  "security": {
+    "secrets_audit": "PASS",
+    "dotenv_gitignored": true,
+    "hardcoded_key_literals": [],
+    "GROQ_API_KEY_PRESENT": true,
+    "audit_sink_strips_api_key": true,
+    "hallucination": "PASS",
+    "prompt_injection": "PASS"
+  },
+  "determinism": {
+    "repeats": 12,
+    "distinct_results": 1,
+    "permutation_stable": true,
+    "status": "PASS"
+  },
+  "source_integrity": {
+    "changed": [],
+    "official_test_artifacts_preserved": true
+  },
+  "live_provider": {
+    "provider": "nvidia",
+    "endpoint": null,
+    "model": "openai/gpt-oss-20b",
+    "LIVE_PROVIDER": "YES",
+    "LIVE_TOOL_CALLING": "UNAVAILABLE",
+    "reason": null,
+    "fallback_used": false,
+    "note": "Provider rephrases deterministic facts and proposes the next read-only tool. Every pick is validated against the allowlist before execution. Groq on this key is HTTP 403; NVIDIA NIM is the active provider."
+  },
+  "code_hygiene": {
+    "artifact_decoupling": true,
+    "hardcoded_metrics": true,
+    "machine_paths": true,
+    "secrets": true,
+    "error_and_debug": true,
+    "logging": true,
+    "frontend": true
+  },
+  "acceptance_gates": {
+    "total": 33,
+    "failed": [],
+    "not_run": []
+  },
+  "remaining_limitations": [
+    "Live provider: YES via nvidia (openai/gpt-oss-20b); tool loop UNAVAILABLE. Groq itself remains HTTP 403 on this key. The provider only rephrases deterministic facts and proposes the next read-only tool; every pick is validated against the allowlist before execution and it can never write financial state.",
+    "NVIDIA NIM latency is 7-20 s per call versus sub-second for the deterministic engine, and the DeepSeek v4 pro/flash models in that catalogue exceeded 120 s on a realistic prompt, so they are unusable against the 30 s controller budget.",
+    "Official Test evaluation NOT RERUN \u2014 NN-16 budget exhausted. The committed `artifacts/test/t04.md` is the source of every Test figure.",
+    "Dev UNIQUE = 0 and auto-clear = 0 on this corpus. The threshold is refuse-all by design, so the auto-clear write path is exercised only by unit tests, never by the corpus.",
+    "AI evidence discovery recovered zero additional reconciliations on this dataset.",
+    "Posted console overlay n=248 differs from scored n=239 on Dev; the overlay is not the official card.",
+    "`TABLE_OWNERS` is a convention, not a SQLite-level restriction. Enforcement is by fixed SQL per owner module plus tests/test_least_privilege.py.",
+    "A single unexplained HTTP 500 on `/` was observed in an earlier session and is not reproducible. The server log is now retained by the E2E harness so a recurrence is diagnosable; no exception suppression was added.",
+    "Working tree is large and uncommitted; nothing was committed by this phase."
+  ],
+  "submission_checks": {
+    "pytest_executes_and_passes": true,
+    "playwright_passes": true,
+    "financial_regression_exact": true,
+    "false_clears_zero": true,
+    "fabricated_facts_zero": true,
+    "llm_financial_decisions_zero": true,
+    "write_path_safe": true,
+    "mcp_safe": true,
+    "cache_safe": true,
+    "determinism": true,
+    "source_unchanged": true,
+    "hygiene": true,
+    "no_gate_failures": true,
+    "diff_check_clean": true,
+    "no_secrets_tracked": true
+  },
+  "failed_checks": [],
+  "FINAL_CODE_STATUS": "READY FOR COMMIT"
+}

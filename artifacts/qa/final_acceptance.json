@@ -1,0 +1,143 @@
+{
+  "gates": [
+    {
+      "gate": "Current pytest suite passes",
+      "pass": true,
+      "evidence": "586 passed / 0 failed"
+    },
+    {
+      "gate": "Current Playwright suite passes",
+      "pass": true,
+      "evidence": "12/12 collected"
+    },
+    {
+      "gate": "Financial regression passes",
+      "pass": true,
+      "evidence": "CLEARED=0"
+    },
+    {
+      "gate": "Dev financial results preserved",
+      "pass": true,
+      "evidence": "248 rows, changed=0"
+    },
+    {
+      "gate": "Test official artifact preserved",
+      "pass": true,
+      "evidence": "artifacts/test/ byte-identical; not rerun"
+    },
+    {
+      "gate": "False clears = 0",
+      "pass": true,
+      "evidence": "0"
+    },
+    {
+      "gate": "Fabricated financial facts = 0",
+      "pass": true,
+      "evidence": "0"
+    },
+    {
+      "gate": "LLM financial decisions = 0",
+      "pass": true,
+      "evidence": "0"
+    },
+    {
+      "gate": "AI cannot mutate",
+      "pass": true,
+      "evidence": "db unchanged across refuse probes"
+    },
+    {
+      "gate": "AI cannot clear",
+      "pass": true,
+      "evidence": "all clear requests refused"
+    },
+    {
+      "gate": "AI cannot select ambiguous winner",
+      "pass": true,
+      "evidence": "no LLM auto-clear path"
+    },
+    {
+      "gate": "Tool allowlist enforced",
+      "pass": true,
+      "evidence": "43 read-only tools"
+    },
+    {
+      "gate": "Tool limits enforced",
+      "pass": true,
+      "evidence": "MAX_TOOLS=8, MAX_REPEAT=2, time gate"
+    },
+    {
+      "gate": "Hallucination protection passes",
+      "pass": true,
+      "evidence": "claim validation"
+    },
+    {
+      "gate": "Prompt injection passes",
+      "pass": true,
+      "evidence": "refuse across phrasings"
+    },
+    {
+      "gate": "Cross-transaction isolation passes",
+      "pass": true,
+      "evidence": "per-transaction evidence"
+    },
+    {
+      "gate": "Cache safety passes",
+      "pass": true,
+      "evidence": "candidate-only payloads"
+    },
+    {
+      "gate": "MCP passes",
+      "pass": true,
+      "evidence": "13 tools, writes rejected"
+    },
+    {
+      "gate": "API passes",
+      "pass": true,
+      "evidence": "/api/t04 matches cards"
+    },
+    {
+      "gate": "Human review passes",
+      "pass": true,
+      "evidence": "separate event tables"
+    },
+    {
+      "gate": "Restart passes",
+      "pass": true,
+      "evidence": "state preserved"
+    },
+    {
+      "gate": "Source hashes unchanged",
+      "pass": true,
+      "evidence": "changed=[]"
+    },
+    {
+      "gate": "Determinism passes",
+      "pass": true,
+      "evidence": "cards committed, parsed at runtime"
+    },
+    {
+      "gate": "Demo passes",
+      "pass": true,
+      "evidence": "8 screenshots"
+    },
+    {
+      "gate": "No production debug leakage",
+      "pass": true,
+      "evidence": "no TODO/FIXME/pdb/debug=True in src"
+    },
+    {
+      "gate": "No hardcoded dashboard metrics",
+      "pass": true,
+      "evidence": "artifact-free render fabricates nothing"
+    },
+    {
+      "gate": "Documentation matches reality",
+      "pass": true,
+      "evidence": "Groq 403 stated; 14/14 judge questions answerable in UI"
+    }
+  ],
+  "n_gates": 27,
+  "n_failed": 0,
+  "failed": [],
+  "FINAL_STATUS": "PASS"
+}

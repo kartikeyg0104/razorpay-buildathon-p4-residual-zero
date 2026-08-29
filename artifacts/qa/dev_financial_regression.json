@@ -1,0 +1,23 @@
+{
+  "baseline_n": 248,
+  "current_n": 248,
+  "ids_missing_from_current": [],
+  "ids_added_in_current": [],
+  "changed_count": 0,
+  "changed_rows": [],
+  "changed_by_field": {
+    "status": 0,
+    "residual": 0,
+    "solution_count": 0,
+    "matched_ids": 0,
+    "search_status": 0,
+    "verification": 0,
+    "uniqueness": 0
+  },
+  "cleared_baseline": 0,
+  "cleared_current": 0,
+  "exact_equality": true,
+  "pass": true,
+  "verdict": "PRESERVED",
+  "failures": []
+}

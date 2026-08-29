@@ -1,0 +1,171 @@
+{
+  "artifact_decoupling": {
+    "artifact_references_in_src": [
+      {
+        "file": "src/residual_zero/books.py",
+        "line": 188,
+        "kind": "artifacts/dev",
+        "code": "parser.add_argument(\"--db\", default=\"artifacts/dev/ledger.sqlite\")"
+      },
+      {
+        "file": "src/residual_zero/cli.py",
+        "line": 127,
+        "kind": "artifacts/dev",
+        "code": "run_p.add_argument(\"--out\", default=\"artifacts/dev\")"
+      },
+      {
+        "file": "src/residual_zero/console/extra.py",
+        "line": 1109,
+        "kind": "artifacts/dev",
+        "code": "\"source\": \"artifacts/dev/t04.md + artifacts/test/t04.md\","
+      },
+      {
+        "file": "src/residual_zero/console/extra.py",
+        "line": 1109,
+        "kind": "artifacts/test",
+        "code": "\"source\": \"artifacts/dev/t04.md + artifacts/test/t04.md\","
+      },
+      {
+        "file": "src/residual_zero/qa/corpus.py",
+        "line": 98,
+        "kind": "artifacts/dev",
+        "code": "\"artifacts/dev/headline.md\","
+      },
+      {
+        "file": "src/residual_zero/qa/corpus.py",
+        "line": 108,
+        "kind": "artifacts/dev",
+        "code": "\"artifacts/dev/threshold.json\","
+      },
+      {
+        "file": "src/residual_zero/qa/corpus.py",
+        "line": 118,
+        "kind": "artifacts/dev",
+        "code": "\"artifacts/dev/headline.md\","
+      },
+      {
+        "file": "src/residual_zero/qa/corpus.py",
+        "line": 128,
+        "kind": "artifacts/dev",
+        "code": "\"artifacts/dev/headline.md\","
+      },
+      {
+        "file": "src/residual_zero/qa/corpus.py",
+        "line": 157,
+        "kind": "artifacts/dev",
+        "code": "\"artifacts/dev/headline.md\","
+      },
+      {
+        "file": "src/residual_zero/qa/corpus.py",
+        "line": 184,
+        "kind": "artifacts/dev",
+        "code": "\"artifacts/dev/headline.md\","
+      }
+    ],
+    "reference_count": 10,
+    "t04_view_missing_card_returns_empty_strings": true,
+    "t04_fields_missing_card_returns_empty_dict": true,
+    "pass": true,
+    "note": "The console intentionally reads committed artifacts/{split}/t04.md as the official card. Missing or unparseable cards yield empty strings, which the templates render as a placeholder rather than a fabricated metric."
+  },
+  "hardcoded_metrics": {
+    "occurrences": [],
+    "occurrence_count": 0,
+    "by_class": {},
+    "production_literals": [],
+    "fabricated_without_artifacts": [],
+    "dashboard_binds_metrics_through_template": true,
+    "pass": true
+  },
+  "machine_paths": {
+    "absolute_or_user_paths_in_src": [],
+    "venv_assumptions_in_src": [],
+    "pass": true
+  },
+  "secrets": {
+    "gitignore_covers": {
+      ".env": true,
+      ".env.local": false,
+      "credentials.json": false,
+      "secrets.yaml": false,
+      "id_rsa": false
+    },
+    "env_example_rows": [
+      {
+        "name": "GROQ_API_KEY",
+        "value_length": 0,
+        "looks_like_real_secret": false
+      },
+      {
+        "name": "GROQ_MODEL",
+        "value_length": 18,
+        "looks_like_real_secret": false
+      },
+      {
+        "name": "AI_PROVIDER",
+        "value_length": 4,
+        "looks_like_real_secret": false
+      },
+      {
+        "name": "AI_MODEL",
+        "value_length": 18,
+        "looks_like_real_secret": false
+      }
+    ],
+    "env_example_has_no_real_secret": true,
+    "hardcoded_key_literals": [],
+    "credential_env_reads": [
+      {
+        "file": "src/residual_zero/semantic/groq.py",
+        "var": "AI_MODEL"
+      },
+      {
+        "file": "src/residual_zero/semantic/groq.py",
+        "var": "GROQ_MODEL"
+      },
+      {
+        "file": "src/residual_zero/semantic/groq.py",
+        "var": "AI_PROVIDER"
+      },
+      {
+        "file": "src/residual_zero/semantic/groq.py",
+        "var": "GROQ_API_KEY"
+      },
+      {
+        "file": "src/residual_zero/semantic/groq.py",
+        "var": "AI_API_KEY"
+      }
+    ],
+    "audit_sink_strips_api_key": true,
+    "dotenv_is_gitignored": true,
+    "pass": true
+  },
+  "error_and_debug": {
+    "broad_except_count": 14,
+    "broad_except_in_financial_modules": [],
+    "silent_pass_handlers": [],
+    "bare_except_handlers": [],
+    "print_calls": 31,
+    "print_calls_outside_cli": [],
+    "debug_markers": [],
+    "budget_exceeded_state_preserved": true,
+    "groq_failure_reported_explicitly": true,
+    "pass": true
+  },
+  "logging": {
+    "file": "artifacts/console/ai_audit.jsonl",
+    "entries": 297,
+    "gsk_key_hits": 0,
+    "authorization_hits": 0,
+    "bearer_hits": 0,
+    "api_key_field_hits": 0,
+    "pass": true
+  },
+  "frontend": {
+    "template_arithmetic_on_values": [],
+    "frontend_financial_mutation": [],
+    "pass": true
+  },
+  "failures": [],
+  "pass": true
+}

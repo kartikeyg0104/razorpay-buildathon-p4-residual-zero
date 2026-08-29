@@ -1,0 +1,8 @@
+{
+  "bank.csv": "3f0a5ecd20a05a056ced677eed1bc8402a10ab1235c1eb567e9d86289c64543c",
+  "ledger.csv": "43d5ec48ec035ca57b90b9dad68ee560005a0e3512ad4cb8371d76ab0ba2a47b",
+  "settlement.csv": "24a40ea6680721ddf0ebd9e69c7eea340c337a4c63147493ea2f73cb5a743b69",
+  "tax_rates.yaml": "9fec32a6765242e2e148d5e588bdbf4205294b94a6719fef57ad0ceebbcc6e71",
+  "fees.yaml": "2ad02483d7f4ba905c29da54ee7746100a59fb14cffac4859dbf0b8a4a316a40",
+  "solver.yaml": "cc77380f6b90b84023ca9519d86314d84d946054244f91f350d8924ad49d291f"
+}

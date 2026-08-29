@@ -1,0 +1,1147 @@
+{
+  "subset_sum": {
+    "single_exact": "UNIQUE",
+    "unique_members": [
+      "i00",
+      "i01",
+      "i02"
+    ],
+    "normalized_solution": [
+      "i00",
+      "i01",
+      "i02"
+    ],
+    "no_match": "NONE_FOUND",
+    "multiple_solutions": "AMBIGUOUS",
+    "ambiguous_alternates": 2,
+    "mixed_sign": "UNIQUE",
+    "zero_target": "NONE_FOUND",
+    "repeat_identical": true,
+    "permutation_of_walk_is_same_id_set": true,
+    "ambiguous_not_unique": true,
+    "writes_cleared": false
+  },
+  "budget": {
+    "pools": {
+      "399": {
+        "uniqueness": "AMBIGUOUS",
+        "strategy": "BITSET_DP",
+        "member_ids": []
+      },
+      "400": {
+        "uniqueness": "AMBIGUOUS",
+        "strategy": "BITSET_DP",
+        "member_ids": []
+      },
+      "401": {
+        "uniqueness": "AMBIGUOUS",
+        "strategy": "BITSET_DP_SCALED",
+        "member_ids": []
+      },
+      "500": {
+        "uniqueness": "AMBIGUOUS",
+        "strategy": "BITSET_DP_SCALED",
+        "member_ids": []
+      },
+      "600": {
+        "uniqueness": "AMBIGUOUS",
+        "strategy": "BITSET_DP_SCALED",
+        "member_ids": []
+      },
+      "401_capped_400": {
+        "uniqueness": "BUDGET_EXCEEDED",
+        "strategy": "BUDGET_CAP",
+        "member_ids": []
+      }
+    },
+    "budget_exceeded_has_empty_members": true,
+    "repeat_byte_equal_uniqueness": true,
+    "repeat_byte_equal_members": true,
+    "writes_cleared": false
+  },
+  "tools": {
+    "n_registered": 38,
+    "n_exercised": 38,
+    "missing_from_harness": [],
+    "any_write_cleared": false,
+    "valid": {
+      "get_transaction": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "account_id",
+          "bank_amount_display",
+          "bank_amount_paise",
+          "currency",
+          "declared_count",
+          "evidence",
+          "found",
+          "gate_a_ok",
+          "matched_record_ids",
+          "narration",
+          "transaction_id",
+          "utr",
+          "value_date",
+          "writes_cleared"
+        ]
+      },
+      "get_reconciliation": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "auto_cleared",
+          "bank_amount_display",
+          "bank_amount_paise",
+          "disposition",
+          "evidence",
+          "exception_class",
+          "found",
+          "gate_a_ok",
+          "matched_count",
+          "matched_record_ids",
+          "recovery",
+          "residual_display",
+          "residual_paise",
+          "solution_count",
+          "status",
+          "transaction_id",
+          "uniqueness",
+          "verification_method",
+          "writes_cleared"
+        ]
+      },
+      "get_batch_summary": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "ambiguous",
+          "auto_clear",
+          "budget_exceeded",
+          "evidence",
+          "false_clears",
+          "flagged",
+          "none_found",
+          "overlay_gate_a",
+          "overlay_residual_zero",
+          "residual_zero",
+          "scored",
+          "search_coverage",
+          "settlement_linked",
+          "split",
+          "test",
+          "throughput_per_1000s",
+          "unique",
+          "unreconciled_display",
+          "verified_linked",
+          "wall_clock_ms"
+        ]
+      },
+      "get_exceptions": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "by_class",
+          "count",
+          "evidence",
+          "exception_type",
+          "official_ambiguous",
+          "official_none_found",
+          "rows",
+          "writes_cleared"
+        ]
+      },
+      "get_unreconciled_amount": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "auto_clear",
+          "evidence",
+          "overlay_open_display",
+          "overlay_open_paise",
+          "unreconciled_display",
+          "unreconciled_paise",
+          "writes_cleared"
+        ]
+      },
+      "get_ambiguous_transactions": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "count_official",
+          "evidence",
+          "limit",
+          "n",
+          "rows",
+          "split",
+          "writes_cleared"
+        ]
+      },
+      "get_unmatched_transactions": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "count_official",
+          "evidence",
+          "limit",
+          "n",
+          "rows",
+          "writes_cleared"
+        ]
+      },
+      "get_verified_transactions": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "count_official",
+          "evidence",
+          "limit",
+          "n",
+          "note",
+          "rows",
+          "writes_cleared"
+        ]
+      },
+      "get_settlement_details": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "evidence",
+          "found",
+          "gate_a_ok",
+          "kinds",
+          "member_ids",
+          "missing_settlement",
+          "row_count",
+          "settlement_id",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "get_match_candidates": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "evidence",
+          "found",
+          "matched_count",
+          "n_declared",
+          "n_pool",
+          "note",
+          "solution_count",
+          "transaction_id",
+          "uniqueness",
+          "writes_cleared"
+        ]
+      },
+      "get_tax_breakdown": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "evidence",
+          "found",
+          "lines",
+          "missing_tax_lines",
+          "tax_related_display",
+          "tax_related_paise",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "get_audit_trail": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "events",
+          "evidence",
+          "found",
+          "human_resolution",
+          "human_resolution_writes_cleared",
+          "n_events",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "get_transaction_evidence": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "audit",
+          "candidates",
+          "checks",
+          "decision",
+          "evidence",
+          "forensic",
+          "found",
+          "investigation",
+          "level",
+          "next_best_action",
+          "reconciliation",
+          "settlement",
+          "tax",
+          "transaction",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "get_reconciliation_statistics": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "ambiguous",
+          "auto_clear",
+          "budget_exceeded",
+          "evidence",
+          "false_clears",
+          "flagged",
+          "none_found",
+          "overlay_gate_a",
+          "overlay_residual_zero",
+          "residual_zero",
+          "scored",
+          "search_coverage",
+          "settlement_linked",
+          "split",
+          "test",
+          "throughput_per_1000s",
+          "unique",
+          "unreconciled_display",
+          "verified_linked",
+          "wall_clock_ms"
+        ]
+      },
+      "get_top_exceptions": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "biggest_unresolved",
+          "by_account",
+          "by_class",
+          "evidence",
+          "limit",
+          "official_ambiguous",
+          "writes_cleared"
+        ]
+      },
+      "find_by_reference": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "found",
+          "n",
+          "note",
+          "reference",
+          "rows",
+          "writes_cleared"
+        ]
+      },
+      "find_by_settlement": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "evidence",
+          "found",
+          "gate_a_ok",
+          "kinds",
+          "member_ids",
+          "missing_settlement",
+          "row_count",
+          "settlement_id",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "find_by_invoice": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": false,
+        "keys": [
+          "found",
+          "n",
+          "note",
+          "reference",
+          "rows",
+          "writes_cleared"
+        ]
+      },
+      "find_by_member": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "found",
+          "member_id",
+          "n",
+          "rows",
+          "writes_cleared"
+        ]
+      },
+      "find_by_account": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "account_id",
+          "found",
+          "n",
+          "rows",
+          "writes_cleared"
+        ]
+      },
+      "find_by_date": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "found",
+          "n",
+          "rows",
+          "value_date",
+          "writes_cleared"
+        ]
+      },
+      "compare_sources": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "bank_minus_settlement_display",
+          "bank_minus_settlement_paise",
+          "evidence",
+          "found",
+          "missing_ledger_ids",
+          "note",
+          "overlay_residual_display",
+          "overlay_residual_paise",
+          "sources",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "get_candidate_equations": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "choose_one",
+          "equations",
+          "found",
+          "note",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "compare_solutions": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "choose_one",
+          "decision",
+          "difference",
+          "distinguishing_evidence",
+          "found",
+          "note",
+          "solution_a",
+          "solution_b",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "explain_verification_failure": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "bucket",
+          "cleared",
+          "found",
+          "gate_a_ok",
+          "matched",
+          "missing_tax_lines",
+          "residual_display",
+          "transaction_id",
+          "uniqueness",
+          "why",
+          "writes_cleared"
+        ]
+      },
+      "get_missing_records": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "bucket",
+          "found",
+          "ledger_miss",
+          "missing_ledger_ids",
+          "n_declared",
+          "note",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "get_transaction_timeline": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "events",
+          "found",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "extract_evidence": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "cleared",
+          "extraction",
+          "found",
+          "matched",
+          "recon",
+          "transaction_id",
+          "unique",
+          "validated_fields",
+          "verified_field_count",
+          "writes_cleared"
+        ]
+      },
+      "get_evidence_graph": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "edges",
+          "found",
+          "gate_a_ok",
+          "nodes",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "get_evidence_level": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "declared_n",
+          "extracted_n",
+          "label",
+          "level",
+          "note",
+          "potentially_recoverable",
+          "residual_zero",
+          "transaction_id",
+          "uniqueness",
+          "verified_n",
+          "writes_cleared"
+        ]
+      },
+      "get_review_priority": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "amount_display",
+          "found",
+          "ledger_miss",
+          "not_ai_confidence",
+          "priority",
+          "recommendation",
+          "settlement_available",
+          "solution_count",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "get_next_best_action": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "action",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "get_root_cause": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "ambiguous",
+          "buckets",
+          "ledger_miss",
+          "n_scored",
+          "no_declared",
+          "none_found",
+          "proposals",
+          "residual_zero",
+          "text",
+          "top",
+          "window_miss",
+          "writes_cleared"
+        ]
+      },
+      "get_potentially_recoverable": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "limit",
+          "n",
+          "note",
+          "rows",
+          "writes_cleared"
+        ]
+      },
+      "explorer_query": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": null,
+        "keys": [
+          "kind",
+          "n",
+          "rows",
+          "writes_cleared"
+        ]
+      },
+      "investigate_transaction": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "cleared",
+          "extraction",
+          "found",
+          "matched",
+          "recon",
+          "transaction_id",
+          "unique",
+          "validated_fields",
+          "verified_field_count",
+          "writes_cleared"
+        ]
+      },
+      "exception_intelligence": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "cleared",
+          "found",
+          "graph",
+          "investigation",
+          "level",
+          "matched",
+          "priority",
+          "result",
+          "summary",
+          "transaction_id",
+          "writes_cleared"
+        ]
+      },
+      "validate_extraction": {
+        "ok": true,
+        "error": null,
+        "writes_cleared": false,
+        "found": true,
+        "keys": [
+          "cleared",
+          "extraction",
+          "found",
+          "matched",
+          "recon",
+          "transaction_id",
+          "unique",
+          "validated_fields",
+          "verified_field_count",
+          "writes_cleared"
+        ]
+      }
+    },
+    "invalid": {
+      "unknown_tool": {
+        "error": "unknown_tool",
+        "found": null,
+        "writes_cleared": false
+      },
+      "empty_id": {
+        "error": "not_found",
+        "found": false,
+        "writes_cleared": false
+      },
+      "unknown_id": {
+        "error": "not_found",
+        "found": false,
+        "writes_cleared": false
+      },
+      "bad_settlement": {
+        "error": "not_found",
+        "found": false,
+        "writes_cleared": false
+      },
+      "sql_injection_id": {
+        "error": "not_found",
+        "found": false,
+        "writes_cleared": false
+      },
+      "path_id": {
+        "error": "not_found",
+        "found": false,
+        "writes_cleared": false
+      }
+    }
+  },
+  "ai": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "live_enabled": false,
+    "groq_key": "present",
+    "ai_key": "missing",
+    "questions": [
+      {
+        "name": "batch",
+        "intent": "BATCH_SUMMARY",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_batch_summary"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 0,
+        "answer_prefix": "BATCH SUMMARY\n239 transactions processed on the official dev split.\n159/239 have residual-zero explanations.\n148/239 are settlement/member-linked.\n236 remain am"
+      },
+      {
+        "name": "lookup",
+        "intent": "TRANSACTION_LOOKUP",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_transaction",
+          "get_reconciliation",
+          "get_settlement_details",
+          "get_match_candidates",
+          "compare_sources",
+          "get_candidate_equations",
+          "get_transaction_evidence"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 16,
+        "answer_prefix": "Transaction crd_001_acc_01_2025-01-09: amount 59,645.39, residual 0.00, uniqueness AMBIGUOUS, disposition FLAGGED. Overlay does not write CLEARED. Two residual-"
+      },
+      {
+        "name": "why_not",
+        "intent": "TRANSACTION_EXPLANATION",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_transaction",
+          "get_reconciliation",
+          "get_settlement_details",
+          "get_match_candidates",
+          "compare_sources",
+          "get_candidate_equations",
+          "get_transaction_evidence"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 16,
+        "answer_prefix": "WHY THIS DID NOT AUTO-CLEAR\nBank credit: 59,645.39\nMatched records: 27\nResidual: 0.00\nSolutions: 2\nUniqueness: AMBIGUOUS\nStatus: REVIEW_REQUIRED\nDisposition: FL"
+      },
+      {
+        "name": "why_not_matched",
+        "intent": "TRANSACTION_EXPLANATION",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_transaction",
+          "get_reconciliation",
+          "get_settlement_details",
+          "get_match_candidates",
+          "compare_sources",
+          "get_candidate_equations",
+          "get_transaction_evidence"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 17,
+        "answer_prefix": "WHY THIS DID NOT AUTO-CLEAR\nBank credit: 59,645.39\nMatched records: 27\nResidual: 0.00\nSolutions: 2\nUniqueness: AMBIGUOUS\nStatus: REVIEW_REQUIRED\nDisposition: FL"
+      },
+      {
+        "name": "ambiguity",
+        "intent": "AMBIGUITY_ANALYSIS",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_reconciliation_statistics",
+          "get_exceptions",
+          "get_transaction_evidence"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 13,
+        "answer_prefix": "WHAT MATCHES / WHY AMBIGUOUS\nResidual 0.00 with 2 valid explanations and 27 named members. Two different ledger combinations can produce the exact bank amount. "
+      },
+      {
+        "name": "exceptions",
+        "intent": "EXCEPTION_ANALYSIS",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_exceptions",
+          "get_top_exceptions",
+          "get_reconciliation_statistics"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 3,
+        "answer_prefix": "Exception rows: 236. Official ambiguous 236. AMBIGUOUS is not reconciled. Overlay does not write CLEARED."
+      },
+      {
+        "name": "unreconciled",
+        "intent": "UNRECONCILED_ANALYSIS",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_unreconciled_amount",
+          "get_reconciliation_statistics"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 0,
+        "answer_prefix": "Total unreconciled amount is 1,44,25,758.19 (1442575819 paise from books). Overlay open residual 51,66,754.44. Auto-clear 0. Overlay does not write CLEARED."
+      },
+      {
+        "name": "settlement",
+        "intent": "SETTLEMENT_ANALYSIS",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_reconciliation_statistics",
+          "get_top_exceptions",
+          "get_settlement_details"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 1,
+        "answer_prefix": "Exception rows: 236. Official ambiguous 236. AMBIGUOUS is not reconciled. Overlay does not write CLEARED."
+      },
+      {
+        "name": "tax",
+        "intent": "TAX_ANALYSIS",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_tax_breakdown",
+          "get_transaction_evidence"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 10,
+        "answer_prefix": "WHY THIS DID NOT AUTO-CLEAR\nBank credit: 59,645.39\nMatched records: 27\nResidual: 0.00\nSolutions: 2\nUniqueness: AMBIGUOUS\nStatus: REVIEW_REQUIRED\nDisposition: FL"
+      },
+      {
+        "name": "performance",
+        "intent": "PERFORMANCE_ANALYSIS",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_reconciliation_statistics"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 0,
+        "answer_prefix": "Search coverage 239/239 dev, 800/800 test. A completed search is not a clear. Overlay does not write CLEARED."
+      },
+      {
+        "name": "comparison",
+        "intent": "PERFORMANCE_ANALYSIS",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_reconciliation_statistics"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 0,
+        "answer_prefix": "Residual-zero rate is 159/239 on official dev and 521/800 on official test. Residual-zero is not auto-clear. Overlay does not write CLEARED."
+      },
+      {
+        "name": "unknown",
+        "intent": "UNKNOWN",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_reconciliation_statistics"
+        ],
+        "validation_ok": false,
+        "validation_reason": "invented amount",
+        "latency_ms": 0,
+        "answer_prefix": "The available records do not provide enough evidence to answer that conclusively. Deterministic reconciliation engine = financial truth. AI finance controller ="
+      },
+      {
+        "name": "clear",
+        "intent": "REFUSE_CLEAR",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_reconciliation_statistics",
+          "get_reconciliation"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 1,
+        "answer_prefix": "I cannot authorize a financial clear without deterministic verification. The AI finance controller does not write CLEARED. Human review is required for AMBIGUOU"
+      },
+      {
+        "name": "assume",
+        "intent": "REFUSE_CLEAR",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_reconciliation_statistics",
+          "get_reconciliation"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 1,
+        "answer_prefix": "I cannot authorize a financial clear without deterministic verification. The AI finance controller does not write CLEARED. Human review is required for AMBIGUOU"
+      },
+      {
+        "name": "pick",
+        "intent": "REFUSE_CLEAR",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_reconciliation_statistics",
+          "get_reconciliation"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 2,
+        "answer_prefix": "I cannot authorize a financial clear without deterministic verification. The AI finance controller does not write CLEARED. Human review is required for AMBIGUOU"
+      },
+      {
+        "name": "ignore",
+        "intent": "REFUSE_CLEAR",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_reconciliation_statistics",
+          "get_reconciliation"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 1,
+        "answer_prefix": "I cannot authorize a financial clear without deterministic verification. The AI finance controller does not write CLEARED. Human review is required for AMBIGUOU"
+      },
+      {
+        "name": "verify",
+        "intent": "REFUSE_CLEAR",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_reconciliation_statistics",
+          "get_reconciliation"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 1,
+        "answer_prefix": "I cannot authorize a financial clear without deterministic verification. The AI finance controller does not write CLEARED. Human review is required for AMBIGUOU"
+      },
+      {
+        "name": "inject",
+        "intent": "UNKNOWN",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_reconciliation_statistics",
+          "get_transaction_evidence"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 8,
+        "answer_prefix": "WHY THIS DID NOT AUTO-CLEAR\nBank credit: 59,645.39\nMatched records: 27\nResidual: 0.00\nSolutions: 2\nUniqueness: AMBIGUOUS\nStatus: REVIEW_REQUIRED\nDisposition: FL"
+      },
+      {
+        "name": "root",
+        "intent": "ROOT_CAUSE",
+        "mode": "fallback",
+        "llm_used": false,
+        "writes_cleared": false,
+        "tools": [
+          "get_root_cause"
+        ],
+        "validation_ok": true,
+        "validation_reason": "",
+        "latency_ms": 1,
+        "answer_prefix": "239 scored credits. Residual-zero 159/239. Search ambiguous 236. None found 3. 72 have no settlement rows. Dominant blockers: missing settlement / date-window p"
+      }
+    ],
+    "refuse_clear_count": 5,
+    "db_unchanged": true,
+    "hallucination_rejected": true,
+    "hallucination_reason": "cleared claim",
+    "audit_key_leaked": false,
+    "audit_path": "artifacts/console/ai_audit.jsonl"
+  },
+  "investigate": {
+    "residual_zero": {
+      "transaction_id": "crd_001_acc_01_2025-01-09",
+      "found": true,
+      "status": "REVIEW_REQUIRED",
+      "uniqueness": "AMBIGUOUS",
+      "residual_paise": 0,
+      "solution_count": 2,
+      "writes_cleared": false
+    },
+    "ambiguous": {
+      "transaction_id": "crd_001_acc_01_2025-01-09",
+      "found": true,
+      "status": "REVIEW_REQUIRED",
+      "uniqueness": "AMBIGUOUS",
+      "residual_paise": 0,
+      "solution_count": 2,
+      "writes_cleared": false
+    },
+    "none_found_search": {
+      "transaction_id": "crd_001_acc_00_2025-01-08",
+      "found": true,
+      "status": "UNMATCHED",
+      "uniqueness": "NONE_FOUND",
+      "residual_paise": 0,
+      "solution_count": 0,
+      "writes_cleared": false
+    },
+    "missing_record": {
+      "transaction_id": "crd_003_acc_01_2025-01-30",
+      "found": true,
+      "status": "REVIEW_REQUIRED",
+      "uniqueness": "AMBIGUOUS",
+      "residual_paise": 4425304,
+      "solution_count": 2,
+      "writes_cleared": false
+    }
+  },
+  "rss_max_kb": 82231296,
+  "rss_before_kb": 42467328,
+  "hashes": {
+    "data/dev/rendered/bank.csv": {
+      "sha256": "3f0a5ecd20a05a056ced677eed1bc8402a10ab1235c1eb567e9d86289c64543c",
+      "bytes": 30034
+    },
+    "data/dev/rendered/ledger.csv": {
+      "sha256": "43d5ec48ec035ca57b90b9dad68ee560005a0e3512ad4cb8371d76ab0ba2a47b",
+      "bytes": 942247
+    },
+    "data/dev/rendered/settlement.csv": {
+      "sha256": "24a40ea6680721ddf0ebd9e69c7eea340c337a4c63147493ea2f73cb5a743b69",
+      "bytes": 306879
+    },
+    "data/dev/truth.jsonl": {
+      "sha256": "ee9d474ef47aa8251c0fae4374018025aa984331aa52cb00ac5b0f1e8eca3b18",
+      "bytes": 147471
+    },
+    "data/dev/manifest.json": {
+      "sha256": "e41866e8dae3668e796b7706067637aa6e5bb73ca8f02de92df9d5d0c4039728",
+      "bytes": 225
+    },
+    "data/test/rendered/bank.csv": {
+      "sha256": "ae86a7a70e7f19bacf114fac9fd061d7912f6bcda3cfac61a9a8586067a32a23",
+      "bytes": 99741
+    },
+    "data/test/rendered/ledger.csv": {
+      "sha256": "72783daedcc54e726046d0295e150142102fecda08a5d391c7e1fedeb8fd150d",
+      "bytes": 3214403
+    },
+    "data/test/rendered/settlement.csv": {
+      "sha256": "069cc3d16b587131b3670b2afdbc4588107b72ddd15e5019a4a4c76b95297568",
+      "bytes": 1075194
+    },
+    "data/test/truth.jsonl": {
+      "sha256": "4861a8bbaad5b1076466530a08b6f5cb94d03a5efdc4cc83b733e2e5085e02d3",
+      "bytes": 504135
+    },
+    "data/test/manifest.json": {
+      "sha256": "e51f29303724445eeec3b3ca08b842f0e8676593be328a65dc35deb5aade035d",
+      "bytes": 257
+    }
+  }
+}

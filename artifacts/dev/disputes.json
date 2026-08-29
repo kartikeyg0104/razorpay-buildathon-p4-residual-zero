@@ -1,0 +1,70 @@
+{
+  "disputes": [
+    {
+      "chargeback_id": "itm_c19cb_crd_001_acc_00_2025-03-04",
+      "state": "DEBITED",
+      "deadline": "2025-03-06",
+      "open_inside_7_days": true,
+      "reconstructed": false
+    },
+    {
+      "chargeback_id": "itm_c19cb_crd_001_acc_01_2025-02-17",
+      "state": "DEBITED",
+      "deadline": "2025-03-06",
+      "open_inside_7_days": true,
+      "reconstructed": false
+    },
+    {
+      "chargeback_id": "itm_c19cb_crd_001_acc_01_2025-02-26",
+      "state": "DEBITED",
+      "deadline": "2025-03-06",
+      "open_inside_7_days": true,
+      "reconstructed": false
+    },
+    {
+      "chargeback_id": "itm_c19cb_crd_002_acc_00_2025-03-04",
+      "state": "DEBITED",
+      "deadline": "2025-03-06",
+      "open_inside_7_days": true,
+      "reconstructed": false
+    },
+    {
+      "chargeback_id": "itm_c19cb_crd_002_acc_01_2025-01-24",
+      "state": "DEBITED",
+      "deadline": "2025-03-06",
+      "open_inside_7_days": true,
+      "reconstructed": false
+    },
+    {
+      "chargeback_id": "itm_c19cb_crd_002_acc_01_2025-01-27",
+      "state": "DEBITED",
+      "deadline": "2025-03-06",
+      "open_inside_7_days": true,
+      "reconstructed": false
+    },
+    {
+      "chargeback_id": "itm_c19cb_crd_003_acc_00_2025-01-16",
+      "state": "DEBITED",
+      "deadline": "2025-03-06",
+      "open_inside_7_days": true,
+      "reconstructed": false
+    },
+    {
+      "chargeback_id": "itm_c19cb_crd_003_acc_01_2025-01-27",
+      "state": "DEBITED",
+      "deadline": "2025-03-06",
+      "open_inside_7_days": true,
+      "reconstructed": false
+    },
+    {
+      "chargeback_id": "itm_c19cb_crd_003_acc_01_2025-02-18",
+      "state": "DEBITED",
+      "deadline": "2025-03-06",
+      "open_inside_7_days": true,
+      "reconstructed": false
+    }
+  ],
+  "reconstructed_end_to_end": 0,
+  "n_disputes": 9,
+  "open_inside_7_days": 9
+}

@@ -1,0 +1,282 @@
+{
+  "production_solver": "residual_zero.solver.solve_search",
+  "independent_solver": "brute_force combinations (development only)",
+  "dpss_installed": false,
+  "production_replaced": false,
+  "determinism_repeat": true,
+  "cases": [
+    {
+      "name": "single_exact",
+      "n_candidates": 3,
+      "target_rupees": 6,
+      "production_uniqueness": "UNIQUE",
+      "production_solution_count": 1,
+      "production_member_ids": [
+        "i00",
+        "i01",
+        "i02"
+      ],
+      "production_matched_total_rupees": 6,
+      "production_runtime_ns": 123167,
+      "production_peak_bytes": 5356,
+      "independent_ran": true,
+      "same_financial_input": true,
+      "production_replaced": false,
+      "independent_solution_count": 1,
+      "independent_member_ids": [
+        [
+          "i00",
+          "i01",
+          "i02"
+        ]
+      ],
+      "independent_runtime_ns": 9042,
+      "independent_expect_uniqueness": "UNIQUE",
+      "same_solution_count_class": true,
+      "same_unique_set": true
+    },
+    {
+      "name": "multiple_solutions",
+      "n_candidates": 2,
+      "target_rupees": 5,
+      "production_uniqueness": "AMBIGUOUS",
+      "production_solution_count": 2,
+      "production_member_ids": [],
+      "production_matched_total_rupees": 5,
+      "production_runtime_ns": 96833,
+      "production_peak_bytes": 5316,
+      "independent_ran": true,
+      "same_financial_input": true,
+      "production_replaced": false,
+      "independent_solution_count": 2,
+      "independent_member_ids": [
+        [
+          "i00"
+        ],
+        [
+          "i01"
+        ]
+      ],
+      "independent_runtime_ns": 5667,
+      "independent_expect_uniqueness": "AMBIGUOUS",
+      "same_solution_count_class": true,
+      "same_unique_set": true
+    },
+    {
+      "name": "no_solution",
+      "n_candidates": 3,
+      "target_rupees": 100,
+      "production_uniqueness": "NONE_FOUND",
+      "production_solution_count": 0,
+      "production_member_ids": [],
+      "production_matched_total_rupees": null,
+      "production_runtime_ns": 20916,
+      "production_peak_bytes": 2464,
+      "independent_ran": true,
+      "same_financial_input": true,
+      "production_replaced": false,
+      "independent_solution_count": 0,
+      "independent_member_ids": [],
+      "independent_runtime_ns": 6458,
+      "independent_expect_uniqueness": "NONE_FOUND",
+      "same_solution_count_class": true,
+      "same_unique_set": true
+    },
+    {
+      "name": "duplicate_values",
+      "n_candidates": 3,
+      "target_rupees": 5,
+      "production_uniqueness": "AMBIGUOUS",
+      "production_solution_count": 2,
+      "production_member_ids": [],
+      "production_matched_total_rupees": 5,
+      "production_runtime_ns": 91000,
+      "production_peak_bytes": 5404,
+      "independent_ran": true,
+      "same_financial_input": true,
+      "production_replaced": false,
+      "independent_solution_count": 3,
+      "independent_member_ids": [
+        [
+          "i00"
+        ],
+        [
+          "i01"
+        ]
+      ],
+      "independent_runtime_ns": 6542,
+      "independent_expect_uniqueness": "AMBIGUOUS",
+      "same_solution_count_class": true,
+      "same_unique_set": true
+    },
+    {
+      "name": "negative_values",
+      "n_candidates": 3,
+      "target_rupees": 11,
+      "production_uniqueness": "UNIQUE",
+      "production_solution_count": 1,
+      "production_member_ids": [
+        "i00",
+        "i01",
+        "i02"
+      ],
+      "production_matched_total_rupees": 11,
+      "production_runtime_ns": 86959,
+      "production_peak_bytes": 5428,
+      "independent_ran": true,
+      "same_financial_input": true,
+      "production_replaced": false,
+      "independent_solution_count": 1,
+      "independent_member_ids": [
+        [
+          "i00",
+          "i01",
+          "i02"
+        ]
+      ],
+      "independent_runtime_ns": 5084,
+      "independent_expect_uniqueness": "UNIQUE",
+      "same_solution_count_class": true,
+      "same_unique_set": true
+    },
+    {
+      "name": "mixed_signs",
+      "n_candidates": 3,
+      "target_rupees": 1100,
+      "production_uniqueness": "UNIQUE",
+      "production_solution_count": 1,
+      "production_member_ids": [
+        "i00",
+        "i01",
+        "i02"
+      ],
+      "production_matched_total_rupees": 1100,
+      "production_runtime_ns": 346000,
+      "production_peak_bytes": 6224,
+      "independent_ran": true,
+      "same_financial_input": true,
+      "production_replaced": false,
+      "independent_solution_count": 1,
+      "independent_member_ids": [
+        [
+          "i00",
+          "i01",
+          "i02"
+        ]
+      ],
+      "independent_runtime_ns": 7250,
+      "independent_expect_uniqueness": "UNIQUE",
+      "same_solution_count_class": true,
+      "same_unique_set": true
+    },
+    {
+      "name": "zero_values",
+      "n_candidates": 3,
+      "target_rupees": 3,
+      "production_uniqueness": "NONE_FOUND",
+      "production_solution_count": 0,
+      "production_member_ids": [],
+      "production_matched_total_rupees": null,
+      "production_runtime_ns": 43875,
+      "production_peak_bytes": 4348,
+      "independent_ran": true,
+      "same_financial_input": true,
+      "production_replaced": false,
+      "independent_solution_count": 2,
+      "independent_member_ids": [
+        [
+          "i00",
+          "i02"
+        ],
+        [
+          "i00",
+          "i01",
+          "i02"
+        ]
+      ],
+      "independent_runtime_ns": 5875,
+      "independent_expect_uniqueness": "AMBIGUOUS",
+      "same_solution_count_class": false,
+      "same_unique_set": true
+    },
+    {
+      "name": "large_pool_20",
+      "n_candidates": 20,
+      "target_rupees": 210,
+      "production_uniqueness": "UNIQUE",
+      "production_solution_count": 1,
+      "production_member_ids": [
+        "i00",
+        "i01",
+        "i02",
+        "i03",
+        "i04",
+        "i05",
+        "i06",
+        "i07",
+        "i08",
+        "i09",
+        "i10",
+        "i11",
+        "i12",
+        "i13",
+        "i14",
+        "i15",
+        "i16",
+        "i17",
+        "i18",
+        "i19"
+      ],
+      "production_matched_total_rupees": 210,
+      "production_runtime_ns": 144584,
+      "production_peak_bytes": 7280,
+      "independent_ran": true,
+      "same_financial_input": true,
+      "production_replaced": false,
+      "independent_solution_count": 1,
+      "independent_member_ids": [
+        [
+          "i00",
+          "i01",
+          "i02",
+          "i03",
+          "i04",
+          "i05",
+          "i06",
+          "i07",
+          "i08",
+          "i09",
+          "i10",
+          "i11",
+          "i12",
+          "i13",
+          "i14",
+          "i15",
+          "i16",
+          "i17",
+          "i18",
+          "i19"
+        ]
+      ],
+      "independent_runtime_ns": 447661042,
+      "independent_expect_uniqueness": "UNIQUE",
+      "same_solution_count_class": true,
+      "same_unique_set": true
+    },
+    {
+      "name": "pool_400",
+      "n_candidates": 400,
+      "target_rupees": 1000000000,
+      "production_uniqueness": "NONE_FOUND",
+      "production_solution_count": 0,
+      "production_member_ids": [],
+      "production_matched_total_rupees": null,
+      "production_runtime_ns": 749333,
+      "production_peak_bytes": 11536,
+      "independent_ran": false,
+      "same_financial_input": true,
+      "production_replaced": false
+    }
+  ],
+  "note": "Same financial input / expected uniqueness class must be preserved. A faster independent brute force does not replace production search."
+}

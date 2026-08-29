@@ -1,0 +1,25 @@
+{
+  "before": {
+    "bank.csv": "3f0a5ecd20a05a056ced677eed1bc8402a10ab1235c1eb567e9d86289c64543c",
+    "ledger.csv": "43d5ec48ec035ca57b90b9dad68ee560005a0e3512ad4cb8371d76ab0ba2a47b",
+    "settlement.csv": "24a40ea6680721ddf0ebd9e69c7eea340c337a4c63147493ea2f73cb5a743b69",
+    "tax_rates.yaml": "9fec32a6765242e2e148d5e588bdbf4205294b94a6719fef57ad0ceebbcc6e71",
+    "fees.yaml": "2ad02483d7f4ba905c29da54ee7746100a59fb14cffac4859dbf0b8a4a316a40",
+    "solver.yaml": "cc77380f6b90b84023ca9519d86314d84d946054244f91f350d8924ad49d291f",
+    "dev_t04.md": "5d2a422de7dd06394bc1f1a1f3c5a26fab9cbe3cc9d27f91a5afbc0fb27a58f4",
+    "test_t04.md": "85b41aeea55de959775bdc513a5501a1c79d28ce52470d32bc3c2425400d3899",
+    "dev_truth.jsonl": "ee9d474ef47aa8251c0fae4374018025aa984331aa52cb00ac5b0f1e8eca3b18"
+  },
+  "after": {
+    "bank.csv": "3f0a5ecd20a05a056ced677eed1bc8402a10ab1235c1eb567e9d86289c64543c",
+    "ledger.csv": "43d5ec48ec035ca57b90b9dad68ee560005a0e3512ad4cb8371d76ab0ba2a47b",
+    "settlement.csv": "24a40ea6680721ddf0ebd9e69c7eea340c337a4c63147493ea2f73cb5a743b69",
+    "tax_rates.yaml": "9fec32a6765242e2e148d5e588bdbf4205294b94a6719fef57ad0ceebbcc6e71",
+    "fees.yaml": "2ad02483d7f4ba905c29da54ee7746100a59fb14cffac4859dbf0b8a4a316a40",
+    "solver.yaml": "cc77380f6b90b84023ca9519d86314d84d946054244f91f350d8924ad49d291f",
+    "dev_t04.md": "5d2a422de7dd06394bc1f1a1f3c5a26fab9cbe3cc9d27f91a5afbc0fb27a58f4",
+    "test_t04.md": "85b41aeea55de959775bdc513a5501a1c79d28ce52470d32bc3c2425400d3899",
+    "dev_truth.jsonl": "ee9d474ef47aa8251c0fae4374018025aa984331aa52cb00ac5b0f1e8eca3b18"
+  },
+  "changed": []
+}

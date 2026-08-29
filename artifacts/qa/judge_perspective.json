@@ -1,0 +1,214 @@
+{
+  "questions": [
+    {
+      "question": "What is this product?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "reconcil",
+        "residual"
+      ],
+      "docs_evidence": [
+        "reconcil",
+        "residual"
+      ]
+    },
+    {
+      "question": "Why is 1:1 reconciliation insufficient?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "combination",
+        "subset"
+      ],
+      "docs_evidence": [
+        "combination",
+        "split",
+        "subset"
+      ]
+    },
+    {
+      "question": "What makes this different from fuzzy matching?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "deterministic",
+        "exact",
+        "proof"
+      ],
+      "docs_evidence": [
+        "deterministic",
+        "exact",
+        "proof",
+        "signed subset-sum"
+      ]
+    },
+    {
+      "question": "What proves a match?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "equation",
+        "proof",
+        "residual"
+      ],
+      "docs_evidence": [
+        "proof",
+        "residual"
+      ]
+    },
+    {
+      "question": "What happens when two valid explanations exist?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "alternative",
+        "ambiguous",
+        "multiple valid"
+      ],
+      "docs_evidence": [
+        "ambiguous"
+      ]
+    },
+    {
+      "question": "What does AI actually do?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "evidence",
+        "explain",
+        "investigat",
+        "prioriti"
+      ],
+      "docs_evidence": [
+        "evidence",
+        "investigat"
+      ]
+    },
+    {
+      "question": "Can AI clear a transaction?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "cannot",
+        "never",
+        "refus"
+      ],
+      "docs_evidence": [
+        "cannot",
+        "never",
+        "refus"
+      ]
+    },
+    {
+      "question": "Why is auto-clear zero?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "auto-clear",
+        "refuse-all",
+        "threshold"
+      ],
+      "docs_evidence": [
+        "auto-clear",
+        "refuse-all",
+        "threshold"
+      ]
+    },
+    {
+      "question": "What happens when evidence is missing?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "missing",
+        "none_found",
+        "unmatched"
+      ],
+      "docs_evidence": [
+        "missing"
+      ]
+    },
+    {
+      "question": "Can a human intervene?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "human",
+        "queue",
+        "review"
+      ],
+      "docs_evidence": [
+        "human",
+        "queue",
+        "review"
+      ]
+    },
+    {
+      "question": "Can I see the mathematical proof?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "equation",
+        "proof",
+        "residual"
+      ],
+      "docs_evidence": [
+        "proof",
+        "residual"
+      ]
+    },
+    {
+      "question": "Can I inspect the candidate alternatives?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "alternative",
+        "candidate",
+        "proof explorer",
+        "solution a"
+      ],
+      "docs_evidence": [
+        "candidate",
+        "proof explorer",
+        "solution a"
+      ]
+    },
+    {
+      "question": "Can I audit what AI did?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "audit",
+        "trace"
+      ],
+      "docs_evidence": [
+        "audit",
+        "trace"
+      ]
+    },
+    {
+      "question": "Does the product visibly refuse a clear request?",
+      "answered_in_ui": true,
+      "answered_in_docs": true,
+      "ui_evidence": [
+        "refusal text rendered on /ask"
+      ],
+      "docs_evidence": []
+    }
+  ],
+  "n_questions": 14,
+  "unanswered_anywhere": [],
+  "answered_in_docs_but_not_ui": [],
+  "pages_probed": [
+    "/",
+    "/challenge",
+    "/credit/crd_001_acc_01_2025-01-09",
+    "/credit/crd_mix_ambiguous_twins",
+    "/demo",
+    "/evidence",
+    "/explorer",
+    "/proof/crd_mix_ambiguous_twins",
+    "/safety"
+  ],
+  "pass": true
+}

@@ -1,0 +1,9 @@
+{
+  "preexisting_console": false,
+  "health_writes_cleared": false,
+  "cleared_before": 0,
+  "cleared_after": 0,
+  "t04_same": true,
+  "listeners": 1,
+  "routes_ok": true
+}

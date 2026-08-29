@@ -1,0 +1,23 @@
+{
+  "dashboard_has_159/239": true,
+  "dashboard_has_521/800": true,
+  "dashboard_has_236": true,
+  "dashboard_has_auto_clear_0": true,
+  "backend_residual_zero": "159/239",
+  "backend_ambiguous": 236,
+  "backend_auto_clear": 0,
+  "backend_false_clears": 0,
+  "backend_search": "239/239",
+  "credit_has_why": true,
+  "credit_has_59645": true,
+  "credit_has_ambiguous": true,
+  "credit_has_residual_0": true,
+  "credit_has_ai": true,
+  "credit_contains_59,645.39": true,
+  "credit_contains_AMBIGUOUS": true,
+  "credit_contains_0.00": true,
+  "credit_contains_solution": false,
+  "credit_contains_candidate": true,
+  "credit_contains_settlement": true,
+  "credit_contains_residual": true
+}

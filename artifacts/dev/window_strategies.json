@@ -1,0 +1,52 @@
+{
+  "split": "dev",
+  "table": [
+    {
+      "strategy": "current_D-5_D-1",
+      "no_declared_misses": 72,
+      "truth_ids_retained": 1163,
+      "full_stack_in_pool": 5,
+      "unique": 0,
+      "unique_eq_truth": 0,
+      "unique_wrong": 0,
+      "unique_verify_ok": 0,
+      "ambiguous": 72,
+      "none_found": 0,
+      "budget": 0,
+      "false_clears": 0
+    },
+    {
+      "strategy": "inclusive_D",
+      "no_declared_misses": 72,
+      "truth_ids_retained": 1932,
+      "full_stack_in_pool": 60,
+      "unique": 0,
+      "unique_eq_truth": 0,
+      "unique_wrong": 0,
+      "unique_verify_ok": 0,
+      "ambiguous": 72,
+      "none_found": 0,
+      "budget": 0,
+      "false_clears": 0
+    },
+    {
+      "strategy": "same_day_plus_widened",
+      "no_declared_misses": 72,
+      "truth_ids_retained": 790,
+      "full_stack_in_pool": 0,
+      "unique": 0,
+      "unique_eq_truth": 0,
+      "unique_wrong": 0,
+      "unique_verify_ok": 0,
+      "ambiguous": 66,
+      "none_found": 6,
+      "budget": 0,
+      "false_clears": 0
+    }
+  ],
+  "unique_details": {
+    "current_D-5_D-1": [],
+    "inclusive_D": [],
+    "same_day_plus_widened": []
+  }
+}

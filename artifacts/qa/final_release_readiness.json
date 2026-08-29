@@ -1,0 +1,565 @@
+{
+  "timestamp": "2026-09-01T17:48:24.822539+00:00",
+  "git_commit": "75cef5067474ceb5dff1119f0a445c896c1c7601",
+  "git_branch": "main",
+  "git_uncommitted_entries": 213,
+  "environment": {
+    "python": "3.13.7",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "pip_check": "No broken requirements found.",
+    "clean_environment_python": "Python 3.14.6"
+  },
+  "tests": {
+    "default_invocation": {
+      "command": "pytest -q",
+      "passed": 971,
+      "failed": 0,
+      "skipped": 12,
+      "runtime_s": 39.858
+    },
+    "full_invocation": {
+      "command": "RZ_E2E=1 pytest -q",
+      "passed": 983,
+      "failed": 0,
+      "runtime_s": 77.007
+    },
+    "collected": {
+      "total": 983,
+      "e2e": 12,
+      "unit_and_integration": 971
+    },
+    "generated_property_cases": 315,
+    "invariant_suite": "tests/invariants/ \u2014 380 cases across 5 modules"
+  },
+  "financial_invariants": {
+    "FALSE_CLEARS": 0,
+    "LLM_FINANCIAL_DECISIONS": 0,
+    "LLM_AUTO_CLEAR": 0,
+    "FABRICATED_MATCHES": 0,
+    "auto_clear_gates": [
+      {
+        "case": "ambiguous_residual_zero",
+        "eval_would_clear": false,
+        "final": "REFUSE",
+        "console_clears": false
+      },
+      {
+        "case": "none_found",
+        "eval_would_clear": false,
+        "final": "REFUSE",
+        "console_clears": false
+      },
+      {
+        "case": "unique_no_overlay",
+        "eval_would_clear": true,
+        "final": "REFUSE",
+        "console_clears": false
+      },
+      {
+        "case": "budget_exceeded",
+        "eval_would_clear": false,
+        "final": "REFUSE",
+        "console_clears": false
+      }
+    ],
+    "all_console_refuse": true,
+    "pass": true
+  },
+  "write_path_audit": {
+    "only_verify_writes_financial_tables": true,
+    "ai_layer_write_free": true,
+    "write_cleared_single_gated_caller": true,
+    "financial_state_unchanged_under_probe": true
+  },
+  "security": {
+    "hallucination_fabricated": 0,
+    "hallucination_pass": true,
+    "all_refuse_clear": true,
+    "db_unchanged": true
+  },
+  "ai_boundary": {
+    "allowlist_size": 43,
+    "sql_write_statements_in_qa_layer": [],
+    "filesystem_writes_in_qa_layer": [
+      "src/residual_zero/qa/evidence_extract.py:163",
+      "src/residual_zero/qa/finance_audit.py:46"
+    ],
+    "shell_or_eval_in_qa_layer": [],
+    "write_like_names_not_failing_closed": [],
+    "tools_leaking_writes_cleared_or_raising": [],
+    "pass": true
+  },
+  "mcp": {
+    "tools_list_count": 13,
+    "write_like_all_rejected": true,
+    "any_writes_cleared_true": false,
+    "pass": true
+  },
+  "api": {
+    "contamination_pass": true
+  },
+  "browser": {
+    "browser": "chromium",
+    "target": "http://127.0.0.1:8765",
+    "transport": "live HTTP (not TestClient)",
+    "suite_total_collected": 12,
+    "passed": 12,
+    "failed": 0,
+    "skipped": 0,
+    "status": "PASS",
+    "tracing": "retain-on-failure",
+    "screenshots": "only-on-failure",
+    "failure_artifacts_present": [],
+    "server_log": null,
+    "timestamp": "2026-09-01T14:33:07.925555+00:00"
+  },
+  "cache": {
+    "request_A_repeat_cache_hit": true,
+    "all_variants_distinct_keys": true,
+    "engine_unaffected_by_cache": true,
+    "pass": true
+  },
+  "audit": {
+    "found": true,
+    "n_sampled": 5,
+    "no_secrets": true,
+    "pass": true
+  },
+  "restart": {
+    "preexisting_console": false,
+    "health_writes_cleared": false,
+    "cleared_before": 0,
+    "cleared_after": 0,
+    "t04_same": true,
+    "listeners": 1,
+    "routes_ok": true
+  },
+  "source_integrity": {
+    "changed": [],
+    "official_test_preserved": true
+  },
+  "determinism": {
+    "same_transaction_repeats": {
+      "n": 12,
+      "distinct_results": 1,
+      "stable": true,
+      "sample": {
+        "status": "REVIEW_REQUIRED",
+        "residual_paise": 0,
+        "uniqueness": "AMBIGUOUS",
+        "verification": null,
+        "matched_record_ids": [
+          "itm_001_000017",
+          "itm_001_000018",
+          "itm_001_000019",
+          "itm_001_000020",
+          "itm_001_000021",
+          "itm_001_000022",
+          "itm_001_000023",
+          "itm_001_000024",
+          "itm_001_000025",
+          "itm_001_000026",
+          "itm_001_000027",
+          "itm_001_000028",
+          "itm_001_000029",
+          "itm_001_000030",
+          "itm_001_000031",
+          "itm_001_001124",
+          "itm_001_001125",
+          "itm_001_001545",
+          "itm_001_001546",
+          "itm_001_001547",
+          "itm_001_001548",
+          "itm_001_001549",
+          "itm_001_001550",
+          "itm_001_001551",
+          "itm_001_001552",
+          "itm_001_001553",
+          "itm_001_001554"
+        ],
+        "solution_count": 2,
+        "disposition": "FLAGGED"
+      }
+    },
+    "permuted_candidate_order": {
+      "cases": [
+        {
+          "amounts": [
+            100,
+            200,
+            700,
+            900
+          ],
+          "target": 300,
+          "distinct_signatures": 1,
+          "stable": true
+        },
+        {
+          "amounts": [
+            500,
+            -200,
+            700
+          ],
+          "target": 300,
+          "distinct_signatures": 1,
+          "stable": true
+        },
+        {
+          "amounts": [
+            100,
+            200,
+            300,
+            900
+          ],
+          "target": 300,
+          "distinct_signatures": 1,
+          "stable": true
+        },
+        {
+          "amounts": [
+            12,
+            34,
+            56,
+            78,
+            90
+          ],
+          "target": 90,
+          "distinct_signatures": 1,
+          "stable": true
+        }
+      ],
+      "stable": true
+    },
+    "pass": true
+  },
+  "performance": {
+    "note": "Layers are measured independently. AI latency is never added to reconciliation runtime.",
+    "deterministic": {
+      "get_reconciliation": {
+        "n": 30,
+        "mean_ms": 1.837,
+        "p50_ms": 1.711,
+        "p95_ms": 2.918,
+        "p99_ms": 3.623,
+        "max_ms": 3.623
+      },
+      "get_reconciliation_statistics": {
+        "n": 12,
+        "mean_ms": 0.239,
+        "p50_ms": 0.231,
+        "p95_ms": 0.305,
+        "p99_ms": 0.305,
+        "max_ms": 0.305
+      },
+      "track04_snapshot": {
+        "n": 30,
+        "mean_ms": 0.112,
+        "p50_ms": 0.112,
+        "p95_ms": 0.115,
+        "p99_ms": 0.119,
+        "max_ms": 0.119
+      },
+      "committed_batch_card": {
+        "machine": "Darwin 25.5.0 (arm64)",
+        "n_credits": "248",
+        "wall_ns": "160053542",
+        "bottleneck": "ingest",
+        "throughput_credits_per_1000s": "1549481",
+        "projected_5000_credit_wall_ns_if_linear": "3226885927"
+      }
+    },
+    "ai": {
+      "finance_ask_investigate": {
+        "n": 8,
+        "mean_ms": 10.219,
+        "p50_ms": 8.626,
+        "p95_ms": 19.646,
+        "p99_ms": 19.646,
+        "max_ms": 19.646
+      },
+      "finance_ask_refuse_clear": {
+        "n": 8,
+        "mean_ms": 2.79,
+        "p50_ms": 2.534,
+        "p95_ms": 4.588,
+        "p99_ms": 4.588,
+        "max_ms": 4.588
+      },
+      "live_groq": "UNAVAILABLE",
+      "live_groq_error": "groq http 403",
+      "fallback_used": true
+    },
+    "mcp": {
+      "tools_list": {
+        "n": 30,
+        "mean_ms": 0.001,
+        "p50_ms": 0.001,
+        "p95_ms": 0.005,
+        "p99_ms": 0.006,
+        "max_ms": 0.006
+      },
+      "finance_tool_get_transaction": {
+        "n": 12,
+        "mean_ms": 93.629,
+        "p50_ms": 90.195,
+        "p95_ms": 118.026,
+        "p99_ms": 118.026,
+        "max_ms": 118.026
+      }
+    },
+    "browser": {
+      "root": {
+        "n": 8,
+        "mean_ms": 16.899,
+        "p50_ms": 15.23,
+        "p95_ms": 32.759,
+        "p99_ms": 32.759,
+        "max_ms": 32.759
+      },
+      "credit": {
+        "n": 8,
+        "mean_ms": 44.762,
+        "p50_ms": 43.42,
+        "p95_ms": 50.333,
+        "p99_ms": 50.333,
+        "max_ms": 50.333
+      },
+      "api_t04": {
+        "n": 8,
+        "mean_ms": 1.213,
+        "p50_ms": 1.112,
+        "p95_ms": 1.82,
+        "p99_ms": 1.82,
+        "max_ms": 1.82
+      },
+      "suite": {
+        "browser": "chromium",
+        "target": "http://127.0.0.1:8765",
+        "transport": "live HTTP (not TestClient)",
+        "suite_total_collected": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "status": "PASS",
+        "tracing": "retain-on-failure",
+        "screenshots": "only-on-failure",
+        "failure_artifacts_present": [],
+        "server_log": null,
+        "timestamp": "2026-09-01T12:37:30.620841+00:00"
+      }
+    },
+    "process": {
+      "max_rss_bytes": 92471296,
+      "max_rss_mb": 88.19
+    },
+    "pass": true
+  },
+  "documentation": {
+    "judge_questions": 14,
+    "unanswered": [],
+    "live_groq": "YES"
+  },
+  "demo": {
+    "pass": true,
+    "screenshots": 8
+  },
+  "code_hygiene": {
+    "artifact_decoupling": true,
+    "hardcoded_metrics": true,
+    "machine_paths": true,
+    "secrets": true,
+    "error_and_debug": true,
+    "logging": true,
+    "frontend": true
+  },
+  "clean_environment": {
+    "CLEAN_ENVIRONMENT_TEST": "PASS",
+    "venv_path": "/tmp/residual-zero-clean-venv",
+    "created_with": "python3 -m venv",
+    "python": "Python 3.14.6",
+    "install_command": "pip install -e \".[dev]\"",
+    "install_source": "pyproject.toml (no requirements.txt in this repo)",
+    "pip_check": "No broken requirements found.",
+    "installed_package_count": 36,
+    "pytest": {
+      "command": "pytest -q",
+      "passed": 971,
+      "skipped": 12,
+      "failed": 0,
+      "runtime_s": 96.71,
+      "note": "12 skipped are the browser E2E tests; playwright is a separate `e2e` extra"
+    },
+    "application_smoke": {
+      "served_by": "clean venv uvicorn on 127.0.0.1:8765",
+      "GET /": 200,
+      "GET /api/health": 200,
+      "GET /credit/crd_001_acc_01_2025-01-09": 200,
+      "GET /api/t04": 200,
+      "POST /api/finance/tool get_reconciliation": "200, returned deterministic evidence",
+      "GET /ask investigation": "200, rendered AMBIGUOUS + residual from the engine",
+      "GET /ask clear request": "200, refused: 'cannot authorize a financial clear'"
+    },
+    "multi_step_investigation": "verified in the clean environment via pytest (tests/invariants/test_release_regressions.py::test_ambiguity_investigation_with_a_credit_runs_multiple_tools)",
+    "packaging_gap_found_and_fixed": "playwright was required by tests/e2e but declared in no extra; added a separate `e2e` optional-dependency group so browser deps stay out of runtime and dev",
+    "notes": [
+      "Dev interpreter is 3.13.7; the clean environment used 3.14.6, so the suite is verified on two interpreter versions.",
+      "The existing .venv was not modified."
+    ]
+  },
+  "failures_fixed": [
+    "CI ran zero tests: the e2e conftest collection hook skipped the entire suite, so bare `pytest -q` and therefore `make test` reported success while executing nothing. Hook now scoped by marker and path.",
+    "Official match rates were hardcoded in the AI answer path: qa/corpus.py interpolated `residual-zero 159/239` into a corpus document and fell back to `129/239`/`239`/`3339/5973`; qa/desk_tools.py fell back to `521/800`. All now sourced from the committed card or `\u2014`.",
+    "Refused tool requests left no audit trace: agent_loop returned early for unknown and repeat-limited names, so the intended `llm_rejected` record was never emitted. Rejections are now reported in `rejected_tools` without consuming a MAX_TOOLS slot.",
+    "Playwright was required by tests/e2e but declared in no dependency group. Added a separate `e2e` extra so browser deps stay out of runtime and dev installs."
+  ],
+  "remaining_limitations": [
+    "Live provider: YES via nvidia (openai/gpt-oss-20b); tool loop UNAVAILABLE. Groq itself remains HTTP 403 on this key. The provider only rephrases deterministic facts and proposes the next read-only tool; every pick is validated against the allowlist before execution and it can never write financial state.",
+    "NVIDIA NIM latency is 7-20 s per call versus sub-second for the deterministic engine, and the DeepSeek v4 pro/flash models in that catalogue exceeded 120 s on a realistic prompt, so they are unusable against the 30 s controller budget.",
+    "Official Test evaluation NOT RERUN \u2014 NN-16 budget exhausted. The committed `artifacts/test/t04.md` is the source of every Test figure.",
+    "Dev UNIQUE = 0 and auto-clear = 0 on this corpus. The threshold is refuse-all by design, so the auto-clear write path is exercised only by unit tests, never by the corpus.",
+    "AI evidence discovery recovered zero additional reconciliations on this dataset.",
+    "Posted console overlay n=248 differs from scored n=239 on Dev; the overlay is not the official card.",
+    "`TABLE_OWNERS` is a convention, not a SQLite-level restriction. Enforcement is by fixed SQL per owner module plus tests/test_least_privilege.py.",
+    "A single unexplained HTTP 500 on `/` was observed in an earlier session and is not reproducible. The server log is now retained by the E2E harness so a recurrence is diagnosable; no exception suppression was added.",
+    "Working tree is large and uncommitted; nothing was committed by this phase."
+  ],
+  "acceptance_gates": {
+    "existing_financial_semantics_preserved": {
+      "status": "PASS",
+      "evidence": "248 dev rows identical on 7 financial fields, changed=0"
+    },
+    "deterministic_engine_remains_authority": {
+      "status": "PASS",
+      "evidence": "financial-table writers: ['src/residual_zero/verify.py']"
+    },
+    "ai_cannot_modify_financial_state": {
+      "status": "PASS",
+      "evidence": "43 tools + 8 mutation prompts + 6 POST probes; delta=[]"
+    },
+    "ai_cannot_clear": {
+      "status": "PASS",
+      "evidence": "CLEARED 0 -> 0"
+    },
+    "ai_cannot_choose_ambiguous_solution": {
+      "status": "PASS",
+      "evidence": "solver returns member_ids=() for AMBIGUOUS; no LLM selection path"
+    },
+    "financial_state_machine_invariants": {
+      "status": "PASS",
+      "evidence": "tests/invariants/test_financial_state_machine.py (121 cases)"
+    },
+    "money_invariants": {
+      "status": "PASS",
+      "evidence": "tests/invariants/test_money_invariants.py (54 cases): no float, no true division, no Decimal"
+    },
+    "solver_invariants": {
+      "status": "PASS",
+      "evidence": "tests/invariants/test_solver_invariants.py (43 cases incl. 315 generated)"
+    },
+    "uniqueness_invariants": {
+      "status": "PASS",
+      "evidence": "AMBIGUOUS never yields members; UNIQUE required for auto-clear"
+    },
+    "search_budget_invariants": {
+      "status": "PASS",
+      "evidence": "BUDGET_EXCEEDED / REDUCED short-circuit away from CLEARED"
+    },
+    "date_semantics_preserved": {
+      "status": "PASS",
+      "evidence": "no window or epsilon change; dev results byte-identical"
+    },
+    "source_data_unchanged": {
+      "status": "PASS",
+      "evidence": "changed=[]"
+    },
+    "no_hardcoded_production_financial_metrics": {
+      "status": "PASS",
+      "evidence": "artifact-free render fabricated=[]; production literals=0"
+    },
+    "no_secret_leakage": {
+      "status": "PASS",
+      "evidence": ".env gitignored=True, key literals=[]"
+    },
+    "dependencies_valid": {
+      "status": "PASS",
+      "evidence": "No broken requirements found."
+    },
+    "clean_environment_tested": {
+      "status": "PASS",
+      "evidence": "Python 3.14.6, pytest 971 passed"
+    },
+    "ai_allowlist": {
+      "status": "PASS",
+      "evidence": "43 read-only tools; write-like not failing closed=[]"
+    },
+    "tool_loop_limits": {
+      "status": "PASS",
+      "evidence": "MAX_TOOLS=8, MAX_REPEAT=2, time gate enforced"
+    },
+    "hallucination_tests": {
+      "status": "PASS",
+      "evidence": "fabricated displayed=0"
+    },
+    "prompt_injection_tests": {
+      "status": "PASS",
+      "evidence": "clear/verify/choose/ignore refused across phrasings; db unchanged"
+    },
+    "cross_transaction_isolation": {
+      "status": "PASS",
+      "evidence": "per-transaction evidence; no fixture markers in metric APIs"
+    },
+    "cache_isolation": {
+      "status": "PASS",
+      "evidence": "repeat hit=True, keys sensitive=True, engine unaffected=True"
+    },
+    "api_contract": {
+      "status": "PASS",
+      "evidence": "/api/t04 matches committed cards; no traceback or writes_cleared leak on 6 POST probes"
+    },
+    "mcp": {
+      "status": "PASS",
+      "evidence": "tools/list=13, refused exposed=[], write-like all rejected=True"
+    },
+    "human_review_boundary": {
+      "status": "PASS",
+      "evidence": "human endpoints touched=['exception_work']"
+    },
+    "audit_integrity": {
+      "status": "PASS",
+      "evidence": "hash chain verified; no key material in the AI audit log"
+    },
+    "browser_e2e": {
+      "status": "PASS",
+      "evidence": "12/12 chromium against live HTTP"
+    },
+    "restart": {
+      "status": "PASS",
+      "evidence": "listeners=1, cards identical=True, CLEARED 0->0"
+    },
+    "determinism": {
+      "status": "PASS",
+      "evidence": "12 repeats distinct=1; permutation stable=True"
+    },
+    "performance_regression_acceptable": {
+      "status": "PASS",
+      "evidence": "deterministic p50=1.711ms, ai p50=8.626ms (layers separate)"
+    },
+    "documentation_accurate": {
+      "status": "PASS",
+      "evidence": "live provider measured as YES; tool loop UNAVAILABLE; 14 judge questions answerable"
+    },
+    "demo": {
+      "status": "PASS",
+      "evidence": "8 screenshots, refusal captured"
+    },
+    "official_evaluation_artifacts_preserved": {
+      "status": "PASS",
+      "evidence": "artifacts/test/ byte-identical (13 files); official Test evaluation NOT RERUN \u2014 budget exhausted"
+    }
+  },
+  "gates_total": 33,
+  "gates_failed": [],
+  "gates_not_run": [],
+  "official_test_evaluation": "NOT RERUN \u2014 BUDGET EXHAUSTED",
+  "final_status": "PASS"
+}

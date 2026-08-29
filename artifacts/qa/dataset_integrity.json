@@ -1,0 +1,241 @@
+{
+  "dev": {
+    "split": "dev",
+    "bank_csv": {
+      "path": "data/dev/rendered/bank.csv",
+      "row_count": 248,
+      "column_count": 7,
+      "columns": [
+        "id",
+        "amount",
+        "value_date",
+        "account_id",
+        "currency",
+        "narration_raw",
+        "utr"
+      ]
+    },
+    "ledger_csv": {
+      "path": "data/dev/rendered/ledger.csv",
+      "row_count": 5991,
+      "column_count": 12,
+      "columns": [
+        "id",
+        "kind",
+        "amount",
+        "occurred_at",
+        "account_id",
+        "currency",
+        "instrument",
+        "order_id",
+        "parent_id",
+        "narration_raw",
+        "counterparty_raw",
+        "source"
+      ]
+    },
+    "settlement_csv": {
+      "path": "data/dev/rendered/settlement.csv",
+      "row_count": 3983,
+      "column_count": 6,
+      "columns": [
+        "credit_id",
+        "item_id",
+        "kind",
+        "amount",
+        "instrument",
+        "order_id"
+      ]
+    },
+    "truth_jsonl_exists": true,
+    "truth_lines": 239,
+    "loaded_bank": 248,
+    "loaded_ledger": 5991,
+    "loaded_settlement": 3983,
+    "duplicate_bank_ids": 0,
+    "duplicate_ledger_ids": 0,
+    "null_bank_ids": 0,
+    "null_ledger_ids": 0,
+    "orphan_settlement_item_ids": 6,
+    "orphan_settlement_credit_ids": 0,
+    "sample_orphan_items": [
+      "itm_001_001400",
+      "itm_001_001121",
+      "itm_001_001510",
+      "itm_002_001390",
+      "itm_002_001679",
+      "itm_003_001108"
+    ],
+    "malformed_bank_amounts": 0,
+    "malformed_ledger_amounts": 0,
+    "invalid_bank_dates": 0,
+    "invalid_ledger_dates": 0,
+    "unsupported_bank_currency": 0,
+    "unsupported_ledger_currency": 0,
+    "bank_currencies": {
+      "INR": 248
+    },
+    "ledger_currencies": {
+      "INR": 5991
+    },
+    "negative_bank_credits": 0,
+    "zero_bank_credits": 0,
+    "ledger_kind_counts": {
+      "PAYMENT": 3318,
+      "FEE": 922,
+      "TAX_GST": 891,
+      "TAX_WITHHOLDING": 231,
+      "RESERVE_HOLD": 240,
+      "BANK_CHARGE": 249,
+      "REFUND": 104,
+      "CHARGEBACK": 9,
+      "REPRESENTMENT": 9,
+      "ADJUSTMENT": 9,
+      "RESERVE_RELEASE": 9
+    },
+    "settlement_kind_counts": {
+      "PAYMENT": 2206,
+      "FEE": 623,
+      "TAX_GST": 587,
+      "TAX_WITHHOLDING": 167,
+      "RESERVE_HOLD": 167,
+      "BANK_CHARGE": 167,
+      "REFUND": 66
+    },
+    "duplicate_ledger_order_ids": 134,
+    "settlement_member_id_column": false,
+    "fee_gst_withholding_refund_reserve": {
+      "FEE": 922,
+      "TAX_GST": 891,
+      "TAX_WITHHOLDING": 231,
+      "REFUND": 104,
+      "RESERVE_HOLD": 240,
+      "RESERVE_RELEASE": 9,
+      "BANK_CHARGE": 249
+    },
+    "writes_cleared": false,
+    "source_modified": false
+  },
+  "test": {
+    "split": "test",
+    "bank_csv": {
+      "path": "data/test/rendered/bank.csv",
+      "row_count": 825,
+      "column_count": 7,
+      "columns": [
+        "id",
+        "amount",
+        "value_date",
+        "account_id",
+        "currency",
+        "narration_raw",
+        "utr"
+      ]
+    },
+    "ledger_csv": {
+      "path": "data/test/rendered/ledger.csv",
+      "row_count": 20448,
+      "column_count": 12,
+      "columns": [
+        "id",
+        "kind",
+        "amount",
+        "occurred_at",
+        "account_id",
+        "currency",
+        "instrument",
+        "order_id",
+        "parent_id",
+        "narration_raw",
+        "counterparty_raw",
+        "source"
+      ]
+    },
+    "settlement_csv": {
+      "path": "data/test/rendered/settlement.csv",
+      "row_count": 13938,
+      "column_count": 6,
+      "columns": [
+        "credit_id",
+        "item_id",
+        "kind",
+        "amount",
+        "instrument",
+        "order_id"
+      ]
+    },
+    "truth_jsonl_exists": true,
+    "truth_lines": 800,
+    "loaded_bank": 825,
+    "loaded_ledger": 20448,
+    "loaded_settlement": 13938,
+    "duplicate_bank_ids": 0,
+    "duplicate_ledger_ids": 0,
+    "null_bank_ids": 0,
+    "null_ledger_ids": 0,
+    "orphan_settlement_item_ids": 26,
+    "orphan_settlement_credit_ids": 0,
+    "sample_orphan_items": [
+      "itm_101_002378",
+      "itm_101_002955",
+      "itm_101_003089",
+      "itm_101_003275",
+      "itm_102_002684",
+      "itm_102_002750",
+      "itm_102_003148",
+      "itm_102_003183"
+    ],
+    "malformed_bank_amounts": 0,
+    "malformed_ledger_amounts": 0,
+    "invalid_bank_dates": 0,
+    "invalid_ledger_dates": 0,
+    "unsupported_bank_currency": 0,
+    "unsupported_ledger_currency": 0,
+    "bank_currencies": {
+      "INR": 825
+    },
+    "ledger_currencies": {
+      "INR": 20448
+    },
+    "negative_bank_credits": 0,
+    "zero_bank_credits": 0,
+    "ledger_kind_counts": {
+      "PAYMENT": 11550,
+      "REFUND": 175,
+      "FEE": 3105,
+      "TAX_GST": 3118,
+      "TAX_WITHHOLDING": 775,
+      "RESERVE_HOLD": 800,
+      "BANK_CHARGE": 825,
+      "CHARGEBACK": 25,
+      "REPRESENTMENT": 25,
+      "ADJUSTMENT": 25,
+      "RESERVE_RELEASE": 25
+    },
+    "settlement_kind_counts": {
+      "PAYMENT": 7883,
+      "FEE": 2129,
+      "TAX_GST": 2137,
+      "TAX_WITHHOLDING": 560,
+      "RESERVE_HOLD": 560,
+      "BANK_CHARGE": 560,
+      "REFUND": 109
+    },
+    "duplicate_ledger_order_ids": 225,
+    "settlement_member_id_column": false,
+    "fee_gst_withholding_refund_reserve": {
+      "FEE": 3105,
+      "TAX_GST": 3118,
+      "TAX_WITHHOLDING": 775,
+      "REFUND": 175,
+      "RESERVE_HOLD": 800,
+      "RESERVE_RELEASE": 25,
+      "BANK_CHARGE": 825
+    },
+    "writes_cleared": false,
+    "source_modified": false
+  },
+  "fee_config": true,
+  "tax_config": true,
+  "writes_cleared": false
+}
