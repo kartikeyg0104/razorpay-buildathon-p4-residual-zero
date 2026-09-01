@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from datetime import date, datetime
 from pathlib import Path
+from typing import NamedTuple
 
 from residual_zero.config import load_fees, load_solver_config, load_tax_rates
 from residual_zero.exceptions.classify import ExceptionSignals, classify
@@ -25,7 +26,17 @@ from residual_zero.candidates import build_pool
 from residual_zero.tz import IST, ensure_utc
 
 
-def run_challenge(path: Path) -> Disposition:
+class ChallengeReport(NamedTuple):
+    disposition: Disposition
+    uniqueness: Uniqueness
+    exception_class: str
+    pool_size: int
+    comment: str
+    credit_id: str
+    amount_paise: int
+
+
+def inspect_challenge(path: Path) -> ChallengeReport:
     data = json.loads(path.read_text(encoding="utf-8"))
     items = []
     for raw in data.get("items", []):
@@ -62,10 +73,17 @@ def run_challenge(path: Path) -> Disposition:
     rates, fees = load_tax_rates(), load_fees()
     pool = build_pool(credit, items, cfg)
     solve = solve_search(pool, credit.amount_paise, cfg)
+    comment = str(data.get("comment") or "")
     if solve.uniqueness == Uniqueness.BUDGET_EXCEEDED or solve.pool_scope == PoolScope.REDUCED:
-        return Disposition.BUDGET_EXCEEDED
+        return ChallengeReport(
+            Disposition.BUDGET_EXCEEDED, solve.uniqueness, "BUDGET_EXCEEDED",
+            solve.pool_size, comment, credit.id, credit.amount_paise,
+        )
     if solve.uniqueness == Uniqueness.UNIQUE:
-        return Disposition.CLEARED
+        return ChallengeReport(
+            Disposition.CLEARED, solve.uniqueness, "",
+            solve.pool_size, comment, credit.id, credit.amount_paise,
+        )
     signals = ExceptionSignals(
         uniqueness=solve.uniqueness,
         pool_scope=solve.pool_scope,
@@ -83,5 +101,16 @@ def run_challenge(path: Path) -> Disposition:
         max_resolution_tier=ResolutionTier.EXACT_NORM,
     )
     classification = classify(signals, rates, fees, cfg)
-    print(f"challenge {path.name}: {solve.uniqueness.value} -> {classification.exception_class.value}")
-    return Disposition.FLAGGED
+    return ChallengeReport(
+        Disposition.FLAGGED, solve.uniqueness, classification.exception_class.value,
+        solve.pool_size, comment, credit.id, credit.amount_paise,
+    )
+
+
+def run_challenge(path: Path) -> Disposition:
+    report = inspect_challenge(path)
+    print(
+        f"challenge {path.name}: {report.uniqueness.value} -> "
+        f"{report.exception_class or report.disposition.value}"
+    )
+    return report.disposition
