@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "residual-zero": {
+      "command": ".venv/bin/python",
+      "args": ["-m", "residual_zero.mcp"]
+    }
+  }
+}
