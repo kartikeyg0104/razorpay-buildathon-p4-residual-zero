@@ -19,6 +19,7 @@ import sys
 from collections import defaultdict
 from datetime import date
 from pathlib import Path
+from typing import Mapping, Sequence
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -65,37 +66,29 @@ def _cleared_members(conn: sqlite3.Connection) -> dict[str, tuple[str, ...]]:
     return {cid: tuple(ids) for cid, ids in grouped.items()}
 
 
-def _double_claimed(conn: sqlite3.Connection) -> tuple[str, ...]:
-    rows = list(
-        conn.execute(
-            "SELECT m.item_id "
-            "FROM decomposition_member m "
-            "JOIN reconciliation r ON r.bank_credit_id = m.bank_credit_id "
-            "WHERE r.disposition = 'CLEARED' "
-            "GROUP BY m.item_id "
-            "HAVING COUNT(DISTINCT m.bank_credit_id) > 1 "
-            "ORDER BY m.item_id"
-        )
-    )
-    return tuple(str(r[0]) for r in rows)
-
-
-def check_account(
-    conn: sqlite3.Connection,
+def identity_from_cleared(
     credits: tuple[BankCredit, ...] | list[BankCredit],
-    ledger: dict[str, LedgerItem],
+    ledger: Mapping[str, LedgerItem],
     account_id: str,
     start: date,
     end: date,
+    cleared: Mapping[str, Sequence[str]],
 ) -> ConservationReport:
-    """Identity for one account over [start, end] inclusive on credit.value_date."""
+    """Identity for one account over [start, end] using an in-memory cleared map.
+
+    Search-cleared and ops-accepted (declared, residual 0, posted sum equals credit)
+    share this formula. The map is the only input that changes.
+    """
     in_period = [
         c
         for c in credits
         if c.account_id == account_id and start <= c.value_date <= end
     ]
-    cleared = _cleared_members(conn)
-    double = _double_claimed(conn)
+    claimed: dict[str, list[str]] = defaultdict(list)
+    for cid, mids in cleared.items():
+        for item_id in mids:
+            claimed[str(item_id)].append(str(cid))
+    double = tuple(sorted(i for i, owners in claimed.items() if len(set(owners)) > 1))
     credits_paise = sum(c.amount_paise for c in in_period)
     cleared_members_paise = 0
     missing: list[str] = []
@@ -124,7 +117,7 @@ def check_account(
         credits_paise=credits_paise,
         cleared_members_paise=cleared_members_paise,
         unreconciled_credits_paise=unreconciled,
-        double_claimed_item_ids=tuple(i for i in double),
+        double_claimed_item_ids=double,
         missing_member_ids=tuple(missing),
         identity_holds=identity,
         n_credits=len(in_period),
@@ -132,12 +125,26 @@ def check_account(
     )
 
 
-def check_books(
+def check_account(
     conn: sqlite3.Connection,
     credits: tuple[BankCredit, ...] | list[BankCredit],
     ledger: dict[str, LedgerItem],
+    account_id: str,
+    start: date,
+    end: date,
+) -> ConservationReport:
+    """Identity for one account over [start, end] inclusive on credit.value_date."""
+    return identity_from_cleared(
+        credits, ledger, account_id, start, end, _cleared_members(conn),
+    )
+
+
+def check_books_from_cleared(
+    credits: tuple[BankCredit, ...] | list[BankCredit],
+    ledger: Mapping[str, LedgerItem],
+    cleared: Mapping[str, Sequence[str]],
 ) -> tuple[ConservationReport, ...]:
-    """One report per account spanning min–max value_date of that account's credits."""
+    """One report per account using an in-memory cleared map (ops overlay or search)."""
     if not credits:
         return ()
     by_acct: dict[str, list[BankCredit]] = defaultdict(list)
@@ -148,8 +155,17 @@ def check_books(
         bucket = by_acct[account_id]
         start = min(c.value_date for c in bucket)
         end = max(c.value_date for c in bucket)
-        reports.append(check_account(conn, credits, ledger, account_id, start, end))
+        reports.append(identity_from_cleared(credits, ledger, account_id, start, end, cleared))
     return tuple(reports)
+
+
+def check_books(
+    conn: sqlite3.Connection,
+    credits: tuple[BankCredit, ...] | list[BankCredit],
+    ledger: dict[str, LedgerItem],
+) -> tuple[ConservationReport, ...]:
+    """One report per account spanning min–max value_date of that account's credits."""
+    return check_books_from_cleared(credits, ledger, _cleared_members(conn))
 
 
 def format_identity(report: ConservationReport) -> str:

@@ -10,6 +10,7 @@ import yaml
 from pydantic import BaseModel, ConfigDict, Field
 
 from residual_zero.models import BankCredit, Kind, LedgerItem
+from residual_zero.money import format_rupees
 
 _STRICT = ConfigDict(frozen=True, extra="forbid")
 
@@ -151,6 +152,72 @@ def render_csv(lines: Sequence[JournalLine]) -> str:
             f"{line.debit_paise},{line.credit_paise},{line.narration},{line.reference}"
         )
     return "\n".join(rows) + "\n"
+
+
+def _xml_escape(text: str) -> str:
+    return (
+        text.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+    )
+
+
+def _tally_amount(paise: int) -> str:
+    """Major-unit string from format_rupees. No true division on money."""
+    return format_rupees(paise).replace(",", "")
+
+
+def render_tally_xml(lines: Sequence[JournalLine]) -> str:
+    """Tally XML import of F40 journal lines. A file the user imports; no credentials."""
+    grouped: dict[str, list[JournalLine]] = {}
+    order: list[str] = []
+    for line in lines:
+        if line.reference not in grouped:
+            order.append(line.reference)
+            grouped[line.reference] = []
+        grouped[line.reference].append(line)
+    vouchers: list[str] = []
+    for ref in order:
+        chunk = grouped[ref]
+        day = chunk[0].date.strftime("%Y%m%d")
+        narration = _xml_escape(chunk[0].narration)
+        entries: list[str] = []
+        for line in chunk:
+            if line.debit_paise:
+                deemed = "Yes"
+                amount = _tally_amount(-line.debit_paise)
+            else:
+                deemed = "No"
+                amount = _tally_amount(line.credit_paise)
+            entries.append(
+                "      <ALLLEDGERENTRIES.LIST>\n"
+                f"       <LEDGERNAME>{_xml_escape(line.account_name)}</LEDGERNAME>\n"
+                f"       <ISDEEMEDPOSITIVE>{deemed}</ISDEEMEDPOSITIVE>\n"
+                f"       <AMOUNT>{amount}</AMOUNT>\n"
+                "      </ALLLEDGERENTRIES.LIST>"
+            )
+        vouchers.append(
+            "    <TALLYMESSAGE>\n"
+            "     <VOUCHER>\n"
+            f"      <DATE>{day}</DATE>\n"
+            "      <VOUCHERTYPENAME>Journal</VOUCHERTYPENAME>\n"
+            f"      <NARRATION>{narration}</NARRATION>\n"
+            f"      <REFERENCE>{_xml_escape(ref)}</REFERENCE>\n"
+            + "\n".join(entries)
+            + "\n     </VOUCHER>\n"
+            "    </TALLYMESSAGE>"
+        )
+    body = "\n".join(vouchers)
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        "<ENVELOPE>\n"
+        " <HEADER><TALLYREQUEST>Import Data</TALLYREQUEST></HEADER>\n"
+        " <BODY><IMPORTDATA><REQUESTDATA>\n"
+        f"{body}\n"
+        " </REQUESTDATA></IMPORTDATA></BODY>\n"
+        "</ENVELOPE>\n"
+    )
 
 
 def write_journal(path: Path, lines: Sequence[JournalLine]) -> None:
