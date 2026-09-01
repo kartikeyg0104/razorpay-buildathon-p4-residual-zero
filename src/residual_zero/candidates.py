@@ -140,3 +140,22 @@ def split_pool(
         out.append(sub)
         k += 1
     return tuple(out)
+
+
+def take_indices(pool: CandidatePool, indices: Sequence[int]) -> CandidatePool:
+    """Keep the listed indices, same order. Scope is unchanged."""
+    keep = tuple(int(i) for i in indices)
+    return CandidatePool(
+        bank_credit_id=pool.bank_credit_id,
+        item_ids=tuple(pool.item_ids[i] for i in keep),
+        amounts_paise=tuple(pool.amounts_paise[i] for i in keep),
+        amounts_rupees=tuple(pool.amounts_rupees[i] for i in keep),
+        scope=pool.scope,
+        sub_window=pool.sub_window,
+        gross_paise=sum(pool.amounts_paise[i] for i in keep if pool.amounts_paise[i] > 0),
+        kinds=tuple(pool.kinds[i] for i in keep),
+        occurred_on=tuple(pool.occurred_on[i] for i in keep),
+        value_date=pool.value_date,
+        account_id=pool.account_id,
+        currency=pool.currency,
+    )
