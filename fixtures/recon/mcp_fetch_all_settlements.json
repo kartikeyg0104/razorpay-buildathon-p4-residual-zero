@@ -1,0 +1,14 @@
+{
+  "entity": "collection",
+  "count": 1,
+  "items": [
+    {
+      "id": "setl_sample_01",
+      "entity": "settlement",
+      "amount": 97640,
+      "status": "processed",
+      "utr": "RZPSAMPLE01",
+      "created_at": 1736380800
+    }
+  ]
+}

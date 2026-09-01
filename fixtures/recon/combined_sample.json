@@ -1,0 +1,33 @@
+{
+  "entity": "collection",
+  "count": 3,
+  "items": [
+    {
+      "entity": "recon.entity",
+      "id": "rec_sample_pay",
+      "settlement_id": "setl_sample_01",
+      "entity_type": "payment",
+      "entity_id": "pay_sample_01",
+      "amount": 100000,
+      "currency": "INR"
+    },
+    {
+      "entity": "recon.entity",
+      "id": "rec_sample_fee",
+      "settlement_id": "setl_sample_01",
+      "entity_type": "fee",
+      "entity_id": "fee_sample_01",
+      "amount": -2000,
+      "currency": "INR"
+    },
+    {
+      "entity": "recon.entity",
+      "id": "rec_sample_tax",
+      "settlement_id": "setl_sample_01",
+      "entity_type": "tax",
+      "entity_id": "tax_sample_01",
+      "amount": -360,
+      "currency": "INR"
+    }
+  ]
+}

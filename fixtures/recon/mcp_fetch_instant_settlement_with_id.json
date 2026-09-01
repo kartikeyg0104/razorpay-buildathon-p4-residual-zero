@@ -1,0 +1,8 @@
+{
+  "id": "setlod_sample_01",
+  "entity": "settlement.ondemand",
+  "amount": 50000,
+  "status": "processed",
+  "utr": "RZPONDEMAND01",
+  "created_at": 1736380800
+}
