@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import date, datetime, timezone
 
-from residual_zero.journal import build_journal, control_residual, load_chart, trial_balance
+from residual_zero.journal import build_journal, control_residual, load_chart, render_tally_xml, trial_balance
 from residual_zero.models import BankCredit, Instrument, Kind, LedgerItem, Source
 
 _AWARE = datetime(2025, 1, 9, 6, 0, tzinfo=timezone.utc)
@@ -49,3 +49,7 @@ def test_cleared_credit_posts_members_without_a_plug():
     assert dr == 100_000
     assert cr == 100_000
     assert control_residual(lines, (credit,), chart.bank_control.code) == 0
+    xml = render_tally_xml(lines)
+    assert "<ENVELOPE>" in xml
+    assert "<REFERENCE>c1</REFERENCE>" in xml
+    assert "900.00" in xml

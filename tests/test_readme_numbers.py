@@ -12,8 +12,10 @@ def test_every_readme_number_is_in_an_artifact():
     readme = Path("README.md").read_text(encoding="utf-8")
     # Headline table rows only.
     wanted = [
-        "0/239", "129/239", "142/1163", "142/5973", "3339/3339", "3339/5973",
-        "1.000000", "1/100", "0/800", "425/800", "11467/11470", "262/4026",
+        "0/239", "129/239", "148/239", "155/239", "159/239", "142/1163", "142/5973", "3339/3339", "3339/5973",
+        "3977/3977", "3977/5973",
+        "1.000000", "1/100", "0/800", "425/800", "501/800", "521/800", "11467/11470",
+        "13912/13912", "13912/20487", "262/4026",
     ]
     blob = "\n".join(p.read_text(encoding="utf-8") for p in Path("artifacts").rglob("*") if p.is_file() and p.suffix in {".md", ".json"})
     missing = [w for w in wanted if w in readme and w not in blob]

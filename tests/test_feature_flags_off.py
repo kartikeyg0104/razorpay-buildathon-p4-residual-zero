@@ -53,3 +53,59 @@ def test_flags_off_matches_v1_baseline():
     assert not changed, f"flags-off dispositions moved vs v1: {list(changed.items())[:8]}"
     allowed = {d.value for d in Disposition}
     assert set(got.values()) <= allowed
+
+
+def _a3_exact(flags: FeatureFlags) -> tuple[int, int]:
+    """A3 member-set exact on dev, through the real eval arm."""
+    from residual_zero.config import (
+        load_fees, load_llm_config, load_profile, load_solver_config, load_tax_rates,
+    )
+    from residual_zero.ingest.settlement_report import load_settlement_report
+    from residual_zero.ingest.source_root import SourceRoot
+
+    from eval.arms.a3_full import run_a3
+    from eval.loader import load_split
+    from eval.metrics import exact_decomposition_counted
+    from eval.truth_loader import load_truth
+
+    root = Path("data")
+    items, credits = load_split("dev", data_root=root)
+    truth = {r.bank_credit_id: r.member_ids for r in load_truth("dev", data_root=root)}
+    by_credit: dict[str, list] = {}
+    for row in load_settlement_report(SourceRoot(DEV_RENDERED)):
+        by_credit.setdefault(row.credit_id, []).append(row)
+    result = run_a3(
+        items, credits, by_credit, truth,
+        load_tax_rates(), load_fees(), load_solver_config(), load_llm_config(),
+        load_profile(Path("config").joinpath("profiles", "phase1.yaml")).reserve_bps,
+        flags=flags,
+    )
+    counted = exact_decomposition_counted(result.predictions, truth)
+    return counted.numerator, counted.denominator
+
+
+def test_flags_off_exact_floor_is_enforced():
+    """F55's exact floor. config/ci.yaml says a drop OR a rise fails — the core moved.
+
+    The CI workflow step named "Flags-off exact floor" loaded this number and printed it
+    without ever comparing anything, so the guard could not fail (found 2026-09). The
+    comparison lives here, where `make test` actually runs it.
+    """
+    import yaml
+
+    if not DEV_RENDERED.is_dir():
+        pytest.skip("data/dev not present")
+    ci = yaml.safe_load(Path("config").joinpath("ci.yaml").read_text(encoding="utf-8"))
+    numerator, denominator = _a3_exact(FeatureFlags.all_off())
+    assert f"{numerator}/{denominator}" == ci["dev_exact_floor"]
+    assert denominator == ci["dev_split_n"]
+
+
+def test_features_on_does_not_lower_exact():
+    """Turning the product's features on may raise exact; it must never lower it."""
+    if not DEV_RENDERED.is_dir():
+        pytest.skip("data/dev not present")
+    off, n_off = _a3_exact(FeatureFlags.all_off())
+    on, n_on = _a3_exact(load_features())
+    assert n_off == n_on
+    assert on >= off, f"features on dropped exact from {off} to {on}"

@@ -33,6 +33,7 @@ def cfg_with_tol(tol: int, *, max_pool: int | None = None) -> SolverConfig:
     }
     if max_pool is not None:
         search_update["max_pool"] = max_pool
+        search_update["max_pool_scaled"] = max_pool
     search = base.search.model_copy(update=search_update)
     diagnosis = base.diagnosis.model_copy(
         update={"rounding_delta_ceiling_paise": tol * 100}
