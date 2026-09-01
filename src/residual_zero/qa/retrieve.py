@@ -19,6 +19,8 @@ class Intent(str, Enum):
     CREDIT_DETAIL = "CREDIT_DETAIL"
     EXCEPTION_SUMMARY = "EXCEPTION_SUMMARY"
     TIER_MIX = "TIER_MIX"
+    PRODUCT_POLICY = "PRODUCT_POLICY"
+    BATCH_SUMMARY = "BATCH_SUMMARY"
     UNRECOGNISED = "UNRECOGNISED"
 
 
@@ -32,6 +34,18 @@ class RetrievedRows(BaseModel):
 
 def classify_intent(question: str, client: LLMClient | None) -> Intent:
     q = question.casefold()
+    if "auto-clear" in q or "auto clear" in q or "threshold" in q:
+        return Intent.PRODUCT_POLICY
+    if "gate a" in q or "verify_declared" in q:
+        return Intent.PRODUCT_POLICY
+    if (
+        "unreconciled" in q
+        or "batch summary" in q
+        or "match rate" in q
+        or "budget exceed" in q
+        or "how many exact" in q
+    ):
+        return Intent.BATCH_SUMMARY
     if "why" in q or "short" in q:
         return Intent.WHY_SHORT
     if "deduction" in q or "stack" in q or "fee" in q:
@@ -51,7 +65,7 @@ def classify_intent(question: str, client: LLMClient | None) -> Intent:
 def retrieve(intent: Intent, params: Mapping[str, str], conn: sqlite3.Connection) -> RetrievedRows:
     """Parameterised SQL against the reconciled ledger only, over a read-only connection."""
     credit_id = params.get("credit_id", "")
-    if intent == Intent.UNRECOGNISED:
+    if intent in (Intent.UNRECOGNISED, Intent.BATCH_SUMMARY):
         return RetrievedRows(intent=intent, rows=(), citations=())
     row = conn.execute(
         "SELECT bank_credit_id, claimed_total_paise, residual_paise, uniqueness, disposition "
