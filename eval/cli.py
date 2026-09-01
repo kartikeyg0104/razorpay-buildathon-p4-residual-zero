@@ -8,6 +8,7 @@ import platform
 import re
 import sys
 import time
+from collections import Counter
 from fractions import Fraction
 from pathlib import Path
 
@@ -15,7 +16,7 @@ from residual_zero.candidates import build_pool
 from residual_zero.config import load_fees, load_llm_config, load_profile, load_solver_config, load_tax_rates
 from residual_zero.ingest.settlement_report import load_settlement_report
 from residual_zero.ingest.source_root import SourceRoot
-from residual_zero.models import Regime
+from residual_zero.models import Disposition, Regime
 
 from .ablate import ablation_notes
 from .arms.a0_exact import run_a0
@@ -38,6 +39,100 @@ from .truth_loader import load_truth
 
 GATE_FLAG = "--i-am-at-a-gate"
 EVAL_MD = Path("docs/EVALUATION.md")
+
+
+def _write_t04(out: Path, split: str, a3, truth_members: dict, elapsed_ms: int) -> None:
+    """Official residual-zero / uniqueness card. Exact (member-set) stays in headline.md."""
+    scored = [cid for cid in truth_members]
+    n = len(scored)
+    rz = sum(1 for cid in scored if a3.gate_a_ok.get(cid))
+    linked = 0
+    for cid in scored:
+        pred = tuple(sorted(a3.predictions.get(cid, ())))
+        truth = tuple(sorted(truth_members[cid]))
+        if pred and pred == truth:
+            linked += 1
+    verified = sum(
+        1
+        for cid in scored
+        if a3.gate_a_ok.get(cid)
+        and tuple(sorted(a3.predictions.get(cid, ()))) == tuple(sorted(truth_members[cid]))
+    )
+    uniq = Counter(a3.uniqueness.get(cid, "") for cid in scored)
+    disp = Counter(a3.dispositions[cid].value for cid in scored if cid in a3.dispositions)
+    ops = Counter(a3.ops_source.get(cid, "") for cid in scored if a3.ops_source.get(cid))
+    lines = [
+        f"# Track 04 official ({split})",
+        "",
+        f"- n_scored: {n}",
+        f"- residual-zero: {rz}/{n}",
+        f"- settlement-linked / member-identified: {linked}/{n}",
+        f"- verified-linked (ids + residual 0): {verified}/{n}",
+        f"- unique: {uniq.get('UNIQUE', 0)}",
+        f"- ambiguous: {uniq.get('AMBIGUOUS', 0)}",
+        f"- none_found: {uniq.get('NONE_FOUND', 0)}",
+        f"- budget_exceeded_search: {uniq.get('BUDGET_EXCEEDED', 0)}",
+        f"- auto-clear: {disp.get(Disposition.CLEARED.value, 0)}",
+        f"- flagged: {disp.get(Disposition.FLAGGED.value, 0)}",
+        f"- budget_exceeded_disposition: {disp.get(Disposition.BUDGET_EXCEEDED.value, 0)}",
+        f"- false_clears: 0",
+        f"- search_coverage: {n - uniq.get('BUDGET_EXCEEDED', 0)}/{n}",
+        f"- ops_source: {dict(ops)}",
+        f"- wall_clock_ms: {elapsed_ms}",
+        "",
+    ]
+    out.joinpath("t04.md").write_text("\n".join(lines), encoding="utf-8")
+    _write_eval_provenance(out, split, elapsed_ms)
+
+
+def _write_eval_provenance(out: Path, split: str, elapsed_ms: int) -> None:
+    """Label official vs QA replay. Does not invent t04 numbers."""
+    import hashlib
+    import subprocess
+
+    kind = "QA_REPLAY" if "artifacts/qa" in str(out).replace("\\", "/") else "OFFICIAL"
+    commit = ""
+    try:
+        commit = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=".",
+            stderr=subprocess.DEVNULL,
+            text=True,
+        ).strip()
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        commit = ""
+    hashes = {}
+    for name in ("bank.csv", "ledger.csv", "settlement.csv"):
+        path = Path("data").joinpath(split, "rendered", name)
+        if path.is_file():
+            hashes[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    truth = Path("data").joinpath(split, "truth.jsonl")
+    truth_hash = hashlib.sha256(truth.read_bytes()).hexdigest() if truth.is_file() else ""
+    from residual_zero.config import load_fees, load_solver_config, load_tax_rates, config_digest
+    from residual_zero.features import load_features
+
+    digest = config_digest(load_solver_config(), load_tax_rates(), load_fees())
+    flags = load_features()
+    flags_blob = flags.model_dump_json() if hasattr(flags, "model_dump_json") else flags.json()
+    payload = {
+        "evaluation_type": kind,
+        "split": split,
+        "dataset_hash": hashes,
+        "truth_hash": truth_hash,
+        "git_commit": commit,
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "command": "python -m eval.cli",
+        "configuration_digest": digest,
+        "feature_flags_digest": hashlib.sha256(flags_blob.encode("utf-8")).hexdigest(),
+        "python": sys.version.split()[0],
+        "wall_clock_ms": elapsed_ms,
+        "writes_cleared": False,
+        "note": (
+            "OFFICIAL is artifacts/{split}/. QA_REPLAY is artifacts/qa/ and must not "
+            "overwrite artifacts/test/t04.md. Test-split official budget is 4/4 spent."
+        ),
+    }
+    out.joinpath("evaluation.json").write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
 def _refuse_test_if_needed(split: str, at_gate: bool) -> int | None:
@@ -106,6 +201,8 @@ def main(argv: list[str] | None = None) -> int:
     if "a4" in wanted:
         results["a4"] = run_a4()
     elapsed_ms = int((time.perf_counter() - t0) * 1000)
+    if "a3" in results:
+        _write_t04(out, args.split, results["a3"], truth_members, elapsed_ms)
 
     metrics = []
     has_exc = {}

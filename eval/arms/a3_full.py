@@ -37,6 +37,9 @@ class A3Result(ArmResult):
     residuals: dict[str, int] = Field(default_factory=dict)
     regimes: dict[str, Regime] = Field(default_factory=dict)
     scored: tuple[ScoredCredit, ...] = ()
+    gate_a_ok: dict[str, bool] = Field(default_factory=dict)
+    uniqueness: dict[str, str] = Field(default_factory=dict)
+    ops_source: dict[str, str] = Field(default_factory=dict)
 
 
 def run_a3(
@@ -65,18 +68,31 @@ def run_a3(
     eligible_map: dict[str, bool] = {}
     residuals: dict[str, int] = {}
     regimes: dict[str, Regime] = {}
+    gate_a_ok: dict[str, bool] = {}
+    uniqueness: dict[str, str] = {}
+    ops_source: dict[str, str] = {}
     scored: list[ScoredCredit] = []
     for credit in credits:
         declared = declared_by_credit.get(credit.id, ())
         regime = Regime.A_DECLARED if declared else Regime.B_SEARCHED
         member_ids: tuple[str, ...] = ()
+        fp_ok = False
+        source = ""
         if declared:
             fp = verify_declared(
                 credit,
                 tuple(DeclaredLine(r.item_id, r.kind, r.amount_paise, r.instrument) for r in declared),
                 ledger, rates, fees, reserve_bps=reserve_bps,
+                allow_declared_ops=flags.f59_settlement_declared_ops,
+                allow_missing_rate_ids=flags.f60_reconstruct_missing_rate_ids,
             )
+            fp_ok = fp.ok
+            source = fp.ops_source
             if fp.ok:
+                member_ids = tuple(r.item_id for r in declared if r.item_id in ledger)
+            elif flags.f58_named_declared_members:
+                # Settlement named these ids. Gate A failed the rate re-derive.
+                # Predicting the named set is multi-source recon, not auto-clear.
                 member_ids = tuple(r.item_id for r in declared if r.item_id in ledger)
         pool = build_pool(credit, items, cfg)
         solve = solve_search(pool, credit.amount_paise, cfg)
@@ -142,6 +158,9 @@ def run_a3(
         eligible_map[credit.id] = eligible
         residuals[credit.id] = outcome.residual_paise
         regimes[credit.id] = regime
+        gate_a_ok[credit.id] = fp_ok
+        uniqueness[credit.id] = solve.uniqueness.value
+        ops_source[credit.id] = source
         scored.append(
             ScoredCredit(
                 credit.id,
@@ -162,4 +181,7 @@ def run_a3(
         residuals=residuals,
         regimes=regimes,
         scored=tuple(scored),
+        gate_a_ok=gate_a_ok,
+        uniqueness=uniqueness,
+        ops_source=ops_source,
     )
