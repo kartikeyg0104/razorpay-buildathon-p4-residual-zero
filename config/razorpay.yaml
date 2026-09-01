@@ -1,4 +1,7 @@
 # Cut without touching another line: enabled false means the adapter is a no-op.
+# MCP settlement fetches (list / id / recon) run against labelled fixtures while
+# this is false. enabled true + env keys = GET https://api.razorpay.com/v1/settlements*
+# only. We do not spawn razorpay-mcp-server and we refuse capture/refund/OTP.
 
 enabled: false
 key_id_env: RAZORPAY_KEY_ID

@@ -11,7 +11,8 @@ search:
   derived_epsilon_paise: 119        # ceil(21 · √32) at the largest exact member count on dev
   derived_epsilon_rupees: 2         # ceil(119/100); applied search window when F32 is on. Confirms
                                     # D6's 7 is a looser worst-case bound (empirical max error was 2).
-  max_pool: 400                     # spec §5.5
+  max_pool: 400                     # spec §5.5 — unpruned cheap path / strategy label
+  max_pool_scaled: 640              # after safe prune, DP may run up to this n if axis fits
   max_axis_width_rupees: 2000000    # deterministic memory/work cap. Snapshot memory is about
                                     # (n+1) * axis_width / 8 bytes; over this -> BUDGET_EXCEEDED.
   max_enum_nodes: 200000            # deterministic backtracking cap

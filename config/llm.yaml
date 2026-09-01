@@ -1,5 +1,7 @@
 # LLM runtime. Credentials never live here; they come from the environment.
-# Q2 answer C: no spend in Phase 1. The client is a stub. Dev runs --offline.
+# Q2 answer C: eval / A3 stay stub. Optional Ask / AI finance controller:
+# NVIDIA_API_KEY or AI_API_KEY in .env. AI_PROVIDER=stub forces fallback templates.
+# NVIDIA NIM is the only supported live provider (Groq removed 2026-09-03).
 # Tier 4 is unexercised; F6 reports the tier 1–3 mix.
 
 model_id: stub

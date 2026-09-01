@@ -36,3 +36,6 @@ f46_bitemporal: true
 f27_scale: true
 f28_calibration: true
 f29_fx: true
+f58_named_declared_members: true
+f59_settlement_declared_ops: true
+f60_reconstruct_missing_rate_ids: true
