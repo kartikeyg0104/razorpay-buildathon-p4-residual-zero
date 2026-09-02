@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Evaluation Lab · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Held-out fixtures</p>
+    <h1>Evaluation Lab</h1>
+    <p class="lede">Three files the solver has never seen as training. Solvable, ambiguous, missing. The third must never clear.</p>
+  </div>
+  <a class="btn primary" href="/challenge?run=all">run all three</a>
+</div>
+{% if ran %}
+<div class="queue-list">
+  {% for r in results %}
+  <section class="card">
+    <h3>{{ r.file }}</h3>
+    <p class="lede">{{ r.comment }}</p>
+    <dl class="meta-grid">
+      <div><dt>transaction</dt><dd class="id">{{ r.credit_id }}</dd></div>
+      <div><dt>amount</dt><dd>{{ r.amount }}</dd></div>
+      <div><dt>uniqueness</dt><dd><span class="pill {{ r.uniqueness }}">{{ r.uniqueness }}</span></dd></div>
+      <div><dt>disposition</dt><dd><span class="pill {{ r.disposition }}">{{ r.disposition }}</span></dd></div>
+      <div><dt>class</dt><dd><span class="pill {{ r.cls }}">{{ r.cls }}</span></dd></div>
+      <div><dt>pool</dt><dd>{{ r.pool }}</dd></div>
+    </dl>
+  </section>
+  {% endfor %}
+</div>
+{% else %}
+<p class="muted">Nothing has been run this view. Click run all three — wall-clock is the DP on tiny pools.</p>
+{% endif %}
+{% endblock %}

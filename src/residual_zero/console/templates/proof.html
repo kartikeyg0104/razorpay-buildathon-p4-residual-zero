@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Proof Explorer · {{ credit_id }}{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">{{ credit_id }}</p>
+    <h1>Proof Explorer</h1>
+    <p class="lede">See exactly why <strong>{{ credit_id }}</strong> was cleared — or why it wasn't. When two candidate equations both produce residual zero, neither wins. The deterministic engine proved the arithmetic. Uniqueness determines whether a single explanation exists.</p>
+  </div>
+  <div class="actions">
+    <a class="btn primary" href="/credit/{{ credit_id }}">transaction detail</a>
+    <a class="btn" href="/ask?credit_id={{ credit_id }}&amp;question=Why can't you just choose the first combination?">why not pick the first combination</a>
+    <a class="btn ghost" href="/mixed">uniqueness testing</a>
+  </div>
+</div>
+{% include "proof_panel.html" %}
+{% if architecture %}
+<section class="card" style="margin-top:16px" id="decision-boundary">
+  <h3>Decision boundary</h3>
+  <pre class="arch-tree">AI
+├── chooses what to investigate
+├── requests tools
+├── summarizes evidence
+└── explains findings
+DETERMINISTIC ENGINE
+├── calculates amounts
+├── generates candidates
+├── verifies equations
+├── determines residual
+├── determines uniqueness
+└── determines reconciliation state
+HUMAN
+└── decides unresolved / ambiguous cases</pre>
+  <p class="muted" style="margin-top:10px">AI cannot authorize CLEARED. The overlay does not write CLEARED.</p>
+</section>
+{% endif %}
+{% endblock %}

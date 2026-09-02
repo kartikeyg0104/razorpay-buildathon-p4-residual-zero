@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Scenario Analysis · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Parameter substitution on known members</p>
+    <h1>Scenario Analysis</h1>
+    <p class="lede">{{ note }} Scenarios operate on a known member set and do not change financial truth. Parameter substitution on a known member set is the only scenario type supported. This is not a cash forecast or Monte Carlo simulation.</p>
+  </div>
+</div>
+{% if no_monte_carlo %}
+<section class="card">
+  <h3>not a cash forecast</h3>
+  <p class="lede" style="margin:0">This page only re-derives reserve bps on a named stack. It does not simulate rails, invent members, or plug a residual. Use <a href="/close">month-end cash bridge</a> for unplugged integer arithmetic.</p>
+</section>
+{% endif %}
+<form class="ask-form" method="get" action="/whatif">
+  <input type="text" name="credit_id" value="{{ credit_id }}" placeholder="crd_…">
+  <input type="number" name="reserve_bps" value="{{ used }}" min="0" step="1">
+  <button class="btn primary" type="submit">recompute</button>
+</form>
+<p class="chips" style="margin-top:12px">
+  {% for p in presets %}
+  <a class="chip {{ 'on' if p == used else '' }}" href="/whatif?credit_id={{ credit_id }}&amp;reserve_bps={{ p }}">reserve {{ p }} bps</a>
+  {% endfor %}
+</p>
+{% if baseline and scenario %}
+<section class="kpis" style="margin-top:18px">
+  <article class="kpi">
+    <div class="lbl">baseline {{ baseline.bps }} bps</div>
+    <div class="val" style="font-size:22px">{{ baseline.residual }}</div>
+    <div class="sub">ok {{ baseline.ok }} · {{ baseline.deltas }} line deltas</div>
+  </article>
+  <article class="kpi {{ 'ok' if scenario.same else 'alert' }}">
+    <div class="lbl">scenario {{ scenario.bps }} bps</div>
+    <div class="val" style="font-size:22px">{{ scenario.residual }}</div>
+    <div class="sub">ok {{ scenario.ok }} · {{ 'same residual' if scenario.same else 'residual moved' }}</div>
+  </article>
+</section>
+<p class="muted"><a href="/credit/{{ credit_id }}">open proof</a></p>
+{% endif %}
+{% endblock %}

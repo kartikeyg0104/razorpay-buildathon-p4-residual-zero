@@ -1,6 +1,74 @@
-<!doctype html>
-<html><head><title>audit</title></head>
-<body>
-<h1>audit</h1>
-<p>entries {{ n }} ok {{ ok }} head {{ head }}</p>
-</body></html>
+{% extends "base.html" %}
+{% block title %}Audit Log · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Traceable audit trail</p>
+    <h1>Audit Log</h1>
+    <p class="lede">Every reconciliation decision is recorded in a traceable audit trail. Each entry is a hashed payload linked to the previous hash. Edit a past row and the chain fails. Timings live outside the hash, so machines can disagree on clocks without disagreeing on history.</p>
+  </div>
+  <div class="status">
+    <span class="dot {{ '' if ok else 'bad' }}"></span>
+    {{ 'chain intact' if ok else 'chain broken' }}
+  </div>
+</div>
+
+<section class="kpis">
+  <article class="kpi ok">
+    <div class="lbl">entries</div>
+    <div class="val">{{ n }}</div>
+    <div class="sub">one per credit decision</div>
+  </article>
+  <article class="kpi {{ 'ok' if ok else 'bad' }}">
+    <div class="lbl">chain integrity</div>
+    <div class="val">{{ 'ok' if ok else 'fail' }}</div>
+    <div class="sub">{% if broken %}broken at seq {{ broken }}{% else %}head matches walk{% endif %}</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">cleared writes</div>
+    <div class="val">0</div>
+    <div class="sub">console cannot write the ledger</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">uniqueness distribution</div>
+    <div class="val" style="font-size:16px">{{ uniq_mix or '—' }}</div>
+    <div class="sub">across all entries, in sequence order</div>
+  </article>
+</section>
+
+<section class="card">
+  <h3>chain visualization</h3>
+  <div class="chain" title="one cell per audit entry">
+    {% for u in chain %}
+    <i data-u="{{ u }}"></i>
+    {% endfor %}
+  </div>
+  <p class="muted">amber ambiguous · slate none found · lime unique · rose budget</p>
+  <h3 style="margin-top:18px">head hash</h3>
+  <div class="hash">{{ head or '—' }}</div>
+</section>
+
+{% if recent %}
+<section class="card" style="margin-top:16px">
+  <h3>latest entries</h3>
+  <div class="table-wrap" style="max-height: none; box-shadow: none;">
+    <table>
+      <thead>
+        <tr><th>seq</th><th>transaction</th><th>uniqueness</th><th>disposition</th><th class="num">residual</th></tr>
+      </thead>
+      <tbody>
+      {% for e in recent %}
+        <tr>
+          <td class="muted">{{ e.seq }}</td>
+          <td class="id"><a href="/credit/{{ e.credit_id }}">{{ e.credit_id }}</a></td>
+          <td><span class="pill {{ e.uniqueness }}">{{ e.uniqueness }}</span></td>
+          <td><span class="pill {{ e.disposition }}">{{ e.disposition }}</span></td>
+          <td class="num">{{ e.residual }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

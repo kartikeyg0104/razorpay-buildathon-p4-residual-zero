@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block title %}AI Finance Controller · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">AI Finance Controller ·
+      {% if provider_status and provider_status.LIVE_PROVIDER == 'YES' %}live
+      {% elif provider_on %}fallback mode
+      {% else %}deterministic templates{% endif %}
+    </p>
+    <h1>AI Finance Controller</h1>
+    <p class="lede">
+      Investigate exceptions, explain evidence, compare sources, and prioritize reconciliation work.
+      The <strong>deterministic reconciliation engine</strong> is financial truth.
+      This panel only explains verified tool output. It does not auto-clear.
+      {% if provider_status and provider_status.LIVE_PROVIDER == 'YES' %}Live AI rewrote the explanation after tools returned; invented figures are rejected.
+      {% elif provider_on %}Live rewrite is <strong>unavailable</strong>. Deterministic tools still run. Fallback templates produce the same evidence.
+      {% else %}AI is offline — answers are deterministic templates from structured tools.{% endif %}
+    </p>
+  </div>
+</div>
+<section class="kpis">
+  <article class="kpi {% if llm_used %}ok{% endif %}">
+    <div class="lbl">answer mode</div>
+    <div class="val" style="font-size:1.15rem">{{ mode or 'idle' }}</div>
+    <div class="sub">{% if llm_used %}live AI{% elif provider_status and provider_status.LIVE_PROVIDER == 'UNAVAILABLE' %}unavailable · fallback{% elif provider_on %}key present · live not proven{% else %}fallback · deterministic{% endif %}</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">cleared by AI</div>
+    <div class="val">0</div>
+    <div class="sub">AI cannot authorize a clear</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">holdout</div>
+    <div class="val">{{ holdout or '—' }}</div>
+    <div class="sub">fitted corpus · {{ n_train or 0 }} train</div>
+  </article>
+</section>
+<form class="ask-form" method="get" action="/ask">
+  <input type="text" name="credit_id" value="{{ credit_id }}" placeholder="crd_…">
+  <input type="text" name="question" value="{{ question }}" placeholder="Ask about your reconciliation batch…" autofocus>
+  <button class="btn primary" type="submit">ask</button>
+</form>
+<p class="chips" style="margin-top:12px">
+  <a class="chip" href="/ask?question=What should I work on today?">What should I work on today?</a>
+  <a class="chip" href="/ask?credit_id=crd_001_acc_01_2025-01-09&amp;question=Why wasn't this transaction cleared?">Why wasn't this transaction cleared?</a>
+  <a class="chip" href="/ask?question=Give me a summary of this batch">Summarize today's exceptions</a>
+  <a class="chip" href="/ask?question=What is the total unreconciled amount?">How much is unreconciled?</a>
+  <a class="chip" href="/ask?question=How many transactions are currently ambiguous?">Show ambiguous settlements</a>
+  <a class="chip" href="/ask?question=Which transactions need human review?">Which transactions need human review?</a>
+  <a class="chip" href="/ask?credit_id=crd_001_acc_01_2025-01-09&amp;question=Explain this transaction">Explain this transaction</a>
+  <a class="chip" href="/ask?question=Why can't we simply clear the ambiguous ones?">Why not clear the ambiguous ones?</a>
+  <a class="chip" href="/ask?question=Why are so many transactions unresolved?">Why so many unresolved?</a>
+  <a class="chip" href="/ask?question=Which exceptions are potentially recoverable?">Potentially recoverable</a>
+  <a class="chip" href="/ask?credit_id=crd_001_acc_01_2025-01-09&amp;question=Why can't you just choose the first combination?">Why not pick the first combination?</a>
+  <a class="chip" href="/ask?question=What is our biggest reconciliation blocker?">What is the biggest blocker?</a>
+  <a class="chip" href="/ask?question=Show me the highest-value unresolved transactions">Highest-value unresolved</a>
+  <a class="chip" href="/ask?credit_id=crd_mix_ambiguous_twins&amp;question=Show competing explanations">Show competing explanations</a>
+  <a class="chip" href="/ask?question=Which transactions may be recoverable?">Which may be recoverable?</a>
+  <a class="chip" href="/ask?question=What should I work on next?">What should I work on next?</a>
+  <a class="chip" href="/explorer">Reconciliation Explorer</a>
+</p>
+{% if copilot %}
+<p class="chips" style="margin-top:8px">
+  {% for c in copilot %}
+  <a class="chip" href="{{ c.href }}">{{ c.label }}</a>
+  {% endfor %}
+</p>
+{% endif %}
+{% if answer %}
+<section class="kpis">
+  <article class="kpi">
+    <div class="lbl">intent</div>
+    <div class="val" style="font-size:1.05rem">{{ intent or '—' }}</div>
+    <div class="sub">tools {{ tools_called|join(', ') if tools_called else '—' }}</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">source</div>
+    <div class="val" style="font-size:1.1rem">{{ provider or 'fallback' }}</div>
+    <div class="sub">{% if llm_used %}live explanation{% else %}deterministic template{% endif %}</div>
+  </article>
+  <article class="kpi {{ 'ok' if decision else '' }}">
+    <div class="lbl">decision state</div>
+    <div class="val" style="font-size:1.05rem">{{ decision or '—' }}</div>
+    <div class="sub">deterministic, not an AI confidence score</div>
+  </article>
+</section>
+<section class="card verdict-card" style="margin-top:4px">
+  <h3>DETERMINISTIC RESULT — the engine, not the model</h3>
+  <p class="lede" style="margin:0 0 10px">
+    This block is rendered from engine fields. A language model cannot reword, soften or
+    contradict it.
+  </p>
+  <dl class="meta-grid">
+    <div><dt>decision state</dt><dd><strong>{{ decision or '—' }}</strong></dd></div>
+    <div><dt>intent</dt><dd>{{ intent or '—' }}</dd></div>
+    <div><dt>cleared by AI</dt><dd>no</dd></div>
+  </dl>
+  {% if intent == 'REFUSE_CLEAR' %}
+  <p class="refusal">
+    I cannot authorize a financial clear because the deterministic reconciliation engine has
+    not established a unique verified explanation. The AI finance controller does not write
+    CLEARED. Human review is required.
+  </p>
+  {% endif %}
+  {% if recommended %}
+  <p class="lede" style="margin:12px 0 0"><strong>NEXT BEST ACTION.</strong> {{ recommended }}</p>
+  {% endif %}
+</section>
+<section class="card ai-panel" style="margin-top:16px">
+  <h3>AI EXPLANATION{% if llm_used %} · rewritten by {{ provider_model or provider }}{% else %} · deterministic template{% endif %}</h3>
+  <p class="lede" style="margin:0 0 10px">
+    {% if llm_used %}A model rephrased the evidence above after the read-only tools returned.
+    Treat the wording as commentary; the verdict block is the record.
+    {% else %}No live rewrite was used. This text is generated from the tool output.{% endif %}
+  </p>
+  {% if investigation_steps %}
+  <h3>INVESTIGATION TRACE</h3>
+  <ol class="ai-steps">
+    {% for s in investigation_steps %}
+    <li>{{ '✓' if s.ok else '✗' }} Step {{ s.n }} · {{ s.label }} <span class="muted">({{ s.tool }}{% if s.latency_ns %} · {{ s.latency_ns }}ns{% endif %})</span></li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+  <pre class="ai-answer">{{ answer }}</pre>
+  {% if checks %}
+  <h3 style="margin-top:18px">EVIDENCE</h3>
+  <dl class="meta-grid">
+    {% for c in checks %}
+    <div><dt>{{ '✓' if c.ok else '✗' }} {{ c.label }}</dt><dd>{{ c.value }}</dd></div>
+    {% endfor %}
+  </dl>
+  {% endif %}
+  <p class="muted" style="margin-top:10px">
+    {% if credit_id %}<a class="btn ghost" href="/credit/{{ credit_id }}">View transaction</a>{% endif %}
+    <button type="button" class="btn ghost" data-evidence-toggle>View evidence</button>
+    citations
+    {% for c in citations %}
+      {% if c.startswith('crd_') %}
+      <a class="id" href="/credit/{{ c }}">{{ c }}</a>
+      {% else %}
+      <span class="id">{{ c }}</span>
+      {% endif %}
+    {% else %}(none){% endfor %}
+    {% if provider_error %} · {{ provider_error }}{% endif %}
+  </p>
+  <div class="evidence-drawer" hidden data-evidence-drawer>
+    {% for e in evidence_refs %}
+    <p class="id">{{ e.evidence_id }} · {{ e.source_type }} · {{ e.source_record_id }} · {{ e.field }} = {{ e.value }}</p>
+    {% else %}
+    <p class="muted">No structured evidence rows for this question.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

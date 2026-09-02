@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Browser Extension · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Chrome · Edge · Brave · Manifest V3</p>
+    <h1>Browser Extension</h1>
+    <p class="lede">A proof chip on the settlement tab the merchant already has open. Read-only. Localhost desk only. Never writes <span class="id">CLEARED</span>. Does not read Razorpay cookies or passwords.</p>
+  </div>
+  <div class="actions">
+    <a class="btn primary" href="/extension.zip" download="residual-zero-extension.zip">download extension</a>
+    <a class="btn ghost" href="/credit/crd_001_acc_01_2025-01-09">open demo proof</a>
+  </div>
+</div>
+<ol class="tour">
+  <li>
+    <span>1</span>
+    <div>
+      <h2>Download, then Load unpacked</h2>
+      <p>Use <a href="/extension.zip" download="residual-zero-extension.zip">download extension</a> on this page. Unzip. In Chrome open <span class="id">chrome://extensions</span>, turn on Developer mode, <b>Load unpacked</b>, pick the unzipped <span class="id">residual-zero-extension</span> folder (the one with <span class="id">manifest.json</span>). Keep this desk running on <span class="id">127.0.0.1:8765</span>.</p>
+    </div>
+  </li>
+  <li>
+    <span>2</span>
+    <div>
+      <h2>Pin and open</h2>
+      <p>The popup shows auto-clear 0, verified transactions, and the human review queue from <span class="id">/api/desk</span>. Lookup a credit. Paste recon JSON. Nothing is written.</p>
+    </div>
+  </li>
+  <li>
+    <span>3</span>
+    <div>
+      <h2>Chips on a live tab</h2>
+      <p>On <span class="id">dashboard.razorpay.com</span> the content script marks <span class="id">crd_</span>, <span class="id">setl_</span>, and <span class="id">setlod_</span> ids. Click the lime <b>0</b> to open the proof or the data sources form. Sample ids on this page so you can demo without a Razorpay login:</p>
+      <p class="id" style="margin-top:10px">crd_001_acc_01_2025-01-09 · setl_sample_01 · setlod_sample_01 · crd_missing</p>
+    </div>
+  </li>
+</ol>
+<section class="card" style="margin-top:18px">
+  <h3>permissions, on purpose</h3>
+  <p class="muted">Host access is <span class="id">127.0.0.1:8765</span> and <span class="id">localhost:8765</span>. Dashboard chips use <span class="id">dashboard.razorpay.com</span> as a page overlay, not an API client. No <span class="id">cookies</span>, <span class="id">&lt;all_urls&gt;</span>, or remote scripts.</p>
+</section>
+{% endblock %}

@@ -1,7 +1,204 @@
-<!doctype html>
-<html><head><title>Residual Zero</title></head>
-<body>
-<h1>batch</h1>
-<p>credits {{ n_credits }} flagged {{ n_flagged }}</p>
-<p>audit head {{ head }} ok {{ chain_ok }}</p>
-</body></html>
+{% extends "base.html" %}
+{% block title %}Reconciliation Dashboard · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">AI-Powered Financial Reconciliation</p>
+    <h1>Reconciliation Dashboard</h1>
+    <p class="lede">See what was proven, what was linked, and what still needs human review. Residual-zero {{ t04.residual_zero if t04 else '—' }} means the reconstructed explanation matches the bank amount exactly. Settlement-linked {{ t04.settlement_linked if t04 else '—' }} identifies the ledger records (6 fail rate re-derive). <a href="/demo">5-minute product tour.</a></p>
+  </div>
+  <div class="status">
+    <span class="dot {{ 'ok' if chain_ok else 'bad' }}"></span>
+    audit {{ 'intact' if chain_ok else 'broken' }} · {{ n_credits }} credits
+  </div>
+</div>
+
+<section class="kpis">
+  <article class="kpi">
+    <div class="lbl">transactions</div>
+    <div class="val">{{ t04.scored if t04 else n_credits }}</div>
+    <div class="sub">scored credits · posted {{ n_credits }}</div>
+  </article>
+  <article class="kpi ok">
+    <div class="lbl">proven residual-zero</div>
+    <div class="val" style="font-size:1.6rem">{{ t04.residual_zero if t04 else '—' }}</div>
+    <div class="sub">reconstructed explanation matches bank amount exactly</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">settlement-linked</div>
+    <div class="val" style="font-size:1.15rem">{{ t04.settlement_linked if t04 else '—' }}</div>
+    <div class="sub">identified settlement members · 6 fail rate re-derive</div>
+  </article>
+  <article class="kpi ok">
+    <div class="lbl">search completed</div>
+    <div class="val" style="font-size:1.15rem">{{ (n_unique|default(0) + n_ambiguous|default(0) + n_none_found|default(0)) }}/{{ n_credits }}</div>
+    <div class="sub">coverage {{ t04.test_search_completed if t04 else '—' }} · search coverage, not clearance</div>
+  </article>
+</section>
+<section class="kpis">
+  <article class="kpi">
+    <div class="lbl">unique explanation</div>
+    <div class="val">{{ n_unique }}</div>
+    <div class="sub">only one valid explanation found</div>
+  </article>
+  <article class="kpi alert">
+    <div class="lbl">ambiguous</div>
+    <div class="val">{{ n_ambiguous }}</div>
+    <div class="sub">no match {{ n_none_found }} · budget {{ n_budget_search }}</div>
+  </article>
+  <article class="kpi alert">
+    <div class="lbl">unresolved</div>
+    <div class="val">{% if forensic and forensic.remaining_unmatched is defined %}{{ forensic.remaining_unmatched }}{% else %}—{% endif %}</div>
+    <div class="sub"><a href="/exceptions">view exceptions</a> · remaining after settlement-linked</div>
+  </article>
+  <article class="kpi alert">
+    <div class="lbl">unreconciled</div>
+    <div class="val" style="font-size:1.15rem">{{ t04.unreconciled if t04 else '—' }}</div>
+    <div class="sub">double-claimed {{ t04.double_claimed if t04 else '0' }} · books identity holds</div>
+  </article>
+</section>
+
+<div class="verdict">
+  <div>
+    <strong>{{ n_cleared }} auto-cleared</strong>
+    <span>auto-clear stayed at zero — uniqueness not proven</span>
+  </div>
+  <div>
+    <strong>{{ n_gate_a }} proven</strong>
+    <span>settlement reports verified against the rate table</span>
+  </div>
+  <div>
+    <strong>{{ n_human }} human review</strong>
+    <span>ambiguous or missing evidence — requires human decision</span>
+  </div>
+</div>
+
+<section class="kpis">
+  <article class="kpi ok">
+    <div class="lbl">auto-cleared</div>
+    <div class="val">{{ n_cleared }}</div>
+    <div class="sub">guesses refused — this is the product</div>
+  </article>
+  <article class="kpi ok">
+    <div class="lbl">verified &amp; accepted</div>
+    <div class="val">{{ n_gate_a }}</div>
+    <div class="sub">settlement reports re-derived successfully</div>
+  </article>
+  <article class="kpi alert">
+    <div class="lbl">human review queue</div>
+    <div class="val">{{ n_human }}</div>
+    <div class="sub">{{ human_rupees or '—' }} still unproven</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">journal-ready</div>
+    <div class="val">{{ n_journalable }}</div>
+    <div class="sub">{{ n_mismatch }} posted-mismatch · overlay does not write CLEARED</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">budget exceeded</div>
+    <div class="val" style="font-size:1.15rem">{{ t04.test_budget if t04 else '—' }}</div>
+    <div class="sub">search completed {{ t04.test_search_completed if t04 else '—' }} · settlement-linked {{ t04.test_exact if t04 else '—' }}</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">throughput</div>
+    <div class="val" style="font-size:1.05rem">{{ (t04.throughput_per_1000s if t04 else '') | count }}</div>
+    <div class="sub">credits / 1000s · wall {{ (t04.wall_ns if t04 else '') | duration_ns }}</div>
+  </article>
+</section>
+
+{% if ai_insight %}
+<section class="card ai-panel">
+  <h3>AI operations insight</h3>
+  <p class="lede" style="margin:0">{{ ai_insight }}</p>
+  <p class="muted" style="margin-top:10px">Grounded in verified reconciliation data. <a href="/ask?question=Give me a summary of this batch">Ask the AI controller</a> · <a href="/explorer">Reconciliation Explorer</a>.</p>
+</section>
+{% endif %}
+{% if ai_root_cause %}
+<section class="card" style="margin-top:12px">
+  <h3>Why so many remain unresolved</h3>
+  <p class="lede" style="margin:0">{{ ai_root_cause }}</p>
+</section>
+{% endif %}
+{% if t04 %}
+<details class="card fold" style="margin-top:12px">
+  <summary><h3>Technical details · reconciliation stages explained</h3></summary>
+  <p class="lede" style="margin:0">Residual-zero {{ t04.residual_zero }} proves the equation. Verified-linked {{ t04_dev.verified_linked if t04_dev else '—' }} is named ids plus residual 0. Unique {{ n_unique }} is search uniqueness. Auto-clear is 0 because UNIQUE is 0. Overlay does not write CLEARED.</p>
+  <ol class="ai-steps" style="margin-top:12px">
+    <li>Bank credit arrives</li>
+    <li>Reconstruct explanation → residual = ₹0 (residual-zero, not a clear)</li>
+    <li>Verify against settlement report → verified-linked (not a clear)</li>
+    <li>Is explanation unique on full pool? No → human review. Yes → ordering gate → CLEARED</li>
+  </ol>
+  <p class="muted">Official cards: <span class="id">artifacts/dev/t04.md</span> and <span class="id">artifacts/test/t04.md</span>. QA replays write <span class="id">artifacts/qa/</span> and do not overwrite those files. To see UNIQUE next to AMBIGUOUS on the same solver, open the <a href="/mixed">uniqueness testing</a> page — it is not official Track 04.</p>
+</details>
+{% endif %}
+{% if t04 %}
+<details class="card fold" style="margin-top:12px">
+  <summary><h3>Technical details · provability waterfall</h3></summary>
+  <p class="lede" style="margin:0">Two views. Overlapping metrics are not a partition. Exclusive uniqueness buckets sum to the scored batch.</p>
+  <h3 style="margin-top:14px">Overlapping metrics (not additive)</h3>
+  <ol class="ai-steps">
+    <li>Test {{ t04_test.n_scored if t04_test else '—' }} TOTAL scored</li>
+    <li>Residual-zero {{ t04_test.residual_zero if t04_test else '—' }} · identified {{ t04.test_exact }} · verified-linked {{ t04_test.verified_linked if t04_test else '—' }}</li>
+    <li>{{ t04_test.unique if t04_test else '0' }} UNIQUE → {{ t04_test.auto_clear if t04_test else '0' }} AUTO-CLEAR · search {{ t04.test_search_completed }}</li>
+  </ol>
+  <p class="muted exclusive-note">Do not add residual-zero + identified + verified. Those populations overlap.</p>
+  <h3 style="margin-top:14px">Mutually exclusive uniqueness (sums to scored)</h3>
+  <ol class="ai-steps">
+    <li>Dev exclusive: unique {{ n_unique }} + ambiguous {{ n_ambiguous }} + none {{ n_none_found }} + budget {{ n_budget_search|default(0) }} = {{ (n_unique|default(0) + n_ambiguous|default(0) + n_none_found|default(0) + n_budget_search|default(0)) }} of {{ n_credits }} posted</li>
+    <li>Official test exclusive (artifacts/test/t04.md): unique {{ t04_test.unique }} + ambiguous {{ t04_test.ambiguous }} + none {{ t04_test.none_found }} + budget {{ t04_test.budget_exceeded_search }} = {{ t04_test.n_scored }}</li>
+    <li>POTENTIALLY_RECOVERABLE is an investigation queue, not a uniqueness bucket, and is never counted as reconciled</li>
+  </ol>
+  <p class="muted">Dev overlapping: {{ t04.residual_zero }} residual-zero · {{ t04.settlement_linked }} identified · {{ t04_dev.verified_linked if t04_dev else '—' }} verified-linked.</p>
+</details>
+{% endif %}
+
+
+<div class="toolbar">
+  <label class="search">
+    <span class="muted">/</span>
+    <input data-filter type="search" placeholder="filter by transaction, account, status, or type" autocomplete="off">
+  </label>
+  <div class="chips">
+    <button type="button" class="chip on" data-chip="">all · <span data-visible>{{ rows|length }}</span></button>
+    {% for chip in gate_counts %}
+    <button type="button" class="chip" data-chip="{{ chip.name }}">{{ chip.short }} {{ chip.n }}</button>
+    {% endfor %}
+    {% for chip in class_counts %}
+    <button type="button" class="chip" data-chip="{{ chip.name }}">{{ chip.short }} {{ chip.n }}</button>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table data-table>
+    <thead>
+      <tr>
+        <th>transaction</th>
+        <th>account</th>
+        <th>date</th>
+        <th class="num">amount</th>
+        <th>uniqueness</th>
+        <th>status</th>
+        <th>exception</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for row in rows %}
+      <tr data-search="{{ row.id }} {{ row.cls }} {{ row.account }} {{ row.uniqueness }} {{ row.gate }} {{ row.utr }} {{ row.narration }}" data-class="{{ row.cls }} {{ row.gate }}">
+        <td class="id"><a href="/credit/{{ row.id }}">{{ row.id }}</a></td>
+        <td class="muted">{{ row.account }}</td>
+        <td class="muted">{{ row.value_date }}</td>
+        <td class="num">{{ row.amount }}</td>
+        <td><span class="pill {{ row.uniqueness }}">{{ row.uniqueness or '—' }}</span></td>
+        <td><span class="pill {{ row.gate }}">{{ row.gate or '—' }}</span></td>
+        <td><span class="pill {{ row.cls }}">{{ row.cls or '—' }}</span></td>
+      </tr>
+    {% else %}
+      <tr><td colspan="7" class="empty">No credits loaded. Run the pipeline from the repo root.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="muted" style="margin-top:14px">{{ n_flagged }} exception rows on disk · audit head <span class="id">{{ head or '—' }}</span></p>
+{% endblock %}

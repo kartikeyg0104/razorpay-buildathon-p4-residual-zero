@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+{% block title %}Data Sources · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Settlement data</p>
+    <h1>Data Sources</h1>
+    <p class="lede">Fetch and inspect settlement data from Razorpay. Supported tools: settlements, instant settlements, and settlement reconciliation details. Members are matched against the local ledger; a hit is not a clear. Live fetch is {{ 'on' if enabled else 'off' }}. Write operations are refused.</p>
+  </div>
+</div>
+<section class="kpis">
+  <article class="kpi {{ 'ok' if not enabled else 'alert' }}">
+    <div class="lbl">adapter</div>
+    <div class="val" style="font-size:18px">{{ 'live' if enabled else 'offline' }}</div>
+    <div class="sub">{{ 'GET api.razorpay.com' if enabled else 'labelled fixtures, no network' }}</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">parsed rows</div>
+    <div class="val">{{ n }}</div>
+    <div class="sub">settlement recon sample</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">in ledger</div>
+    <div class="val">{{ ledger_hits }}</div>
+    <div class="sub">{{ ledger_misses }} miss · CLEARED 0</div>
+  </article>
+</section>
+<section class="card">
+  <h3>fetch settlement data</h3>
+  <p class="muted">Default uses the labelled fixture. A <span class="id">setl_</span> or <span class="id">setlod_</span> chip opens this form with the id filled. Keys are required only if live fetch is enabled.</p>
+  <form class="ask-form" id="mcp-form">
+    <select id="mcp-tool">
+      <option value="fetch_settlement_recon_details">fetch_settlement_recon_details</option>
+      <option value="fetch_all_settlements">fetch_all_settlements</option>
+      <option value="fetch_settlement_with_id">fetch_settlement_with_id</option>
+      <option value="fetch_all_instant_settlements">fetch_all_instant_settlements</option>
+      <option value="fetch_instant_settlement_with_id">fetch_instant_settlement_with_id</option>
+    </select>
+    <input id="mcp-year" type="number" value="2025" min="2000" max="2100" title="year">
+    <input id="mcp-month" type="number" value="1" min="1" max="12" title="month">
+    <input id="mcp-day" type="number" value="" min="1" max="31" placeholder="day optional" title="day">
+    <input id="mcp-setl" type="text" value="setl_sample_01" placeholder="setl_… or setlod_…">
+    <button class="btn primary" type="submit">run</button>
+  </form>
+  <p class="muted" id="mcp-status" style="margin-top:10px"></p>
+  <div class="table-wrap" id="mcp-table" style="margin-top:12px;max-height:none"></div>
+</section>
+<section class="card" style="margin-top:16px">
+  <h3>paste JSON</h3>
+  <p class="muted">Raw <span class="id">GET /v1/settlements/recon/combined</span> or an MCP envelope. Samples: <span class="id">fixtures/recon/combined_sample.json</span>, <span class="id">mcp_fetch_settlement_recon_details.json</span>.</p>
+  <textarea id="recon-blob" rows="8" placeholder='{"entity":"collection","items":[...]}'></textarea>
+  <div class="actions">
+    <button type="button" class="btn" id="recon-run">preview paste</button>
+  </div>
+  {% if error %}<p class="identity-eq bad" style="margin-top:12px">{{ error }}</p>{% endif %}
+</section>
+{% if rows %}
+<div class="table-wrap" style="margin-top:16px;max-height:none">
+  <table>
+    <thead><tr><th>settlement</th><th>item</th><th>kind</th><th class="num">amount</th><th>type</th><th>ledger</th></tr></thead>
+    <tbody>
+    {% for r in rows %}
+      <tr>
+        <td class="id"><a href="/recon?tool=fetch_settlement_with_id&amp;settlement_id={{ r.settlement }}">{{ r.settlement }}</a></td>
+        <td class="id">{{ r.item }}</td>
+        <td>{{ r.kind }}</td>
+        <td class="num">{{ r.amount }}</td>
+        <td class="muted">{{ r.type }}</td>
+        <td>{{ 'hit' if r.in_ledger else 'miss' }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+<details class="card fold" style="margin-top:16px">
+  <summary><h3>Technical details · Razorpay MCP integration</h3></summary>
+  <p class="muted">Same fetch tools as <a href="https://github.com/razorpay/razorpay-mcp-server" rel="noreferrer">razorpay-mcp-server</a>: settlements, instant settlements, and <span class="id">fetch_settlement_recon_details</span>. Capture, refund, OTP, and <span class="id">create_instant_settlement</span> are refused. Nothing is written. Config: <code>config/razorpay.yaml</code>.</p>
+</details>
+<script>
+(function () {
+  function cell(text) {
+    var td = document.createElement("td");
+    td.textContent = text;
+    return td;
+  }
+  function toolForId(id) {
+    return String(id || "").indexOf("setlod_") === 0
+      ? "fetch_instant_settlement_with_id"
+      : "fetch_settlement_with_id";
+  }
+  function runTool(tool, settlementId) {
+    document.getElementById("mcp-tool").value = tool;
+    if (settlementId) document.getElementById("mcp-setl").value = settlementId;
+    document.getElementById("mcp-form").requestSubmit();
+  }
+  function idCell(id) {
+    var td = document.createElement("td");
+    td.className = "id";
+    var a = document.createElement("a");
+    a.href = "/recon?tool=" + encodeURIComponent(toolForId(id)) + "&settlement_id=" + encodeURIComponent(id);
+    a.textContent = id;
+    a.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      runTool(toolForId(id), id);
+    });
+    td.appendChild(a);
+    return td;
+  }
+  function renderMcp(data) {
+    var status = document.getElementById("mcp-status");
+    var wrap = document.getElementById("mcp-table");
+    wrap.replaceChildren();
+    if (!data.ok) {
+      status.textContent = data.error || "refused";
+      status.className = "identity-eq bad";
+      return;
+    }
+    status.className = "muted";
+    status.textContent = data.tool + " · " + data.source + " · n=" + data.n
+      + " · ledger " + String(data.ledger_hits || 0) + "/" + String(data.n)
+      + " · written " + String(data.written)
+      + " · CLEARED " + String(data.cleared);
+    var table = document.createElement("table");
+    var head = document.createElement("thead");
+    var hr = document.createElement("tr");
+    var rows = data.rows || [];
+    var sets = data.settlements || [];
+    if (rows.length) {
+      ["settlement", "item", "kind", "amount", "type", "ledger"].forEach(function (h) {
+        var th = document.createElement("th");
+        th.textContent = h;
+        hr.appendChild(th);
+      });
+      head.appendChild(hr);
+      table.appendChild(head);
+      var tb = document.createElement("tbody");
+      rows.forEach(function (r) {
+        var tr = document.createElement("tr");
+        tr.appendChild(idCell(r.settlement));
+        tr.appendChild(cell(r.item));
+        tr.appendChild(cell(r.kind));
+        var amt = cell(r.amount);
+        amt.className = "num";
+        tr.appendChild(amt);
+        tr.appendChild(cell(r.type));
+        tr.appendChild(cell(r.in_ledger ? "hit" : "miss"));
+        tb.appendChild(tr);
+      });
+      table.appendChild(tb);
+    } else {
+      ["id", "amount", "status", "utr"].forEach(function (h) {
+        var th = document.createElement("th");
+        th.textContent = h;
+        hr.appendChild(th);
+      });
+      head.appendChild(hr);
+      table.appendChild(head);
+      var tb2 = document.createElement("tbody");
+      sets.forEach(function (r) {
+        var tr = document.createElement("tr");
+        tr.appendChild(idCell(r.id));
+        var amt = cell(r.amount);
+        amt.className = "num";
+        tr.appendChild(amt);
+        tr.appendChild(cell(r.status));
+        tr.appendChild(cell(r.utr));
+        tb2.appendChild(tr);
+      });
+      table.appendChild(tb2);
+    }
+    wrap.appendChild(table);
+  }
+  var form = document.getElementById("mcp-form");
+  if (form) {
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var body = {
+        tool: document.getElementById("mcp-tool").value,
+        arguments: {
+          year: Number(document.getElementById("mcp-year").value),
+          month: Number(document.getElementById("mcp-month").value),
+          settlement_id: document.getElementById("mcp-setl").value,
+          count: 10
+        }
+      };
+      var day = document.getElementById("mcp-day").value;
+      if (day) body.arguments.day = Number(day);
+      fetch("/api/mcp/tool", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(body)
+      }).then(function (r) { return r.json(); }).then(renderMcp);
+    });
+  }
+  var params = new URLSearchParams(window.location.search);
+  var sid = params.get("settlement_id");
+  var tool = params.get("tool");
+  if (sid) document.getElementById("mcp-setl").value = sid;
+  if (tool) document.getElementById("mcp-tool").value = tool;
+  if (sid) form.requestSubmit();
+  var btn = document.getElementById("recon-run");
+  var box = document.getElementById("recon-blob");
+  if (!btn || !box) return;
+  btn.addEventListener("click", function () {
+    fetch("/recon", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: box.value || "{}"
+    }).then(function (r) { return r.text(); }).then(function (html) {
+      document.open(); document.write(html); document.close();
+    });
+  });
+})();
+</script>
+{% endblock %}

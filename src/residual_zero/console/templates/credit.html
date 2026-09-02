@@ -1,7 +1,418 @@
-<!doctype html>
-<html><head><title>{{ credit_id }}</title></head>
-<body>
-<h1>decomposition</h1>
-<p id="proof">{{ credit_id }} {{ amount }}</p>
-<div id="waterfall">waterfall</div>
-</body></html>
+{% extends "base.html" %}
+{% block title %}{{ credit_id }} · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Transaction detail</p>
+    <h1 id="proof" class="id-title">{{ credit_id }}</h1>
+    <p class="lede">{{ amount or '—' }} {{ currency }} · {{ account }} · {{ value_date }}. Residual 0 is arithmetic. Unique is search. Verified means settlement report re-derived. Auto-clear requires UNIQUE + FULL + threshold.{% if mixed_corpus %} This credit is a constructed test pool, not official Track 04.{% endif %}</p>
+  </div>
+  <div class="actions">
+    {% if prev_id %}<a class="btn ghost" data-prev href="/credit/{{ prev_id }}">← prev</a>{% endif %}
+    {% if next_id %}<a class="btn ghost" data-next href="/credit/{{ next_id }}">next →</a>{% endif %}
+    <a class="btn ghost" href="/ask?credit_id={{ credit_id }}&amp;question=Why wasn't this transaction cleared?">ask AI</a>
+    <a class="btn ghost" href="/proof/{{ credit_id }}">proof explorer</a>
+    <a class="btn ghost" href="/whatif?credit_id={{ credit_id }}">scenario analysis</a>
+    <a class="btn ghost" href="/">dashboard</a>
+  </div>
+</div>
+
+{% if mixed_corpus %}
+<div class="banner {{ 'zero' if uniqueness == 'UNIQUE' else '' }}">
+  <div>
+    <h2>{% if uniqueness == 'UNIQUE' %}UNIQUE on a constructed pool. Eval would clear.{% elif uniqueness == 'AMBIGUOUS' %}AMBIGUOUS on a constructed pool. Eval refuses.{% else %}NONE_FOUND on a constructed pool. Eval refuses.{% endif %}</h2>
+    <p>Official Dev unique remains 0/239. {{ diagnosis }}</p>
+  </div>
+</div>
+{% elif uniqueness == 'AMBIGUOUS' %}
+<div class="banner {{ 'zero' if gate_a_ok else '' }}">
+  <div>
+    <h2>{% if gate_a_ok %}Zero auto-clear is correct. Settlement report already verified.{% else %}Search is ambiguous. Auto-clear refused.{% endif %}</h2>
+    <p>{% if gate_a_ok %}Residual {{ gate_a_residual or residual }}. Another subset still fits, so the system will not pick a winner. That 0 is a feature. The alternative would be 147 unverified clears.{% else %}{{ diagnosis or "The settlement report may re-derive to residual 0.00. Another subset still fits inside the tolerance window, so the system will not pick a winner." }}{% endif %}</p>
+  </div>
+</div>
+{% elif diagnosis %}
+<div class="banner">
+  <div>
+    <h2>{{ exception_class }}</h2>
+    <p>{{ diagnosis }}</p>
+  </div>
+</div>
+{% elif residual == '0.00' %}
+<div class="banner zero">
+  <div>
+    <h2>Residual is zero.</h2>
+    <p>Every figure below was computed from integer paise and the rate table. Uniqueness is {{ uniqueness or 'unknown' }} — that gate is separate from the arithmetic.</p>
+  </div>
+</div>
+{% endif %}
+
+{% if utr_siblings and utr_siblings.n %}
+<div class="banner">
+  <div>
+    <h2>Duplicate UTR</h2>
+    <p>{{ utr_siblings.note }} Also on {% for cid in utr_siblings.ids %}<a href="/credit/{{ cid }}">{{ cid }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>
+  </div>
+</div>
+{% endif %}
+
+<section class="kpis">
+  <article class="kpi {{ 'ok' if residual == '0.00' else '' }}">
+    <div class="lbl">1 · residual proof</div>
+    <div class="val" style="font-size:1.2rem">{{ 'YES' if residual == '0.00' else 'NO' }}</div>
+    <div class="sub">residual {{ residual or '—' }} · integer paise</div>
+  </article>
+  <article class="kpi {{ 'ok' if uniqueness == 'UNIQUE' else 'alert' if uniqueness in ('AMBIGUOUS', 'NONE_FOUND', 'BUDGET_EXCEEDED') else '' }}">
+    <div class="lbl">2 · uniqueness</div>
+    <div class="val" style="font-size:1.05rem">{{ uniqueness or '—' }}</div>
+    <div class="sub">not the same as residual 0</div>
+  </article>
+  <article class="kpi {{ 'ok' if gate_a_ok else 'alert' }}">
+    <div class="lbl">3 · verified</div>
+    <div class="val" style="font-size:1.2rem">{{ 'ACCEPT' if gate_a_ok else 'NO' }}</div>
+    <div class="sub">settlement report re-derived</div>
+  </article>
+  <article class="kpi {{ 'alert' if not auto_cleared else 'ok' }}">
+    <div class="lbl">4 · auto-clear</div>
+    <div class="val" style="font-size:1.2rem">{{ 'YES' if auto_cleared else 'NO' }}</div>
+    <div class="sub">{% if resolution %}human {{ resolution }}{% else %}UNIQUE + FULL + threshold{% endif %}</div>
+  </article>
+</section>
+<section class="card" style="margin-top:4px" id="financial-truth">
+  <h3>FINANCIAL TRUTH</h3>
+  <p class="lede" style="margin:0 0 10px">Deterministic engine first. AI explanation second. Human action third.</p>
+  <dl class="meta-grid">
+    <div><dt>BANK AMOUNT</dt><dd>{{ amount or '—' }} {{ currency }}</dd></div>
+    <div><dt>RESIDUAL</dt><dd>{{ residual or '—' }}</dd></div>
+    <div><dt>EXPLANATIONS FOUND</dt><dd>{{ proof.solution_count if proof and proof.solution_count is not none else n_members }}</dd></div>
+    <div><dt>UNIQUENESS</dt><dd>{{ uniqueness or '—' }}</dd></div>
+    <div><dt>VERIFICATION</dt><dd>{% if uniqueness == 'UNIQUE' and residual == '0.00' %}UNIQUE VERIFIED{% elif gate_a_ok %}VERIFIED · search not UNIQUE{% else %}not unique verified{% endif %}</dd></div>
+    <div><dt>SETTLEMENT VERIFIED</dt><dd>{{ 'ACCEPT' if gate_a_ok else 'NO' }}</dd></div>
+    <div><dt>MATCHED RECORDS</dt><dd>{{ n_members }}</dd></div>
+  </dl>
+</section>
+<section class="kpis">
+  <article class="kpi">
+    <div class="lbl">bank amount</div>
+    <div class="val" style="font-size:22px">{{ amount or '—' }}</div>
+    <div class="sub">{{ n_members }} members</div>
+  </article>
+  <article class="kpi ok">
+    <div class="lbl">residual</div>
+    <div class="val" style="font-size:22px">{{ residual or '—' }}</div>
+    <div class="sub">verifier never widens</div>
+  </article>
+  <article class="kpi {{ 'ok' if gate_a_ok else 'alert' }}">
+    <div class="lbl">settlement verified</div>
+    <div class="val" style="font-size:18px">{{ 'ACCEPT' if gate_a_ok else 'NO' }}</div>
+    <div class="sub">{{ gate_a_deltas }} line deltas · residual {{ gate_a_residual or residual or '—' }}</div>
+  </article>
+  <article class="kpi {{ 'ok' if uniqueness == 'UNIQUE' else 'alert' if uniqueness in ('AMBIGUOUS', 'NONE_FOUND') else '' }}">
+    <div class="lbl">search uniqueness</div>
+    <div class="val" style="font-size:18px">{{ uniqueness or '—' }}</div>
+    <div class="sub">{{ regime or '—' }} · {{ disposition or '—' }}</div>
+  </article>
+</section>
+
+<section class="card" style="margin-top:4px" id="auto-clear-decision">
+  <h3>AUTO-CLEAR DECISION</h3>
+  <p class="lede" style="margin:0 0 10px">Why this transaction was not auto-cleared. {{ clear_decision.thesis if clear_decision else thesis }}</p>
+  {% if clear_decision %}
+  <div class="ladder">
+    <div>Residual <b class="{{ 'pass' if clear_decision.residual == 'PASS' else 'fail' }}">{{ clear_decision.residual }}</b></div>
+    <div>Uniqueness <b class="{{ 'pass' if clear_decision.uniqueness_gate == 'PASS' else 'fail' }}">{{ clear_decision.uniqueness_gate }} · {{ clear_decision.uniqueness }}</b></div>
+    <div>Search scope <b class="{{ 'pass' if clear_decision.search_scope_gate == 'PASS' else 'fail' }}">{{ clear_decision.search_scope_gate }} · {{ clear_decision.search_scope }}</b></div>
+    <div>Ordering score <b>{{ clear_decision.ordering_gate }} · {{ clear_decision.ordering_score }}</b></div>
+    <div>Eval would clear <b class="{{ 'pass' if clear_decision.eval_would_clear else 'fail' }}">{{ clear_decision.eval_label }}</b></div>
+    <div>Console write <b class="fail">{{ clear_decision.final }}</b></div>
+  </div>
+  <p class="lede" style="margin:12px 0 0">Reason: {{ clear_decision.reason }}</p>
+  {% endif %}
+</section>
+
+<section class="card" style="margin-top:16px" id="why-not-cleared">
+  <h3>WHY NOT CLEARED?</h3>
+  <p class="lede" style="margin:0 0 10px">Evidence checklist. Not an AI confidence score.</p>
+  <dl class="meta-grid">
+    <div><dt>amount / residual</dt><dd>{% if residual == '0.00' %}exact residual 0.00{% else %}residual {{ residual or '—' }}{% endif %}</dd></div>
+    <div><dt>settlement verified</dt><dd>{% if gate_a_ok %}ACCEPT — named stack re-derives{% else %}FAIL or absent — not auto-clear{% endif %}</dd></div>
+    <div><dt>search uniqueness</dt><dd>{{ uniqueness or '—' }}{% if uniqueness == 'UNIQUE' %} — still needs FULL pool + threshold{% else %} — auto-clear blocked{% endif %}</dd></div>
+    <div><dt>auto-clear</dt><dd>{{ 'YES' if auto_cleared else 'NO' }} · UNIQUE + FULL + threshold {{ '1.000000' }}</dd></div>
+    <div><dt>recommended</dt><dd>{% if uniqueness == 'AMBIGUOUS' %}Human review — do not pick a subset{% elif uniqueness == 'UNIQUE' %}Eval would clear. Overlay does not write CLEARED.{% elif not gate_a_ok %}Check settlement fee/GST/withholding vs the rate table{% else %}Leave flagged until uniqueness is UNIQUE{% endif %}</dd></div>
+    {% if sla_age is not none %}
+    <div><dt>queue age</dt><dd>{{ sla_age }}d · bucket {{ sla_bucket }} · as-of max corpus date, not wall clock</dd></div>
+    {% endif %}
+  </dl>
+</section>
+
+{% include "proof_panel.html" %}
+
+{% if architecture %}
+<details class="card fold" style="margin-top:16px" id="decision-boundary">
+  <summary><h3>Decision boundary · who is allowed to decide what</h3></summary>
+  <pre class="arch-tree">AI
+├── chooses what to investigate
+├── requests tools
+├── summarizes evidence
+└── explains findings
+DETERMINISTIC ENGINE
+├── calculates amounts
+├── generates candidates
+├── verifies equations
+├── determines residual
+├── determines uniqueness
+└── determines reconciliation state
+HUMAN
+└── decides unresolved / ambiguous cases</pre>
+  <p class="muted" style="margin-top:10px">AI investigates. The engine calculates. A human decides unresolved cases.</p>
+</details>
+{% endif %}
+
+{% if proof and proof.matrix %}
+<section class="card" style="margin-top:16px" id="source-comparison">
+  <h3>SOURCE COMPARISON</h3>
+  <p class="lede" style="margin:0 0 10px">The AI can explain this matrix. The AI cannot modify it.</p>
+  <div class="table-wrap">
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th></th>
+          {% for col in ('BANK', 'SETTLEMENT', 'LEDGER', 'TAX', 'REFUND') %}
+          <th>{{ col }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in ('BANK', 'SETTLEMENT', 'LEDGER', 'TAX', 'REFUND') %}
+        <tr>
+          <th>{{ row }}</th>
+          {% for col in ('BANK', 'SETTLEMENT', 'LEDGER', 'TAX', 'REFUND') %}
+          <td>{{ proof.matrix[row][col] }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endif %}
+
+{% if four_way %}
+<details class="card fold" style="margin-top:16px">
+  <summary><h3>Four-way identity · {{ four_way.n_hit }}/4 present (evidence, not a matcher)</h3></summary>
+  <p class="lede" style="margin:0 0 10px">UTR · settlement · named ledger · residual 0. This does not auto-clear.</p>
+  <dl class="meta-grid">
+    <div><dt>UTR</dt><dd>{{ 'YES' if four_way.utr else 'NO' }} · {{ four_way.details.utr }}</dd></div>
+    <div><dt>settlement rows</dt><dd>{{ 'YES' if four_way.settlement else 'NO' }} · {{ four_way.details.settlement }}</dd></div>
+    <div><dt>named ledger</dt><dd>{{ 'YES' if four_way.named_ledger else 'NO' }} · {{ four_way.details.named_ledger }}</dd></div>
+    <div><dt>residual 0</dt><dd>{{ 'YES' if four_way.residual_zero else 'NO' }} · {{ four_way.details.residual_zero }}</dd></div>
+  </dl>
+</details>
+{% endif %}
+
+{% if causal %}
+<section class="card" style="margin-top:16px">
+  <h3>causal chain</h3>
+  <p class="chips">{% for step in causal %}<span class="chip on">{{ step }}</span>{% if not loop.last %}<span class="muted"> → </span>{% endif %}{% endfor %}</p>
+  <p class="muted">Declared kinds in PAYMENT → FEE → GST → withholding → reserve → BANK order. Missing kinds are omitted. Not a match.</p>
+</section>
+{% endif %}
+
+{% if why %}
+<section class="card" style="margin-top:16px" id="why-not-matched">
+  <h3>Why this did not reconcile</h3>
+  <p class="lede" style="margin:0 0 10px">Coverage is not clearance. Recovery class is from the offline forensic artifact, not a live guess.</p>
+  <dl class="meta-grid">
+    <div><dt>bank amount</dt><dd>{{ amount or '—' }} {{ currency }}</dd></div>
+    <div><dt>candidate records</dt><dd>{{ why.n_pool }}</dd></div>
+    <div><dt>named declared</dt><dd>{{ why.n_declared }}</dd></div>
+    <div><dt>search status</dt><dd>{{ uniqueness or '—' }}</dd></div>
+    <div><dt>recovery</dt><dd>{{ why.recovery }}</dd></div>
+    <div><dt>bucket</dt><dd>{{ why.bucket }}</dd></div>
+    <div><dt>possible causes</dt><dd>
+      {% if why.window_miss %}date window excludes {{ why.window_miss }} truth member(s){% else %}date window not the blocker{% endif %}
+      · {% if why.account_miss %}account filter excludes {{ why.account_miss }}{% else %}account filter not the blocker{% endif %}
+      · {% if why.ledger_miss %}{{ why.ledger_miss }} truth id(s) missing from ledger{% else %}ledger ids present{% endif %}
+      · {% if why.n_declared == 0 %}no settlement rows{% elif why.fp_ok %}declared re-derives{% else %}declared failed rate re-derive{% endif %}
+    </dd></div>
+    <div><dt>recommended action</dt><dd>{{ why.recovery_why }}</dd></div>
+  </dl>
+</section>
+{% endif %}
+
+<div class="grid-2">
+  <section class="card">
+    <h3>identity</h3>
+    <dl class="meta-grid">
+      <div><dt>account</dt><dd>{{ account or '—' }}</dd></div>
+      <div><dt>value date</dt><dd>{{ value_date or '—' }}</dd></div>
+      <div><dt>utr</dt><dd>{{ utr or '—' }}</dd></div>
+      <div><dt>narration</dt><dd>{{ narration or '—' }}</dd></div>
+    </dl>
+    {% if kind_rows %}
+    <h3 style="margin-top:18px">stack by kind</h3>
+    {% for k in kind_rows %}
+    <div class="kind-row">
+      <span>{{ k.label }}</span>
+      <div class="bar"><i style="width: {{ k.width_pct }}%"></i></div>
+      <b>{{ k.amount }}</b>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="actions">
+      <button type="button" class="btn" data-copy>copy proof</button>
+      <button type="button" class="btn" data-resolve="accept" data-id="{{ credit_id }}">accept</button>
+      <button type="button" class="btn" data-resolve="correct" data-id="{{ credit_id }}">correct</button>
+      <button type="button" class="btn primary" data-resolve="escalate" data-id="{{ credit_id }}">escalate</button>
+    </div>
+    {% if gates %}
+    <h3 style="margin-top:18px">decision trace</h3>
+    <p class="chips">
+      {% for g in gates %}<span class="chip on">{{ g }}</span>{% endfor %}
+    </p>
+    {% endif %}
+    <div class="muted" data-resolve-note style="margin-top:10px">{% if resolution %}last human decision: {{ resolution }} (does not write CLEARED){% endif %}</div>
+    <p class="muted">Human review records accept/correct/escalate. The AI finance controller cannot approve a clear.</p>
+  </section>
+  <section class="card">
+    <h3>waterfall</h3>
+    {% if identity_lines %}
+    <p class="identity-eq {{ 'ok' if identity_ok else 'bad' }}">
+      recomputed {{ identity_lines }} + residual {{ residual }} = credit {{ amount }}
+      <b>{{ 'holds' if identity_ok else 'fails' }}</b>
+    </p>
+    {% if posted_sum %}
+    <p class="muted">posted ledger {{ posted_sum }} — residual is re-derived from the rate table, not posted-sum minus credit.{% if posted_mismatch %} Verified but posted members do not sum to the credit, so this row cannot journal.{% endif %}</p>
+    {% endif %}
+    {% endif %}
+    <div id="waterfall">{{ waterfall | safe }}</div>
+  </section>
+</div>
+
+{% if mcp %}
+<details class="card fold" style="margin-top:16px">
+  <summary><h3>Settlement data (this transaction)</h3></summary>
+  <p class="muted">Same fetch as <span class="id">fetch_settlement_recon_details</span>. {{ mcp.mcp.source }} · {{ mcp.mcp.n }} rows · ledger {{ mcp.mcp.ledger_hits }} · this credit {{ mcp.mcp.credit_hits }} · UTR hits {{ mcp.mcp.utr_hits }} · CLEARED {{ mcp.cleared }}. A hit is not a clear. <a href="/recon">run the tool</a>.</p>
+</details>
+{% endif %}
+
+{% if greedy %}
+<details class="card fold" style="margin-top:16px">
+  <summary><h3>Technical details · greedy vs verified comparison</h3></summary>
+  <p class="muted">Greedy would-clear {{ 'yes' if greedy.would_clear else 'no' }}. Same member set as the settlement report: {{ 'yes' if greedy.same else 'no' }}. Symmetric difference {{ greedy.symdiff }} · shared {{ greedy.shared }} · greedy members {{ greedy.n }}.</p>
+  <div class="grid-2" style="margin-top:12px">
+    <div>
+      <p class="muted">only in verified</p>
+      <p class="id">{% for x in greedy.only_declared %}{{ x }}{% if not loop.last %}, {% endif %}{% else %}—{% endfor %}{% if greedy.more_declared %} +{{ greedy.more_declared }}{% endif %}</p>
+    </div>
+    <div>
+      <p class="muted">only in greedy</p>
+      <p class="id">{% for x in greedy.only_greedy %}{{ x }}{% if not loop.last %}, {% endif %}{% else %}—{% endfor %}{% if greedy.more_greedy %} +{{ greedy.more_greedy }}{% endif %}</p>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:10px">Live rival search pairs: <a href="/alts">alternative explanations</a> (corpus is cap-refused).</p>
+</details>
+{% endif %}
+
+{% if proof_text %}
+<details class="card fold" style="margin-top:16px">
+  <summary><h3>Technical details · proof block</h3></summary>
+  <p class="muted">Calculator-checkable. Nothing downstream formats a number.</p>
+  <pre class="proof">{{ proof_text }}</pre>
+</details>
+{% endif %}
+
+<section class="card" style="margin-top:16px">
+  <h3>playbook</h3>
+  <p class="lede" style="margin:0 0 10px">{{ playbook or 'Leave flagged.' }}</p>
+</section>
+
+{% if three_way %}
+<section class="card" style="margin-top:16px">
+  <h3>three-way comparison (bank · settlement · ledger)</h3>
+  <p class="lede" style="margin:0 0 10px">{{ three_way.note }} Settlement rows {{ three_way.n_settlement }} · ledger missing {{ three_way.n_ledger_missing }}.</p>
+  <dl class="meta-grid">
+    <div><dt>bank</dt><dd>{{ three_way.bank.amount_display }} · {{ three_way.bank.value_date }} · UTR {{ three_way.bank.utr or '—' }}</dd></div>
+    <div><dt>narration</dt><dd>{{ three_way.bank.narration }}</dd></div>
+  </dl>
+  {% if three_way.settlement %}
+  <div class="table-wrap" style="margin-top:10px">
+    <table>
+      <thead><tr><th>item</th><th>kind</th><th>settlement</th><th>ledger</th></tr></thead>
+      <tbody>
+      {% for row in three_way.settlement %}
+        <tr>
+          <td class="id">{{ row.item_id }}</td>
+          <td class="muted">{{ row.kind }}</td>
+          <td class="num">{{ row.amount_display }}</td>
+          <td class="muted">{{ three_way.ledger[loop.index0].status }} {{ three_way.ledger[loop.index0].amount_display }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if dispute_draft %}
+<section class="card" style="margin-top:16px">
+  <h3>dispute draft</h3>
+  <p class="lede" style="margin:0 0 10px">Deterministic letter from evidence. Amounts are not invented.</p>
+  <pre class="proof" data-dispute>{{ dispute_draft }}</pre>
+  <button type="button" class="btn" data-copy-dispute>copy draft</button>
+</section>
+{% endif %}
+
+<section class="card" style="margin-top:16px" id="human-decision">
+  <h3>Human decision</h3>
+  <p class="lede" style="margin:0 0 10px">{% if uniqueness == 'UNIQUE' %}UNIQUE is eval-eligible. A human is not required to pick a subset.{% else %}AMBIGUOUS stays flagged. The operator records a review. No button here writes CLEARED.{% endif %}</p>
+  <dl class="meta-grid">
+    <div><dt>decision maker</dt><dd>HUMAN</dd></div>
+    <div><dt>AI role</dt><dd>INVESTIGATOR ONLY — not the decision maker</dd></div>
+    <div><dt>candidates</dt><dd>Leave both flagged. Do not pick one automatically.</dd></div>
+    <div><dt>writes CLEARED</dt><dd>no</dd></div>
+  </dl>
+  <div class="actions" style="margin-top:12px">
+    <a class="btn" href="/ask?credit_id={{ credit_id }}&amp;question=Why is this transaction ambiguous?">compare candidates with AI</a>
+    <a class="btn ghost" href="/exceptions">exceptions queue</a>
+  </div>
+</section>
+
+<section class="card" style="margin-top:16px">
+  <h3>Queue work</h3>
+  <p class="lede" style="margin:0 0 10px">Assignee / note / status for the exception desk. Status cannot be CLEARED.</p>
+  <p class="muted">current: {{ work.status if work and work.status else 'open' }} · {{ work.assignee if work and work.assignee else 'unassigned' }}{% if work and work.note %} · {{ work.note }}{% endif %}</p>
+  <div class="actions">
+    <input type="text" data-work-assignee placeholder="assignee" value="{{ work.assignee if work else '' }}">
+    <input type="text" data-work-note placeholder="note" value="{{ work.note if work else '' }}">
+    <select data-work-status aria-label="queue work status">
+      <option value="open" {% if not work or work.status == 'open' %}selected{% endif %}>open</option>
+      <option value="investigating" {% if work and work.status == 'investigating' %}selected{% endif %}>investigating</option>
+      <option value="resolved" {% if work and work.status == 'resolved' %}selected{% endif %}>resolved</option>
+      <option value="written_off" {% if work and work.status == 'written_off' %}selected{% endif %}>written_off</option>
+    </select>
+    <button type="button" class="btn primary" data-work-save data-id="{{ credit_id }}">save work</button>
+  </div>
+  <div class="muted" data-work-note-out style="margin-top:10px"></div>
+</section>
+
+<section class="card ai-panel" style="margin-top:16px" id="ai-controller">
+  <h3>AI INVESTIGATION</h3>
+  <p class="lede" style="margin:0 0 10px">Explains the same deterministic evidence shown above. Does not auto-clear. Does not invent IDs or amounts.</p>
+  {% if evidence_level %}
+  <dl class="meta-grid">
+    <div><dt>evidence level</dt><dd>{{ evidence_level.level }} · {{ evidence_level.label }}</dd></div>
+    <div><dt>potentially recoverable</dt><dd>{{ 'YES (not a match)' if evidence_level.potentially_recoverable else 'NO' }}</dd></div>
+    <div><dt>next best action</dt><dd>{{ next_action.action if next_action else '—' }}</dd></div>
+  </dl>
+  {% endif %}
+  <div class="actions">
+    <button type="button" class="btn primary" data-ai-ask data-id="{{ credit_id }}" data-q="Can you investigate why this wasn't reconciled?">INVESTIGATE WITH AI</button>
+    <button type="button" class="btn" data-ai-ask data-id="{{ credit_id }}" data-q="Why wasn't this transaction cleared?">Why wasn't this cleared?</button>
+    <button type="button" class="btn" data-ai-ask data-id="{{ credit_id }}" data-q="Why is this transaction ambiguous?">Why ambiguous?</button>
+    <a class="btn ghost" href="/credit/{{ credit_id }}#why-not-matched">View evidence</a>
+  </div>
+  <div data-ai-out class="ai-out" hidden></div>
+</section>
+{% endblock %}

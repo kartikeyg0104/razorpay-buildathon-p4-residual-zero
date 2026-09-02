@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Residual Zero{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/app.css?v=desk21">
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="shell">
+    <aside class="side">
+      <a class="brand" href="/">
+        <div class="mark">0</div>
+        <div>
+          <strong>Residual Zero</strong>
+          <span>reconciliation controller</span>
+        </div>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <div class="nav-label" id="nav-desk">Reconciliation</div>
+        <a href="/" class="{{ 'active' if active == 'batch' else '' }}"{% if active == 'batch' %} aria-current="page"{% endif %}>Dashboard <small>B</small></a>
+        <a href="/exceptions" class="{{ 'active' if active == 'exceptions' else '' }}"{% if active == 'exceptions' %} aria-current="page"{% endif %}>Exceptions <small>Q</small></a>
+        <a href="/proof/crd_mix_ambiguous_twins" class="{{ 'active' if active == 'proof' else '' }}"{% if active == 'proof' %} aria-current="page"{% endif %}>Proof Explorer</a>
+        <a href="/evidence" class="{{ 'active' if active == 'evidence' else '' }}"{% if active == 'evidence' %} aria-current="page"{% endif %}>Evidence</a>
+        <a href="/demo" class="{{ 'active' if active == 'demo' else '' }}"{% if active == 'demo' %} aria-current="page"{% endif %}>Product Tour</a>
+        <div class="nav-label" id="nav-ops">Operations</div>
+        <a href="/close" class="{{ 'active' if active == 'close' else '' }}"{% if active == 'close' %} aria-current="page"{% endif %}>Month-End Close <small>M</small></a>
+        <a href="/books" class="{{ 'active' if active == 'books' else '' }}"{% if active == 'books' %} aria-current="page"{% endif %}>Books &amp; Journal</a>
+        <a href="/audit" class="{{ 'active' if active == 'audit' else '' }}"{% if active == 'audit' %} aria-current="page"{% endif %}>Audit Log <small>A</small></a>
+        <div class="nav-label" id="nav-ai">AI</div>
+        <a href="/ask" class="{{ 'active' if active == 'ask' else '' }}"{% if active == 'ask' %} aria-current="page"{% endif %}>AI Finance Controller</a>
+        <a href="/explorer" class="{{ 'active' if active == 'explorer' else '' }}"{% if active == 'explorer' %} aria-current="page"{% endif %}>Reconciliation Explorer</a>
+        <a href="/whatif" class="{{ 'active' if active == 'whatif' else '' }}"{% if active == 'whatif' %} aria-current="page"{% endif %}>Scenario Analysis</a>
+        <div class="nav-label" id="nav-control">Control</div>
+        <a href="/human" class="{{ 'active' if active == 'human' else '' }}"{% if active == 'human' %} aria-current="page"{% endif %}>Human Review</a>
+        <a href="/recon" class="{{ 'active' if active == 'recon' else '' }}"{% if active == 'recon' %} aria-current="page"{% endif %}>Data Sources</a>
+        <a href="/safety" class="{{ 'active' if active == 'safety' else '' }}"{% if active == 'safety' %} aria-current="page"{% endif %}>Safety &amp; Controls</a>
+        <details class="nav-more" {% if active in ('mixed','challenge','alts','clusters','controller','asof','extension','journal') %}open{% endif %}>
+          <summary aria-label="Advanced and internal pages">Advanced</summary>
+          <a href="/mixed" class="{{ 'active' if active == 'mixed' else '' }}"{% if active == 'mixed' %} aria-current="page"{% endif %}>Uniqueness Testing</a>
+          <a href="/alts" class="{{ 'active' if active == 'alts' else '' }}"{% if active == 'alts' %} aria-current="page"{% endif %}>Alternative Explanations</a>
+          <a href="/clusters" class="{{ 'active' if active == 'clusters' else '' }}"{% if active == 'clusters' %} aria-current="page"{% endif %}>Duplicate Analysis</a>
+          <a href="/controller" class="{{ 'active' if active == 'controller' else '' }}"{% if active == 'controller' %} aria-current="page"{% endif %}>Leakage Detection</a>
+          <a href="/asof" class="{{ 'active' if active == 'asof' else '' }}"{% if active == 'asof' %} aria-current="page"{% endif %}>Historical Ledger</a>
+          <a href="/journal" class="{{ 'active' if active == 'journal' else '' }}"{% if active == 'journal' %} aria-current="page"{% endif %}>Journal Export</a>
+          <a href="/challenge" class="{{ 'active' if active == 'challenge' else '' }}"{% if active == 'challenge' %} aria-current="page"{% endif %}>Evaluation Lab</a>
+          <a href="/extension" class="{{ 'active' if active == 'extension' else '' }}"{% if active == 'extension' %} aria-current="page"{% endif %}>Browser Extension</a>
+        </details>
+      </nav>
+      {# A fixed floating pill always covers whatever is under it mid-scroll, so the
+         shortcut legend lives in the rail instead. #}
+      <div class="side-keys" aria-label="Keyboard shortcuts">
+        <span><kbd>⌘K</kbd> jump</span>
+        <span><kbd>/</kbd> search</span>
+        <span><kbd>J</kbd><kbd>K</kbd> next</span>
+      </div>
+      {# Was a second copy of the thesis, which now closes each page. A persistent rail is
+         better spent on the invariant an operator needs in view at all times. #}
+      <div class="side-foot">
+        <span class="side-foot-dot" aria-hidden="true"></span>
+        <span><b>Read-only overlay.</b> The deterministic engine decides. This console never
+        writes <span class="side-foot-k">CLEARED</span>.</span>
+      </div>
+    </aside>
+    <main class="main" id="content">
+      {% block body %}{% endblock %}
+      {# The thesis and the provenance strip used to sit ABOVE the page title, costing
+         163px before a reader saw which page they were on, and the thesis was printed a
+         second time in the sidebar foot. They are reference material, not the headline,
+         so they close the page instead of opening it. #}
+      <footer class="page-foot">
+        {% if honesty %}
+        <details class="provenance">
+          <summary>Technical details · evaluation provenance, overlay counts, thresholds</summary>
+          <p class="honesty">{{ honesty }}</p>
+        </details>
+        {% endif %}
+        {% if thesis %}
+        <p class="thesis">{{ thesis }}</p>
+        {% endif %}
+      </footer>
+    </main>
+  </div>
+  <div class="palette-scrim" id="palette-scrim" aria-hidden="true"></div>
+  <div class="palette" id="palette" aria-hidden="true">
+    <input id="palette-q" type="search" placeholder="jump to a credit, page, or proof…" autocomplete="off">
+    <div id="palette-list"></div>
+  </div>
+  <script src="/static/app.js?v=desk21"></script>
+</body>
+</html>

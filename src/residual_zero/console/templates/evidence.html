@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}Evidence · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Source evidence</p>
+    <h1>Evidence</h1>
+    <p class="lede">Every reconciliation decision is backed by source evidence. Auto-clear is 0 because uniqueness failed — that is better than clearing 147 unverified guesses. {{ n_gate_a }} transactions are verified through settlement reports that re-derive against the rate table.</p>
+  </div>
+</div>
+<section class="kpis">
+  <article class="kpi">
+    <div class="lbl">exact 1:1 match</div>
+    <div class="val">{{ a0_exact }}</div>
+    <div class="sub">1:1 cannot see a net aggregate</div>
+  </article>
+  <article class="kpi alert">
+    <div class="lbl">unverified would-clear</div>
+    <div class="val">{{ a2_cleared }}</div>
+    <div class="sub">greedy, no uniqueness check</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">settlement-linked</div>
+    <div class="val">{{ t04_dev.identified if t04_dev else '—' }}</div>
+    <div class="sub">residual-zero {{ t04_dev.residual_zero if t04_dev else '—' }} · 6 verify-fail</div>
+  </article>
+  <article class="kpi ok">
+    <div class="lbl">auto-cleared</div>
+    <div class="val">0</div>
+    <div class="sub">guesses refused — the product</div>
+  </article>
+  <article class="kpi ok">
+    <div class="lbl">verified &amp; accepted</div>
+    <div class="val">{{ n_gate_a }}</div>
+    <div class="sub">{{ n_journalable }} journal-ready · {{ n_mismatch }} posted-mismatch</div>
+  </article>
+</section>
+<section class="card">
+  <h3>held-out test split (official card, artifacts/test/t04.md)</h3>
+  <p class="muted">
+    Settlement-linked {{ t04_test.identified or '—' }} ·
+    residual-zero {{ t04_test.residual_zero or '—' }} ·
+    verified-linked {{ t04_test.verified_linked or '—' }} ·
+    search completed {{ t04_test.search_coverage or '—' }} ·
+    budget-exceeded {{ t04_test.budget_exceeded_search or '—' }} ·
+    UNIQUE {{ t04_test.unique or '0' }} → auto-clear {{ t04_test.auto_clear or '0' }} ·
+    false clears {{ t04_test.false_clears or '0' }}.
+    Dev assignment R {{ a3_assignment_r }}. Search completing on every credit is not
+    coverage: uniqueness still refuses, so auto-clear stays 0.
+  </p>
+</section>
+<section class="card">
+  <h3>reconciliation summary</h3>
+  <div class="table-wrap" style="max-height:none;box-shadow:none">
+    <table>
+      <thead>
+        <tr><th>approach</th><th>n</th><th>exact</th><th>assignment P</th><th>assignment R</th><th>cleared</th><th>flagged</th><th>budget</th></tr>
+      </thead>
+      <tbody>
+      {% for row in arms %}
+        <tr>
+          {% for cell in row %}<td class="{{ 'id' if loop.first else 'num' }}">{{ cell }}</td>{% endfor %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+<details class="card fold" style="margin-top:16px">
+  <summary><h3>Technical details · thin cells (exact 0)</h3></summary>
+  <p class="muted">Directional map, not a 90-vs-82 claim. n≈9 per class.</p>
+  <div class="chips">
+    {% for row in weak %}
+    <span class="pill NONE_FOUND">class {{ row[0] }} · {{ row[2] }}</span>
+    {% endfor %}
+  </div>
+</details>
+{% if providers %}
+<details class="card fold" style="margin-top:16px">
+  <summary><h3>Technical details · provider comparison</h3></summary>
+  <p class="muted">Equal tuning. Tier-4 calls: 0 on every backend. The model is a commodity.</p>
+  <div class="table-wrap" style="max-height:none;box-shadow:none">
+    <table>
+      <thead><tr><th>backend</th><th>model</th><th>exact (normalized)</th><th>tokens</th><th>coverage</th></tr></thead>
+      <tbody>
+      {% for row in providers %}
+        <tr>
+          <td class="id">{{ row[0] }}</td>
+          <td class="num">{{ row[2] }}</td>
+          <td class="num">{{ row[3] }}</td>
+          <td class="num">{{ row[5] }}</td>
+          <td class="num">{{ row[8] }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</details>
+{% endif %}
+{% endblock %}

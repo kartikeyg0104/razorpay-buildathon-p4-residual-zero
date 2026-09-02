@@ -1,10 +1,94 @@
-<!doctype html>
-<html><head><title>exceptions</title></head>
-<body>
-<h1>queue</h1>
-<ul>
-{% for id, cls in rows %}
-<li>{{ id }} {{ cls }}</li>
-{% endfor %}
-</ul>
-</body></html>
+{% extends "base.html" %}
+{% block title %}Exceptions · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Transactions requiring attention</p>
+    <h1>Exceptions</h1>
+    <p class="lede">Transactions that require human review before they can be safely cleared. {{ n_gate_a }} transactions are already verified. The items below have uniqueness failures or missing records — each exception type has a resolution playbook.</p>
+  </div>
+  <div class="actions">
+    <a class="btn ghost" href="/exceptions.csv">export CSV</a>
+    <div class="status"><span class="dot warn"></span>{{ n_human }} need human review</div>
+  </div>
+</div>
+
+{% if exposure and exposure.rows %}
+<section class="card" style="margin:16px 0">
+  <h3>highest priority</h3>
+  <p class="muted">{{ exposure.note }} <a href="/close#exposure">full ranking on month-end</a></p>
+  <div class="queue-list">
+    {% for row in exposure.rows %}
+    <a class="q-card" href="{{ row.href }}">
+      <div>
+        <div class="id">{{ row.id }}</div>
+        <div class="muted">age {{ row.age_days }}d · priority {{ row.score }}</div>
+      </div>
+      <div class="num">{{ row.amount_display }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<div class="toolbar">
+  <label class="search">
+    <span class="muted">/</span>
+    <input data-filter type="search" placeholder="filter exceptions" autocomplete="off">
+  </label>
+  <div class="chips">
+    <button type="button" class="chip on" data-chip="">all exceptions · <span data-visible>{{ human_rows|length }}</span></button>
+    {% for chip in class_counts %}
+    <button type="button" class="chip" data-chip="{{ chip.name }}">{{ chip.short }} {{ chip.n }}</button>
+    {% endfor %}
+  </div>
+  {% if playbooks %}
+  <details class="fold-inline">
+    <summary>Resolution playbook by exception type</summary>
+    <dl class="meta-grid" style="margin-top:10px">
+      {% for name, text in playbooks %}
+      <div><dt>{{ name }}</dt><dd>{{ text }}</dd></div>
+      {% endfor %}
+    </dl>
+  </details>
+  {% endif %}
+</div>
+
+<h3 class="queue-h">needs human review · {{ n_human }}</h3>
+<div class="queue-list" data-table>
+  {% for row in human_rows %}
+  <a class="q-card" href="/credit/{{ row.id }}" data-search="{{ row.id }} {{ row.cls }} {{ row.gate }} {{ row.utr }} {{ row.narration }} {{ row.playbook }}" data-class="{{ row.cls }}">
+    <div>
+      <div class="id">{{ row.id }}</div>
+      <div class="muted">{{ row.account }} · {{ row.value_date }}{% if row.utr %} · {{ row.utr }}{% endif %}</div>
+    </div>
+    <div class="num">{{ row.amount }}</div>
+    <span class="pill {{ row.cls }}">{{ row.cls }}</span>
+    {% if row.work_status %}<span class="pill">{{ row.work_status }}</span>{% endif %}
+    {% if row.resolution %}<span class="pill">{{ row.resolution }}</span>{% endif %}
+  </a>
+  {% else %}
+  <p class="empty">no unproven credits</p>
+  {% endfor %}
+</div>
+
+{% if proven_rows %}
+<h3 class="queue-h">verified &amp; accepted · {{ n_gate_a }}</h3>
+<p class="muted" style="margin:0 0 10px">These re-derive successfully. Search is still AMBIGUOUS, so they are not search-cleared. Open one to inspect the proof.</p>
+<div class="queue-list">
+  {% for row in proven_rows[:24] %}
+  <a class="q-card proven" href="/credit/{{ row.id }}">
+    <div>
+      <div class="id">{{ row.id }}</div>
+      <div class="muted">{{ row.account }} · {{ row.value_date }}</div>
+    </div>
+    <div class="num">{{ row.amount }}</div>
+    <span class="pill GATE_A">GATE_A</span>
+  </a>
+  {% endfor %}
+</div>
+{% if proven_rows|length > 24 %}
+<p class="muted">showing 24 of {{ n_gate_a }} · filter GATE_A on <a href="/">dashboard</a></p>
+{% endif %}
+{% endif %}
+{% endblock %}

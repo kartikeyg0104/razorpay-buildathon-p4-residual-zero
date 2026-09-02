@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Historical Ledger · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Point-in-time view</p>
+    <h1>Historical Ledger</h1>
+    <p class="lede">Last disposition per credit among audit rows with seq ≤ N. The SQL last-write view must equal a prefix replay of the same chain.</p>
+  </div>
+  <div class="status">
+    <span class="dot {{ '' if equal else 'bad' }}"></span>
+    {{ 'views equal' if equal else 'views diverge' }}
+  </div>
+</div>
+<form class="ask-form" method="get" action="/asof">
+  <label class="muted">seq 0…{{ max_seq }}</label>
+  <input type="number" name="seq" value="{{ seq }}" min="0" max="{{ max_seq }}" step="1">
+  <button class="btn primary" type="submit">replay</button>
+</form>
+<section class="kpis" style="margin-top:18px">
+  <article class="kpi">
+    <div class="lbl">as-of seq</div>
+    <div class="val">{{ seq }}</div>
+    <div class="sub">of {{ max_seq }}</div>
+  </article>
+  {% for c in counts %}
+  <article class="kpi">
+    <div class="lbl">{{ c.name }}</div>
+    <div class="val">{{ c.n }}</div>
+    <div class="sub">at this prefix</div>
+  </article>
+  {% endfor %}
+</section>
+<section class="card">
+  <h3>sample</h3>
+  <div class="table-wrap" style="max-height: 420px; box-shadow: none;">
+    <table>
+      <thead><tr><th>transaction</th><th>disposition</th></tr></thead>
+      <tbody>
+      {% for id, disp in sample %}
+        <tr>
+          <td class="id"><a href="/credit/{{ id }}">{{ id }}</a></td>
+          <td><span class="pill {{ disp }}">{{ disp }}</span></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

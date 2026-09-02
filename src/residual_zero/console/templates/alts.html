@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Alternative Explanations · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Rival subsets</p>
+    <h1>Alternative Explanations</h1>
+    <p class="lede">When two subsets both produce residual zero, the engine refuses to pick one. Live search on this corpus is cap-refused (245/245). The fixture below is fully enumerated: two subsets both fit, so we refuse rather than pick.</p>
+  </div>
+  <a class="btn" href="/challenge?run=all">evaluation lab</a>
+</div>
+<section class="kpis">
+  <article class="kpi alert">
+    <div class="lbl">live uncapped pairs</div>
+    <div class="val">0</div>
+    <div class="sub">enumerate cap 32 · 245 credits</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">symmetric difference</div>
+    <div class="val">{{ symdiff }}</div>
+    <div class="sub">{{ shared }} shared members</div>
+  </article>
+</section>
+<div class="grid-2">
+  <section class="card">
+    <h3>explanation A</h3>
+    <p class="id">{% for x in set_a %}{{ x }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+    <p class="muted" style="margin-top:10px">only in A</p>
+    <p class="id">{% for x in only_a %}{{ x }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+  </section>
+  <section class="card">
+    <h3>explanation B</h3>
+    <p class="id">{% for x in set_b %}{{ x }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+    <p class="muted" style="margin-top:10px">only in B</p>
+    <p class="id">{% for x in only_b %}{{ x }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+  </section>
+</div>
+<section class="card" style="margin-top:16px">
+  <h3>what a human reads</h3>
+  <pre class="proof">{{ rendered }}</pre>
+</section>
+{% if live_md %}
+<section class="card" style="margin-top:16px">
+  <h3>live corpus note</h3>
+  <pre class="proof">{{ live_md }}</pre>
+</section>
+{% endif %}
+{% endblock %}

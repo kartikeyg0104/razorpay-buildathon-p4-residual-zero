@@ -1,0 +1,42 @@
+{% if proof and proof.found %}
+<section class="card" style="margin-top:16px" id="proof-explorer">
+  <h3>Candidate Equations</h3>
+  <p class="lede" style="margin:0 0 10px">
+    <strong>{{ proof.transaction_id }}</strong> · Bank amount ₹{{ proof.bank_display }} ·
+    {{ proof.solution_count }} candidate{{ 's' if proof.solution_count != 1 else '' }} · <span class="pill {{ proof.uniqueness }}">{{ proof.uniqueness }}</span> ·
+    {% if proof.corpus and proof.corpus != 'OFFICIAL' %}constructed test pool{% else %}official corpus{% endif %}.
+  </p>
+  <div class="proof-cols">
+    {% for sol in proof.solutions %}
+    <article class="card" style="margin:0">
+      <h3>Explanation {{ sol.name }}{% if sol.label %} · {{ sol.label }}{% endif %}</h3>
+      <dl class="meta-grid">
+        <div><dt>matched records</dt><dd class="id">{% for x in sol.matched_ids %}{{ x }}{% if not loop.last %}, {% endif %}{% else %}—{% endfor %}</dd></div>
+        <div><dt>count</dt><dd>{{ sol.n }}</dd></div>
+        <div><dt>total</dt><dd>{{ sol.total_display or '—' }}</dd></div>
+        <div><dt>residual</dt><dd>₹{{ sol.residual_display or '—' }}</dd></div>
+        <div><dt>settlement</dt><dd>{{ sol.settlement }}</dd></div>
+        <div><dt>member</dt><dd>{{ sol.member }}</dd></div>
+        <div><dt>date</dt><dd>{{ sol.date }}</dd></div>
+        <div><dt>reference</dt><dd class="id">{{ sol.reference or '—' }}</dd></div>
+      </dl>
+      {% if sol.note %}<p class="muted">{{ sol.note }}</p>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  {% if proof.difference %}
+  <h3 style="margin-top:16px">Comparison</h3>
+  <dl class="meta-grid" style="margin-top:8px">
+    <div><dt>shared records</dt><dd>{{ proof.difference.common }}</dd></div>
+    <div><dt>only in A</dt><dd class="id">{% for x in proof.difference.only_a %}{{ x }}{% if not loop.last %}, {% endif %}{% else %}—{% endfor %}</dd></div>
+    <div><dt>only in B</dt><dd class="id">{% for x in proof.difference.only_b %}{{ x }}{% if not loop.last %}, {% endif %}{% else %}—{% endfor %}</dd></div>
+    <div><dt>residual A / B</dt><dd>{% if proof.solutions|length >= 2 %}₹{{ proof.solutions[0].residual_display or '—' }} / ₹{{ proof.solutions[1].residual_display or '—' }}{% else %}—{% endif %}</dd></div>
+    <div><dt>distinguishing evidence</dt><dd>{{ proof.distinguishing_authoritative_evidence }}</dd></div>
+    <div><dt>decision</dt><dd><span class="pill {{ proof.decision }}">{{ proof.decision }}</span></dd></div>
+    <div><dt>can auto-select</dt><dd>{{ 'YES' if proof.choose_one else 'NO — requires human review' }}</dd></div>
+  </dl>
+  {% endif %}
+  <p class="lede" style="margin:12px 0 0">{{ proof.thesis }}</p>
+  <p class="muted">Confidence percentages are not financial evidence.</p>
+</section>
+{% endif %}

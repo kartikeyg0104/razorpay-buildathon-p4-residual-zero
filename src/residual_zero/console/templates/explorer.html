@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Reconciliation Explorer · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Reconciliation Explorer</p>
+    <h1>Reconciliation Explorer</h1>
+    <p class="lede">Filter and investigate reconciliation exceptions by type. Use the filters below to find missing settlements, ambiguous matches, tax mismatches, and high-value exceptions.</p>
+  </div>
+</div>
+<section class="kpis">
+  <article class="kpi">
+    <div class="lbl">potentially recoverable</div>
+    <div class="val">{{ recoverable.n if recoverable else 0 }}</div>
+    <div class="sub">investigation evidence only — not reconciled</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">this view</div>
+    <div class="val">{{ result.n if result else 0 }}</div>
+    <div class="sub">{{ kind or '—' }}</div>
+  </article>
+  <article class="kpi alert">
+    <div class="lbl">cleared by explorer</div>
+    <div class="val">0</div>
+    <div class="sub">explorer is read-only</div>
+  </article>
+</section>
+<p class="chips">
+  <a class="chip" href="/explorer?kind=MISSING_SETTLEMENT">Missing Settlement</a>
+  <a class="chip" href="/explorer?kind=AMBIGUOUS">Ambiguous</a>
+  <a class="chip" href="/explorer?kind=UNRESOLVED">Unresolved</a>
+  <a class="chip" href="/explorer?kind=TAX_MISMATCH">Tax Mismatch</a>
+  <a class="chip" href="/explorer?kind=HIGH_VALUE_AMBIGUOUS">High-Value Exceptions</a>
+  <a class="chip" href="/explorer?kind=POTENTIALLY_RECOVERABLE">Potentially Recoverable</a>
+  <a class="chip" href="/explorer?kind=LEDGER_SETTLEMENT_DISAGREE">Settlement vs Ledger</a>
+  <a class="chip" href="/explorer?kind=MISSING_LEDGER">Missing Ledger</a>
+  <a class="chip" href="/explorer?kind=NONE_FOUND">No Match Found</a>
+  <a class="chip" href="/explorer?kind=DESCRIPTION_HAS_SETTLEMENT_WORD">Description Mentions Settlement</a>
+  <a class="chip" href="/ask?question=Why are so many transactions unresolved?">Root Cause Analysis</a>
+</p>
+{% if kind in ('POTENTIALLY_RECOVERABLE', 'RECOVERABLE') %}
+<p class="lede exclusive-note" style="margin-top:12px">POTENTIALLY_RECOVERABLE is <strong>NOT RECONCILED</strong>. Extracted identifiers are investigation evidence only. Overlay does not write CLEARED.</p>
+{% endif %}
+{% if result and result.rows %}
+<div class="table-wrap" style="margin-top:16px">
+  <table>
+    <thead><tr><th>transaction</th><th>amount</th><th>reason</th></tr></thead>
+    <tbody>
+    {% for row in result.rows %}
+      <tr>
+        <td class="id"><a href="/credit/{{ row.transaction_id }}">{{ row.transaction_id }}</a></td>
+        <td class="num">{{ row.amount_display }}</td>
+        <td class="muted">{{ row.why or row.extracted_added or '—' }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% elif result %}
+<p class="muted" style="margin-top:16px">No rows in this slice. That can be the honest answer.</p>
+{% endif %}
+{% if root %}
+<section class="card" style="margin-top:16px">
+  <h3>Root cause</h3>
+  <p class="lede" style="margin:0">{{ root.text }}</p>
+  <ul class="muted">
+    {% for p in root.proposals %}<li>{{ p }}</li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Safety & Controls · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Reconciliation safety controls</p>
+    <h1>Safety &amp; Controls</h1>
+    <p class="lede">Four controls protect every reconciliation decision: AI cannot clear transactions. Financial truth is deterministic. Evidence is required for every decision. Ambiguous cases go to human review.</p>
+  </div>
+</div>
+<section class="kpis">
+  <article class="kpi ok">
+    <div class="lbl">AI cannot clear</div>
+    <div class="val">✓</div>
+    <div class="sub">AI investigates and explains — never authorizes</div>
+  </article>
+  <article class="kpi ok">
+    <div class="lbl">financial truth is deterministic</div>
+    <div class="val">✓</div>
+    <div class="sub">all calculations use the reconciliation engine</div>
+  </article>
+  <article class="kpi ok">
+    <div class="lbl">evidence is required</div>
+    <div class="val">✓</div>
+    <div class="sub">no decision without source evidence</div>
+  </article>
+  <article class="kpi ok">
+    <div class="lbl">ambiguous → human review</div>
+    <div class="val">✓</div>
+    <div class="sub">multiple explanations always go to a human</div>
+  </article>
+</section>
+<section class="kpis">
+  <article class="kpi ok">
+    <div class="lbl">PII egress</div>
+    <div class="val">0</div>
+    <div class="sub">redact then raise</div>
+  </article>
+  <article class="kpi ok">
+    <div class="lbl">injection auto-clears</div>
+    <div class="val">0/30</div>
+    <div class="sub">planted narrations tested</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">autonomy coverage</div>
+    <div class="val">0/239</div>
+    <div class="sub">every autonomy level</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">tier-4 calls</div>
+    <div class="val">0</div>
+    <div class="sub">three stub backends</div>
+  </article>
+</section>
+<details class="card fold">
+  <summary><h3>Technical details · security and injection testing</h3></summary>
+  <pre class="proof">{{ injections }}</pre>
+</details>
+{% endblock %}

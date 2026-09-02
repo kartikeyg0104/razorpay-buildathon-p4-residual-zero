@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Books & Journal · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Accounting identity</p>
+    <h1>Books &amp; Journal</h1>
+    <p class="lede">Verify that reconciliation preserves accounting identity. For each account: bank credits = cleared members + unreconciled credits. Auto-clear is still 0. Verified transactions use settlement reports whose posted members sum to the credit.</p>
+  </div>
+  <div class="status">
+    <span class="dot {{ '' if all_hold else 'bad' }}"></span>
+    {{ 'identity holds' if all_hold else 'identity fails' }}
+    {% if ops_reports %} · verified {{ 'holds' if ops_hold else 'fails' }} · {{ n_gate_a }} accepted{% endif %}
+  </div>
+</div>
+<section class="kpis">
+  {% for r in reports %}
+  <article class="kpi {{ 'ok' if r.holds else 'bad' }}">
+    <div class="lbl">{{ r.account }}</div>
+    <div class="val" style="font-size:18px">{{ r.credits }}</div>
+    <div class="sub">{{ r.n_credits }} credits · cleared {{ r.n_cleared }} · double-claimed {{ r.double }}</div>
+  </article>
+  {% endfor %}
+</section>
+{% for r in reports %}
+<section class="card" style="margin-bottom:12px">
+  <h3>{{ r.account }} · {{ r.period }}</h3>
+  <p class="id">{{ r.line }}</p>
+  <dl class="meta-grid" style="margin-top:12px">
+    <div><dt>cleared members</dt><dd>{{ r.cleared }}</dd></div>
+    <div><dt>unreconciled</dt><dd>{{ r.unreconciled }}</dd></div>
+  </dl>
+</section>
+{% endfor %}
+{% if ops_reports %}
+<p class="muted" style="margin: 8px 0 12px">Verified books. Search uniqueness is still AMBIGUOUS; these rows are declared re-derives with posted sum equal to the credit.</p>
+{% for r in ops_reports %}
+<section class="card" style="margin-bottom:12px">
+  <h3>verified · {{ r.account }} · {{ r.period }}</h3>
+  <p class="id">{{ r.line }}</p>
+  <dl class="meta-grid" style="margin-top:12px">
+    <div><dt>accepted members</dt><dd>{{ r.cleared }}</dd></div>
+    <div><dt>unreconciled</dt><dd>{{ r.unreconciled }}</dd></div>
+  </dl>
+</section>
+{% endfor %}
+{% endif %}
+{% endblock %}

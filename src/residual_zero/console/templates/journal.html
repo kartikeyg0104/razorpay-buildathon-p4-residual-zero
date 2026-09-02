@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Journal Export · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Double-entry journal</p>
+    <h1>Journal Export</h1>
+    <p class="lede">{% if used_ops %}Verified journal: {{ n_ops }} of {{ n_gate_a }} accepted stacks whose posted members sum to the credit. {{ n_mismatch }} accepted but posted-mismatch cannot journal. Uncleared credits still post to suspense. No plug.{% else %}A file you import. Uncleared credits post to suspense. No plug line. Nothing here holds accounting-system credentials.{% endif %}{% if journal_error %} Overlay refused: {{ journal_error }}{% endif %}</p>
+  </div>
+  <a class="btn ghost" href="/journal?gate=search">search journal</a>
+  <a class="btn ghost" href="/journal.tally">tally xml</a>
+  <a class="btn primary" href="/journal.csv">download csv</a>
+</div>
+<section class="kpis">
+  <article class="kpi {{ 'ok' if balanced else 'bad' }}">
+    <div class="lbl">debits</div>
+    <div class="val" style="font-size:22px">{{ debit }}</div>
+    <div class="sub">{{ n }} lines</div>
+  </article>
+  <article class="kpi {{ 'ok' if balanced else 'bad' }}">
+    <div class="lbl">credits</div>
+    <div class="val" style="font-size:22px">{{ credit }}</div>
+    <div class="sub">{{ 'balanced' if balanced else 'imbalanced' }}</div>
+  </article>
+  <article class="kpi {{ 'ok' if control_ok else 'bad' }}">
+    <div class="lbl">bank control residual</div>
+    <div class="val" style="font-size:22px">{{ residual }}</div>
+    <div class="sub">must be 0</div>
+  </article>
+</section>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>date</th><th>account</th><th class="num">debit</th><th class="num">credit</th><th>narration</th><th>ref</th></tr>
+    </thead>
+    <tbody>
+    {% for line in lines %}
+      <tr>
+        <td class="muted">{{ line.date }}</td>
+        <td class="id">{{ line.code }} {{ line.name }}</td>
+        <td class="num">{{ line.debit }}</td>
+        <td class="num">{{ line.credit }}</td>
+        <td class="muted">{{ line.narration }}</td>
+        <td class="id"><a href="/credit/{{ line.ref }}">{{ line.ref }}</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="muted" style="margin-top:12px">showing first 80 lines · full file via download</p>
+{% endblock %}

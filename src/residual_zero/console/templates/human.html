@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Human Review · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Independent human evaluation</p>
+    <h1>Human Review</h1>
+    <p class="lede">Ambiguous and unresolved cases require a human decision. Three raters, twenty credits, frozen before machine answers. Sheets 2 and 3 are blank on purpose — filling them from engine output would invalidate the study.</p>
+  </div>
+</div>
+<section class="kpis">
+  <article class="kpi">
+    <div class="lbl">selected</div>
+    <div class="val">{{ selected|length }}</div>
+    <div class="sub">dev split · stratified</div>
+  </article>
+  {% for s in sheets %}
+  <article class="kpi {{ 'alert' if s.filled == 0 else '' }}">
+    <div class="lbl">rater {{ s.n }}</div>
+    <div class="val">{{ s.filled }}/{{ s.total }}</div>
+    <div class="sub">dispositions written</div>
+  </article>
+  {% endfor %}
+</section>
+{% if f56 %}
+<section class="card">
+  <h3>study status</h3>
+  <p>{{ f56.status }} — {{ f56.reason }}</p>
+</section>
+{% endif %}
+{% if f19 %}
+<section class="card" style="margin-top:12px">
+  <h3>protocol status</h3>
+  <p>{{ f19.status }} — {{ f19.reason }}</p>
+</section>
+{% endif %}
+{% if question %}
+<section class="card" style="margin-top:12px">
+  <h3>pre-registered question</h3>
+  <p>{{ question }}</p>
+</section>
+{% endif %}
+<section class="card" style="margin-top:12px">
+  <h3>selected credits</h3>
+  <p class="chips">
+    {% for cid in selected %}
+    <a class="chip" href="/credit/{{ cid }}">{{ cid }}</a>
+    {% endfor %}
+  </p>
+</section>
+{% if protocol %}
+<section class="card" style="margin-top:12px">
+  <h3>protocol</h3>
+  <pre class="proof">{{ protocol }}</pre>
+</section>
+{% endif %}
+{% endblock %}

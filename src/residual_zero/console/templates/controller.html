@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Leakage Detection · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Financial leakage detection</p>
+    <h1>Leakage Detection</h1>
+    <p class="lede">Leakage rupees measure the detector on synthetic data, not incidence. Reserve outstanding is arithmetic over known release dates. Disputes reconstruct class-19 chargebacks. Coverage at every degradation rung is 0/239.</p>
+  </div>
+  <div class="status">as-of {{ as_of }}</div>
+</div>
+
+<section class="kpis">
+  <article class="kpi">
+    <div class="lbl">leakage identified</div>
+    <div class="val" style="font-size:22px">{{ leak_total or '—' }}</div>
+    <div class="sub">detector output, not a claim about the world</div>
+  </article>
+  {% if reserve %}
+  <article class="kpi {{ 'ok' if reserve.identity else 'bad' }}">
+    <div class="lbl">reserve outstanding</div>
+    <div class="val" style="font-size:22px">{{ reserve.outstanding }}</div>
+    <div class="sub">{{ reserve.holds }} holds · overdue {{ reserve.overdue }}</div>
+  </article>
+  {% endif %}
+  {% if disputes %}
+  <article class="kpi">
+    <div class="lbl">disputes</div>
+    <div class="val">{{ disputes.n }}</div>
+    <div class="sub">reconstructed {{ disputes.reconstructed }} · open ≤7d {{ disputes.open7 }}</div>
+  </article>
+  {% endif %}
+</section>
+
+<div class="grid-2">
+  <section class="card">
+    <h3>leakage by kind</h3>
+    {% for k in leak_kinds %}
+    <div class="kind-row"><span>{{ k.kind }}</span><b>{{ k.amount }}</b></div>
+    {% else %}
+    <p class="muted">no evidence at this as-of</p>
+    {% endfor %}
+  </section>
+  <section class="card">
+    <h3>degradation ladder</h3>
+    <p class="muted">Coverage may fall. Auto-clear error may not rise. Here coverage is 0 at every rung.</p>
+    {% for r in rungs %}
+    <div class="kind-row">
+      <span>{{ r.name }}</span>
+      <div class="bar"><i style="width: {{ 8 if r.process else 2 }}%"></i></div>
+      <b>{{ r.coverage }}</b>
+    </div>
+    {% endfor %}
+  </section>
+</div>
+
+{% if drift_rows %}
+<section class="card" style="margin-top:16px">
+  <h3>fee drift on verified members</h3>
+  <p class="muted">{{ drift_n }} instrument-weeks · alerts {{ drift_alerts }} · {{ n_gate_a }} verified accepts. Contracted bps vs fitted bps. Not rupee ROI.</p>
+  <div class="table-wrap" style="max-height: 280px; box-shadow: none;">
+    <table>
+      <thead><tr><th>instrument</th><th>week</th><th class="num">n</th><th class="num">effective bps</th><th class="num">contracted</th><th>alert</th></tr></thead>
+      <tbody>
+      {% for p in drift_rows %}
+        <tr>
+          <td>{{ p.instrument }}</td>
+          <td class="muted">{{ p.week }}</td>
+          <td class="num">{{ p.n }}</td>
+          <td class="num">{{ p.effective }}</td>
+          <td class="num">{{ p.contracted }}</td>
+          <td>{{ 'yes' if p.alert else 'no' }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endif %}
+
+{% if leak_rows %}
+<section class="card" style="margin-top:16px">
+  <h3>leak evidence (first 40)</h3>
+  <div class="table-wrap" style="max-height: 360px; box-shadow: none;">
+    <table>
+      <thead><tr><th>kind</th><th>subject</th><th class="num">amount</th><th>note</th></tr></thead>
+      <tbody>
+      {% for ev in leak_rows %}
+        <tr>
+          <td class="pill">{{ ev.kind }}</td>
+          <td class="id">{{ ev.subject }}</td>
+          <td class="num">{{ ev.amount }}</td>
+          <td class="muted">{{ ev.note }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

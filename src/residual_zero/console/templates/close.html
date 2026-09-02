@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+{% block title %}Month-End Close · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Close readiness · as-of {{ pack.as_of }}</p>
+    <h1>Month-End Close</h1>
+    <p class="lede">Know what is reconciled, what is unresolved, and what needs attention before closing. Covers bidirectional unmatched items, tax mismatches, queue aging, four-way identity, cash bridge, tax reconciliation, batch seal, exposure ranking, and duplicate UTR detection.</p>
+  </div>
+  <div class="actions">
+    <a class="btn ghost" href="/standup.md">standup report</a>
+    <a class="btn ghost" href="/close.zip">close pack</a>
+    <a class="btn ghost" href="/api/health">health</a>
+    <a class="btn ghost" href="/api/ops">ops json</a>
+    <a class="btn ghost" href="/certificate">batch seal</a>
+    <a class="btn ghost" href="/close.md">close.md</a>
+    <a class="btn ghost" href="/journal.tally">tally xml</a>
+    <a class="btn ghost" href="/journal.csv">journal csv</a>
+    <a class="btn primary" href="/exceptions">exceptions</a>
+  </div>
+</div>
+
+<section class="kpis">
+  <article class="kpi alert">
+    <div class="lbl">bank uncovered</div>
+    <div class="val">{{ pack.n_bank_uncovered }}</div>
+    <div class="sub">no settlement cover or verification failed</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">ledger orphans</div>
+    <div class="val">{{ pack.n_ledger_orphans }}</div>
+    <div class="sub">never named by a settlement row</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">tax mismatch</div>
+    <div class="val">{{ pack.n_tax_mismatch }}</div>
+    <div class="sub">fee / GST / withholding re-derive failed</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">human review queue</div>
+    <div class="val">{{ pack.n_human }}</div>
+    <div class="sub">four-way full {{ pack.n_four_way_full }} · auto-clear 0</div>
+  </article>
+</section>
+
+<section class="card">
+  <h3>close checklist</h3>
+  <dl class="meta-grid">
+    {% for item in checklist %}
+    <div>
+      <dt>{{ item.name }}</dt>
+      <dd>{{ 'HOLD' if item.ok else 'OPEN' }} · {{ item.detail }}</dd>
+    </div>
+    {% endfor %}
+  </dl>
+  <details class="fold-inline" style="margin-top:10px">
+    <summary>Technical details</summary>
+    <p class="muted">Checklist does not write CLEARED. UNIQUE + FULL + threshold remains the only auto-clear path.</p>
+  </details>
+</section>
+
+<div class="grid-2" style="margin-top:16px">
+  <section class="card">
+    <h3>queue aging</h3>
+    <p class="muted">Unverified items only. Buckets vs as-of {{ pack.as_of }}.</p>
+    {% for bucket in sla %}
+    <div class="kind-row">
+      <span>{{ bucket.name }}</span>
+      <b>{{ bucket.n }} · {{ bucket.amount_display }}</b>
+    </div>
+    {% endfor %}
+  </section>
+  <section class="card">
+    <h3>autonomy levels</h3>
+    <p class="muted">Coverage 0 at every level. The model never picks a member set.</p>
+    {% for rung in autonomy %}
+    <div class="kind-row">
+      <span>{{ rung.name }}</span>
+      <b>auto-clear {{ rung.auto_clear }} · {{ rung.coverage }}</b>
+    </div>
+    {% endfor %}
+  </section>
+</div>
+
+<section class="card" style="margin-top:16px">
+  <h3>bank → ledger uncovered</h3>
+  {% if bank_uncovered %}
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>transaction</th><th>amount</th><th>why</th></tr></thead>
+      <tbody>
+      {% for row in bank_uncovered %}
+        <tr>
+          <td class="id"><a href="{{ row.href }}">{{ row.transaction_id }}</a></td>
+          <td class="num">{{ row.amount_display }}</td>
+          <td class="muted">{{ row.why }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">showing first {{ bank_uncovered|length }} of {{ pack.n_bank_uncovered }}</p>
+  {% else %}
+  <p class="muted">No uncovered bank credits in this overlay.</p>
+  {% endif %}
+</section>
+
+<section class="card" style="margin-top:16px">
+  <h3>ledger → bank orphans</h3>
+  {% if ledger_orphans %}
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>item</th><th>kind</th><th>amount</th></tr></thead>
+      <tbody>
+      {% for row in ledger_orphans %}
+        <tr>
+          <td class="id">{{ row.item_id }}</td>
+          <td class="muted">{{ row.kind }}</td>
+          <td class="num">{{ row.amount_display }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">showing first {{ ledger_orphans|length }} of {{ pack.n_ledger_orphans }}</p>
+  {% else %}
+  <p class="muted">Every ledger item is named by a settlement row.</p>
+  {% endif %}
+</section>
+
+<section class="card" style="margin-top:16px">
+  <h3>GST / TDS / fee mismatch</h3>
+  <p class="muted">Verified transactions with rate-line deltas. Uniqueness is never UNIQUE here.</p>
+  {% if tax_mismatch %}
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>transaction</th><th>residual</th><th>uniqueness</th><th>why</th></tr></thead>
+      <tbody>
+      {% for row in tax_mismatch %}
+        <tr>
+          <td class="id"><a href="{{ row.href }}">{{ row.transaction_id }}</a></td>
+          <td class="num">{{ row.residual_display }}</td>
+          <td class="muted">{{ row.uniqueness }}</td>
+          <td class="muted">{{ row.why }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="muted">No fee/GST/withholding re-derive failures in the overlay sample.</p>
+  {% endif %}
+</section>
+
+{% if bridge %}
+<section class="card" style="margin-top:16px">
+  <h3>cash bridge</h3>
+  <p class="lede" style="margin:0 0 10px">{{ bridge.note }}</p>
+  <dl class="meta-grid">
+    <div><dt>ledger total</dt><dd>{{ bridge.ledger_total_display }}</dd></div>
+    <div><dt>bank landed</dt><dd>{{ bridge.bank_landed_display }}</dd></div>
+    <div><dt>journal-ready</dt><dd>{{ bridge.journalable_display }}</dd></div>
+    <div><dt>unreconciled</dt><dd>{{ bridge.unreconciled_display }}</dd></div>
+    <div><dt>residual</dt><dd>{{ bridge.residual_display }} · plugged {{ 'yes' if bridge.plugged else 'no' }}</dd></div>
+  </dl>
+  {% for line in bridge.lines %}
+  <div class="kind-row">
+    <span>{{ line.kind }}</span>
+    <b>{{ line.amount_display }}</b>
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
+
+{% if radar %}
+<section class="card" style="margin-top:16px">
+  <h3>tax reconciliation</h3>
+  <p class="lede" style="margin:0 0 10px">{{ radar.note }} GST on fee, not gross. {{ radar.section }}.</p>
+  <dl class="meta-grid">
+    <div><dt>fee posted / expected / delta</dt><dd>{{ radar.fee_posted_display }} · {{ radar.fee_expected_display }} · {{ radar.fee_delta_display }}</dd></div>
+    <div><dt>GST posted / expected / delta</dt><dd>{{ radar.gst_posted_display }} · {{ radar.gst_expected_display }} · {{ radar.gst_delta_display }}</dd></div>
+    <div><dt>TDS posted / expected / delta</dt><dd>{{ radar.tds_posted_display }} · {{ radar.tds_expected_display }} · {{ radar.tds_delta_display }}</dd></div>
+  </dl>
+</section>
+{% endif %}
+
+{% if cert %}
+<section class="card" style="margin-top:16px">
+  <h3>batch certificate</h3>
+  <p class="lede" style="margin:0 0 10px">{{ cert.note }} SHA-256 of overlay counts + audit head.</p>
+  <dl class="meta-grid">
+    <div><dt>sha256</dt><dd class="id">{{ cert.sha256 }}</dd></div>
+    <div><dt>audit head</dt><dd class="id">{{ cert.audit_head or '—' }}</dd></div>
+    <div><dt>credits / verified / journal-ready</dt><dd>{{ cert.n_credits }} · {{ cert.n_gate_a }} · {{ cert.n_journalable }}</dd></div>
+    <div><dt>unique / ambiguous / none</dt><dd>{{ cert.n_unique }} · {{ cert.n_ambiguous }} · {{ cert.n_none_found }}</dd></div>
+    <div><dt>auto-cleared / chain</dt><dd>{{ cert.n_auto_cleared }} · {{ 'ok' if cert.chain_ok else 'broken' }}</dd></div>
+  </dl>
+  <p class="muted"><a href="/metrics">prometheus text</a> · gauges are integers · rz_writes_cleared 0</p>
+</section>
+{% endif %}
+
+{% if exposure %}
+<section class="card" style="margin-top:16px" id="exposure">
+  <h3>priority ranking (exposure)</h3>
+  <p class="lede" style="margin:0 0 10px">{{ exposure.note }} {{ exposure.n }} in the human review queue.</p>
+  {% if exposure.rows %}
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>transaction</th><th>amount</th><th>age</th><th>priority</th></tr></thead>
+      <tbody>
+      {% for row in exposure.rows %}
+        <tr>
+          <td class="id"><a href="{{ row.href }}">{{ row.id }}</a></td>
+          <td class="num">{{ row.amount_display }}</td>
+          <td class="muted">{{ row.age_days }}d</td>
+          <td class="num">{{ row.score }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if gaps %}
+<section class="card" style="margin-top:16px">
+  <h3>four-way identity gaps</h3>
+  <p class="lede" style="margin:0 0 10px">{{ gaps.note }} Full identity {{ gaps.n_full }}/{{ gaps.n_credits }}.</p>
+  <dl class="meta-grid">
+    <div><dt>missing UTR</dt><dd>{{ gaps.missing_utr }}</dd></div>
+    <div><dt>missing settlement</dt><dd>{{ gaps.missing_settlement }}</dd></div>
+    <div><dt>missing named ledger</dt><dd>{{ gaps.missing_named_ledger }}</dd></div>
+    <div><dt>residual not 0</dt><dd>{{ gaps.missing_residual_zero }}</dd></div>
+  </dl>
+  {% if gaps.almost %}
+  <p class="muted" style="margin-top:10px">3/4 present (almost — still not a clear)</p>
+  <p class="id">{% for row in gaps.almost %}<a href="{{ row.href }}">{{ row.id }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if dupes %}
+<section class="card" style="margin-top:16px">
+  <h3>duplicate UTR detection</h3>
+  <p class="lede" style="margin:0 0 10px">{{ dupes.note }} Groups {{ dupes.n }}.</p>
+  {% if dupes.rows %}
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>UTR</th><th>n</th><th>credits</th></tr></thead>
+      <tbody>
+      {% for row in dupes.rows %}
+        <tr>
+          <td class="id">{{ row.utr }}</td>
+          <td>{{ row.n }}</td>
+          <td class="id">{% for cid in row.ids %}<a href="/credit/{{ cid }}">{{ cid }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="muted">No repeated UTRs in this overlay.</p>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if twins and twins.rows %}
+<section class="card" style="margin-top:16px">
+  <h3>amount twins</h3>
+  <p class="lede" style="margin:0 0 10px">{{ twins.note }}</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>account</th><th>amount</th><th>credits</th></tr></thead>
+      <tbody>
+      {% for row in twins.rows %}
+        <tr>
+          <td class="muted">{{ row.account }}</td>
+          <td class="num">{{ row.amount_display }}</td>
+          <td class="id">{% for cid in row.ids %}<a href="/credit/{{ cid }}">{{ cid }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

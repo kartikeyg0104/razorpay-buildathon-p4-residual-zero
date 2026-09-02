@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Duplicate Analysis · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Root-cause clustering</p>
+    <h1>Duplicate Analysis</h1>
+    <p class="lede">Exceptions are clustered by deterministic signatures: class, delta sign, delta-as-bps-of-gross, instrument, missing kind, ISO week. The model never forms a cluster. More clusters are preferred over unrelated items grouped together.</p>
+  </div>
+  <div class="status"><span class="dot warn"></span>compression {{ ratio }}</div>
+</div>
+<section class="kpis">
+  <article class="kpi alert">
+    <div class="lbl">exceptions</div>
+    <div class="val">{{ n_exc }}</div>
+    <div class="sub">open queue</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">clusters</div>
+    <div class="val">{{ n_clu }}</div>
+    <div class="sub">deterministic signatures</div>
+  </article>
+</section>
+<div class="queue-list">
+  {% for row in rows %}
+  <div class="card">
+    <div class="id">{{ row.signature }}</div>
+    <p class="muted">{{ row.size }} credits</p>
+    <p>
+      {% for id in row.ids %}
+        <a class="id" href="/credit/{{ id }}">{{ id }}</a>
+      {% endfor %}
+      {% if row.more %}<span class="muted">+{{ row.more }}</span>{% endif %}
+    </p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Product Tour · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">5-minute product tour · deterministic</p>
+    <h1>5-Minute Product Tour</h1>
+    <p class="lede">One story: ₹59,645.39 is residual-zero and still not cleared. See how Residual Zero reconstructs explanations, proves amounts, verifies uniqueness, and refuses to clear when evidence is insufficient.</p>
+  </div>
+</div>
+<ol class="tour">
+  <li>
+    <span>0:00</span>
+    <div>
+      <h2>Step 1 · Bank credit arrives</h2>
+      <p>Open the dashboard. Residual-zero {{ t04_dev.residual_zero if t04_dev else '—' }} transactions have reconstructed explanations matching the bank amount exactly. Unique {{ t04_dev.unique if t04_dev else '0' }} is search uniqueness. Auto-clear {{ t04_dev.auto_clear if t04_dev else '0' }} follows uniqueness.</p>
+      <a class="btn primary" href="/">open dashboard</a>
+    </div>
+  </li>
+  <li>
+    <span>0:30</span>
+    <div>
+      <h2>Step 2 · Reconstruct the explanation</h2>
+      <p>Constructed pools show how the solver works. UNIQUE credits show Eval ELIGIBLE. AMBIGUOUS and NONE_FOUND show REFUSE. Official unique remains 0/239.</p>
+      <a class="btn primary" href="/mixed">open uniqueness testing</a>
+      <a class="btn" href="/credit/crd_mix_unique_pair#auto-clear-decision">UNIQUE eligible</a>
+      <a class="btn" href="/credit/crd_mix_ambiguous_twins#auto-clear-decision">AMBIGUOUS refuse</a>
+    </div>
+  </li>
+  <li>
+    <span>0:45</span>
+    <div>
+      <h2>Step 3 · Prove the residual</h2>
+      <p>crd_001_acc_01_2025-01-09 · ₹59,645.39 · residual 0.00 · uniqueness AMBIGUOUS. Read AUTO-CLEAR DECISION: Residual PASS, Uniqueness FAIL, Eval REFUSE, Console write REFUSE. Reason: multiple valid explanations.</p>
+      <a class="btn primary" href="/credit/crd_001_acc_01_2025-01-09#auto-clear-decision">open the decision table</a>
+    </div>
+  </li>
+  <li>
+    <span>1:00</span>
+    <div>
+      <h2>Step 4 · Verify uniqueness</h2>
+      <p>Open the twins credit then the dedicated proof page. Two residual-zero explanations, common vs only-A/only-B, distinguishing evidence NONE, decision AMBIGUOUS. Then the official ₹59,645.39 credit — still AMBIGUOUS. The engine will not pick a winner.</p>
+      <a class="btn primary" href="/proof/crd_mix_ambiguous_twins">twins proof explorer</a>
+      <a class="btn" href="/proof/crd_001_acc_01_2025-01-09">official proof explorer</a>
+    </div>
+  </li>
+  <li>
+    <span>2:00</span>
+    <div>
+      <h2>Step 5 · AI investigation + human review</h2>
+      <p>Click INVESTIGATE WITH AI. The trace shows tool calls, not a chatbot. Ask why the first combination can't be chosen. Then ask "Clear this transaction" and see REFUSE_CLEAR. Auto-cleared stays 0.</p>
+      <a class="btn primary" href="/ask?credit_id=crd_001_acc_01_2025-01-09&amp;question=Why wasn't this transaction cleared?">why not cleared</a>
+      <a class="btn" href="/ask?credit_id=crd_001_acc_01_2025-01-09&amp;question=Why can't you just choose the first combination?">why not pick first</a>
+      <a class="btn" href="/ask?credit_id=crd_001_acc_01_2025-01-09&amp;question=Clear this transaction">refuse a clear</a>
+    </div>
+  </li>
+  <li>
+    <span>3:15</span>
+    <div>
+      <h2>Human review</h2>
+      <p>On the credit page, the human decision card shows AI is not the decision maker. Save a work note (open → investigating). Status cannot be CLEARED. The priority queue is ranked by exposure, not match confidence.</p>
+      <a class="btn" href="/credit/crd_001_acc_01_2025-01-09#human-decision">human decision</a>
+      <a class="btn" href="/exceptions">exceptions queue</a>
+    </div>
+  </li>
+  <li>
+    <span>4:15</span>
+    <div>
+      <h2>Explore + close</h2>
+      <p>The Reconciliation Explorer filters by exception type. Month-end shows cash bridge, exposure rank, and standup report. Auto-clear stays 0.</p>
+      <a class="btn" href="/explorer?kind=AMBIGUOUS">explorer: ambiguous</a>
+      <a class="btn" href="/close">month-end close</a>
+    </div>
+  </li>
+  <li>
+    <span>5:15</span>
+    <div>
+      <h2>Verify + books</h2>
+      <p>Run the held-out evaluation. Books still hold with 0 auto-clears. Settlement data hits are not clears.</p>
+      <a class="btn" href="/challenge?run=all">evaluation lab</a>
+      <a class="btn" href="/books">books &amp; journal</a>
+      <a class="btn" href="/recon">data sources</a>
+    </div>
+  </li>
+  <li>
+    <span>6:15</span>
+    <div>
+      <h2>The product</h2>
+      <p>When evidence is insufficient, the system can prove why it refuses to pretend.</p>
+      <a class="btn primary" href="/evidence">evidence</a>
+    </div>
+  </li>
+</ol>
+<section class="card" style="margin-top:24px" id="judge">
+  <h3>What a judge should understand from this product</h3>
+  <dl class="meta-grid">
+    <div><dt>What is this product?</dt><dd>An AI-powered settlement reconciliation controller. The deterministic engine proves residual and uniqueness. AI investigates. Humans decide genuine ambiguity. The system never auto-clears without proof.</dd></div>
+    <div><dt>Why is 1:1 insufficient?</dt><dd>Exact 1:1 matching finds 0 out of 239. A payout is a signed net of many lines, not one invoice.</dd></div>
+    <div><dt>What makes this different from fuzzy matching?</dt><dd>Fuzzy matching picks a likely pair. This system enumerates exact paise subsets and refuses when more than one explanation fits.</dd></div>
+    <div><dt>What proves a match?</dt><dd>Residual 0 <strong>and</strong> UNIQUE on a FULL pool <strong>and</strong> the ordering gate. Residual 0 alone is not CLEARED.</dd></div>
+    <div><dt>Two valid explanations?</dt><dd>AMBIGUOUS. Proof Explorer shows A/B. The engine will not pick a winner.</dd></div>
+    <div><dt>What does AI actually do?</dt><dd>Select read-only tools, retrieve evidence, compare sources and equations, explain, prioritize. It does not calculate financial truth.</dd></div>
+    <div><dt>Can AI clear a transaction?</dt><dd>No. REFUSE_CLEAR. writes_cleared stays false.</dd></div>
+    <div><dt>Why is auto-clear zero?</dt><dd>Official unique is 0. Auto-clear follows UNIQUE, not residual-zero.</dd></div>
+    <div><dt>Missing evidence?</dt><dd>NOT_RECONCILED / NONE_FOUND. The controller names the gap. It does not invent members.</dd></div>
+    <div><dt>Can a human intervene?</dt><dd>Yes. Human review is a separate event from AI investigation. Status cannot be CLEARED here.</dd></div>
+    <div><dt>Mathematical proof?</dt><dd>Credit page + Proof Explorer. Integer paise. Candidate equations displayed, not chosen.</dd></div>
+    <div><dt>Audit the AI?</dt><dd>/audit and artifacts/console/ai_audit.jsonl. No API keys. Claim validation is recorded.</dd></div>
+  </dl>
+  <details class="fold-inline" style="margin-top:12px">
+    <summary>Technical details</summary>
+    <p class="muted">The live NVIDIA NIM rewrite is optional. If the provider fails or the key is rejected, fallback templates still run. That is not a live provider pass.</p>
+  </details>
+</section>
+{% endblock %}

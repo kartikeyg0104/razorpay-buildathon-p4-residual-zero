@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Uniqueness Testing · Residual Zero{% endblock %}
+{% block body %}
+<div class="top">
+  <div>
+    <p class="kicker">Constructed search pools · not official Track 04</p>
+    <h1>Uniqueness Testing</h1>
+    <p class="lede">Same solver, tiny FULL pools, epsilon 0. Official Dev unique stays 0/239. This page exists so you can see UNIQUE next to AMBIGUOUS next to NONE_FOUND on the same solver. Overlay does not write CLEARED.</p>
+  </div>
+  <a class="btn ghost" href="/">official dashboard</a>
+</div>
+
+<section class="kpis">
+  <article class="kpi ok">
+    <div class="lbl">UNIQUE</div>
+    <div class="val">{{ counts.unique }}</div>
+    <div class="sub">eval {{ counts.eval_eligible }} eligible</div>
+  </article>
+  <article class="kpi alert">
+    <div class="lbl">AMBIGUOUS</div>
+    <div class="val">{{ counts.ambiguous }}</div>
+    <div class="sub">human review</div>
+  </article>
+  <article class="kpi alert">
+    <div class="lbl">NONE_FOUND</div>
+    <div class="val">{{ counts.none_found }}</div>
+    <div class="sub">no exact set</div>
+  </article>
+  <article class="kpi">
+    <div class="lbl">overlay CLEARED</div>
+    <div class="val">{{ counts.overlay_cleared }}</div>
+    <div class="sub">never writes</div>
+  </article>
+</section>
+
+<section class="card" style="margin-top:12px">
+  <h3>Open a credit to see the auto-clear decision. UNIQUE is green ELIGIBLE. AMBIGUOUS is REFUSE.</h3>
+  <div class="table-wrap" style="margin-top:12px">
+    <table>
+      <thead>
+        <tr>
+          <th>transaction</th>
+          <th>amount</th>
+          <th>pool</th>
+          <th>residual</th>
+          <th>uniqueness</th>
+          <th>eval</th>
+          <th>console write</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for row in rows %}
+        <tr>
+          <td class="id"><a href="/credit/{{ row.credit_id }}#auto-clear-decision">{{ row.credit_id }}</a></td>
+          <td class="num">{{ row.amount }}</td>
+          <td class="muted">{{ row.pool }}</td>
+          <td>{{ row.residual }}</td>
+          <td><span class="pill {{ row.uniqueness }}">{{ row.uniqueness }}</span></td>
+          <td><b class="{{ 'pass' if row.eval_would_clear else 'fail' }}">{{ row.eval_label }}</b></td>
+          <td class="muted">{{ row.console_write }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="muted" style="margin-top:12px">{{ counts.n }} constructed credits. Official cards remain <span class="id">artifacts/dev/t04.md</span> unique 0, auto-clear 0.</p>
+</section>
+{% endblock %}
