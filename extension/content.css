@@ -1,0 +1,20 @@
+.rz-id {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.rz-chip {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: #c8f542;
+  color: #10120a;
+  font: 800 10px/1 ui-sans-serif, system-ui, sans-serif;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.rz-chip:hover { filter: brightness(1.08); }

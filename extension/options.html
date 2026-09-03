@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Residual Zero — options</title>
+  <link rel="stylesheet" href="app.css">
+  <style>
+    .ok { color: #7fd08a }
+    .warn { color: #ffb3bd }
+    input[type=password], input[type=url] { width: 100%; box-sizing: border-box }
+    .row { margin: 10px 0 }
+  </style>
+</head>
+<body class="panel">
+  <main class="wrap" style="padding:18px;max-width:600px">
+    <h1 class="view-title" style="padding:0 0 10px">Extension options</h1>
+    <section class="card">
+      <h2 class="card-h">Desk endpoint and token</h2>
+      <p class="muted">Point the extension at your Residual Zero desk. A deployed desk must be
+      <span class="mono">https://</span>; a loopback development desk is also accepted.</p>
+      <p class="muted">To get a token: open the desk in a browser, sign in, visit
+      <span class="mono">/tokens</span>, create one, and paste it below. The token carries your own
+      permissions and nothing more — no role in Residual Zero can authorise a clear.</p>
+      <form id="f" class="ask-form" style="display:block">
+        <div class="row">
+          <label class="mono" for="desk" style="font-size:11px;color:var(--faint)">Desk URL</label>
+          <input id="desk" type="url" list="allowed" aria-label="Desk URL"
+                 placeholder="https://residual-zero.example.com">
+          <datalist id="allowed">
+            <option value="http://127.0.0.1:8765"></option>
+            <option value="http://localhost:8765"></option>
+          </datalist>
+        </div>
+        <div class="row">
+          <label class="mono" for="token" style="font-size:11px;color:var(--faint)">Personal access token</label>
+          <input id="token" type="password" autocomplete="off" spellcheck="false"
+                 aria-label="Personal access token" placeholder="rz_pat_…">
+        </div>
+        <div class="row">
+          <button class="btn primary" type="submit">Save</button>
+          <button class="btn" id="verify" type="button">Check connection</button>
+        </div>
+      </form>
+      <p id="msg" class="muted" role="status" aria-live="polite"></p>
+      <p id="who" class="muted mono" role="status" aria-live="polite"></p>
+    </section>
+    <section class="card">
+      <h2 class="card-h">What this extension holds</h2>
+      <p class="muted">No API keys. No database credentials. The NVIDIA model is called on the
+      server and its key never reaches the browser. The only credential stored here is your own
+      access token, kept in this browser's extension storage and sent only to the desk URL above.</p>
+    </section>
+    <section class="card">
+      <h2 class="card-h">Safety</h2>
+      <p class="muted">This extension is read-only. It renders results the deterministic engine
+      produced and can never write CLEARED, resolve an exception, or change engine state.</p>
+    </section>
+  </main>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "manifest_version": 3,
+  "name": "Residual Zero",
+  "version": "3.0.0",
+  "description": "Settlement reconciliation desk in the browser. Read-only against an authenticated Residual Zero backend. Ships no API keys. The extension never writes CLEARED.",
+  "action": {
+    "default_title": "Residual Zero",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8765/*",
+    "http://localhost:8765/*",
+    "https://dashboard.razorpay.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://dashboard.razorpay.com/*",
+        "http://127.0.0.1:8765/extension",
+        "http://127.0.0.1:8765/extension?*",
+        "http://localhost:8765/extension",
+        "http://localhost:8765/extension?*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "optional_host_permissions": [
+    "https://*/*"
+  ]
+}

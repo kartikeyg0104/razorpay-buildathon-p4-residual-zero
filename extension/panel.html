@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Residual Zero — panel</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body class="panel">
+  <header class="top">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">0</span>
+      <span class="brand-t"><b>Residual Zero</b><small id="desk-url">—</small></span>
+    </div>
+    <form id="search" class="search" role="search">
+      <input type="search" placeholder="crd_… · account · UTR" aria-label="Find a transaction">
+      <button class="btn" type="submit">Find</button>
+    </form>
+    <button id="expand" class="btn ghost" type="button" title="Open the extension panel in a tab">Expand</button>
+  </header>
+  <nav id="nav" class="nav" aria-label="Extension sections"></nav>
+  <p id="status" class="status">connecting…</p>
+  <main class="wrap">
+    <h1 id="view-title" class="view-title">Dashboard</h1>
+    <div id="view" class="view" role="region" aria-live="polite"></div>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
