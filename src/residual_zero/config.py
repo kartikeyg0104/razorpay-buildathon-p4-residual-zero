@@ -13,6 +13,7 @@ somebody picked.
 from __future__ import annotations
 
 import hashlib
+import re
 from datetime import date
 from pathlib import Path
 from typing import Any, Iterator
@@ -24,6 +25,11 @@ from .canonical import canonical_json as _canonical_json
 from .models import Instrument
 
 _STRICT = ConfigDict(frozen=True, extra="forbid")
+
+# The exact shape `residual_zero.models.render_score` emits: f"{score:.6f}" over a score the
+# ordering module clamps to [0, 1]. The auto-clear gate compares rendered score against threshold
+# as strings, so the threshold has to be spelled identically or the comparison fails open.
+_RENDERED_SCORE = re.compile(r"[01]\.[0-9]{6}")
 
 UNVERIFIED_PREFIX = "TBD-VERIFY"
 DEFERRED_PREFIX = "TBD-CP"
@@ -149,6 +155,7 @@ class SearchConfig(BaseModel):
     derived_epsilon_paise: int | None = Field(default=None, ge=0)
     derived_epsilon_rupees: int | None = Field(default=None, ge=0)
     max_pool: int = Field(gt=0)
+    max_pool_scaled: int | None = Field(default=None, gt=0)
     max_axis_width_rupees: int = Field(gt=0)
     max_enum_nodes: int = Field(gt=0)
     enumerate_cap: int = Field(ge=2)
@@ -245,6 +252,17 @@ class AutonomyConfig(BaseModel):
             raise ValueError(
                 "autonomy.threshold requires a threshold_source naming the curve artifact it was "
                 "read from. A threshold set by hand is a guess wearing a suit (spec §9.5)."
+            )
+        if self.threshold is not None and not _RENDERED_SCORE.fullmatch(self.threshold):
+            # The clear gate compares `render_ordering_score(score) >= threshold` as strings, so
+            # the threshold must be in exactly the shape `render_score` emits. Any other spelling
+            # ("1.0", ".5", " 1.000000") compares lexicographically against a fixed six-decimal
+            # score and fails OPEN — every score would pass the ADR-11 gate #5.
+            raise ValueError(
+                f"autonomy.threshold {self.threshold!r} is not a rendered ordering score. It must "
+                "match the exact output of residual_zero.models.render_score — one digit, a dot, "
+                "and six decimals (e.g. '1.000000'). The auto-clear gate compares it as a string, "
+                "so any other spelling silently fails open."
             )
         return self
 

@@ -54,6 +54,9 @@ class FeatureFlags(BaseModel):
     f27_scale: bool = True
     f28_calibration: bool = True
     f29_fx: bool = True
+    f58_named_declared_members: bool = True
+    f59_settlement_declared_ops: bool = True
+    f60_reconstruct_missing_rate_ids: bool = True
 
     @classmethod
     def all_off(cls) -> "FeatureFlags":
@@ -94,6 +97,9 @@ class FeatureFlags(BaseModel):
             f27_scale=False,
             f28_calibration=False,
             f29_fx=False,
+            f58_named_declared_members=False,
+            f59_settlement_declared_ops=False,
+            f60_reconstruct_missing_rate_ids=False,
         )
 
 
