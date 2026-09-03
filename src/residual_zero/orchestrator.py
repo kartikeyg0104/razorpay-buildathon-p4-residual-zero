@@ -36,7 +36,7 @@ from residual_zero.proof import build_proof
 from residual_zero.rates import regress, triples_from_members
 from residual_zero.semantic.llm import CachedLLMClient, StubLLMClient, TokenBudgetExceeded
 from residual_zero.semantic.tiers import registry_from_items, resolve, tier_mix
-from residual_zero.solver import collect_enumerated, disambiguate, solve_search
+from residual_zero.solver import collect_enumerated, disambiguate, solve_search, unsearched_result
 from residual_zero.solver.fastpath import DeclaredLine, verify_declared
 from residual_zero.solver.tolerance import apply_derived_epsilon
 from residual_zero.runtime.degrade import Rung, active_rung, policy_for
@@ -166,27 +166,26 @@ def run_split(
                             DeclaredLine(r.item_id, r.kind, r.amount_paise, r.instrument) for r in declared
                         ),
                         ledger, rates, fees, reserve_bps=reserve_bps,
+                        allow_declared_ops=flags.f59_settlement_declared_ops,
+                        allow_missing_rate_ids=flags.f60_reconstruct_missing_rate_ids,
                     )
                     if tracer:
                         tracer.gate("declared_verify", fp.ok, f"residual={fp.residual_paise}")
                     if fp.ok:
                         member_ids = tuple(r.item_id for r in declared if r.item_id in ledger)
+                    elif flags.f58_named_declared_members:
+                        member_ids = tuple(r.item_id for r in declared if r.item_id in ledger)
                 pool = build_pool(credit, items, cfg)
                 if tracer:
                     tracer.gate("pool", True, f"size={len(pool.item_ids)} scope={pool.scope.value}")
-                if pol.allow_search:
-                    with clock.span("dp"):
+                with clock.span("dp"):
+                    if pol.allow_search:
                         solve = solve_search(pool, credit.amount_paise, cfg)
-                else:
-                    with clock.span("dp"):
-                        solve = solve_search(pool, credit.amount_paise, cfg)
-                    solve = solve.model_copy(
-                        update={
-                            "uniqueness": Uniqueness.NONE_FOUND,
-                            "member_ids": (),
-                            "alternates": 0,
-                        }
-                    )
+                    else:
+                        # The rung forbids search, so do not spend it. Overriding the fields of a
+                        # search we did run left slack/margin/nearest_delta on the result and still
+                        # paid for the DP, which is not what allow_search=False means.
+                        solve = unsearched_result(pool)
                 if tracer:
                     tracer.gate("dp", True, solve.uniqueness.value)
                 structurally_infeasible = False
@@ -327,7 +326,11 @@ def run_split(
                 fp_lines = tuple(
                     DeclaredLine(r.item_id, r.kind, r.amount_paise, r.instrument) for r in declared
                 )
-                fp_now = verify_declared(credit, fp_lines, ledger, rates, fees, reserve_bps=reserve_bps)
+                fp_now = verify_declared(
+                    credit, fp_lines, ledger, rates, fees, reserve_bps=reserve_bps,
+                    allow_declared_ops=flags.f59_settlement_declared_ops,
+                    allow_missing_rate_ids=flags.f60_reconstruct_missing_rate_ids,
+                )
                 declared_deltas = fp_now.line_deltas
 
             signals = ExceptionSignals(
@@ -427,8 +430,16 @@ def run_split(
                 "ordering_score": score_s,
                 "exception_class": classification.exception_class.value,
                 "matched_rule": classification.matched_rule,
+                "search_strategy": solve.strategy,
+                "pool_size_before": solve.pool_size_before,
             }
-            metrics = {"pool_size": solve.pool_size, "axis_width": solve.axis_width, "tier": int(max_tier)}
+            metrics = {
+                "pool_size": solve.pool_size,
+                "pool_size_before": solve.pool_size_before,
+                "axis_width": solve.axis_width,
+                "tier": int(max_tier),
+                "search_strategy": solve.strategy,
+            }
             if tracer:
                 tracer.gate("paise_verify", outcome.accepted, f"residual={outcome.residual_paise}")
                 tracer.gate("ordering", True, score_s)
