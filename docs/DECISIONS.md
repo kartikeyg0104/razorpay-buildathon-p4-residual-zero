@@ -218,3 +218,46 @@ quantities. A model-derived score does not authorise anything.
 **If a model-derived score had gated any of the above, that would be an NN-4 bug to fix, not
 a curve to draw.** It does not. One paragraph is the owed note.
 
+---
+
+## ADR-12 · Settlement-declared operational amounts (f59)
+
+**Decision.** `verify_declared` first re-derives the stack from **ledger** operational
+amounts. If that residual is nonzero, it retries using **settlement-report** operational
+amounts for the same named ids. Rate lines (fee, GST, withholding, reserve) are always
+re-derived from the rate table. Missing ledger ids still fail. Search-path
+`verify_decomposition` stays ledger-only.
+
+**Argument.** Classes 5 and 18 mutate one ledger amount and leave `settlement.csv` intact.
+The bank credit still equals the settlement operational sum plus re-derived rates. Using
+only the corrupted ledger line rejected a composition the settlement report itself proves.
+Class 8 shortens both sources and is still rejected. Declared fee amounts are still never
+trusted.
+
+**Evidence hierarchy.** An explicit settlement item id plus a zero-paise re-derive outranks
+description similarity and outranks a ledger amount that contradicts the report. Text
+cannot override a contradictory hard residual.
+
+**Flag.** `f59_settlement_declared_ops` default on. `FeatureFlags.all_off()` keeps the
+ledger-only path so flags-off exact stays `129/239`.
+
+**What we are not claiming.** We are not claiming every named settlement stack is the
+answer key. Gate A subsets (classes 12/14/13) remain residual-zero with incomplete ids.
+Class 8 remains an exception.
+
+---
+
+## ADR-13 · Reconstruct missing rate-derived ids (f60)
+
+**Decision.** If a settlement row names a FEE / GST / WITHHOLDING / RESERVE_HOLD id that
+is absent from the ledger, Regime A still re-derives that line from the rate table.
+The missing id is recorded. Missing **operational** ids (payments, refunds) still fail.
+
+**Argument.** Class 13 deletes the withholding ledger row and leaves it named in
+`settlement.csv`. Classes 12 and 14 omit the same rate lines from both sources and
+already residual-zero via re-derive. Failing only when the report still names the
+deleted id was inconsistent with "never copy declared rate amounts."
+
+**Not applied.** Class 11 deleted refunds (operational). Including D in the search
+window (payments at D-2, fees on D). Both leave uniqueness at 0 or invent amounts.
+

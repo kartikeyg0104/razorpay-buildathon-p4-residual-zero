@@ -141,3 +141,23 @@ evaluated the test split once. Auto-clear is zero on this profile because unique
 the product. Next: a merchant's own files, not another feature."
 
 Stop. Do not tour Phase 2–4. They are in the README when someone asks.
+
+---
+
+## AI finance controller (2–3 minutes, on demand)
+
+The deterministic engine stays the source of truth. This segment is explanation only.
+
+**0:00.** Dashboard `/`. 239 scored · residual-zero 159/239 · test 521/800 · auto-clear 0 · false clears 0 · search coverage 800/800. Numbers come from `artifacts/*/t04.md`, not a hardcoded percent.
+
+**0:20.** Open `/credit/crd_001_acc_01_2025-01-09`. Amount 59,645.39. Residual 0.00. 27 members. Uniqueness AMBIGUOUS. Auto-clear NO.
+
+**0:40.** Click **Why wasn't this cleared?** The controller calls `get_transaction`, `get_reconciliation`, `get_transaction_evidence`. It explains: exact residual 0, more than one valid explanation, uniqueness blocked auto-clear. Overlay does not write CLEARED.
+
+**1:10.** **View evidence** — checks, settlement, ledger ids, audit.
+
+**1:25.** Ask: “How many transactions are currently ambiguous?” Answer is the official t04 count (236 dev / 779 test).
+
+**1:40.** Ask: “Why can't we simply clear the ambiguous ones?” Because multiple financially valid explanations exist; choosing one is an unsupported assumption.
+
+**2:00.** Second credit: `/credit/crd_003_acc_01_2025-01-30` (missing ledger / no declared). Ask why it cannot be reconciled. The AI says the records are incomplete. Show the audit trail. Do not invent the missing row.

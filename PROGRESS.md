@@ -427,6 +427,81 @@ Test-split eval 4 of 4 still skipped. Freeze commit follows `v4`.
 Frozen `data/dev/rendered` + `truth.jsonl` are committed so `make eval` from a clone
 hits the published numbers.
 
+---
 
+## Recovery audit · named-declared exact 148/239 · 2026-08-29
 
+Command: `.venv/bin/python -m eval.forensics_dev && .venv/bin/python -m eval.window_containment && .venv/bin/python -m pytest -q`
 
+Exit: 0 — **405 passed**.
+
+Forensic on all 239 scored credits (`artifacts/dev/forensics_exact.json`):
+- 129 EXACT_DECLARED_OK (verify-gated)
+- 19 DECLARED_EQ_TRUTH_VERIFY_FAIL → recovered by `f58_named_declared_members`
+- 13 DECLARED_OK_BUT_NOT_TRUTH
+- 6 DECLARED_NE_TRUTH_VERIFY_FAIL
+- 56 NO_DECLARED_WINDOW_MISS
+- 11 NO_DECLARED_TRUTH_MISSING
+- 5 NO_DECLARED_SEARCH_PATH
+- account filter: 0 credits with truth on another account
+- dev max pool 385 → 0 BUDGET_EXCEEDED from max_pool
+- test pools: p50=436, 706/825 posted over max_pool 400; last measured test BUDGET_EXCEEDED 684/800
+
+Window: including value_date raises full-stack containment 9/239 → 191/239. Not adopted (pool p50 already 287 vs cap 400; search stays AMBIGUOUS). Production window remains [D-5, D-1].
+
+A3 with f58 on: exact **148/239**, assignment P 3977/3977, R 3977/5973, cleared **0**. Verify-gated / flags-off floor remains **129/239**.
+
+Solution enumeration now stores sorted index tuples so permutations of the same set cannot double-count.
+
+Console: coverage vs clearance cards; credit page “why this did not reconcile” from the forensic artifact (does not open the answer-key file). Overlay still does not write CLEARED.
+
+---
+
+## Scale search · test eval 2 of 4 · 2026-08-29
+
+Command: `.venv/bin/python -m pytest -q && .venv/bin/python -m eval.scale_audit && .venv/bin/python -m eval.cli --split test --full --out artifacts/test --i-am-at-a-gate`
+
+Exit: 0. **420+ tests** then official test eval.
+
+`max_pool` stays 400. After safe prune, bitset DP may run up to `max_pool_scaled: 640` when axis ≤ 2e6. Worst-case 594-item test credit: 46 ms, axis 1,646,045.
+
+Test A3 eval 2 (`artifacts/test/headline.md`): member-identified 501/800, residual-zero still 425/800, cleared 0, flagged 800, budget **0**. Eval 1 was 425/800 exact, budget 684, wall 30842 ms. Eval 2 wall 69776 ms.
+
+Scale audit: 684/684 previous budget dispositions → AMBIGUOUS. Search completed 800/800. UNIQUE 0. Strategy: BITSET_DP 112, PRUNED 3, SCALED 684, PRUNED_EMPTY 1.
+
+NN-16: this is **2 of 4**. Logged in `docs/EVALUATION.md` §10.
+
+---
+
+## Ground-truth coverage · settlement-ops (f59) · 2026-08-29
+
+Command: `.venv/bin/python -m eval.gap_analysis && .venv/bin/python -m eval.forensics_dev && .venv/bin/python -m pytest -q`
+
+`verify_declared` retries with settlement-declared operational amounts when ledger ops fail.
+Rate lines still re-derived. Missing ids still fail. Search-path `verify_decomposition` unchanged.
+
+Dev residual-zero **155/239** (was 129 linked+ok / 142 fp.ok). Linked+ok 142. Settlement-linked 148. Class 8 remaining 6. SETTLEMENT_OPS recovered 13.
+
+Test residual-zero **501/800** (was 425 linked+ok / 462 fp.ok). Linked+ok 464. Settlement-linked 501. Official test eval not spent (A3 exact unchanged).
+
+False clears 0. Auto-clear 0. Date window unchanged. Flags-off exact floor stays 129/239.
+
+Artifacts: `artifacts/dev/gap_analysis.json`, `artifacts/test/gap_analysis.json`, `artifacts/dev/coverage_scorecard.md`.
+
+---
+
+## Official coverage · eval 3 + f60 eval 4 · 2026-08-29
+
+Command: `.venv/bin/python -m eval.cli --split test --full --out artifacts/test --i-am-at-a-gate` (eval 3 then 4); `.venv/bin/python -m eval.cli --split dev --full --out artifacts/dev`; `.venv/bin/python -m pytest -q`
+
+Eval 3 (f59 official): residual-zero **501/800**, member-identified 501/800, unique 0, auto-clear 0, wall 69621 ms.
+
+Date-window probe: payments at D-2, fees on value_date D. Including D puts 60/72 Regime B stacks in pool; UNIQUE stays 0. Settlement-item date bypass does not apply (those 56 have no settlement.csv rows).
+
+f60: missing RATE_DERIVED ids reconstructed from the rate table. Class 13 recovers. Class 11 refunds still fail.
+
+Eval 4 (f60 official): residual-zero **521/800**. Member-identified 501/800. Unique 0. Auto-clear 0. False clears 0. Wall 68299 ms. Search 800/800.
+
+Dev official: residual-zero **159/239**, member-identified 148/239, unique 0, search 239/239, wall 10066 ms.
+
+NN-16: **4 of 4 spent**. Remaining 80/239 misses are irreducible under current semantics.

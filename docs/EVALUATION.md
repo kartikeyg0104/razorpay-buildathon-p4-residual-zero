@@ -155,6 +155,13 @@ prompt, tolerance and window is tuned on dev, always. Dev evaluation is unlimite
 | # | Timestamp | Commit | Tag | Phase | Notes |
 |---|---|---|---|---|---|
 | 1 | `2026-08-27T18:45:00+05:30` | (tag `v1-submittable`) | `v1-submittable` | 1 | Evaluation **1 of 4**. n=800. A0/A1 exact 0/800. A2 exact 0/800, greedy-cleared 510, budget 238. A3 exact 425/800, assignment 11467/11470 P / 11467/20487 R, auto-cleared 0, flagged 116, budget 684. Held-out class 9 present. Tuned on dev only. |
+| 2 | `2026-08-29T16:10:00+05:30` | `75cef50` | — | scale | Evaluation **2 of 4**. Safe prune + bitset DP up to `max_pool_scaled: 640` when axis ≤ 2e6. `max_pool` stays 400. Threshold 1.000000, windows, uniqueness unchanged. A3 member-identified 501/800 (residual-zero still 425/800; +76 are settlement-linked verify-fail via f58). Search uniqueness: AMBIGUOUS 779, NONE_FOUND 21, UNIQUE 0, BUDGET 0. Auto-clear 0. Flagged 800. Assignment 13912/13912 P / 13912/20487 R. Wall 69776 ms (eval 1 was 30842 ms). `artifacts/test/headline.md`, `artifacts/test/scale_audit.json`. Tuned on dev only. |
+| 3 | `2026-08-29T16:33:38+05:30` | `75cef50` | — | coverage | Evaluation **3 of 4**. Official f59 confirmation. A3 member-identified 501/800. Residual-zero **501/800**. Verified-linked 464/800. UNIQUE 0, AMBIGUOUS 779, NONE_FOUND 21, BUDGET 0. Auto-clear 0. Flagged 800. False clears 0. Assignment 13912/13912 P / 13912/20487 R. Wall 69621 ms. Search 800/800. `artifacts/test/t04.md`. Tuned on dev only. |
+| 4 | `2026-08-29T16:45:00+05:30` | `75cef50` | — | coverage | Evaluation **4 of 4**. f60 reconstruct missing rate-derived ids. A3 member-identified 501/800. Residual-zero **521/800**. Verified-linked 464/800. UNIQUE 0, AMBIGUOUS 779, NONE_FOUND 21, BUDGET 0. Auto-clear 0. Flagged 800. False clears 0. Assignment 13912/13912 P / 13912/20487 R. Wall 68299 ms. Search 800/800. `artifacts/test/t04.md`. Tuned on dev only. Ceiling: remaining misses are Regime B (no settlement) or class 8/11 dirty sources. |
+
+Official residual-zero after eval 4: dev 159/239 (`artifacts/dev/t04.md`), test 521/800 (`artifacts/test/t04.md`). A3 member-identified unchanged (148/239, 501/800). Flags-off floor remains 129/239. Test-split budget exhausted (4 of 4).
+
+QA replay `2026-08-29T21:05+05:30` (local verification, **not** evaluation 5 of 4): `--split test --full --out artifacts/qa/official_test --i-am-at-a-gate`. Did not overwrite `artifacts/test/t04.md`. Measured residual-zero 521/800, unique 0, ambiguous 779, none 21, budget 0, auto-clear 0, false clears 0, search 800/800, verified-linked 464/800, wall_clock_ms 1485087 (`--full` includes A0–A4). Same official card as eval 4.
 
 ## 11 · Pre-registered questions
 
