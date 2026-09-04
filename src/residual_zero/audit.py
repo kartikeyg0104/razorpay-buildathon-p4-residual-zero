@@ -32,11 +32,31 @@ def _entry_hash(payload: Mapping[str, Any], prev_hash: str) -> str:
     return hashlib.sha256(blob).hexdigest()
 
 
+AUDIT_LOCK = "residual_zero.audit_entry"
+
+
 def append_entry(
     conn: sqlite3.Connection, payload: Mapping[str, Any], metrics: Mapping[str, Any],
 ) -> AuditEntry:
-    """entry_hash = sha256(canonical_json(payload) || 0x00 || prev_hash_ascii). D11 pins it."""
-    cur = conn.execute("SELECT MAX(seq), entry_hash FROM audit_entry")
+    """entry_hash = sha256(canonical_json(payload) || 0x00 || prev_hash_ascii). D11 pins it.
+
+    Appending is a read-modify-write: read the head, hash against its hash, insert the
+    successor. Two writers interleaving that would either collide on ``seq`` or fork the
+    chain into two branches claiming the same predecessor, so on a backend that has more
+    than one writer the whole sequence takes a lock first. It is transaction-scoped, so a
+    crashed writer releases it rather than wedging the log.
+
+    The two ``UNIQUE`` constraints on the production table (``entry_hash``, ``prev_hash``)
+    are the backstop: even without the lock, a fork is a constraint violation rather than a
+    silently branched audit trail.
+    """
+    locker = getattr(conn, "lock_for_append", None)
+    if locker is not None:
+        locker(AUDIT_LOCK)
+    # `SELECT MAX(seq), entry_hash` relied on SQLite's bare-column-with-aggregate
+    # extension, which returns the row that produced the maximum. Standard SQL rejects it,
+    # so the head is selected explicitly — same row, same result, portable.
+    cur = conn.execute("SELECT seq, entry_hash FROM audit_entry ORDER BY seq DESC LIMIT 1")
     row = cur.fetchone()
     if row is None or row[0] is None:
         seq = 0
