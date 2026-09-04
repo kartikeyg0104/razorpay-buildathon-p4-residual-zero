@@ -83,8 +83,41 @@ def open_verify(path) -> sqlite3.Connection:
     return _open_readwrite(Path(path), "verify")
 
 
+class ConflictingClearError(RuntimeError):
+    """A second, different explanation was offered for an already-cleared credit."""
+
+
 def write_cleared(conn: sqlite3.Connection, decomposition: Decomposition) -> None:
-    """Insert a cleared decomposition. The only function that writes reconciliation rows."""
+    """Insert a cleared decomposition. The only function that writes reconciliation rows.
+
+    Re-clearing the same credit with the same member set is a no-op, which is what makes a
+    replay or a crash-resume safe (F25). Re-clearing it with a *different* member set is
+    refused: two different explanations of one bank credit cannot both be true, and
+    silently replacing the first would destroy the decomposition an earlier proof and audit
+    entry were built from.
+
+    The arithmetic is not repeated here. ``decomposition`` already carries the residual and
+    uniqueness the solver and verifier established; this function only stores them.
+    """
+    existing = conn.execute(
+        "SELECT disposition FROM reconciliation WHERE bank_credit_id = ?",
+        (decomposition.bank_credit_id,),
+    ).fetchone()
+    if existing is not None and str(existing[0]) == "CLEARED":
+        prior = tuple(
+            str(r[0])
+            for r in conn.execute(
+                "SELECT item_id FROM decomposition_member WHERE bank_credit_id = ? "
+                "ORDER BY item_id",
+                (decomposition.bank_credit_id,),
+            )
+        )
+        if prior and prior != tuple(decomposition.member_ids):
+            raise ConflictingClearError(
+                f"{decomposition.bank_credit_id} is already cleared with "
+                f"{len(prior)} members; refusing to replace them with "
+                f"{len(decomposition.member_ids)}"
+            )
     conn.execute(
         "INSERT OR REPLACE INTO reconciliation "
         "(bank_credit_id, claimed_total_paise, residual_paise, uniqueness, pool_scope, disposition) "
