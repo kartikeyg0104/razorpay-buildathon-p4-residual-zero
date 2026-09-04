@@ -162,10 +162,53 @@ def test_the_entrypoint_exits_rather_than_serving_a_bad_configuration(prod, monk
     served = []
     import uvicorn
 
-    monkeypatch.setattr(uvicorn, "run", lambda *a, **k: served.append(True))
+    # Patch what main() actually calls. This test passed vacuously once already, when the
+    # entrypoint moved off uvicorn.run() to hand over a pre-bound socket.
+    monkeypatch.setattr(uvicorn.Server, "run", lambda *a, **k: served.append(True))
     from residual_zero.console.__main__ import main
 
     with pytest.raises(SystemExit) as exit_info:
         main()
     assert exit_info.value.code == 2
     assert served == [], "the server started despite an invalid configuration"
+
+
+def test_the_ipv6_wildcard_still_answers_ipv4(monkeypatch):
+    """`RZ_HOST=::` must mean every interface, not IPv6 only.
+
+    asyncio sets IPV6_V6ONLY on any AF_INET6 socket it binds itself, so letting uvicorn
+    bind `::` produces a server that logs a clean startup and refuses every IPv4
+    connection. Railway's health probe dials IPv4; the deploy died on healthcheck timeout
+    with no request in the log. Connect over IPv4 for real — asserting the sockopt alone
+    would not have caught the original bug's symptom.
+    """
+    import socket
+
+    from residual_zero.console.__main__ import _listen_socket
+
+    sock = _listen_socket("::", 0)
+    assert sock is not None, "the wildcard must be bound by us, not by uvicorn"
+    try:
+        if not sock.getsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY) == 0:
+            pytest.skip("kernel refuses dual-stack sockets")
+        sock.listen(8)
+        port = sock.getsockname()[1]
+        for family, address in ((socket.AF_INET, "127.0.0.1"), (socket.AF_INET6, "::1")):
+            client = socket.socket(family, socket.SOCK_STREAM)
+            client.settimeout(5)
+            try:
+                client.connect((address, port))
+            except OSError as exc:  # pragma: no cover - the bug this test exists for
+                pytest.fail(f"{address} was refused by the wildcard bind: {exc}")
+            finally:
+                client.close()
+    finally:
+        sock.close()
+
+
+def test_a_specific_bind_address_is_left_to_uvicorn(monkeypatch):
+    """Only the wildcard is special-cased; picking an address picks a family on purpose."""
+    from residual_zero.console.__main__ import _listen_socket
+
+    for host in ("127.0.0.1", "0.0.0.0", "::1"):
+        assert _listen_socket(host, 0) is None, host

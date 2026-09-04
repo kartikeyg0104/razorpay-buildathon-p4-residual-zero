@@ -77,6 +77,45 @@ def _port() -> int:
     return DEFAULT_PORT
 
 
+# Every "listen on all interfaces" guide writes the IPv6 wildcard this way, so treat both
+# spellings as the same request.
+WILDCARD_V6 = frozenset({"::", "0:0:0:0:0:0:0:0"})
+
+
+def _listen_socket(host: str, port: int) -> socket.socket | None:
+    """A dual-stack listening socket for the IPv6 wildcard, else ``None`` to let uvicorn bind.
+
+    ``asyncio.BaseEventLoop.create_server`` sets ``IPV6_V6ONLY`` on every ``AF_INET6``
+    socket it binds. So ``RZ_HOST=::`` — the value that reads as "all interfaces" and that
+    platform docs hand you — listens on IPv6 *only* and answers an IPv4 connection with
+    ECONNREFUSED. That failure is invisible from inside the process: startup completes,
+    uvicorn logs ``Uvicorn running on http://[::]:8080``, and nothing ever arrives.
+    Observed on Railway, where the health probe connects over IPv4: the deploy was killed
+    on healthcheck timeout with not one request line in the log.
+
+    Binding here, before uvicorn, is the only place the option can be cleared. Wildcard
+    only — a specific address means the operator picked a family on purpose.
+    """
+    if host not in WILDCARD_V6:
+        return None
+    sock = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
+    try:
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        try:
+            sock.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
+        except OSError:
+            # Some kernels refuse to serve both families on one socket (OpenBSD forbids it
+            # outright). Bind IPv6-only rather than fail to start; the operator can set
+            # RZ_HOST=0.0.0.0 if IPv4 is the family that matters there.
+            pass
+        # Not listen() — asyncio calls that itself with the configured backlog.
+        sock.bind((host, port))
+    except BaseException:
+        sock.close()
+        raise
+    return sock
+
+
 def main() -> None:
     import uvicorn
 
@@ -101,11 +140,19 @@ def main() -> None:
         # Identity must exist before the first login attempt. Idempotent.
         bootstrap_shared()
 
-    obs.event("console.starting", host=_host(), port=_port(), **config.redacted_summary())
-    uvicorn.run(
+    host, port = _host(), _port()
+    sock = _listen_socket(host, port)
+    obs.event(
+        "console.starting",
+        host=host,
+        port=port,
+        dual_stack=sock is not None,
+        **config.redacted_summary(),
+    )
+    settings = uvicorn.Config(
         "residual_zero.console.app:app",
-        host=_host(),
-        port=_port(),
+        host=host,
+        port=port,
         log_level=(os.environ.get("RZ_LOG_LEVEL") or "info").lower(),
         reload=False,
         # Behind a TLS-terminating proxy, uvicorn must read X-Forwarded-* to know the
@@ -114,6 +161,9 @@ def main() -> None:
         proxy_headers=config.trust_proxy,
         forwarded_allow_ips="*" if config.trust_proxy else None,
     )
+    # Config/Server rather than uvicorn.run() only so a pre-bound socket can be handed
+    # over; every other argument is unchanged. sockets=None is uvicorn's own default path.
+    uvicorn.Server(settings).run(sockets=[sock] if sock else None)
 
 
 if __name__ == "__main__":
