@@ -268,6 +268,71 @@ edit needed. Expect roughly 60-70 ms per connection to Neon's `us-east-2` instea
 single-digit milliseconds; with six connections per credit page that is under a second, not
 the 24 s measured from 12,000 km away. Prefer `ohio` if it is offered.
 
+## 7a-ter. Railway (the platform this is deployed on)
+
+Live: **https://residual-zero-production.up.railway.app**
+
+Railway builds the `Dockerfile` — the same image rehearsed locally — and probes `/healthz`.
+
+### Service settings
+
+Railway's **Config as Code is deprecated**: `railway.json` / `railway.toml` are silently
+ignored, and the API rejects `railwayConfigFile` outright, pointing at Infrastructure as
+Code (`.railway/railway.ts`) instead. This repo carried a `railway.json` declaring
+`builder: DOCKERFILE`; the live service reported `builder: RAILPACK`,
+`railwayConfigFile: null` the entire time, and two tests asserting that file's contents
+passed while none of it was in effect. The file is gone. Settings now live on the service
+instance:
+
+| setting | value |
+|---|---|
+| `dockerfilePath` | `Dockerfile` |
+| `healthcheckPath` | `/healthz` |
+| `healthcheckTimeout` | `300` |
+| `restartPolicyType` | `ON_FAILURE` (max 3) |
+
+`Builder` has no `DOCKERFILE` member — setting `dockerfilePath` is what selects a
+Dockerfile build.
+
+### RZ_HOST on Railway
+
+Set it to `::` or `0.0.0.0`, or leave it unset and take the image default. Two spellings
+that look right and are not:
+
+- **`[::]`** — RFC 3986 bracket notation for a URL, which is what Railway's own docs show.
+  `getaddrinfo` does not accept brackets, so uvicorn failed with a bare
+  `[Errno -2] Name or service not known` *after* logging "Application startup complete".
+  The entrypoint now strips the brackets and probes a real bind before uvicorn starts.
+- **a hostname** (`*.railway.internal`, the public domain) — `RZ_HOST` is the address the
+  process binds, not the address people reach it on. The public URL belongs in
+  `RZ_PUBLIC_ORIGIN`.
+
+`::` also needs care for a second reason: `asyncio` sets `IPV6_V6ONLY` on every `AF_INET6`
+socket it binds, so a wildcard IPv6 bind serves IPv6 *only* and answers IPv4 with
+ECONNREFUSED. Railway's health probe connects over IPv4. The symptom is silent — clean
+startup, "Uvicorn running on http://[::]:8080", and not one request line in the log while
+the deploy is killed on healthcheck timeout. The entrypoint binds the wildcard itself and
+clears the option; a healthy probe shows up as `::ffff:100.64.0.2 - "GET /healthz" 200`,
+an IPv4-mapped address.
+
+### Seeding the demo organisation
+
+A self-service signup at `/signup` deliberately starts **empty** — another tenant's records
+are never a starting point — so the desk renders with `n_credits: 0`. The organisation that
+shows numbers reads the committed synthetic corpus and must be created explicitly. Run it
+inside the service, where `RZ_DATABASE_URL` is already present:
+
+```bash
+railway link                     # select this project / environment / service
+RZ_ADMIN_PASSWORD='…' railway run \
+  python scripts/bootstrap_admin.py --email you@example.com --org demo --dataset files
+```
+
+`--dataset files` is what makes the deployed demo show numbers immediately. Any
+organisation holding real books stays on `sql` and ingests its own rows.
+
+---
+
 ## 7b. Region co-location is a performance requirement, not a preference
 
 Put the web service in the **same region as the database**. Residual Zero opens a

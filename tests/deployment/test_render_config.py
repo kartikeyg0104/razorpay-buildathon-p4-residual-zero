@@ -239,24 +239,25 @@ def test_the_ai_budget_is_not_widened_to_hide_latency(env_vars):
 RAILWAY_JSON = Path("railway.json")
 
 
-def test_railway_uses_the_same_dockerfile_and_health_path():
-    """Railway is the deployment platform; the blueprint must agree with it."""
-    import json
+def test_the_deprecated_railway_config_file_is_not_present():
+    """Config as Code is dead; a file that looks like config but isn't is worse than none.
 
-    cfg = json.loads(RAILWAY_JSON.read_text(encoding="utf-8"))
-    assert cfg["build"]["builder"] == "DOCKERFILE"
-    assert cfg["build"]["dockerfilePath"] == "Dockerfile"
-    assert cfg["deploy"]["healthcheckPath"] == "/healthz"
-    # Same path the Render blueprint uses, and the one exempted from the HTTPS redirect.
-    from residual_zero.console.security import HEALTH_PATHS
+    railway.json used to live here and declared builder=DOCKERFILE with a 120 s
+    healthcheck. Railway never read a line of it: the API rejects railwayConfigFile with
+    "Config as Code (railway.json / railway.toml) is deprecated. Use Infrastructure as
+    Code (.railway/railway.ts) instead", and the live service reported builder=RAILPACK
+    with railwayConfigFile=null the whole time.
 
-    assert cfg["deploy"]["healthcheckPath"] in HEALTH_PATHS
-
-
-def test_railway_config_declares_no_secret():
-    text = RAILWAY_JSON.read_text(encoding="utf-8")
-    for pattern in (r"nvapi-", r"npg_", r"postgres(ql)?://"):
-        assert not re.search(pattern, text), f"railway.json contains {pattern}"
+    Two tests asserted that file's contents and passed, which is how a build that never
+    used the Dockerfile looked configured for as long as it did. The build settings now
+    live on the service instance (dockerfilePath="Dockerfile", healthcheckPath="/healthz",
+    healthcheckTimeout=300); see DEPLOYMENT.md. Re-adding this file would restore the
+    false confidence, not the configuration.
+    """
+    assert not RAILWAY_JSON.exists(), (
+        "railway.json is deprecated and silently ignored by Railway - configure the "
+        "service instance, or migrate to .railway/railway.ts"
+    )
 
 
 @pytest.mark.parametrize("bad", [
