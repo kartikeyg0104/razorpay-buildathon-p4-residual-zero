@@ -1,0 +1,50 @@
+# Local production-shaped stack: the app on PostgreSQL, with authentication on.
+#
+#   docker compose up --build
+#   docker compose exec app python scripts/migrate.py --shared
+#   docker compose exec app python scripts/migrate_corpus.py --org demo --create-org \
+#       --source data/dev/rendered
+#   docker compose exec app python scripts/bootstrap_admin.py --email you@example.com --org demo
+#
+# This is for rehearsing the deployment, not for serving the internet: RZ_PUBLIC_ORIGIN is
+# http://localhost:8765, so cookies are not marked Secure and there is no HSTS.
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: residual
+      POSTGRES_PASSWORD: residual_local_only
+      POSTGRES_DB: residual_zero
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U residual -d residual_zero"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      RZ_ENV: local
+      RZ_AUTH_MODE: required
+      RZ_SESSION_SECRET: local-development-secret-not-for-production-use
+      RZ_PUBLIC_ORIGIN: http://localhost:8765
+      RZ_TRUST_PROXY: "0"
+      RZ_HOST: 0.0.0.0
+      RZ_PORT: "8765"
+      RZ_DATABASE_URL: postgresql://residual:residual_local_only@db:5432/residual_zero
+      RZ_LOG_LEVEL: INFO
+      # The provider stays off unless a key is supplied in the environment. It is read
+      # server-side only and never reaches the browser or the extension.
+      AI_PROVIDER: ${AI_PROVIDER:-stub}
+      NVIDIA_API_KEY: ${NVIDIA_API_KEY:-}
+    ports:
+      - "8765:8765"
+
+volumes:
+  pgdata:

@@ -5,17 +5,64 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    # The deployment suite runs the storage layer against a real PostgreSQL as well as
+    # against SQLite. Without this service those tests skip, and the SQL translation — the
+    # part with the most room to be subtly wrong — would only ever be exercised on the
+    # dialect it was written in.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: residual
+          POSTGRES_PASSWORD: residual_ci
+          POSTGRES_DB: residual_zero_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      RZ_TEST_POSTGRES_URL: postgresql://residual:residual_ci@127.0.0.1:5432/residual_zero_ci
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
       - name: Install
-        run: pip install -e ".[dev]"
+        run: pip install -e ".[dev,postgres]"
       - name: Test
         run: make test
         env:
           PY: python
+
+      - name: Deployment suite (SQLite and PostgreSQL)
+        run: python -m pytest -q tests/deployment
+        env:
+          PY: python
+
+      - name: Migrations apply cleanly to an empty PostgreSQL
+        run: |
+          python scripts/migrate.py --shared
+          python scripts/migrate.py --status
+        env:
+          RZ_DATABASE_URL: postgresql://residual:residual_ci@127.0.0.1:5432/residual_zero_ci
+
+      - name: Corpus migration preserves every financial aggregate
+        run: |
+          python scripts/migrate_corpus.py --org ci --create-org --source data/dev/rendered
+        env:
+          RZ_DATABASE_URL: postgresql://residual:residual_ci@127.0.0.1:5432/residual_zero_ci
+
+      - name: Production configuration is refused when incomplete
+        run: |
+          set +e
+          RZ_ENV=production python -m residual_zero.console > out.txt 2>&1
+          code=$?
+          set -e
+          test "$code" = "2" || { echo "expected exit 2, got $code"; cat out.txt; exit 1; }
+          grep -q "without authentication" out.txt
       - name: Generate dev split if missing
         run: |
           python - <<'PY'
@@ -30,23 +77,15 @@ jobs:
         run: make verify-audit
       - name: verify-books
         run: make verify-books
+      # The comparison lives in tests/test_feature_flags_off.py so `make test` runs it too.
+      # This step used to load the floor and print it without comparing anything, so it
+      # could not fail (fixed 2026-09).
       - name: Flags-off exact floor
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          import yaml
-          from residual_zero.features import FeatureFlags
-          from eval.dispositions import collect_a3_dispositions
-          from eval.metrics import exact_decomposition_counted
-          from eval.truth_loader import load_truth
-          floor = yaml.safe_load(Path("config/ci.yaml").read_text())["dev_exact_floor"]
-          flags = FeatureFlags.all_off()
-          # Disposition regression is tests/test_feature_flags_off.py. Exact floor:
-          recs = load_truth("dev")
-          truth = {r.bank_credit_id: r.member_ids for r in recs}
-          print("ci floor", floor, "truth_n", len(truth))
-          print("ci offline: config/llm.yaml model_id=stub token_budget=0; no provider keys")
-          PY
+          python -m pytest -q \
+            tests/test_feature_flags_off.py::test_flags_off_exact_floor_is_enforced \
+            tests/test_feature_flags_off.py::test_features_on_does_not_lower_exact \
+            tests/test_feature_flags_off.py::test_flags_off_matches_v1_baseline
       - name: eval (dev, full, stub)
         run: make eval
       - name: reproduce
