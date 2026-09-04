@@ -594,3 +594,71 @@ def test_a_second_different_clear_for_one_credit_is_refused(pg):
                 write_cleared(conn, second)
         finally:
             conn.close()
+
+
+@requires_pg
+def test_a_corpus_organisation_is_not_blanked_by_its_empty_schema(pg):
+    """REGRESSION: the deployed desk reported 0 everywhere.
+
+    ``_db()`` returns ``None`` for "no ledger yet", and every caller falls back to the
+    organisation's corpus. On SQLite that state is a missing file. PostgreSQL creates the
+    schema up front, so a brand-new organisation handed back a healthy connection to empty
+    tables instead, the database branch won, and an organisation reading 248 committed
+    credits reported 0 of them. Same records, different backend.
+    """
+    from residual_zero.console import app as console_app
+    from residual_zero.tenancy import Tenant, use_tenant
+
+    one, _two = pg
+    corpus = Tenant(
+        org_id=one.org_id, slug=one.slug, db_schema=one.db_schema,
+        dataset_kind="files", dataset_root="data/dev/rendered",
+    )
+    console_app.reset_caches()
+    with use_tenant(corpus):
+        assert console_app._db() is None, "an untouched schema must read as 'no ledger yet'"
+        split = console_app._split()
+        assert split is not None, "the corpus did not load"
+        _items, credits, _by, _ledger, _by_id = split
+        assert len(credits) > 100, f"only {len(credits)} credits loaded from the corpus"
+
+
+@requires_pg
+def test_the_first_recorded_exception_brings_the_database_back(pg):
+    """The fallback is "nothing recorded yet", not "ignore this schema"."""
+    from residual_zero.console import app as console_app
+    from residual_zero.storage.engine import open_tenant_readwrite
+    from residual_zero.tenancy import Tenant, use_tenant
+
+    one, _two = pg
+    corpus = Tenant(
+        org_id=one.org_id, slug=one.slug, db_schema=one.db_schema,
+        dataset_kind="files", dataset_root="data/dev/rendered",
+    )
+    with use_tenant(corpus):
+        assert console_app._db() is None
+        conn = open_tenant_readwrite("exceptions")
+        try:
+            conn.execute(
+                "INSERT INTO exception (bank_credit_id, exception_class) VALUES (?, ?)",
+                ("bc-regression", "AMBIGUOUS_DECOMPOSITION"),
+            )
+            conn.commit()
+        finally:
+            conn.close()
+        restored = console_app._db()
+        assert restored is not None, "a recorded exception must resurface the ledger"
+        restored.close()
+
+
+@requires_pg
+def test_an_organisation_on_its_own_rows_is_left_alone(pg):
+    """A `sql` organisation's records *are* the schema — empty means empty."""
+    from residual_zero.console import app as console_app
+    from residual_zero.tenancy import use_tenant
+
+    one, _two = pg
+    with use_tenant(one):
+        conn = console_app._db()
+        assert conn is not None, "a sql organisation must keep its connection"
+        conn.close()

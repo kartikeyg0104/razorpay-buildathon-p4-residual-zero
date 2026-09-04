@@ -308,6 +308,47 @@ class IdentityStore:
         bootstrap_tenant(tenant)
         return tenant
 
+    def set_organization_dataset(
+        self, slug: str, dataset_kind: str, dataset_root: str = ""
+    ) -> Tenant:
+        """Repoint an existing organisation at a different source of records.
+
+        ``files`` reads the committed synthetic corpus; ``sql`` reads the organisation's
+        own ingested rows. A self-service signup starts on ``sql`` and therefore starts
+        empty, which is correct — another tenant's records are never a starting point —
+        but it leaves the deployed demo with nothing to show. This is the supported way to
+        say "this organisation is the demo".
+
+        Never point an organisation holding real books at the file corpus: the corpus is
+        synthetic and shared, and the desk would then report figures that are not that
+        organisation's. Nothing here writes to the ledger, and nothing here clears
+        anything; it only changes which source the read-only overlay loads.
+        """
+        clean_slug = _clean_slug(slug)
+        conn = self._connect()
+        try:
+            row = conn.execute(
+                "SELECT org_id, slug, db_schema FROM organization WHERE slug = ?",
+                (clean_slug,),
+            ).fetchone()
+            if row is None:
+                raise AuthError(f"unknown organisation {clean_slug!r}")
+            # Constructed before the write so an unknown kind is rejected by the same
+            # validation the request path uses, rather than stored and failing later.
+            tenant = Tenant(
+                org_id=str(row[0]), slug=str(row[1]), db_schema=str(row[2]),
+                dataset_kind=dataset_kind,
+                dataset_root=dataset_root if dataset_kind == "files" else "",
+            )
+            conn.execute(
+                "UPDATE organization SET dataset_kind = ?, dataset_root = ? WHERE org_id = ?",
+                (tenant.dataset_kind, tenant.dataset_root, tenant.org_id),
+            )
+            conn.commit()
+        finally:
+            conn.close()
+        return tenant
+
     def tenant_for_org(self, org_id: str) -> Tenant:
         conn = self._connect(readonly=True)
         try:

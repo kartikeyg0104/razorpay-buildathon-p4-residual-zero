@@ -161,11 +161,45 @@ def reset_caches() -> None:
     _OVERLAY_CACHE.clear()
 
 
+def _ledger_is_untouched(conn) -> bool:
+    """True when this schema holds no overlay rows at all.
+
+    Only meaningful for an organisation that reads a file corpus: its records live in the
+    committed files, and its schema exists to hold what the desk writes *about* them —
+    exceptions and human decisions. Nothing there yet means nothing has been recorded yet.
+    """
+    from residual_zero.storage.errors import QUERY_ERRORS, rollback_quietly
+
+    try:
+        for table in ("audit_entry", "exception"):
+            row = conn.execute(f"SELECT 1 FROM {table} LIMIT 1").fetchone()
+            if row is not None:
+                return False
+    except QUERY_ERRORS:
+        # A schema that cannot answer is not a schema with data in it.
+        rollback_quietly(conn)
+        return True
+    return True
+
+
 def _db():
     """Read-only connection to the current organisation's ledger, or ``None``.
 
     ``None`` means "this organisation has no ledger yet", which every caller already
     handles — a freshly created organisation is legitimately empty.
+
+    On SQLite that state is a missing file. PostgreSQL has no equivalent: the schema is
+    created up front by the migrations, so a brand-new organisation returned a perfectly
+    good connection to empty tables, and every caller took the database branch and
+    reported zero instead of falling back to its corpus. An organisation reading the
+    committed corpus therefore showed 248 credits on SQLite and 0 on PostgreSQL, from the
+    same records — which is exactly what the deployed desk did. The signal is restored for
+    the file-corpus case, where an empty schema genuinely means "nothing recorded yet";
+    the first exception or decision written brings the database branch back, the same way
+    the SQLite file springs into existence.
+
+    An organisation on ``sql`` is left alone: its records *are* the schema, so empty means
+    empty and there is nothing to fall back to.
     """
     from residual_zero.storage.config import Backend, storage_config
 
@@ -175,7 +209,11 @@ def _db():
         if not path.is_file():
             return None
         return open_readonly(path)
-    return open_readonly()
+    conn = open_readonly()
+    if tenant is not None and tenant.dataset_kind == "files" and _ledger_is_untouched(conn):
+        conn.close()
+        return None
+    return conn
 
 
 @lru_cache(maxsize=1)
