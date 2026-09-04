@@ -5,6 +5,11 @@ PY := $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 
 .PHONY: demo eval test verify-audit verify-books reproduce challenge evidence eval-diff
 
+# Deployment targets, declared separately: the .PHONY line above is pinned by
+# tests/test_plan_arithmetic.py to exactly the list in spec §7, spec §10 and CLAUDE.md, and
+# these are not in those documents. See docs/DEPLOYMENT.md.
+.PHONY: test-deploy migrate migrate-status bootstrap-admin migrate-corpus serve
+
 test:
 	$(PY) -m pytest -q
 
@@ -35,3 +40,25 @@ evidence:
 
 eval-diff:
 	$(PY) -m eval.diff --a $(RUN_A) --b $(RUN_B)
+
+# ---------------------------------------------------------------- deployment
+# See docs/DEPLOYMENT.md. Every target below reads RZ_DATABASE_URL from the environment or
+# .env; none of them takes a credential on the command line.
+
+test-deploy:
+	$(PY) -m pytest -q tests/deployment
+
+migrate:
+	$(PY) scripts/migrate.py --all
+
+migrate-status:
+	$(PY) scripts/migrate.py --status
+
+bootstrap-admin:
+	$(PY) scripts/bootstrap_admin.py --email $(EMAIL) --org $(ORG) $(ARGS)
+
+migrate-corpus:
+	$(PY) scripts/migrate_corpus.py --org $(ORG) --source $(or $(SOURCE),data/dev/rendered)
+
+serve:
+	$(PY) -m residual_zero.console

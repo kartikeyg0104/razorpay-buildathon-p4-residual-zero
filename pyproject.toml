@@ -18,6 +18,8 @@ dependencies = [
     "fastapi>=0.110",
     "uvicorn>=0.27",
     "jinja2>=3.1",
+    # Login and signup are HTML forms, and FastAPI's Form() requires this to read one.
+    "python-multipart>=0.0.9",
     "ortools>=9.8",
     "lxml>=5.0",
 ]
@@ -26,6 +28,23 @@ dependencies = [
 dev = [
     "pytest>=8.0",
     "hypothesis>=6.98",    # property tests on the arithmetic invariant
+    # starlette.testclient needs httpx2. Without it every console test had to call route
+    # endpoint functions directly, so FastAPI's own routing, path/query coercion, validation
+    # errors and status codes were never exercised by the suite (found 2026-09).
+    # It must be httpx2, not httpx: starlette warns on plain httpx and filterwarnings=error
+    # turns that warning into a failure.
+    "httpx2",
+]
+# Browser certification only. Kept out of `dev` so unit and integration tests install
+# without a browser toolchain. After installing, fetch the browser binary once:
+#   python -m playwright install chromium
+e2e = [
+    "playwright>=1.44",
+]
+# The production database driver. Kept optional so a local clone, the eval harness and CI
+# install and run on SQLite with no Postgres toolchain present.
+postgres = [
+    "psycopg[binary]>=3.1",
 ]
 
 [tool.setuptools.packages.find]
@@ -35,6 +54,9 @@ where = ["src"]
 testpaths = ["tests"]
 pythonpath = ["src", "."]
 filterwarnings = ["error"]
+markers = [
+    "e2e: live browser tests against http://127.0.0.1:8765 (set RZ_E2E=1)",
+]
 
 [tool.setuptools.package-data]
 "residual_zero" = ["console/templates/*.html", "console/static/*"]

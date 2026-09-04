@@ -1,4 +1,40 @@
-# Data: gitignored except manifests, seeds, and the frozen Phase 1 *dev* corpus.
+# ---------------------------------------------------------------- secrets
+# Never commit a real credential. .env.example is the committed template.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+!config/**/*.key
+secrets/
+credentials.json
+client_secret*.json
+
+# ---------------------------------------------------------------- environments
+.venv/
+venv/
+env/
+ENV/
+node_modules/
+*.egg-info/
+build/
+dist/
+*.whl
+
+# ---------------------------------------------------------------- python junk
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ---------------------------------------------------------------- data
+# Gitignored except manifests, seeds, and the frozen Phase 1 *dev* corpus.
 # Dev rendered views + truth.jsonl are committed so `make demo` / `make eval` work
 # from a clean clone (NN-14). Regenerating them does not reproduce the tagged numbers.
 # The test split stays gitignored; it is spent once (`artifacts/test/`).
@@ -12,16 +48,40 @@ data/**
 !data/dev/rendered/**
 !data/dev/truth.jsonl
 
-# artifacts/ is COMMITTED on purpose (§10) — do not ignore it.
+# ---------------------------------------------------------------- runtime state
+# Per-organisation SQLite ledgers and the identity DB created at runtime.
+var/
 *.sqlite-wal
 *.sqlite-shm
+data/cache/
 
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-.env
-.pytest_cache/
-.hypothesis/
+# ---------------------------------------------------------------- artifacts
+# artifacts/ is COMMITTED on purpose (§10) — it is the published evidence for every
+# number in the README. What is excluded below is test *output*, not evidence:
+# Playwright traces and failure screenshots, server logs, and runtime caches, all of
+# which regenerate on the next run.
+artifacts/e2e/
+artifacts/console/*.jsonl
+artifacts/**/*.log
+artifacts/qa/*.txt
+artifacts/qa/*.out
+artifacts/dev/stream.sqlite
+
+# ---------------------------------------------------------------- os / editor
 .DS_Store
-*.egg-info/
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+!.vscode/extensions.json
+
+# ---------------------------------------------------------------- logs / temp
+*.log
+logs/
+tmp/
+*.tmp
+*.bak
+*.orig
