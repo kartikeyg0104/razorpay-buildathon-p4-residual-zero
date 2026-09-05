@@ -430,9 +430,21 @@ def load_profile(path: Path) -> MerchantProfile:
 
 
 def load_llm_config(path: Path = Path("config/llm.yaml")) -> LLMRuntimeConfig:
-    """Load LLM runtime settings. No credentials. Unverified-rate scan still applies."""
+    """Load LLM runtime settings. No credentials. Unverified-rate scan still applies.
+
+    ``RZ_LLM_CACHE_DIR`` moves the semantic cache, because the committed default lives
+    under ``data/`` and a container image ships that directory read-only to the service
+    account. The first run in production died creating it. A cache is per-container and
+    disposable, so pointing it at the writable volume changes nothing about a result.
+    """
+    import os
+
     raw = _load_yaml(path)
     _reject_unverified(raw, path)
+    override = (os.environ.get("RZ_LLM_CACHE_DIR") or "").strip()
+    if override:
+        raw = dict(raw)
+        raw["cache_dir"] = override
     return LLMRuntimeConfig.model_validate(raw)
 
 

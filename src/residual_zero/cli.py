@@ -122,7 +122,23 @@ def _cmd_run_org(args) -> int:
     engine succeeding is not the same thing as the run being recorded.
     """
     from residual_zero.identity.store import AuthError, IdentityStore
-    from residual_zero.runner import PersistenceError, RunConflict, record_run
+    from residual_zero.runner import (
+        PersistenceError,
+        RunConflict,
+        record_run,
+        require_production_database,
+    )
+
+    # Before the identity store, not after. Opening it under a production environment with
+    # no PostgreSQL creates a local SQLite identity database and then reports "unknown
+    # organisation" — a loud failure for the wrong reason, having already written exactly
+    # the local production database that must never exist. Caught by running the real
+    # image with RZ_DATABASE_URL unset.
+    try:
+        require_production_database()
+    except PersistenceError as exc:
+        print(str(exc), file=sys.stderr)
+        return 4
 
     try:
         store = IdentityStore()

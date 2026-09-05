@@ -354,3 +354,32 @@ def test_the_public_origin_falls_back_to_the_platform_domain(monkeypatch):
     # An explicit value always wins, which is what a custom domain needs.
     monkeypatch.setenv("RZ_PUBLIC_ORIGIN", "https://custom.example")
     assert load_config().public_origin == "https://custom.example"
+
+
+def test_every_runtime_write_path_lives_under_the_writable_volume():
+    """REGRESSION: the first production run died with PermissionError on data/cache.
+
+    The image ships /app read-only to uid 10001 and chowns only /app/var, so anything the
+    process creates at runtime has to be under /app/var. The semantic cache defaulted to
+    data/cache/llm, which is inside the read-only tree — invisible until something
+    actually tried to write there, which nothing did until a run was recorded in
+    production.
+    """
+    text = DOCKERFILE.read_text(encoding="utf-8")
+    for var in ("RZ_LLM_CACHE_DIR", "RZ_AI_AUDIT", "RZ_TENANT_ROOT"):
+        match = re.search(rf"{var}=(\S+)", text)
+        assert match, f"{var} is not set in the Dockerfile"
+        assert match.group(1).startswith("/app/var/"), (
+            f"{var}={match.group(1)} is outside the only writable directory"
+        )
+
+
+def test_the_semantic_cache_directory_is_overridable(monkeypatch, tmp_path):
+    """The committed default stays; the deployment moves it."""
+    from residual_zero.config import load_llm_config
+
+    monkeypatch.delenv("RZ_LLM_CACHE_DIR", raising=False)
+    assert load_llm_config().cache_dir == "data/cache/llm"
+
+    monkeypatch.setenv("RZ_LLM_CACHE_DIR", str(tmp_path / "cache"))
+    assert load_llm_config().cache_dir == str(tmp_path / "cache")

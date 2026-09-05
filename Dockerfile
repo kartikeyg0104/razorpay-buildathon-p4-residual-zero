@@ -45,7 +45,8 @@ USER residual
 # default (8765) still applies when neither is set.
 # /app/var is the only writable directory (chowned below). The AI investigation log and
 # any per-organisation SQLite live here rather than in the read-only image tree.
-ENV RZ_AI_AUDIT=/app/var/ai_audit.jsonl \
+ENV RZ_LLM_CACHE_DIR=/app/var/llm-cache \
+    RZ_AI_AUDIT=/app/var/ai_audit.jsonl \
     RZ_TENANT_ROOT=/app/var/tenants \
     RZ_HOST=0.0.0.0 \
     RZ_ENV=production \

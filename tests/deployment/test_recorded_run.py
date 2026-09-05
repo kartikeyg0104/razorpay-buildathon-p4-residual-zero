@@ -458,3 +458,30 @@ def test_an_organisation_created_before_the_run_table_can_still_record(orgs):
     result = record_run(tenant=a, split="dev", limit=4)
     assert result.recorded
     assert _rows("org_runa", "SELECT status FROM reconciliation_run") == [("COMPLETED",)]
+
+
+def test_production_without_postgres_writes_no_local_database(tmp_path, monkeypatch, capsys):
+    """REGRESSION: it refused, but only after creating the database it must never create.
+
+    require_production_database ran inside record_run, and the CLI resolved the
+    organisation first. Opening the identity store under a production environment with no
+    PostgreSQL created a local SQLite identity database, then reported "unknown
+    organisation" — a loud failure for the wrong reason, with the forbidden file already
+    on disk. Found by running the real image with RZ_DATABASE_URL unset.
+    """
+    from residual_zero.cli import main
+
+    monkeypatch.setenv("RZ_ENV", "production")
+    monkeypatch.setenv("RZ_AUTH_MODE", "required")
+    monkeypatch.setenv("RZ_SESSION_SECRET", "s" * 40)
+    monkeypatch.setenv("RZ_PUBLIC_ORIGIN", "https://rz.example")
+    monkeypatch.setenv("RZ_TENANT_ROOT", str(tmp_path / "tenants"))
+    monkeypatch.delenv("RZ_DATABASE_URL", raising=False)
+    monkeypatch.delenv("RZ_IDENTITY_DB", raising=False)
+
+    code = main(["run", "--org", "anything", "--limit", "1"])
+    assert code == 4, "a production run without PostgreSQL must fail with the persistence code"
+    assert "PostgreSQL" in capsys.readouterr().err
+
+    created = list(tmp_path.rglob("*.sqlite"))
+    assert created == [], f"a local production database was created: {created}"
