@@ -17,7 +17,13 @@ services:
     runtime: docker
     dockerfilePath: ./Dockerfile
     plan: starter          # ortools + scipy + pandas do not fit the free plan's memory
-    region: oregon
+    # MUST co-locate with the Neon database. The Neon endpoint is us-east-2 (AWS Ohio),
+    # so this is `ohio`. Measured: one fresh connection to Neon costs 2550 ms from ~12,000 km
+    # away versus 2.1 ms on the same host, and a credit page opens six connections - which
+    # is 24,021 ms versus 94 ms for byte-identical code. The application is not slow; the
+    # round trip is. Moving this service to a region away from the database is the single
+    # most expensive change anyone could make to it.
+    region: ohio
     branch: main
     autoDeploy: true
 

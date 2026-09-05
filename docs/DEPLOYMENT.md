@@ -240,6 +240,25 @@ Neither suite writes into a committed artifact. Two knobs exist for the cases wh
 Regenerate the published evaluation artifacts explicitly with `make eval` /
 `python -m eval.ai_recovery`, never as a side effect of `pytest`.
 
+## 7b. Region co-location is a performance requirement, not a preference
+
+Put the web service in the **same region as the database**. Residual Zero opens a
+connection per read path rather than holding a pool, so latency is dominated by connection
+setup, and connection setup is dominated by distance.
+
+Measured on the production image, byte-identical code, six connections per credit page:
+
+| | one fresh connection | login | `/api/desk` | credit page |
+|---|---|---|---|---|
+| Same host (~0 ms RTT) | 2.1 ms | 70 ms | 116 ms | **94 ms** |
+| Across ~12,000 km | 2550 ms | 16.8 s | 11.5 s | **24.0 s** |
+
+Neon's endpoint here is `us-east-2`, so the Render service is pinned to `ohio` in
+`render.yaml`. If you move the database, move the service with it.
+
+If a future workload needs more headroom than co-location gives, the next lever is
+connection reuse (a pool), not a bigger timeout - and not a smaller AI budget.
+
 ## 8. Observability
 
 One JSON object per line on stderr. Every value passes a scrubber that removes anything
