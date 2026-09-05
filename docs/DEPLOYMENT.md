@@ -331,6 +331,26 @@ RZ_ADMIN_PASSWORD='…' railway run \
 `--dataset files` is what makes the deployed demo show numbers immediately. Any
 organisation holding real books stays on `sql` and ingests its own rows.
 
+For an organisation that already exists — a self-service signup, say — use:
+
+```bash
+python scripts/set_org_dataset.py --org <slug> --dataset files
+```
+
+It is idempotent, so it is safe as a Railway **pre-deploy command**, which is how the
+deployed demo was seeded: the command runs inside the service container, where
+`RZ_DATABASE_URL` is already present, so the credential never has to leave the platform.
+Clear the pre-deploy command afterwards — it names one organisation, and a deploy would
+fail if that organisation were ever removed.
+
+What a corpus organisation shows, and what it does not: the desk reports 248 credits with
+per-credit proofs computed on request, and the headline scores come from the committed
+evaluation artifacts. Its ledger is still empty, so "search completed" reads 0/248 and the
+audit badge reads **audit not started** rather than *intact* — there is no chain to verify
+until something is recorded. That is deliberate. The pipeline (`residual_zero.cli run`)
+writes a SQLite ledger and has no PostgreSQL output, so a deployed organisation cannot yet
+be given a recorded run.
+
 ---
 
 ## 7b. Region co-location is a performance requirement, not a preference
