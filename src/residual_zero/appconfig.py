@@ -43,8 +43,14 @@ ENV_VAR = "RZ_ENV"
 AUTH_VAR = "RZ_AUTH_MODE"
 SECRET_VAR = "RZ_SESSION_SECRET"
 ORIGIN_VAR = "RZ_PUBLIC_ORIGIN"
-# Set by Render to the service's own https URL. Used only when RZ_PUBLIC_ORIGIN is unset.
+# Hosting platforms that publish the service's own address. Used only when
+# RZ_PUBLIC_ORIGIN is unset, because the URL is not knowable before the service exists.
+# Render gives a full URL; Railway gives a bare hostname, so the scheme is added.
 PLATFORM_ORIGIN_VAR = "RENDER_EXTERNAL_URL"
+PLATFORM_ORIGIN_VARS: tuple[tuple[str, str], ...] = (
+    ("RENDER_EXTERNAL_URL", ""),          # already https://host
+    ("RAILWAY_PUBLIC_DOMAIN", "https://"),  # bare host, e.g. app-production.up.railway.app
+)
 EXTRA_ORIGINS_VAR = "RZ_ALLOWED_ORIGINS"
 EXT_IDS_VAR = "RZ_EXTENSION_IDS"
 TRUST_PROXY_VAR = "RZ_TRUST_PROXY"
@@ -152,12 +158,15 @@ def load_config() -> AppConfig:
     secret = (os.environ.get(SECRET_VAR) or "").strip()
     origin = (os.environ.get(ORIGIN_VAR) or "").strip().rstrip("/")
     if not origin:
-        # A platform that publishes the service's own HTTPS URL can supply it. Render sets
-        # RENDER_EXTERNAL_URL, and the URL is not knowable before the service exists - so
-        # without this, the first deploy of a new service could not satisfy the production
-        # origin check no matter what the operator typed. An explicit RZ_PUBLIC_ORIGIN
-        # still wins, which is what a custom domain needs.
-        origin = (os.environ.get(PLATFORM_ORIGIN_VAR) or "").strip().rstrip("/")
+        # A platform that publishes the service's own address can supply it: the URL is not
+        # knowable before the service exists, so without this the first deploy could not
+        # satisfy the production origin check no matter what the operator typed. An
+        # explicit RZ_PUBLIC_ORIGIN still wins, which is what a custom domain needs.
+        for name, scheme in PLATFORM_ORIGIN_VARS:
+            supplied = (os.environ.get(name) or "").strip().rstrip("/")
+            if supplied:
+                origin = supplied if "://" in supplied else scheme + supplied
+                break
     if not origin and env is Env.LOCAL:
         origin = "http://127.0.0.1:8765"
 

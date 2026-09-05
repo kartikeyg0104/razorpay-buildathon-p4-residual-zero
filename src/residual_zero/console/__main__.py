@@ -9,6 +9,7 @@ authentication and a session secret — so the dangerous configuration cannot bo
 from __future__ import annotations
 
 import os
+import socket
 import sys
 
 from residual_zero.runtime.envfile import load_env_file
@@ -17,9 +18,46 @@ DEFAULT_HOST = "127.0.0.1"
 DEFAULT_PORT = 8765
 
 
+class BindAddressError(RuntimeError):
+    """RZ_HOST is not an address this process can bind. Names the variable and the value."""
+
+
 def _host() -> str:
-    """Bind address. ``0.0.0.0`` is required inside a container, so it is configurable."""
-    return (os.environ.get("RZ_HOST") or DEFAULT_HOST).strip() or DEFAULT_HOST
+    """Bind address. ``0.0.0.0`` is required inside a container, so it is configurable.
+
+    Validated, because the failure mode otherwise is genuinely undiagnosable. RZ_HOST is a
+    *bind address*, but on a hosting platform whose UI offers variables like
+    ``RAILWAY_PUBLIC_DOMAIN`` it is natural to set it to the service's public hostname.
+    uvicorn then hands that name to ``getaddrinfo``, which fails with a bare
+    ``[Errno -2] Name or service not known`` - no variable named, no value shown, logged
+    *after* "Application startup complete" so the app looks like it booted fine. Observed
+    on Railway; reproduced exactly with RZ_HOST set to both a ``.railway.internal`` name
+    and an ``https://`` URL.
+    """
+    raw = (os.environ.get("RZ_HOST") or DEFAULT_HOST).strip() or DEFAULT_HOST
+    if "://" in raw:
+        raise BindAddressError(
+            f"RZ_HOST={raw!r} looks like a URL. RZ_HOST is the address the server binds "
+            f"to, not the address people reach it on. Inside a container it must be "
+            f"'0.0.0.0'. Set the public URL in RZ_PUBLIC_ORIGIN instead."
+        )
+    # Try an actual bind on an ephemeral port. Resolution alone is not enough: a public
+    # hostname like `app-production.up.railway.app` resolves perfectly well and is still
+    # unbindable, because the address belongs to a load balancer and not to any interface
+    # on this container. That case fails later with EADDRNOTAVAIL rather than gaierror, so
+    # checking only getaddrinfo would let the more confusing of the two mistakes through.
+    try:
+        family = socket.AF_INET6 if ":" in raw else socket.AF_INET
+        with socket.socket(family, socket.SOCK_STREAM) as probe:
+            probe.bind((raw, 0))
+    except OSError as exc:
+        raise BindAddressError(
+            f"RZ_HOST={raw!r} is not an address this container can bind to ({exc}). "
+            f"RZ_HOST is the bind address, not the address people reach the service on. "
+            f"Inside a container it must be '0.0.0.0'; leave it unset to use the image "
+            f"default. The service's public URL belongs in RZ_PUBLIC_ORIGIN."
+        ) from None
+    return raw
 
 
 def _port() -> int:
@@ -42,7 +80,8 @@ def main() -> None:
     obs.configure_logging()
     try:
         config = validate_for_startup()
-    except ConfigError as exc:
+        _host()  # validate the bind address here, not inside uvicorn's socket setup
+    except (ConfigError, BindAddressError) as exc:
         # Refuse rather than serve. Printed to stderr as plain text because a config error
         # before logging is configured should still be readable in a platform's boot log.
         print(str(exc), file=sys.stderr)

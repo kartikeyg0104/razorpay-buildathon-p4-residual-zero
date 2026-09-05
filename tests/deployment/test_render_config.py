@@ -232,3 +232,99 @@ def test_the_ai_budget_is_not_widened_to_hide_latency(env_vars):
     """A measured 61 s provider call is reported, not papered over with a bigger budget."""
     assert int(env_vars["AI_TIMEOUT_S"]["value"]) <= 30
     assert int(env_vars["AI_TOTAL_BUDGET_S"]["value"]) <= 40
+
+
+# ---------------------------------------------------------------- Railway
+
+RAILWAY_JSON = Path("railway.json")
+
+
+def test_railway_uses_the_same_dockerfile_and_health_path():
+    """Railway is the deployment platform; the blueprint must agree with it."""
+    import json
+
+    cfg = json.loads(RAILWAY_JSON.read_text(encoding="utf-8"))
+    assert cfg["build"]["builder"] == "DOCKERFILE"
+    assert cfg["build"]["dockerfilePath"] == "Dockerfile"
+    assert cfg["deploy"]["healthcheckPath"] == "/healthz"
+    # Same path the Render blueprint uses, and the one exempted from the HTTPS redirect.
+    from residual_zero.console.security import HEALTH_PATHS
+
+    assert cfg["deploy"]["healthcheckPath"] in HEALTH_PATHS
+
+
+def test_railway_config_declares_no_secret():
+    text = RAILWAY_JSON.read_text(encoding="utf-8")
+    for pattern in (r"nvapi-", r"npg_", r"postgres(ql)?://"):
+        assert not re.search(pattern, text), f"railway.json contains {pattern}"
+
+
+@pytest.mark.parametrize("bad", [
+    "razorpay-buildathon-p4-residual-zero.railway.internal",
+    "https://residual-zero-production.up.railway.app",
+    "residual-zero-production.up.railway.app",
+    "http://example.invalid",
+])
+def test_a_hostname_in_rz_host_is_refused_with_a_useful_message(monkeypatch, bad):
+    """REGRESSION: this crashed Railway with a bare `[Errno -2] Name or service not known`.
+
+    RZ_HOST is a bind address. Set to a public hostname, uvicorn passed it to getaddrinfo,
+    which failed *after* "Application startup complete" - so the log said the app had
+    started, then died, naming neither the variable nor the value. Reproduced exactly in
+    the built image (exit 3, no "Uvicorn running on" line).
+    """
+    from residual_zero.console.__main__ import BindAddressError, _host
+
+    monkeypatch.setenv("RZ_HOST", bad)
+    with pytest.raises(BindAddressError) as exc:
+        _host()
+    message = str(exc.value)
+    assert "RZ_HOST" in message, "the error must name the variable"
+    assert bad in message, "the error must show the offending value"
+    assert "0.0.0.0" in message, "the error must say what the value should be"
+    assert "RZ_PUBLIC_ORIGIN" in message, "it must point at the right variable for a URL"
+
+
+@pytest.mark.parametrize("good", ["0.0.0.0", "127.0.0.1", "localhost", "::"])
+def test_a_real_bind_address_is_accepted(monkeypatch, good):
+    from residual_zero.console.__main__ import _host
+
+    monkeypatch.setenv("RZ_HOST", good)
+    assert _host() == good
+
+
+def test_the_public_origin_falls_back_to_the_platform_domain(monkeypatch):
+    """Railway publishes a bare hostname; Render publishes a full URL. Both work.
+
+    Deliberately no importlib.reload here. `load_config()` reads the environment on every
+    call, so a reload buys nothing - and it swaps out the AuthMode/Env enum members, after
+    which an `is` comparison in another test module compares a pre-reload member against a
+    post-reload one and silently inverts an authorisation check. That cost a debugging pass
+    once already.
+    """
+    from residual_zero.appconfig import load_config
+
+    for k in ("RZ_PUBLIC_ORIGIN", "RENDER_EXTERNAL_URL", "RAILWAY_PUBLIC_DOMAIN"):
+        monkeypatch.delenv(k, raising=False)
+    monkeypatch.setenv("RZ_ENV", "production")
+    monkeypatch.setenv("RZ_AUTH_MODE", "required")
+    monkeypatch.setenv("RZ_SESSION_SECRET", "s" * 40)
+    monkeypatch.setenv("RZ_DATABASE_URL", "postgresql://u:p@h/db")
+
+    # Nothing published: production refuses, naming the variable.
+    assert any("RZ_PUBLIC_ORIGIN" in e for e in load_config()._errors)
+
+    # Railway publishes a bare hostname; the scheme is added.
+    monkeypatch.setenv("RAILWAY_PUBLIC_DOMAIN", "app-production.up.railway.app")
+    config = load_config()
+    assert config.public_origin == "https://app-production.up.railway.app"
+    assert config.https_only is True
+    assert not config._errors, "the platform domain must satisfy the production origin check"
+
+    # Render publishes a full URL and takes precedence in the lookup order.
+    monkeypatch.setenv("RENDER_EXTERNAL_URL", "https://x.onrender.com")
+    assert load_config().public_origin == "https://x.onrender.com"
+
+    # An explicit value always wins, which is what a custom domain needs.
+    monkeypatch.setenv("RZ_PUBLIC_ORIGIN", "https://custom.example")
+    assert load_config().public_origin == "https://custom.example"
