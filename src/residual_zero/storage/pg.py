@@ -94,14 +94,16 @@ class PgConnection:
                 with self._raw.cursor() as cur:
                     cur.execute(f'CREATE SCHEMA IF NOT EXISTS "{schema}"')
                 self._raw.commit()
-            with self._raw.cursor() as cur:
-                # No session-level search_path here: it would be true on a direct server
-                # and quietly false through a transaction pooler, which is the worst of
-                # both. Every transaction scopes itself in _scope() instead. No `public`
-                # fallback either way: a missing table must be an error, never a silent
-                # read of a shared one.
-                if readonly:
-                    cur.execute("SET default_transaction_read_only = on")
+            # Nothing session-level is set here at all. search_path and the read-only
+            # marker are both per-transaction, for the same reason: through a transaction
+            # pooler, session state is true on the backend that received it and quietly
+            # absent — or worse, still present for somebody else — on the next one. The
+            # read-only leak is the more alarming direction: a reader's
+            # `default_transaction_read_only = on` outlived it on a pooled backend and a
+            # writer inherited it, which surfaced as "cannot execute DELETE in a read-only
+            # transaction" on a connection opened read-write.
+            #
+            # Both are re-established per transaction in _scope().
             self._raw.commit()
         except BaseException:
             self._raw.close()
@@ -126,6 +128,12 @@ class PgConnection:
         """
         if self._path_scoped:
             return
+        if self._readonly:
+            # SET TRANSACTION READ ONLY, not `SET LOCAL default_transaction_read_only`:
+            # the latter sets the default for *subsequent* transactions and leaves this
+            # one writable, so the refusal silently stopped happening. It also has to come
+            # before the first query in the transaction, hence ahead of search_path.
+            cur.execute("SET TRANSACTION READ ONLY")
         cur.execute(f'SET LOCAL search_path TO "{self._schema}"')
         self._path_scoped = True
 

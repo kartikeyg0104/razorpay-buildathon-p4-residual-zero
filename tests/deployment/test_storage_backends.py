@@ -745,3 +745,47 @@ def test_a_recorded_run_survives_transaction_pooling(monkeypatch):
         with psycopg.connect(POOLED_URL, autocommit=True) as conn, conn.cursor() as cur:
             for schema in ("org_pooltest", "rz_shared_pooltest"):
                 cur.execute(f'DROP SCHEMA IF EXISTS "{schema}" CASCADE')
+
+
+@requires_pg
+def test_the_read_only_marker_does_not_outlive_its_connection(pg):
+    """REGRESSION: a writer inherited a reader's read-only setting.
+
+    `SET default_transaction_read_only = on` was session state, like search_path was.
+    Through a transaction pooler a reader's setting outlived it on the backend and the
+    next client to be handed that backend inherited it — a connection opened read-write
+    failing with "cannot execute DELETE in a read-only transaction". Both markers are now
+    per-transaction.
+    """
+    from residual_zero.storage.pg import PgConnection
+
+    one, _two = pg
+    reader = PgConnection(PG_URL, schema=one.db_schema, readonly=True)
+    try:
+        list(reader.execute("SELECT 1"))
+        with pytest.raises(Exception):
+            reader.execute("DELETE FROM audit_entry")
+            reader.commit()
+    finally:
+        reader.close()
+
+    writer = PgConnection(PG_URL, schema=one.db_schema, readonly=False)
+    try:
+        writer.execute("DELETE FROM audit_entry")
+        writer.commit()
+    finally:
+        writer.close()
+
+
+@requires_pg
+def test_no_session_level_settings_are_issued_at_all():
+    from pathlib import Path
+
+    source = Path("src/residual_zero/storage/pg.py").read_text(encoding="utf-8")
+    allowed = ("SET LOCAL", "SET TRANSACTION")
+    for line in source.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("cur.execute(") and '"SET ' in stripped.replace("'", '"'):
+            assert any(k in stripped for k in allowed), (
+                f"a session-level setting survives and a pooler will not keep it: {stripped}"
+            )
