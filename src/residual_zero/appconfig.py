@@ -198,6 +198,33 @@ def config_errors(config: AppConfig | None = None) -> tuple[str, ...]:
     return (config or load_config())._errors
 
 
+def enforce_import_time(config: AppConfig | None = None) -> None:
+    """Refuse to *import* a production app that is misconfigured.
+
+    :func:`validate_for_startup` runs in ``residual_zero.console.__main__``, which only
+    executes for ``python -m residual_zero.console``. A process started as
+    ``uvicorn residual_zero.console.app:app`` - the default on most hosting platforms, and
+    what a Procfile or a `CMD` override typically uses - imports the module and never runs
+    that check. With ``RZ_ENV=production`` and no ``RZ_DATABASE_URL`` the app then came up
+    happily and served the committed development SQLite ledger as if it were production
+    data (verified: 248 audit rows).
+
+    A silent downgrade of the authoritative store is the worst failure this deployment can
+    have, so the check moves to import time, where no start command can route around it.
+    Local mode is unaffected: with ``RZ_ENV`` unset or ``local`` there are no required
+    settings and this returns immediately.
+    """
+    resolved = config or load_config()
+    if not resolved.is_production:
+        return
+    problems = resolved._errors
+    if problems:
+        raise ConfigError(
+            "refusing to serve: RZ_ENV=production but the deployment is misconfigured:\n  - "
+            + "\n  - ".join(problems)
+        )
+
+
 def validate_for_startup(config: AppConfig | None = None) -> AppConfig:
     """Return the config, or raise :class:`ConfigError` listing everything wrong with it."""
     resolved = config or load_config()

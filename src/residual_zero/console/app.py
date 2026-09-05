@@ -16,7 +16,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from residual_zero.appconfig import load_config
+from residual_zero.appconfig import enforce_import_time, load_config
 from residual_zero import obs
 from residual_zero.audit import verify_chain
 from residual_zero.console.security import (
@@ -98,6 +98,10 @@ app = FastAPI(title="Residual Zero")
 # `chrome-extension://[a-z]+` used to admit EVERY installed extension, which on a public
 # deployment would let any extension in the user's browser read this organisation's
 # financial JSON.
+# Enforced here, not only in __main__: `uvicorn residual_zero.console.app:app` imports
+# this module without ever running the entry point's checks, and a production process
+# with no RZ_DATABASE_URL would otherwise serve the development SQLite ledger.
+enforce_import_time()
 _CONFIG = load_config()
 _CORS_ORIGINS = list(_CONFIG.cors_origins())
 if _CORS_ORIGINS:
