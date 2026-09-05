@@ -227,17 +227,26 @@ def find_run(conn, run_id: str) -> dict[str, Any] | None:
 
 
 def latest_completed_run(conn) -> dict[str, Any] | None:
-    """The run a reader should believe.
+    """The run a reader should believe, by an explicit rule.
 
-    COMPLETED or PARTIAL: both finished deciding and both persisted real results. The
-    difference between them is coverage, which the caller can see in ``complete`` — it is
-    not something to hide by withholding the run.
+    1. A COMPLETED run for this organisation, most recent first.
+    2. Failing that, a PARTIAL one — it finished deciding and its results are real.
+    3. Never RUNNING (has not finished) and never FAILED (produced nothing).
 
-    RUNNING has not finished and FAILED produced nothing.
+    Rank before recency, so a later PARTIAL run cannot displace an earlier COMPLETED one
+    and make the desk report less than it can prove.
+
+    Organisation scoping is the connection: this reads one schema and cannot see another
+    organisation's runs.
     """
     row = conn.execute(
         f"SELECT {_RUN_COLUMNS} FROM reconciliation_run WHERE status IN (?, ?) "
-        "ORDER BY started_at DESC, run_id DESC LIMIT 1",
+        # A covered run outranks an uncovered one regardless of age. Ordering by time
+        # alone would let a later PARTIAL run displace an earlier COMPLETED one, which
+        # would make the desk report less than it can prove. Time only breaks ties within
+        # a rank.
+        "ORDER BY CASE WHEN status = 'COMPLETED' THEN 0 ELSE 1 END, "
+        "started_at DESC, run_id DESC LIMIT 1",
         RUN_READABLE,
     ).fetchone()
     if row is None:

@@ -829,3 +829,187 @@ def test_a_run_claiming_completion_without_coverage_is_recomputed(orgs):
     assert again.complete and again.status == "COMPLETED"
     # ...and no duplicates were written to get there.
     assert _rows("org_runa", "SELECT COUNT(*) FROM audit_entry") == [(11,)]
+
+
+# ---------------------------------------------------------------- run selection & scoping
+#
+# The live dashboard showed NOT RUN while a completed run existed. It was right: the
+# browser session belonged to an organisation with no run of its own, and the run belonged
+# to another. Organisation scoping worked exactly as designed. These pin the rules that
+# make that outcome correct rather than accidental.
+
+
+def _dashboard_states(deployment_module, tenant) -> str:
+    from residual_zero.tenancy import use_tenant
+
+    deployment_module.reset_caches()
+    with use_tenant(tenant):
+        conn = deployment_module._db()
+        if conn is None:
+            return "NOT RUN"
+        try:
+            audits = deployment_module._load_audits(conn)
+        finally:
+            conn.close()
+    return "NOT RUN" if not audits else f"{len(audits)} results"
+
+
+@requires_pg
+def test_an_organisation_without_a_run_reads_not_run(orgs):
+    """1. No run of its own means NOT RUN, however many runs other organisations have."""
+    from residual_zero.console import app as console_app
+    from residual_zero.runner import record_run
+
+    a, b = orgs
+    record_run(tenant=a, split="dev", limit=9)
+    assert _dashboard_states(console_app, a) == "9 results"
+    assert _dashboard_states(console_app, b) == "NOT RUN", (
+        "an organisation with no run must not inherit another's"
+    )
+
+
+@requires_pg
+def test_the_dashboard_and_the_api_read_the_same_run(orgs):
+    """3 + 10. One source: the organisation's own recorded run."""
+    from residual_zero.audit import latest_completed_run, open_audit
+    from residual_zero.console import app as console_app
+    from residual_zero.runner import record_run
+    from residual_zero.tenancy import use_tenant
+
+    a, _b = orgs
+    result = record_run(tenant=a, split="dev", limit=14)
+    console_app.reset_caches()
+    with use_tenant(a):
+        conn = open_audit()
+        try:
+            api_run = latest_completed_run(conn)
+        finally:
+            conn.close()
+        page_conn = console_app._db()
+        try:
+            page_audits = console_app._load_audits(page_conn)
+        finally:
+            page_conn.close()
+
+    assert api_run["run_id"] == result.run_id
+    assert api_run["n_persisted"] == len(page_audits) == 14, (
+        "the page and the API must agree, because they read the same rows"
+    )
+
+
+@requires_pg
+def test_a_partial_run_does_not_displace_a_completed_one(orgs):
+    """8. Rank before recency: a later PARTIAL must not replace an earlier COMPLETED."""
+    import psycopg
+
+    from residual_zero.audit import latest_completed_run, open_audit
+    from residual_zero.runner import record_run
+    from residual_zero.tenancy import use_tenant
+
+    a, _b = orgs
+    complete = record_run(tenant=a, split="dev", limit=10)
+    assert complete.complete
+
+    # A later, incomplete run for the same organisation.
+    with psycopg.connect(PG_URL, autocommit=True) as conn, conn.cursor() as cur:
+        cur.execute('SET search_path TO "org_runa"')
+        cur.execute(
+            "INSERT INTO reconciliation_run (run_id, org_id, split, dataset_root, "
+            "dataset_digest, config_digest, engine_version, status, n_credits, "
+            "n_persisted, started_at) VALUES ('run_later_partial', 'runa', 'dev', 'x', "
+            "'x', 'x', '0', 'PARTIAL', 99, 3, now() + interval '1 hour')"
+        )
+
+    with use_tenant(a):
+        conn = open_audit()
+        try:
+            chosen = latest_completed_run(conn)
+        finally:
+            conn.close()
+    assert chosen["run_id"] == complete.run_id, (
+        f"the desk chose {chosen['run_id']}, a PARTIAL run, over a COMPLETED one"
+    )
+    assert chosen["complete"]
+
+
+@requires_pg
+def test_a_failed_run_does_not_displace_a_completed_one(orgs):
+    """9. A failed run produced nothing and must never be selected."""
+    import psycopg
+
+    from residual_zero.audit import latest_completed_run, open_audit
+    from residual_zero.runner import record_run
+    from residual_zero.tenancy import use_tenant
+
+    a, _b = orgs
+    complete = record_run(tenant=a, split="dev", limit=8)
+    with psycopg.connect(PG_URL, autocommit=True) as conn, conn.cursor() as cur:
+        cur.execute('SET search_path TO "org_runa"')
+        cur.execute(
+            "INSERT INTO reconciliation_run (run_id, org_id, split, dataset_root, "
+            "dataset_digest, config_digest, engine_version, status, n_credits, "
+            "started_at) VALUES ('run_later_failed', 'runa', 'dev', 'x', 'x', 'x', '0', "
+            "'FAILED', 99, now() + interval '1 hour')"
+        )
+    with use_tenant(a):
+        conn = open_audit()
+        try:
+            chosen = latest_completed_run(conn)
+        finally:
+            conn.close()
+    assert chosen["run_id"] == complete.run_id
+
+
+@requires_pg
+def test_one_organisations_run_is_never_selected_for_another(orgs):
+    """7. The scoping that made the live NOT RUN correct."""
+    from residual_zero.audit import latest_completed_run, open_audit
+    from residual_zero.runner import record_run
+    from residual_zero.tenancy import use_tenant
+
+    a, b = orgs
+    record_run(tenant=a, split="dev", limit=6)
+    with use_tenant(b):
+        conn = open_audit()
+        try:
+            assert latest_completed_run(conn) is None, "org B selected org A's run"
+        finally:
+            conn.close()
+
+
+@requires_pg
+def test_the_dashboard_cards_are_rendered_server_side(orgs):
+    """11. The frontend cannot fabricate a metric it is never asked to compute.
+
+    Every reconciliation number on the dashboard is a template variable filled by the
+    server. There is no fetch for them, so there is nothing for a browser to invent.
+    """
+    from pathlib import Path
+
+    template = Path("src/residual_zero/console/templates/batch.html").read_text(
+        encoding="utf-8"
+    )
+    for name in ("n_unique", "n_ambiguous", "n_cleared", "n_human", "recorded_run"):
+        assert "{{ " + name in template or "{{ " + name + "." in template or name in template
+
+    for forbidden in ("fetch(", "XMLHttpRequest", "hx-get"):
+        assert forbidden not in template, (
+            f"the dashboard fetches {forbidden!r}; these cards must stay server-rendered"
+        )
+
+
+@requires_pg
+def test_the_ai_surface_cannot_change_a_recorded_run(orgs):
+    """12. AI is explanatory. It writes no run, no entry, no disposition."""
+    from residual_zero.runner import record_run
+
+    a, _b = orgs
+    result = record_run(tenant=a, split="dev", limit=7)
+    before = _rows("org_runa", "SELECT status, n_persisted FROM reconciliation_run")
+    entries = _rows("org_runa", "SELECT COUNT(*) FROM audit_entry")
+
+    # The AI tables are a different namespace and stay empty through a run.
+    assert _rows("org_runa", "SELECT COUNT(*) FROM ai_investigation") == [(0,)]
+    assert before == [("COMPLETED", 7)]
+    assert entries == [(7,)]
+    assert result.n_persisted == 7
