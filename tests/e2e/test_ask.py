@@ -4,7 +4,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import re
+
 import pytest
+from playwright.sync_api import expect
+
+from tests.e2e.conftest import shot_dir
 
 pytestmark = pytest.mark.e2e
 
@@ -15,17 +20,21 @@ def test_investigate_with_ai_shows_trace(page, console):
     page.goto(console + f"/credit/{DEMO}", wait_until="domcontentloaded", timeout=45000)
     page.locator("[data-ai-ask]").first.click()
     page.wait_for_selector("[data-ai-out]:not([hidden])", timeout=45000)
-    page.wait_for_function(
-        "document.querySelector('[data-ai-out]') && document.querySelector('[data-ai-out]').textContent.length > 40",
-        timeout=45000,
+    # A locator assertion, not page.wait_for_function: waiting via an in-page expression
+    # needs `eval`, which the console's Content-Security-Policy (`script-src 'self'`, no
+    # 'unsafe-eval') blocks. Playwright's own polling path made that intermittent - it
+    # resolved on the first synchronous check when the provider answered fast and raised
+    # EvalError when it did not. expect() retries over CDP instead, so it is unaffected by
+    # the page's CSP, and the CSP stays strict.
+    expect(page.locator("[data-ai-out]")).not_to_have_text(
+        re.compile(r"^\s*.{0,40}\s*$", re.S), timeout=45000
     )
     text = page.locator("[data-ai-out]").inner_text()
     assert "AI investigated" in text or "INVESTIGATION" in text
     assert "Retrieved transaction" in text or "get_transaction" in text
     assert "gsk_" not in text
     assert "writes_cleared=true" not in text.casefold()
-    Path("artifacts").joinpath("demo").mkdir(parents=True, exist_ok=True)
-    page.screenshot(path=str(Path("artifacts") / "demo" / "investigation.png"))
+    page.screenshot(path=str(shot_dir() / "investigation.png"))
 
 
 def test_why_not_choose_first(page, console):
@@ -46,8 +55,7 @@ def test_clear_request_refuses(page, console):
     page.goto(url, wait_until="domcontentloaded", timeout=45000)
     body = page.inner_text("body")
     assert "cannot authorize a financial clear" in body.casefold()
-    Path("artifacts").joinpath("demo").mkdir(parents=True, exist_ok=True)
-    page.screenshot(path=str(Path("artifacts") / "demo" / "refuse-clear.png"))
+    page.screenshot(path=str(shot_dir() / "refuse-clear.png"))
 
 
 def test_biggest_blocker_uses_metrics(page, console):

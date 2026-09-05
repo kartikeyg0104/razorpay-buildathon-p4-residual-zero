@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import os
 import socket
+import shutil
 import subprocess
+import tempfile
 import time
 from pathlib import Path
 
@@ -81,9 +83,22 @@ def console():
         # Keep the server log: a 500 from a page is otherwise undiagnosable after the run.
         ART.mkdir(parents=True, exist_ok=True)
         log_handle = (ART / "console_server.log").open("w", encoding="utf-8")
+        # The desk under test writes (exception resolutions, work notes). Pointed at the
+        # committed ledger it dirtied `artifacts/dev/ledger.sqlite` on every E2E run, so
+        # merely running the suite made the working tree look like the corpus had moved.
+        # It gets a disposable copy instead; RZ_DB is the documented override.
+        scratch = Path(tempfile.mkdtemp(prefix="rz-e2e-"))
+        ledger = scratch / "ledger.sqlite"
+        for candidate in (Path("artifacts/dev/ledger.sqlite"),
+                          Path("artifacts/dev/cp5/ledger.sqlite")):
+            if candidate.is_file():
+                shutil.copy(candidate, ledger)
+                break
+        env = {**os.environ, "RZ_DB": str(ledger)}
         proc = subprocess.Popen(
             [".venv/bin/python", "-m", "residual_zero.console"],
             cwd=str(Path.cwd()),
+            env=env,
             stdout=log_handle,
             stderr=subprocess.STDOUT,
         )
@@ -169,3 +184,19 @@ def page(browser_page, request):
 @pytest.fixture
 def page_errors(browser_page):
     return browser_page[1]
+
+
+# ---------------------------------------------------------------- screenshot output
+
+def shot_dir() -> Path:
+    """Where E2E screenshots go.
+
+    Default is `artifacts/e2e/`, which is gitignored, so running the suite never dirties
+    the tree. Set RZ_REFRESH_DEMO_SHOTS=1 to deliberately refresh the committed
+    documentation screenshots in `artifacts/demo/` instead - that is a documentation
+    update, and it should be an explicit act rather than a side effect of testing.
+    """
+    target = (Path("artifacts") / "demo") if os.environ.get("RZ_REFRESH_DEMO_SHOTS") == "1" \
+        else (Path("artifacts") / "e2e" / "shots")
+    target.mkdir(parents=True, exist_ok=True)
+    return target

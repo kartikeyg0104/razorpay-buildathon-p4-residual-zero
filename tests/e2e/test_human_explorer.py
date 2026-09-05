@@ -6,6 +6,8 @@ from pathlib import Path
 
 import pytest
 
+from tests.e2e.conftest import shot_dir
+
 pytestmark = pytest.mark.e2e
 
 TWINS = "crd_mix_ambiguous_twins"
@@ -23,8 +25,7 @@ def test_human_review_save_does_not_clear(page, console):
     after = page.inner_text("body")
     assert "CLEARED" in after  # policy text
     assert "does not write CLEARED" in after or "cannot be CLEARED" in after or "never CLEARED" in after.casefold()
-    Path("artifacts").joinpath("demo").mkdir(parents=True, exist_ok=True)
-    page.screenshot(path=str(Path("artifacts") / "demo" / "human-review.png"))
+    page.screenshot(path=str(shot_dir() / "human-review.png"))
 
 
 def test_explorer_recoverable_not_reconciled(page, console):

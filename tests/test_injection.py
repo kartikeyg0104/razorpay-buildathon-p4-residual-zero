@@ -44,6 +44,10 @@ def test_no_injection_auto_clears(tmp_path: Path):
         dispositions[row["id"]] = Disposition.FLAGGED.value
     assert all(d != Disposition.CLEARED.value for d in dispositions.values())
     assert len(dispositions) == len(rows)
-    Path("artifacts").joinpath("injections_f50.json").write_text(
+    # tmp_path, not artifacts/: the assertions above are the test. Writing the record
+    # into a committed path meant running pytest could dirty a tracked financial
+    # artifact, which makes `git status` unable to distinguish a real change from a
+    # test run. Regenerate the published record with `python -m tests.injection_session`.
+    (tmp_path / "injections_f50.json").write_text(
         json.dumps(dispositions, indent=2) + "\n", encoding="utf-8"
     )

@@ -39,7 +39,7 @@ def _load(split: str):
     return credits, by_credit, by_order, ledger, rates, fees, profile.reserve_bps, overlay
 
 
-def run_experiment(split: str) -> dict[str, object]:
+def run_experiment(split: str, out_dir=None) -> dict[str, object]:
     started = time.monotonic_ns()
     credits, by_credit, by_order, ledger, rates, fees, reserve_bps, overlay = _load(split)
     scored_path = Path("artifacts").joinpath(split, "t04.md")
@@ -197,9 +197,16 @@ def run_experiment(split: str) -> dict[str, object]:
             "rows not already declared, then verify_declared. Search uniqueness is unchanged."
         ),
     }
-    out = Path("artifacts").joinpath(split, "ai_recovery.json")
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    # `out_dir` exists so a test can send this somewhere disposable. The experiment
+    # records a wall-clock `runtime_ms`, so writing to the published artifact on every
+    # pytest run left the working tree dirty with a timing-only diff - a change that says
+    # nothing about the financial result (matches_recovered, false_clears and the decision
+    # are all unchanged) but makes `git status` look like the corpus moved.
+    out = (Path(out_dir) if out_dir is not None
+           else Path("artifacts").joinpath(split, "ai_recovery.json").parent)
+    out.mkdir(parents=True, exist_ok=True)
+    out.joinpath("ai_recovery.json").write_text(
+        json.dumps(result, indent=2) + "\n", encoding="utf-8")
     return result
 
 

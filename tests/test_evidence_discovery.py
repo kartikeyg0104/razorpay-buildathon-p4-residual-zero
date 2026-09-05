@@ -256,10 +256,17 @@ def test_audit_includes_extraction(tmp_path, monkeypatch):
     assert row.get("prompt_version") or row.get("intent")
 
 
-def test_experiment_records_do_not_implement():
+def test_experiment_records_do_not_implement(tmp_path):
+    """The experiment's conclusion, without writing to the published artifact.
+
+    `run_experiment` records a wall-clock runtime, so letting it write to
+    `artifacts/dev/ai_recovery.json` dirtied the working tree on every pytest run with a
+    timing-only diff. The financial assertions below are what this test is about.
+    """
     from eval.ai_recovery import run_experiment
 
-    result = run_experiment("dev")
+    result = run_experiment("dev", out_dir=tmp_path)
+    assert (tmp_path / "ai_recovery.json").is_file()
     assert result["recovered_n"] == 0
     assert result["experiment"]["decision"] == "DO_NOT_IMPLEMENT_ENGINE_CHANGE"
     assert result["experiment"]["ground_truth_retained"] is True

@@ -7,6 +7,8 @@ from pathlib import Path
 
 import pytest
 
+from tests.e2e.conftest import shot_dir
+
 pytestmark = pytest.mark.e2e
 
 
@@ -27,8 +29,9 @@ def test_dashboard_matches_api_t04(page, console):
     mismatches = []
     if rz and rz not in body and "521/800" not in body:
         mismatches.append({"metric": "test_residual_zero", "api": rz, "ui": "missing"})
-    Path("artifacts").joinpath("qa").mkdir(parents=True, exist_ok=True)
-    Path("artifacts").joinpath("qa", "ui_backend_consistency.json").write_text(
+    # Written beside the other E2E output (gitignored) rather than into the committed
+    # QA artifact, so running the suite never rewrites a published record.
+    (shot_dir() / "ui_backend_consistency.json").write_text(
         json.dumps(
             {
                 "api_t04": api.get("stats"),

@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import pytest
 
+from tests.e2e.conftest import shot_dir
+
 pytestmark = pytest.mark.e2e
 
 TWINS = "crd_mix_ambiguous_twins"
@@ -56,6 +58,6 @@ def test_proof_explorer_two_solutions(page, console):
     assert "94%" not in body
     assert "AI confidence" not in body
     assert "best candidate" not in body.casefold()
-    art = __import__("pathlib").Path("artifacts").joinpath("demo")
+    art = shot_dir()
     art.mkdir(parents=True, exist_ok=True)
     page.screenshot(path=str(art / "proof-explorer.png"))
