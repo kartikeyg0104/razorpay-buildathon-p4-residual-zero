@@ -293,6 +293,31 @@ def test_a_real_bind_address_is_accepted(monkeypatch, good):
     assert _host() == good
 
 
+@pytest.mark.parametrize("bracketed,plain", [("[::]", "::"), ("[::1]", "::1")])
+def test_bracketed_ipv6_is_accepted(monkeypatch, bracketed, plain):
+    """REGRESSION: RZ_HOST='[::]' crash-looped the real Railway deployment.
+
+    `[::]` is how RFC 3986 writes an IPv6 host in a URL, and it is what Railway's guidance
+    shows for binding all interfaces - but getaddrinfo rejects the brackets, so a
+    correct-looking value produced `[Errno -2] Name or service not known`. Confirmed from
+    the live deployment logs. Bracket notation has exactly one meaning, so stripping is
+    unambiguous rather than a guess.
+    """
+    from residual_zero.console.__main__ import _host
+
+    monkeypatch.setenv("RZ_HOST", bracketed)
+    assert _host() == plain
+
+
+def test_brackets_do_not_smuggle_an_invalid_host_through(monkeypatch):
+    """Stripping brackets must not become a way to skip validation."""
+    from residual_zero.console.__main__ import BindAddressError, _host
+
+    monkeypatch.setenv("RZ_HOST", "[not-an-address]")
+    with pytest.raises(BindAddressError):
+        _host()
+
+
 def test_the_public_origin_falls_back_to_the_platform_domain(monkeypatch):
     """Railway publishes a bare hostname; Render publishes a full URL. Both work.
 

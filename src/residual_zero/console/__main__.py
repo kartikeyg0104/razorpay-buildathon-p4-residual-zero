@@ -35,6 +35,14 @@ def _host() -> str:
     and an ``https://`` URL.
     """
     raw = (os.environ.get("RZ_HOST") or DEFAULT_HOST).strip() or DEFAULT_HOST
+    # `[::]` is how RFC 3986 writes an IPv6 host inside a URL, and it is what Railway's own
+    # guidance shows for "listen on all interfaces". getaddrinfo does not accept the
+    # brackets, so uvicorn turned a correct-looking value into
+    # `[Errno -2] Name or service not known` and the container crash-looped. Stripping them
+    # is not a guess: bracket notation has exactly one meaning, and `[::]` is the address
+    # `::`. Observed on Railway with RZ_HOST='[::]'.
+    if len(raw) > 2 and raw.startswith("[") and raw.endswith("]"):
+        raw = raw[1:-1]
     if "://" in raw:
         raise BindAddressError(
             f"RZ_HOST={raw!r} looks like a URL. RZ_HOST is the address the server binds "
