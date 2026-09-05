@@ -608,6 +608,48 @@ def mount(app: FastAPI) -> None:
         )
 
     @app.get("/health")
+    def _recorded_run() -> dict | None:
+        """The organisation's latest COMPLETED run, or None.
+
+        Read-only, and it never invents a run: an organisation that has not reconciled has
+        no row here and the desk keeps saying so.
+        """
+        from residual_zero.audit import latest_completed_run
+        from residual_zero.console.app import _db
+        from residual_zero.storage.errors import QUERY_ERRORS, rollback_quietly
+
+        conn = _db()
+        if conn is None:
+            return None
+        try:
+            return latest_completed_run(conn)
+        except QUERY_ERRORS:
+            rollback_quietly(conn)
+            return None
+        finally:
+            conn.close()
+
+    @app.get("/api/run")
+    def api_run():
+        """The recorded deterministic run, straight from the database.
+
+        Exists so persistence is checkable from outside the process: if this returns a
+        run after a restart, the run is in the database and not in somebody's memory.
+        """
+        run = _recorded_run()
+        return JSONResponse(
+            {
+                "ok": True,
+                "recorded": run is not None,
+                "run": run,
+                "writes_cleared": False,
+                "note": (
+                    "A run records that the deterministic engine executed. It is not a "
+                    "clearance and it does not authorise one."
+                ),
+            }
+        )
+
     @app.get("/api/health")
     def health():
         from residual_zero.semantic.provider import desk_ai_status, provider_model, live_enabled
@@ -617,6 +659,7 @@ def mount(app: FastAPI) -> None:
         split = _split()
         n_credits = len(split[1]) if split is not None else 0
         ai = desk_ai_status()
+        run = _recorded_run()
         return JSONResponse(
             {
                 "ok": True,
@@ -627,6 +670,8 @@ def mount(app: FastAPI) -> None:
                 "n_gate_a": overlay.n_ok if overlay is not None else 0,
                 "n_journalable": overlay.n_journalable if overlay is not None else 0,
                 "n_human": pack.n_human,
+                "run_recorded": run is not None,
+                "run_id": (run or {}).get("run_id", ""),
                 "chain": any(item["name"] == "audit chain intact" and item["ok"] for item in pack.checklist),
                 # NVIDIA NIM is the only backend. Each fact appears exactly once: this
                 # literal used to repeat `provider_model`, `LIVE_PROVIDER`,

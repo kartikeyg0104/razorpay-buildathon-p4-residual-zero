@@ -35,6 +35,7 @@ PRIMARY_KEYS: dict[str, tuple[str, ...]] = {
     "reconciliation": ("bank_credit_id",),
     "decomposition_member": ("bank_credit_id", "item_id"),
     "audit_entry": ("seq",),
+    "reconciliation_run": ("run_id",),
     "exception": ("bank_credit_id",),
     "exception_resolution": ("bank_credit_id",),
     "exception_work": ("bank_credit_id",),

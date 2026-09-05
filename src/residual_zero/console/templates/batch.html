@@ -13,6 +13,7 @@
     <span class="dot {{ '' if chain_ok is none else ('ok' if chain_ok else 'bad') }}"></span>
     audit {{ 'not run' if chain_ok is none else ('intact' if chain_ok else 'broken') }}
     · {{ (n_credits ~ ' credits posted') if n_credits else 'no credits posted' }}
+    {%- if recorded_run %} · run <span class="id">{{ recorded_run.run_id }}</span>{% endif %}
   </div>
 </div>
 

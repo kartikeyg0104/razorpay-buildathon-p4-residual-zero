@@ -36,7 +36,10 @@ AUDIT_LOCK = "residual_zero.audit_entry"
 
 
 def append_entry(
-    conn: sqlite3.Connection, payload: Mapping[str, Any], metrics: Mapping[str, Any],
+    conn: sqlite3.Connection,
+    payload: Mapping[str, Any],
+    metrics: Mapping[str, Any],
+    run_id: str | None = None,
 ) -> AuditEntry:
     """entry_hash = sha256(canonical_json(payload) || 0x00 || prev_hash_ascii). D11 pins it.
 
@@ -65,14 +68,19 @@ def append_entry(
         seq = int(row[0]) + 1
         prev = str(row[1])
     entry_hash = _entry_hash(payload, prev)
+    # run_id sits outside the hashed payload deliberately: entry_hash covers what the
+    # engine decided, not which execution recorded it, so linking an entry to a run cannot
+    # change a hash and an existing chain still verifies.
     conn.execute(
-        "INSERT INTO audit_entry (seq, payload, metrics, prev_hash, entry_hash) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO audit_entry (seq, payload, metrics, prev_hash, entry_hash, run_id) "
+        "VALUES (?, ?, ?, ?, ?, ?)",
         (
             seq,
             canonical_json(payload).decode("utf-8"),
             json.dumps(dict(metrics), sort_keys=True, separators=(",", ":")),
             prev,
             entry_hash,
+            run_id,
         ),
     )
     conn.commit()
@@ -106,8 +114,183 @@ def verify_chain(conn: sqlite3.Connection) -> tuple[bool, int | None, str]:
     return True, None, head
 
 
-def open_audit(path: "Path") -> sqlite3.Connection:
+def open_audit(path: "Path | None" = None) -> sqlite3.Connection:
+    """Write connection for the audit chain and the run record.
+
+    ``None`` means "wherever the current organisation's rows live", which is what a
+    recorded run wants. An explicit path is the single-tenant CLI and test route, and it
+    always wins — so passing a placeholder here would send a tenant's run to that file
+    instead of its own ledger.
+    """
     from pathlib import Path as P
-    if not isinstance(path, P):
+
+    if path is not None and not isinstance(path, P):
         path = P(path)
     return _open_readwrite(path, "audit")
+
+
+# ---------------------------------------------------------------- recorded runs
+#
+# A run record says a deterministic execution happened: over which dataset, under which
+# configuration, and whether it finished. The per-credit results were always persisted —
+# audit_entry carries the uniqueness, residual and disposition the engine decided, on
+# either backend. What was missing was the run, and without it a reader cannot tell
+# "searched and found nothing" from "never searched".
+#
+# These live in audit.py because ``reconciliation_run`` is owned by the audit writer.
+# Adding a fourth module that opens a write connection would break the rule that exactly
+# three do (§5.12), and a run record is an audit fact, not a new kind of authority.
+#
+# Nothing here computes a financial value. The engine decides; this records that it ran.
+
+RUN_RUNNING = "RUNNING"
+RUN_COMPLETED = "COMPLETED"
+RUN_FAILED = "FAILED"
+
+
+class RunConflict(RuntimeError):
+    """A completed run already exists for this identity. Re-running would duplicate it."""
+
+
+def derive_run_id(
+    org_id: str,
+    split: str,
+    dataset_root: str,
+    dataset_digest: str,
+    config_digest: str,
+    limit: int = 0,
+) -> str:
+    """A stable identity for "this organisation, this data, this configuration".
+
+    Deliberately not a timestamp: the same run executed twice must collide so the second
+    can be refused, and a clock makes every execution unique by construction. Same inputs
+    in, same id out, on any machine.
+    """
+    import hashlib
+
+    material = canonical_json(
+        {
+            "org_id": org_id,
+            "split": split,
+            "dataset_root": dataset_root,
+            "dataset_digest": dataset_digest,
+            "config_digest": config_digest,
+            "limit": int(limit),
+        }
+    )
+    # canonical_json already returns bytes, and its ordering is what makes the id stable.
+    return "run_" + hashlib.sha256(material).hexdigest()[:24]
+
+
+_RUN_KEYS = (
+    "run_id", "org_id", "split", "dataset_digest", "config_digest", "status",
+    "n_credits", "n_processed", "started_at", "finished_at", "error",
+)
+
+
+def _run_row(row) -> dict[str, Any]:
+    """One shape regardless of backend.
+
+    PostgreSQL hands back TIMESTAMPTZ as ``datetime`` and SQLite hands back the TEXT it
+    was given. A caller serialising the result should not have to know which database it
+    is talking to, so the timestamps leave here as ISO strings either way.
+    """
+    from datetime import date, datetime
+
+    out = dict(zip(_RUN_KEYS, row))
+    for key in ("started_at", "finished_at"):
+        value = out.get(key)
+        if isinstance(value, (datetime, date)):
+            out[key] = value.isoformat()
+    return out
+
+
+def find_run(conn, run_id: str) -> dict[str, Any] | None:
+    row = conn.execute(
+        "SELECT run_id, org_id, split, dataset_digest, config_digest, status, "
+        "n_credits, n_processed, started_at, finished_at, error "
+        "FROM reconciliation_run WHERE run_id = ?",
+        (run_id,),
+    ).fetchone()
+    if row is None:
+        return None
+    return _run_row(row)
+
+
+def latest_completed_run(conn) -> dict[str, Any] | None:
+    """The run a reader should believe. RUNNING and FAILED rows are not results."""
+    row = conn.execute(
+        "SELECT run_id, org_id, split, dataset_digest, config_digest, status, "
+        "n_credits, n_processed, started_at, finished_at, error "
+        "FROM reconciliation_run WHERE status = ? ORDER BY started_at DESC, run_id DESC "
+        "LIMIT 1",
+        (RUN_COMPLETED,),
+    ).fetchone()
+    if row is None:
+        return None
+    return _run_row(row)
+
+
+def begin_run(
+    conn,
+    *,
+    run_id: str,
+    org_id: str,
+    split: str,
+    dataset_root: str,
+    dataset_digest: str,
+    config_digest: str,
+    engine_version: str,
+    n_credits: int,
+    started_at: str,
+) -> None:
+    """Open a run as RUNNING. Refuses to reopen one that already completed.
+
+    The refusal is the idempotency guarantee: the same organisation, dataset and
+    configuration derive the same id, so a second execution raises instead of writing a
+    second set of results for the same facts.
+    """
+    existing = find_run(conn, run_id)
+    if existing is not None and existing["status"] == RUN_COMPLETED:
+        raise RunConflict(
+            f"run {run_id} already completed for organisation {existing['org_id']!r} "
+            f"({existing['n_processed']} credits at {existing['finished_at']}). "
+            f"Re-running the same dataset under the same configuration would duplicate it."
+        )
+    # A previous RUNNING or FAILED attempt is replaced: it never became a result.
+    conn.execute("DELETE FROM reconciliation_run WHERE run_id = ?", (run_id,))
+    conn.execute(
+        "INSERT INTO reconciliation_run "
+        "(run_id, org_id, split, dataset_root, dataset_digest, config_digest, "
+        " engine_version, status, n_credits, n_processed, started_at, error) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (run_id, org_id, split, dataset_root, dataset_digest, config_digest,
+         engine_version, RUN_RUNNING, int(n_credits), 0, started_at, ""),
+    )
+    conn.commit()
+
+
+def complete_run(conn, run_id: str, *, n_processed: int, finished_at: str) -> None:
+    """Mark the run recorded. This commit is what makes the run visible to readers."""
+    conn.execute(
+        "UPDATE reconciliation_run SET status = ?, n_processed = ?, finished_at = ? "
+        "WHERE run_id = ?",
+        (RUN_COMPLETED, int(n_processed), finished_at, run_id),
+    )
+    conn.commit()
+
+
+def discard_run(conn, run_id: str, *, error: str, finished_at: str) -> None:
+    """Undo a run that did not finish, then record why.
+
+    The audit entries this run wrote are deleted rather than left behind: a partial run is
+    not a smaller run, and counting its rows would report a search that never completed.
+    The run row survives as FAILED so the failure is visible instead of silent.
+    """
+    conn.execute("DELETE FROM audit_entry WHERE run_id = ?", (run_id,))
+    conn.execute(
+        "UPDATE reconciliation_run SET status = ?, finished_at = ?, error = ? "
+        "WHERE run_id = ?",
+        (RUN_FAILED, finished_at, error[:500], run_id),
+    )
+    conn.commit()

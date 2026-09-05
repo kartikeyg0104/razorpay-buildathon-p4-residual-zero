@@ -78,9 +78,16 @@ def verify_decomposition(
     )
 
 
-def open_verify(path) -> sqlite3.Connection:
+def open_verify(path=None) -> sqlite3.Connection:
+    """Write connection for the reconciliation tables.
+
+    ``None`` means "wherever the current organisation's rows live", matching the other two
+    owners. A database-backed run names no file, and coercing that None into a Path was a
+    TypeError rather than a fallback.
+    """
     from pathlib import Path
-    return _open_readwrite(Path(path), "verify")
+
+    return _open_readwrite(Path(path) if path is not None else None, "verify")
 
 
 class ConflictingClearError(RuntimeError):

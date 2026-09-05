@@ -6,6 +6,7 @@ import json
 from collections import defaultdict
 from datetime import date, timedelta
 from pathlib import Path
+from typing import Any
 
 from residual_zero.audit import append_entry, open_audit
 from residual_zero.candidates import WIDENED_KINDS, build_pool
@@ -73,16 +74,41 @@ def _delta_matches(amount_paise: int, delta: int) -> bool:
     return abs(amount_paise) == abs(delta)
 
 
+#: ``artifact_dir`` left alone means "beside the SQLite ledger", which is what every
+#: existing caller wants. A database-backed run has no such directory and passes ``None``.
+_DERIVE_FROM_DB_PATH: Any = object()
+
+
 def run_split(
     split: str,
-    db_path: Path,
+    db_path: Path | None,
     limit: int = 0,
     offline: bool = False,
     flags: FeatureFlags | None = None,
     halt_after: int = 0,
     rung: Rung | None = None,
+    run_id: str | None = None,
+    artifact_dir: Path | None | Any = _DERIVE_FROM_DB_PATH,
 ) -> int:
-    """Process a split into the sqlite ledger, exceptions, and audit chain."""
+    """Process a split into the ledger, exceptions, and audit chain.
+
+    The ledger is whichever backend the environment configures. On SQLite that is the file
+    at ``db_path``; on PostgreSQL it is the current organisation's schema and ``db_path``
+    is unused for financial rows — the three write connections come from the storage
+    engine either way, so the engine cannot tell which one it is writing to.
+
+    ``artifact_dir`` is the side-artifact directory (clusters.json, journal.csv and
+    friends). It used to be ``db_path.parent`` unconditionally, which is why a
+    database-backed run crashed on the first of them: there was no directory. ``None``
+    skips them, which is the honest answer for a run whose output is a database.
+
+    ``run_id`` links every audit entry this execution writes to a recorded run. ``None``
+    keeps the historical behaviour: results are written, no run is recorded.
+    """
+    if artifact_dir is _DERIVE_FROM_DB_PATH:
+        # None names no file, which is the database-backed run: no ledger file, and so no
+        # directory to put side artifacts in either.
+        artifact_dir = db_path.parent if db_path is not None else None
     init_db(db_path)
     flags = flags if flags is not None else load_features()
     pol = policy_for(active_rung(flags, rung))
@@ -244,6 +270,7 @@ def run_split(
                         "trace_gates": [g.name for g in tracer.finish(disposition, tracer.error).gates],
                     },
                     {"error": tracer.error},
+                    run_id=run_id,
                 )
                 traces_complete += 1
                 n += 1
@@ -449,7 +476,7 @@ def run_split(
                 metrics["trace_error"] = tr.error
                 traces_complete += 1
             if pol.allow_writes:
-                append_entry(audit, payload, metrics)
+                append_entry(audit, payload, metrics, run_id=run_id)
             seen_ids.add(credit.id)
             n += 1
             if halt_after and flags.f25_idempotency and n >= halt_after:
@@ -457,10 +484,10 @@ def run_split(
         mix = tier_mix(all_resolutions)
         print("tier_mix " + " ".join(f"{t.name}={mix[t]}" for t in mix))
         print("exception_classes " + " ".join(f"{k}={v}" for k, v in sorted(class_counts.items())))
-        if flags.f37_clustering and exception_rows:
+        if flags.f37_clustering and exception_rows and artifact_dir is not None:
             clusters = cluster_rows(exception_rows)
             print(f"F37 compression {len(exception_rows)}/{len(clusters)}")
-            db_path.parent.joinpath("clusters.json").write_text(
+            artifact_dir.joinpath("clusters.json").write_text(
                 json.dumps(
                     [{"signature": c.signature, "size": c.size, "ids": list(c.credit_ids)} for c in clusters],
                     indent=2,
@@ -472,7 +499,7 @@ def run_split(
             points = regress(rate_points, fees)
             n_alert = sum(1 for p in points if p.alert)
             print(f"F38 instrument_weeks={len(points)} alerts={n_alert}")
-        if flags.f40_journal and pol.allow_writes:
+        if flags.f40_journal and pol.allow_writes and artifact_dir is not None:
             chart = load_chart()
             cleared_map = {}
             for row in verify_conn.execute(
@@ -490,58 +517,58 @@ def run_split(
             lines = build_journal(universe, ledger, cleared_map, chart)
             dr, cr = trial_balance(lines)
             residual = control_residual(lines, universe, chart.bank_control.code)
-            write_journal(db_path.parent.joinpath("journal.csv"), lines)
+            write_journal(artifact_dir.joinpath("journal.csv"), lines)
             print(f"F40 journal debits={dr} credits={cr} control_residual={residual} lines={len(lines)}")
         if flags.f52_trace:
             print(f"F52 traces_complete={traces_complete}")
-        if flags.f39_leakage:
+        if flags.f39_leakage and artifact_dir is not None:
             from residual_zero.controller.leakage import sweep
             as_of = max((c.value_date for c in credits), default=date(2025, 1, 6))
             leak = sweep(
                 items, credits, as_of=as_of,
                 reserve_lag_days=profile.reserve_release_lag_days,
             )
-            db_path.parent.joinpath("leakage.json").write_text(
+            artifact_dir.joinpath("leakage.json").write_text(
                 leak.model_dump_json(indent=2) + "\n", encoding="utf-8"
             )
             print(f"F39 leakage_paise={leak.rupees_identified_paise} rows={len(leak.evidence)}")
-        if flags.f41_reserve:
+        if flags.f41_reserve and artifact_dir is not None:
             from residual_zero.controller.reserve import subledger
             as_of = max((c.value_date for c in credits), default=date(2025, 1, 6))
             reserve = subledger(items, as_of=as_of, lag_days=profile.reserve_release_lag_days)
-            db_path.parent.joinpath("reserve.json").write_text(
+            artifact_dir.joinpath("reserve.json").write_text(
                 reserve.model_dump_json(indent=2) + "\n", encoding="utf-8"
             )
             print(
                 f"F41 outstanding={reserve.outstanding_paise} "
                 f"overdue={reserve.overdue_count} identity={reserve.identity_holds}"
             )
-        if flags.f42_disputes:
+        if flags.f42_disputes and artifact_dir is not None:
             from residual_zero.controller.disputes import track
             as_of = max((c.value_date for c in credits), default=date(2025, 1, 6))
             disp = track(items, as_of=as_of)
-            db_path.parent.joinpath("disputes.json").write_text(
+            artifact_dir.joinpath("disputes.json").write_text(
                 disp.model_dump_json(indent=2) + "\n", encoding="utf-8"
             )
             print(
                 f"F42 reconstructed={disp.reconstructed_end_to_end}/{disp.n_disputes} "
                 f"open_7d={disp.open_inside_7_days}"
             )
-        if flags.f35_stream:
+        if flags.f35_stream and artifact_dir is not None:
             from residual_zero.stream.carry_forward import replay
             stream = replay(
                 credits, items,
-                db_path=db_path.parent.joinpath("stream.sqlite"),
+                db_path=artifact_dir.joinpath("stream.sqlite"),
                 widened_days_before=cfg.windows.widened_days_before,
             )
-            db_path.parent.joinpath("stream.json").write_text(
+            artifact_dir.joinpath("stream.json").write_text(
                 stream.model_dump_json(indent=2) + "\n", encoding="utf-8"
             )
             print(
                 f"F35 unsolvable_on_arrival={stream.unsolvable_on_arrival} "
                 f"eventually={stream.eventually_resolved} aged={stream.aged_out}"
             )
-        if flags.f57_latency:
+        if flags.f57_latency and artifact_dir is not None:
             import platform
             import time as _time
             wall = _time.perf_counter_ns() - wall0
@@ -554,7 +581,7 @@ def run_split(
                 wall_ns=wall,
                 bottleneck=clock.bottleneck(),
             )
-            db_path.parent.joinpath("latency.md").write_text(md, encoding="utf-8")
+            artifact_dir.joinpath("latency.md").write_text(md, encoding="utf-8")
             print(f"F57 bottleneck={clock.bottleneck()} wall_ns={wall}")
     finally:
         audit.close()

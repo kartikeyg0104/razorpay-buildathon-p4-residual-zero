@@ -18,7 +18,7 @@ from pathlib import Path
 
 TABLE_OWNERS: dict[str, frozenset[str]] = {
     "verify":     frozenset({"reconciliation", "decomposition_member"}),
-    "audit":      frozenset({"audit_entry"}),
+    "audit":      frozenset({"audit_entry", "reconciliation_run"}),
     "exceptions": frozenset({"exception", "exception_resolution", "exception_work"}),
 }
 
@@ -42,6 +42,21 @@ CREATE TABLE IF NOT EXISTS audit_entry (
     metrics TEXT NOT NULL,
     prev_hash TEXT NOT NULL,
     entry_hash TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS reconciliation_run (
+    run_id TEXT PRIMARY KEY,
+    org_id TEXT NOT NULL,
+    split TEXT NOT NULL,
+    dataset_root TEXT NOT NULL,
+    dataset_digest TEXT NOT NULL,
+    config_digest TEXT NOT NULL,
+    engine_version TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'RUNNING',
+    n_credits INTEGER NOT NULL DEFAULT 0,
+    n_processed INTEGER NOT NULL DEFAULT 0,
+    started_at TEXT NOT NULL DEFAULT '',
+    finished_at TEXT,
+    error TEXT NOT NULL DEFAULT ''
 );
 CREATE TABLE IF NOT EXISTS exception (
     bank_credit_id TEXT PRIMARY KEY,
@@ -84,6 +99,9 @@ def _sqlite_readonly(path: Path) -> sqlite3.Connection:
 ADDED_COLUMNS: tuple[tuple[str, str, str], ...] = (
     ("exception_resolution", "decided_by", "TEXT NOT NULL DEFAULT ''"),
     ("exception_work", "updated_by", "TEXT NOT NULL DEFAULT ''"),
+    # Outside the hashed payload, so an existing chain still verifies. NULL means "written
+    # before runs were recorded", which is a real result with no run row — not a gap.
+    ("audit_entry", "run_id", "TEXT"),
 )
 
 

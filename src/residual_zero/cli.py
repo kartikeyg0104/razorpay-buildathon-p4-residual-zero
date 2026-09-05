@@ -113,6 +113,56 @@ def _cmd_solve(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_run_org(args) -> int:
+    """Record a run for one organisation, into whichever database is configured.
+
+    The backend comes from the environment, never from a guess: production requires a
+    PostgreSQL RZ_DATABASE_URL and refuses to write a local file instead. A failure to
+    persist is a failure of the run, reported as such and with a non-zero exit — the
+    engine succeeding is not the same thing as the run being recorded.
+    """
+    from residual_zero.identity.store import AuthError, IdentityStore
+    from residual_zero.runner import PersistenceError, RunConflict, record_run
+
+    try:
+        store = IdentityStore()
+        found = store.find_organization(args.org)
+        if found is None:
+            print(f"unknown organisation {args.org!r}", file=sys.stderr)
+            return 2
+        tenant = store.tenant_for_org(found.org_id)
+    except (AuthError, PersistenceError) as exc:
+        print(str(exc), file=sys.stderr)
+        return 2
+
+    try:
+        result = record_run(
+            tenant=tenant,
+            split=args.split,
+            limit=args.limit,
+            run_id=args.run_id or None,
+            offline=args.offline,
+        )
+    except RunConflict as exc:
+        print(str(exc), file=sys.stderr)
+        return 3
+    except PersistenceError as exc:
+        print(f"run NOT recorded: {exc}", file=sys.stderr)
+        return 4
+
+    if result.reused:
+        print(
+            f"run {result.run_id} already recorded for {result.org_id} "
+            f"({result.n_processed} credits, {result.backend}); nothing to do"
+        )
+        return 0
+    print(
+        f"recorded run {result.run_id} for {result.org_id}: "
+        f"{result.n_processed} credits into {result.backend}"
+    )
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="residual_zero")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -126,12 +176,27 @@ def main(argv: list[str] | None = None) -> int:
     run_p.add_argument("--limit", type=int, default=0)
     run_p.add_argument("--out", default="artifacts/dev")
     run_p.add_argument("--offline", action="store_true")
+    run_p.add_argument(
+        "--org", default="",
+        help="record the run for this organisation, in the configured database. "
+             "Without it the run writes the local SQLite ledger under --out.",
+    )
+    run_p.add_argument(
+        "--run-id", default="",
+        help="override the derived run identity. The default is a digest of "
+             "organisation + dataset + configuration, so the same run twice collides.",
+    )
     challenge_p = sub.add_parser("challenge")
     challenge_p.add_argument("file")
     args = parser.parse_args(argv)
     if args.cmd == "solve":
         return _cmd_solve(args)
     if args.cmd == "run":
+        if args.org:
+            return _cmd_run_org(args)
+        # No organisation named: the single-tenant local path, unchanged. It writes the
+        # SQLite ledger under --out and records no run, which is what every existing
+        # caller and Makefile target expects.
         from residual_zero.orchestrator import run_split
         out = Path(args.out)
         out.mkdir(parents=True, exist_ok=True)

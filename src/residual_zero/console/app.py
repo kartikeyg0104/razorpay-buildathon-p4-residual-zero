@@ -522,6 +522,22 @@ def batch():
     # "search completed 0/0" and "ambiguous 0" claims a search ran and found nothing.
     has_records = bool(rows)
     search_recorded = bool(audits)
+    # The run that produced those results, when one was recorded. Read from the same
+    # connection the results came from, and never invented: an organisation that has not
+    # reconciled has no row and the page keeps saying "not run".
+    recorded_run = None
+    if search_recorded:
+        from residual_zero.audit import latest_completed_run
+        from residual_zero.storage.errors import QUERY_ERRORS, rollback_quietly
+
+        probe = _db()
+        if probe is not None:
+            try:
+                recorded_run = latest_completed_run(probe)
+            except QUERY_ERRORS:
+                rollback_quietly(probe)
+            finally:
+                probe.close()
     uniq = Counter(str(payload.get("uniqueness") or "") for payload in audits.values())
     snap = track04_snapshot()
     from residual_zero.qa.finance_templates import batch_insight_text
@@ -564,6 +580,7 @@ def batch():
         n_budget_search=uniq.get("BUDGET_EXCEEDED", 0),
         has_records=has_records,
         search_recorded=search_recorded,
+        recorded_run=recorded_run,
         forensic=forensic_summary(),
         ai_insight=insight,
         ai_root_cause=root_text,
