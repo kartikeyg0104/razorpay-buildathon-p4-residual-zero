@@ -20,10 +20,66 @@ if str(REPO.joinpath("src")) not in sys.path:
     sys.path.insert(0, str(REPO.joinpath("src")))
 
 
+def _list_all() -> int:
+    """Every organisation, who signs in to it, and whether it has a recorded run.
+
+    The question this answers is "which organisation does that browser session land in",
+    which is not answerable from a dashboard that is correctly organisation-scoped.
+    """
+    from residual_zero.audit import latest_completed_run, open_audit
+    from residual_zero.identity.store import IdentityStore
+    from residual_zero.storage.engine import open_shared
+    from residual_zero.tenancy import use_tenant
+
+    store = IdentityStore()
+    conn = open_shared(readonly=True)
+    try:
+        orgs = list(conn.execute(
+            "SELECT org_id, slug, db_schema, dataset_kind FROM organization ORDER BY slug"
+        ))
+        users = list(conn.execute("SELECT email, org_id, role FROM app_user ORDER BY email"))
+    finally:
+        conn.close()
+
+    by_org: dict[str, list[str]] = {}
+    for email, org_id, role in users:
+        by_org.setdefault(str(org_id), []).append(f"{email} ({role})")
+
+    for org_id, slug, schema, kind in orgs:
+        tenant = store.tenant_for_org(str(org_id))
+        with use_tenant(tenant):
+            audit = open_audit()
+            try:
+                run = latest_completed_run(audit)
+                entries = list(audit.execute(
+                    "SELECT COUNT(DISTINCT json_extract(payload, '$.bank_credit_id')) "
+                    "FROM audit_entry"
+                ))[0][0]
+            except Exception as exc:  # noqa: BLE001 - a schema may predate the run table
+                run, entries = None, f"unreadable: {type(exc).__name__}"
+            finally:
+                audit.close()
+        print(f"org {slug!r} schema={schema} dataset={kind}")
+        print(f"    users: {by_org.get(str(org_id)) or 'none'}")
+        if run is None:
+            print("    recorded run: NONE  -> dashboard correctly says NOT RUN")
+        else:
+            print(f"    recorded run: {run['run_id']} {run['status']} "
+                  f"{run['n_persisted']}/{run['n_credits']} complete={run['complete']}")
+        print(f"    distinct credits with results: {entries}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--org", required=True, help="organisation slug")
+    parser.add_argument("--org", help="organisation slug")
+    parser.add_argument("--all", action="store_true",
+                        help="list every organisation, its users, and its recorded run")
     args = parser.parse_args(argv)
+    if args.all:
+        return _list_all()
+    if not args.org:
+        parser.error("--org or --all is required")
 
     from residual_zero.identity.store import IdentityStore
     from residual_zero.storage.engine import open_tenant_readonly
