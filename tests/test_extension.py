@@ -25,6 +25,9 @@ def test_manifest_is_mv3_and_narrow():
     assert manifest["manifest_version"] == 3
     hosts = set(manifest["host_permissions"])
     assert hosts == {
+        # This extension's own hosted desk, granted at install because it is the default.
+        # One named host; `<all_urls>` is still forbidden below.
+        "https://residual-zero-production.up.railway.app/*",
         "http://127.0.0.1:8765/*",
         "http://localhost:8765/*",
         "https://dashboard.razorpay.com/*",

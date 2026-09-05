@@ -27,7 +27,12 @@
  * not be replicated to the user's other machines as a side effect of being saved.
  */
 
-export const DEFAULT_DESK = "http://127.0.0.1:8765";
+export const DEFAULT_DESK = "https://residual-zero-production.up.railway.app";
+// The hosted desk, because that is the one a person who installs this can
+// actually reach. It used to default to loopback, which is only useful to
+// somebody already running a console — everyone else installed the extension and
+// got "Desk offline" against a port with nothing behind it. Loopback is still one
+// click away in the options page, and is still a permitted origin.
 
 /** Keys in chrome.storage.local. */
 const DESK_KEY = "desk";

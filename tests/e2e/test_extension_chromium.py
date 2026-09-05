@@ -68,7 +68,15 @@ def ext(console, playwright_session):
             page.on("console", lambda m: errors.append(f"[{m.type}] {m.text}")
                     if m.type == "error" else None)
             page.on("pageerror", lambda e: errors.append(f"[pageerror] {e}"))
+            # Pin the desk instead of relying on the shipped default. The default is the
+            # hosted desk now, and an e2e run must exercise the local console it started,
+            # not production.
             page.goto(f"chrome-extension://{ext_id}/panel.html", wait_until="domcontentloaded")
+            page.evaluate(
+                "() => new Promise(r => chrome.storage.local.set("
+                "{desk: 'http://127.0.0.1:8765', apiToken: ''}, r))"
+            )
+            page.reload(wait_until="domcontentloaded")
             page.wait_for_selector(".navb", timeout=15000)
             page.wait_for_timeout(1500)
             try:

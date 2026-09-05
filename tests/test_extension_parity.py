@@ -201,7 +201,15 @@ def test_no_secrets_or_remote_code_in_the_extension():
     # page's prose and its input placeholder legitimately show an example https URL now
     # that the desk is configurable, and neither is an endpoint.
     external = set(re.findall(r"https?://[^\s\"'`)]+", JS_CODE))
-    allowed = {"http://127.0.0.1:8765", "http://localhost:8765"}
+    # Desk endpoints, not code. The extension talks to a desk over HTTP and one of them is
+    # its default; what this assertion protects is that no *other* origin appears, so a
+    # stray analytics or CDN host would still fail here. Loading code from any of them is
+    # separately impossible: extension_pages CSP is script-src 'self'.
+    allowed = {
+        "https://residual-zero-production.up.railway.app",
+        "http://127.0.0.1:8765",
+        "http://localhost:8765",
+    }
     assert external <= allowed, sorted(external - allowed)
     # The HTML must still not pull code or styling from anywhere off-package.
     for path in HTML:
@@ -244,6 +252,11 @@ def test_manifest_is_mv3_and_still_narrow():
     assert manifest["manifest_version"] == 3
     assert manifest["background"]["type"] == "module"
     assert set(manifest["host_permissions"]) == {
+        # The hosted desk, granted at install because it is this extension's own
+        # deployment and its default. One named host, not a wildcard: `<all_urls>` is
+        # still forbidden below, and anything else a user wants stays an optional
+        # permission they grant per origin.
+        "https://residual-zero-production.up.railway.app/*",
         "http://127.0.0.1:8765/*",
         "http://localhost:8765/*",
         "https://dashboard.razorpay.com/*",

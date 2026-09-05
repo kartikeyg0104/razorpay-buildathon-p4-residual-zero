@@ -226,10 +226,24 @@ def test_the_extension_has_no_localhost_dependency_for_a_deployed_desk():
     # ...and the desk is read from storage rather than pinned to a constant.
     assert "chrome.storage.local" in api
     manifest = json.loads(Path("extension/manifest.json").read_text(encoding="utf-8"))
-    # Host access for a deployment is requested at runtime, so no production domain is
-    # baked into the shipped package.
+    # Host access for *someone else's* deployment is still requested at runtime. What
+    # changed: this extension's own hosted desk is granted at install, because an
+    # extension that cannot reach its own product on installation is not much of a
+    # product — it reported "Desk offline" against a loopback port nobody was running.
+    #
+    # The invariant that matters is unchanged and asserted here: one named first-party
+    # host, no wildcard, and every other origin still goes through permissions.request.
     assert manifest["optional_host_permissions"] == ["https://*/*"]
+    first_party = "https://residual-zero-production.up.railway.app/*"
+    baked = set(manifest["host_permissions"])
+    assert first_party in baked
     assert all(
-        host.startswith(("http://127.0.0.1", "http://localhost", "https://dashboard.razorpay.com"))
-        for host in manifest["host_permissions"]
+        host.startswith((
+            "https://residual-zero-production.up.railway.app",
+            "http://127.0.0.1", "http://localhost", "https://dashboard.razorpay.com",
+        ))
+        for host in baked
+    ), sorted(baked)
+    assert not any("*" in host.rstrip("/*") for host in baked), (
+        f"a wildcard host would grant far more than one desk: {sorted(baked)}"
     )
