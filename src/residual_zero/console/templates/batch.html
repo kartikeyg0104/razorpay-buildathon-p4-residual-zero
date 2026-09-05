@@ -188,7 +188,9 @@
 {% if t04 %}
 <details class="card fold" style="margin-top:12px">
   <summary><h3>Technical details · reconciliation stages explained</h3></summary>
-  <p class="lede" style="margin:0">Residual-zero {{ t04.residual_zero }} proves the equation. Verified-linked {{ t04_dev.verified_linked if t04_dev else '—' }} is named ids plus residual 0. Unique {{ n_unique }} is search uniqueness. Auto-clear is 0 because UNIQUE is 0. Overlay does not write CLEARED.</p>
+  {# "Auto-clear is 0 because UNIQUE is 0" is a causal claim about a search. Without one,
+     the honest sentence is that uniqueness was never established. #}
+  <p class="lede" style="margin:0">Residual-zero {{ t04.residual_zero }} proves the equation. Verified-linked {{ t04_dev.verified_linked if t04_dev else '—' }} is named ids plus residual 0. {% if search_recorded %}Unique {{ n_unique }} is search uniqueness. Auto-clear is 0 because UNIQUE is 0.{% else %}Uniqueness is not evaluated for this organisation — no search has been recorded, so nothing reached the auto-clear gate.{% endif %} Overlay does not write CLEARED.</p>
   <ol class="ai-steps" style="margin-top:12px">
     <li>Bank credit arrives</li>
     <li>Reconstruct explanation → residual = ₹0 (residual-zero, not a clear)</li>
@@ -211,7 +213,9 @@
   <p class="muted exclusive-note">Do not add residual-zero + identified + verified. Those populations overlap.</p>
   <h3 style="margin-top:14px">Mutually exclusive uniqueness (sums to scored)</h3>
   <ol class="ai-steps">
-    <li>Dev exclusive: unique {{ n_unique }} + ambiguous {{ n_ambiguous }} + none {{ n_none_found }} + budget {{ n_budget_search|default(0) }} = {{ (n_unique|default(0) + n_ambiguous|default(0) + n_none_found|default(0) + n_budget_search|default(0)) }} of {{ n_credits }} posted</li>
+    {# The buckets partition a completed search. With none recorded they sum to 0, which
+       reads as a partition of nothing rather than an absent measurement. #}
+    <li>Dev exclusive: {% if search_recorded %}unique {{ n_unique }} + ambiguous {{ n_ambiguous }} + none {{ n_none_found }} + budget {{ n_budget_search|default(0) }} = {{ (n_unique|default(0) + n_ambiguous|default(0) + n_none_found|default(0) + n_budget_search|default(0)) }} of {{ n_credits }} posted{% else %}not evaluated — no search recorded for this organisation ({{ n_credits }} posted){% endif %}</li>
     <li>Official test exclusive (artifacts/test/t04.md): unique {{ t04_test.unique }} + ambiguous {{ t04_test.ambiguous }} + none {{ t04_test.none_found }} + budget {{ t04_test.budget_exceeded_search }} = {{ t04_test.n_scored }}</li>
     <li>POTENTIALLY_RECOVERABLE is an investigation queue, not a uniqueness bucket, and is never counted as reconciled</li>
   </ol>

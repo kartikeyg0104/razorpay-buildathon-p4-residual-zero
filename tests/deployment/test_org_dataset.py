@@ -233,3 +233,20 @@ def test_the_headline_verdict_does_not_claim_auto_clear_held(deployment):
     assert "nothing to auto-clear" in page
     # The overlay results beside it are real and must survive.
     assert "settlement reports verified against the rate table" in page
+
+
+def test_the_technical_details_do_not_assert_search_findings_either(deployment):
+    """The prose below the cards made the same claims the cards did.
+
+    "Auto-clear is 0 because UNIQUE is 0" states a cause, and the uniqueness buckets are a
+    partition of a completed search. Both summed to zero and read as measurements.
+    """
+    IdentityStore().set_organization_dataset("beta", "files", "data/dev/rendered")
+    deployment.module.reset_caches()
+    page = deployment.login("owner@beta.test").get("/").text
+
+    assert "Auto-clear is 0 because UNIQUE is 0" not in page
+    assert "no search has been recorded" in page
+    assert "not evaluated — no search recorded for this organisation" in page
+    # The evaluation-artifact partition is a real measurement and stays.
+    assert "Official test exclusive" in page
