@@ -8,9 +8,11 @@
     <p class="lede">See what was proven, what was linked, and what still needs human review. Residual-zero {{ t04.residual_zero if t04 else '—' }} means the reconstructed explanation matches the bank amount exactly. Settlement-linked {{ t04.settlement_linked if t04 else '—' }} identifies the ledger records (6 fail rate re-derive). <a href="/demo">5-minute product tour.</a></p>
   </div>
   <div class="status">
-    {# None is "no chain to verify", which is a different claim from "verified". #}
+    {# None is "no chain to verify", which is a different claim from "verified". And the
+       count is what *this organisation* has posted, not how large the corpus is. #}
     <span class="dot {{ '' if chain_ok is none else ('ok' if chain_ok else 'bad') }}"></span>
-    audit {{ 'not started' if chain_ok is none else ('intact' if chain_ok else 'broken') }} · {{ n_credits }} credits
+    audit {{ 'not run' if chain_ok is none else ('intact' if chain_ok else 'broken') }}
+    · {{ (n_credits ~ ' credits posted') if n_credits else 'no credits posted' }}
   </div>
 </div>
 
@@ -30,22 +32,37 @@
     <div class="val" style="font-size:1.15rem">{{ t04.settlement_linked if t04 else '—' }}</div>
     <div class="sub">identified settlement members · 6 fail rate re-derive</div>
   </article>
-  <article class="kpi ok">
-    <div class="lbl">search completed</div>
+  <article class="kpi {{ 'ok' if search_recorded else 'pending' }}">
+    <div class="lbl">search</div>
+    {% if search_recorded %}
     <div class="val" style="font-size:1.15rem">{{ (n_unique|default(0) + n_ambiguous|default(0) + n_none_found|default(0)) }}/{{ n_credits }}</div>
     <div class="sub">coverage {{ t04.test_search_completed if t04 else '—' }} · search coverage, not clearance</div>
+    {% else %}
+    <div class="val state">Not run</div>
+    <div class="sub">no search recorded for this organisation</div>
+    {% endif %}
   </article>
 </section>
 <section class="kpis">
-  <article class="kpi">
+  <article class="kpi{{ '' if search_recorded else ' pending' }}">
     <div class="lbl">unique explanation</div>
+    {% if search_recorded %}
     <div class="val">{{ n_unique }}</div>
     <div class="sub">only one valid explanation found</div>
+    {% else %}
+    <div class="val state">Not evaluated</div>
+    <div class="sub">uniqueness needs a recorded search</div>
+    {% endif %}
   </article>
-  <article class="kpi alert">
+  <article class="kpi {{ 'alert' if search_recorded else 'pending' }}">
     <div class="lbl">ambiguous</div>
+    {% if search_recorded %}
     <div class="val">{{ n_ambiguous }}</div>
     <div class="sub">no match {{ n_none_found }} · budget {{ n_budget_search }}</div>
+    {% else %}
+    <div class="val state">Not evaluated</div>
+    <div class="sub">ambiguity needs a recorded search</div>
+    {% endif %}
   </article>
   <article class="kpi alert">
     <div class="lbl">unresolved</div>
@@ -60,40 +77,79 @@
 </section>
 
 <div class="verdict">
+  {# "auto-clear stayed at zero" is a search result. Without a recorded search there was
+     nothing that could have been cleared, so the headline states the run instead. #}
   <div>
+    {% if search_recorded %}
     <strong>{{ n_cleared }} auto-cleared</strong>
     <span>auto-clear stayed at zero — uniqueness not proven</span>
+    {% else %}
+    <strong>search not run</strong>
+    <span>no recorded search for this organisation — nothing to auto-clear</span>
+    {% endif %}
   </div>
   <div>
+    {% if has_records %}
     <strong>{{ n_gate_a }} proven</strong>
     <span>settlement reports verified against the rate table</span>
+    {% else %}
+    <strong>not evaluated</strong>
+    <span>no posted credits for this organisation</span>
+    {% endif %}
   </div>
   <div>
+    {% if has_records %}
     <strong>{{ n_human }} human review</strong>
     <span>ambiguous or missing evidence — requires human decision</span>
+    {% else %}
+    <strong>not evaluated</strong>
+    <span>no posted credits for this organisation</span>
+    {% endif %}
   </div>
 </div>
 
 <section class="kpis">
-  <article class="kpi ok">
+  <article class="kpi {{ 'ok' if search_recorded else 'pending' }}">
     <div class="lbl">auto-cleared</div>
+    {% if search_recorded %}
     <div class="val">{{ n_cleared }}</div>
     <div class="sub">guesses refused — this is the product</div>
+    {% else %}
+    {# 0 here would read as "nothing was auto-cleared", which is a safety claim. Nothing
+       was searched, so nothing could be. The measured claim lives on /safety. #}
+    <div class="val state">Not evaluated</div>
+    <div class="sub">no run to auto-clear from · see <a href="/safety">safety</a></div>
+    {% endif %}
   </article>
-  <article class="kpi ok">
+  <article class="kpi {{ 'ok' if has_records else 'pending' }}">
     <div class="lbl">verified &amp; accepted</div>
+    {% if has_records %}
     <div class="val">{{ n_gate_a }}</div>
     <div class="sub">settlement reports re-derived successfully</div>
+    {% else %}
+    <div class="val state">Not evaluated</div>
+    <div class="sub">no posted credits for this organisation</div>
+    {% endif %}
   </article>
-  <article class="kpi alert">
+  <article class="kpi {{ 'alert' if has_records else 'pending' }}">
     <div class="lbl">human review queue</div>
+    {% if has_records %}
     <div class="val">{{ n_human }}</div>
     <div class="sub">{{ human_rupees or '—' }} still unproven</div>
+    {% else %}
+    <div class="val state">Not evaluated</div>
+    <div class="sub">no posted credits for this organisation</div>
+    {% endif %}
   </article>
-  <article class="kpi">
+  <article class="kpi{{ '' if has_records else ' pending' }}">
     <div class="lbl">journal-ready</div>
+    {% if has_records %}
     <div class="val">{{ n_journalable }}</div>
     <div class="sub">{{ n_mismatch }} posted-mismatch · overlay does not write CLEARED</div>
+    {% else %}
+    <div class="val state">Not evaluated</div>
+    <div class="sub">no posted credits for this organisation</div>
+    {% endif %}
   </article>
   <article class="kpi">
     <div class="lbl">budget exceeded</div>
@@ -106,6 +162,15 @@
     <div class="sub">credits / 1000s · wall {{ (t04.wall_ns if t04 else '') | duration_ns }}</div>
   </article>
 </section>
+{# Three provenances share this page. Saying so once is shorter than qualifying twelve
+   cards, and it is the difference between "we searched and found none" and "no search". #}
+<p class="metric-note">
+  <b>Deterministic scores</b> — transactions, residual-zero, settlement-linked,
+  unreconciled, unresolved — come from the committed evaluation run and read the same for
+  every organisation. <b>Verified, journal-ready and human review</b> are this
+  organisation's posted credits. <b>Search, uniqueness and the audit chain</b> are this
+  organisation's own run, and say <i>not run</i> until it has one — never a zero.
+</p>
 
 {% if ai_insight %}
 <section class="card ai-panel">

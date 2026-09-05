@@ -499,6 +499,23 @@ h1.id-title {
 .kpi.bad .val { color: var(--rose); }
 .kpi.bad::before { background: var(--rose); }
 
+/* A metric nobody measured must not look like a measured zero. Muted rail, muted value,
+   and the state spelled out where the number would be. */
+.kpi.pending::before { background: var(--line); opacity: 1; }
+.kpi.pending .val { color: var(--faint); }
+.kpi .val.state {
+  font: 600 15px/1.25 var(--display);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.metric-note {
+  margin: -12px 0 22px;
+  color: var(--faint);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.metric-note b { color: var(--muted); font-weight: 600; }
+
 .verdict {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

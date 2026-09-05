@@ -513,6 +513,15 @@ def batch():
         if credit is not None:
             human_paise += credit.amount_paise
     gate_counts = _class_counts([r["gate"] for r in rows if r.get("gate")])
+    # Three different provenances land on this page and a bare 0 cannot tell them apart.
+    #   * the committed evaluation run  — the same for every organisation
+    #   * this organisation's records   — its posted credits, read through the overlay
+    #   * this organisation's own run   — search, uniqueness, audit chain
+    # A deployed organisation has the first two and not the third, because the pipeline
+    # writes a SQLite ledger and has no PostgreSQL output. Rendering that as
+    # "search completed 0/0" and "ambiguous 0" claims a search ran and found nothing.
+    has_records = bool(rows)
+    search_recorded = bool(audits)
     uniq = Counter(str(payload.get("uniqueness") or "") for payload in audits.values())
     snap = track04_snapshot()
     from residual_zero.qa.finance_templates import batch_insight_text
@@ -553,6 +562,8 @@ def batch():
         n_ambiguous=uniq.get("AMBIGUOUS", 0),
         n_none_found=uniq.get("NONE_FOUND", 0),
         n_budget_search=uniq.get("BUDGET_EXCEEDED", 0),
+        has_records=has_records,
+        search_recorded=search_recorded,
         forensic=forensic_summary(),
         ai_insight=insight,
         ai_root_cause=root_text,

@@ -510,6 +510,28 @@ def mount(app: FastAPI) -> None:
                 conn.close()
         return [_enrich(cid, cls, audits.get(cid)) for cid, cls in raw]
 
+    def _run_recorded() -> bool:
+        """Whether this organisation has a recorded search/audit run of its own.
+
+        The certificate's counts come from that run. Without one they are all zero and
+        ``chain_ok`` is False, which the page rendered as "broken" — an alarm about
+        evidence that does not exist. The certificate object is left exactly as it is;
+        only what the page *says* about an absent run changes.
+        """
+        from residual_zero.console.app import _db
+        from residual_zero.storage.errors import QUERY_ERRORS, rollback_quietly
+
+        conn = _db()
+        if conn is None:
+            return False
+        try:
+            return conn.execute("SELECT 1 FROM audit_entry LIMIT 1").fetchone() is not None
+        except QUERY_ERRORS:
+            rollback_quietly(conn)
+            return False
+        finally:
+            conn.close()
+
     @app.get("/close", response_class=HTMLResponse)
     def close_desk():
         pack = _assemble_close()
@@ -528,6 +550,7 @@ def mount(app: FastAPI) -> None:
             bridge=bridge,
             radar=radar,
             cert=cert,
+            run_recorded=_run_recorded(),
             exposure=extra["exposure"],
             dupes=extra["dupes"],
             twins=extra["twins"],

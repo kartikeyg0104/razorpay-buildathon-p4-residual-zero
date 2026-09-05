@@ -192,8 +192,10 @@
     <div><dt>sha256</dt><dd class="id">{{ cert.sha256 }}</dd></div>
     <div><dt>audit head</dt><dd class="id">{{ cert.audit_head or '—' }}</dd></div>
     <div><dt>credits / verified / journal-ready</dt><dd>{{ cert.n_credits }} · {{ cert.n_gate_a }} · {{ cert.n_journalable }}</dd></div>
-    <div><dt>unique / ambiguous / none</dt><dd>{{ cert.n_unique }} · {{ cert.n_ambiguous }} · {{ cert.n_none_found }}</dd></div>
-    <div><dt>auto-cleared / chain</dt><dd>{{ cert.n_auto_cleared }} · {{ 'ok' if cert.chain_ok else 'broken' }}</dd></div>
+    {# Without a recorded run these are all zero and chain_ok is False, which read as
+       "0 ambiguous" and "chain broken" — two findings from a search that never ran. #}
+    <div><dt>unique / ambiguous / none</dt><dd>{% if run_recorded %}{{ cert.n_unique }} · {{ cert.n_ambiguous }} · {{ cert.n_none_found }}{% else %}not evaluated — no search recorded{% endif %}</dd></div>
+    <div><dt>auto-cleared / chain</dt><dd>{% if run_recorded %}{{ cert.n_auto_cleared }} · {{ 'ok' if cert.chain_ok else 'broken' }}{% else %}not evaluated · chain not run{% endif %}</dd></div>
   </dl>
   <p class="muted"><a href="/metrics">prometheus text</a> · gauges are integers · rz_writes_cleared 0</p>
 </section>
