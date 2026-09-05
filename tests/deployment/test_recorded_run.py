@@ -426,3 +426,35 @@ def test_an_organisation_without_a_run_keeps_its_existing_metrics(orgs):
         n_after = len(after[1]) if after is not None else 0
         assert console_app._db() is None, "B gained a ledger it never ran"
     assert n_after == n_before
+
+
+@requires_pg
+def test_an_organisation_created_before_the_run_table_can_still_record(orgs):
+    """REGRESSION: the first production run died with UndefinedTable.
+
+    run_split bootstraps the tenant through init_db, but the idempotency check reads
+    reconciliation_run before that ever happens. An organisation created before the table
+    existed — the normal state of anything already deployed — failed on the first query.
+    A run must bring its own schema up to date before reading or writing one.
+    """
+    import psycopg
+
+    from residual_zero.runner import record_run
+
+    a, _b = orgs
+    # Wind org A back to the schema it would have had before the run table shipped.
+    with psycopg.connect(PG_URL, autocommit=True) as conn, conn.cursor() as cur:
+        cur.execute('SET search_path TO "org_runa"')
+        cur.execute("DROP TABLE IF EXISTS reconciliation_run CASCADE")
+        cur.execute("ALTER TABLE audit_entry DROP COLUMN IF EXISTS run_id")
+        cur.execute("DELETE FROM schema_migration WHERE version = '0002_run'")
+
+    assert _rows(
+        "org_runa",
+        "SELECT COUNT(*) FROM information_schema.tables "
+        "WHERE table_schema = 'org_runa' AND table_name = 'reconciliation_run'",
+    ) == [(0,)], "the table should be gone for this test to mean anything"
+
+    result = record_run(tenant=a, split="dev", limit=4)
+    assert result.recorded
+    assert _rows("org_runa", "SELECT status FROM reconciliation_run") == [("COMPLETED",)]

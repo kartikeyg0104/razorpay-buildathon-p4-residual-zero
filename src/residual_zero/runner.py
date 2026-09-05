@@ -131,6 +131,18 @@ def record_run(
 
     require_production_database()
 
+    # Bring this organisation's schema up to date before reading or writing a run.
+    # Idempotent: it applies pending migrations and returns the versions it applied.
+    #
+    # Ordering matters and cost me a deploy. run_split calls init_db, which bootstraps the
+    # tenant — but the idempotency check reads reconciliation_run *before* that, so on an
+    # organisation created before the run table existed the first query failed with
+    # UndefinedTable. A schema older than the code is the normal case for a deployed
+    # organisation, not an edge case.
+    from residual_zero.storage.engine import bootstrap_tenant
+
+    bootstrap_tenant(tenant)
+
     root = Path(tenant.dataset_root or Path("data").joinpath(split, "rendered"))
     data_digest = dataset_digest(root)
     cfg_digest = config_digest(load_tax_rates(), load_fees())
