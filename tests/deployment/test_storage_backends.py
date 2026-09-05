@@ -662,3 +662,86 @@ def test_an_organisation_on_its_own_rows_is_left_alone(pg):
         conn = console_app._db()
         assert conn is not None, "a sql organisation must keep its connection"
         conn.close()
+
+
+# ---------------------------------------------------------------- transaction pooling
+
+POOLED_URL = os.environ.get("RZ_TEST_PGBOUNCER_URL", "")
+requires_pooler = pytest.mark.skipif(
+    not POOLED_URL, reason="set RZ_TEST_PGBOUNCER_URL to run the transaction-pooling suite",
+)
+
+
+@requires_pg
+def test_the_search_path_is_reestablished_after_every_transaction(pg):
+    """REGRESSION: production reaches Neon through a transaction pooler.
+
+    A session-level `SET search_path` belongs to the transaction that issued it. Through
+    PgBouncer in transaction mode the next transaction can be handed a different backend
+    that never saw it, so the connection silently loses its tenant scope. That is the
+    failure schema-per-tenant exists to prevent, and it did not fail cleanly: the audit
+    writes landed in the right schema while the exception writes, on an identically built
+    connection, raised UndefinedTable for a table that plainly existed.
+    """
+    from residual_zero.storage.pg import PgConnection
+
+    one, _two = pg
+    conn = PgConnection(PG_URL, schema=one.db_schema)
+    try:
+        for _ in range(3):
+            got = list(conn.execute("SELECT current_schema()"))[0][0]
+            assert got == one.db_schema, f"transaction saw schema {got!r}"
+            conn.commit()
+        conn.execute("SELECT 1")
+        conn.rollback()
+        got = list(conn.execute("SELECT current_schema()"))[0][0]
+        assert got == one.db_schema, "the scope was lost after a rollback"
+    finally:
+        conn.close()
+
+
+@requires_pg
+def test_no_session_state_is_relied_on_for_tenant_scope():
+    """The scope must be per transaction, because that is the unit a pooler preserves."""
+    from pathlib import Path
+
+    source = Path("src/residual_zero/storage/pg.py").read_text(encoding="utf-8")
+    assert "SET LOCAL search_path" in source
+    assert "SET search_path TO" not in source, (
+        "a session-level search_path is true on a direct server and quietly false "
+        "through a transaction pooler"
+    )
+    assert "options=" not in source, (
+        "pgbouncer refuses the connection outright: "
+        "'unsupported startup parameter in options: search_path'"
+    )
+
+
+@requires_pooler
+def test_a_recorded_run_survives_transaction_pooling(monkeypatch):
+    """The end-to-end proof, against a real pooler in transaction mode."""
+    import psycopg
+
+    from residual_zero.runner import record_run
+    from residual_zero.storage.engine import bootstrap_shared, bootstrap_tenant
+    from residual_zero.tenancy import Tenant
+
+    # monkeypatch, not os.environ: setting it directly leaked the pooled database into
+    # every test that ran afterwards and failed 25 of them.
+    monkeypatch.setenv("RZ_DATABASE_URL", POOLED_URL)
+    monkeypatch.setenv("RZ_SHARED_SCHEMA", "rz_shared_pooltest")
+    bootstrap_shared()
+    tenant = Tenant(org_id="pooltest", slug="pooltest", db_schema="org_pooltest",
+                    dataset_kind="files", dataset_root="data/dev/rendered")
+    bootstrap_tenant(tenant)
+    try:
+        result = record_run(tenant=tenant, split="dev", limit=6)
+        assert result.recorded
+        with psycopg.connect(POOLED_URL) as conn, conn.cursor() as cur:
+            cur.execute('SET search_path TO "org_pooltest"')
+            cur.execute("SELECT COUNT(*) FROM exception")
+            assert cur.fetchone()[0] == 6
+    finally:
+        with psycopg.connect(POOLED_URL, autocommit=True) as conn, conn.cursor() as cur:
+            for schema in ("org_pooltest", "rz_shared_pooltest"):
+                cur.execute(f'DROP SCHEMA IF EXISTS "{schema}" CASCADE')

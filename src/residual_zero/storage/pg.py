@@ -18,6 +18,7 @@ from __future__ import annotations
 from typing import Any, Iterator, Sequence
 
 from residual_zero.storage.dialect import split_script, translate
+from residual_zero.tenancy import safe_namespace
 
 
 class PostgresUnavailable(RuntimeError):
@@ -81,6 +82,12 @@ class PgConnection:
         psycopg = _psycopg()
         self._readonly = readonly
         self._schema = schema
+        # The schema name reaches SQL as an identifier, so validate it here too rather
+        # than trust every caller to have done it.
+        safe_namespace(schema)
+        #: Whether the *current transaction* has had its search_path set. Reset on every
+        #: commit and rollback, because that is exactly the lifetime of a `SET LOCAL`.
+        self._path_scoped = False
         self._raw = psycopg.connect(dsn, autocommit=False, application_name=application_name)
         try:
             if create_schema and not readonly:
@@ -88,9 +95,11 @@ class PgConnection:
                     cur.execute(f'CREATE SCHEMA IF NOT EXISTS "{schema}"')
                 self._raw.commit()
             with self._raw.cursor() as cur:
-                # search_path names this tenant's schema only. No `public` fallback: a
-                # missing table must be an error, never a silent read of a shared one.
-                cur.execute(f'SET search_path TO "{schema}"')
+                # No session-level search_path here: it would be true on a direct server
+                # and quietly false through a transaction pooler, which is the worst of
+                # both. Every transaction scopes itself in _scope() instead. No `public`
+                # fallback either way: a missing table must be an error, never a silent
+                # read of a shared one.
                 if readonly:
                     cur.execute("SET default_transaction_read_only = on")
             self._raw.commit()
@@ -100,9 +109,30 @@ class PgConnection:
 
     # ------------------------------------------------------------------ DB-API surface
 
+    def _scope(self, cur) -> None:
+        """Name this tenant's schema for the transaction the cursor is about to open.
+
+        Production reaches Neon through PgBouncer in transaction pooling mode, where a
+        session-level ``SET`` belongs to the transaction that issued it: the next
+        transaction can be handed a different server backend that never saw it. That does
+        not fail cleanly, it fails *intermittently* — the audit writes landed in the right
+        schema while the exception writes, on an identically built connection, raised
+        UndefinedTable for a table that plainly existed. Reproduced against pgbouncer in
+        transaction mode, and fixed by never depending on session state.
+
+        ``SET LOCAL`` lasts exactly one transaction, which is the unit a pooler preserves.
+        Startup options are not an alternative: pgbouncer rejects the connection outright
+        with "unsupported startup parameter in options: search_path".
+        """
+        if self._path_scoped:
+            return
+        cur.execute(f'SET LOCAL search_path TO "{self._schema}"')
+        self._path_scoped = True
+
     def execute(self, sql: str, params: Sequence[Any] | None = None) -> PgCursor:
         translated = translate(sql, has_params=bool(params))
         cur = self._raw.cursor()
+        self._scope(cur)
         if translated is None:
             # PRAGMA and friends. Return an empty result rather than raising, matching what
             # the SQLite path does with a statement that has no rows.
@@ -125,6 +155,7 @@ class PgConnection:
         if translated is None:  # pragma: no cover - PRAGMA has no parameters
             return
         with self._raw.cursor() as cur:
+            self._scope(cur)
             cur.executemany(translated, batch)
 
     def executescript(self, script: str) -> None:
@@ -133,14 +164,19 @@ class PgConnection:
             if translated is None:
                 continue
             with self._raw.cursor() as cur:
+                self._scope(cur)
                 cur.execute(translated)
         self._raw.commit()
+        self._path_scoped = False
 
     def commit(self) -> None:
+        # A SET LOCAL dies with its transaction, so the next one must scope itself again.
         self._raw.commit()
+        self._path_scoped = False
 
     def rollback(self) -> None:
         self._raw.rollback()
+        self._path_scoped = False
 
     def close(self) -> None:
         try:
