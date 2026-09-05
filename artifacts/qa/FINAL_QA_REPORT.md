@@ -1,5 +1,13 @@
 # FINAL QA REPORT — Residual Zero
 
+> **HISTORICAL SNAPSHOT — not current production state.**
+> Captured during the QA campaign dated below, when Groq was still the configured
+> provider and was returning HTTP 403. **Groq was removed on 2026-09-03.** The current
+> provider is **NVIDIA NIM** (`openai/gpt-oss-20b`), and `AI_PROVIDER=groq` now resolves
+> to no endpoint and makes no call. The financial figures in this document are unchanged
+> and remain valid; only the provider state is out of date. Current provider
+> configuration: `README.md` and `.env.example`.
+
 > Historical record of the competitive-engineering campaign. Superseded for browser status
 > by `artifacts/qa/FINAL_RELEASE_READINESS.md`, where Playwright Chromium is 12/12 PASS.
 > The financial figures, "not retuned", "not rerun" and LIVE_GROQ = UNAVAILABLE all still hold.

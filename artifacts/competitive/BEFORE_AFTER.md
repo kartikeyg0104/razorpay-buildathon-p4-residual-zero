@@ -1,5 +1,13 @@
 # Before / after — competitive upgrade
 
+> **HISTORICAL SNAPSHOT — not current production state.**
+> Captured during the QA campaign dated below, when Groq was still the configured
+> provider and was returning HTTP 403. **Groq was removed on 2026-09-03.** The current
+> provider is **NVIDIA NIM** (`openai/gpt-oss-20b`), and `AI_PROVIDER=groq` now resolves
+> to no endpoint and makes no call. The financial figures in this document are unchanged
+> and remain valid; only the provider state is out of date. Current provider
+> configuration: `README.md` and `.env.example`.
+
 All financial metrics below are **executed official cards**, not retuned results.
 
 Official Dev: `artifacts/dev/t04.md`  

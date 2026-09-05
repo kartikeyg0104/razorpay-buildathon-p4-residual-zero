@@ -221,6 +221,25 @@ Optional: `RZ_ALLOWED_ORIGINS`, `RZ_EXTENSION_IDS`, `RZ_ALLOW_SIGNUP`,
 
 ---
 
+## 7a. Running the tests without dirtying the tree
+
+```bash
+pytest -q                 # unit + integration; leaves the working tree clean
+RZ_E2E=1 pytest -q        # adds Playwright browser certification
+RZ_TEST_POSTGRES_URL=postgresql://... pytest -q tests/deployment   # storage against real PG
+```
+
+Neither suite writes into a committed artifact. Two knobs exist for the cases where you
+*do* want the published files refreshed:
+
+| Variable | Effect |
+|---|---|
+| `RZ_REFRESH_DEMO_SHOTS=1` | E2E writes its screenshots to `artifacts/demo/` (the committed documentation set) instead of the gitignored `artifacts/e2e/shots/`. Refreshing documentation should be a deliberate act, not a side effect of testing. |
+| `RZ_DB=<path>` | Points the desk at a specific SQLite ledger. The E2E harness sets this to a disposable copy so the suite never writes `artifacts/dev/ledger.sqlite`. |
+
+Regenerate the published evaluation artifacts explicitly with `make eval` /
+`python -m eval.ai_recovery`, never as a side effect of `pytest`.
+
 ## 8. Observability
 
 One JSON object per line on stderr. Every value passes a scrubber that removes anything

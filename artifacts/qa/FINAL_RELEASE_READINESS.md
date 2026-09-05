@@ -1,5 +1,13 @@
 # Residual Zero — final release readiness
 
+> **HISTORICAL SNAPSHOT — not current production state.**
+> Captured during the QA campaign dated below, when Groq was still the configured
+> provider and was returning HTTP 403. **Groq was removed on 2026-09-03.** The current
+> provider is **NVIDIA NIM** (`openai/gpt-oss-20b`), and `AI_PROVIDER=groq` now resolves
+> to no endpoint and makes no call. The financial figures in this document are unchanged
+> and remain valid; only the provider state is out of date. Current provider
+> configuration: `README.md` and `.env.example`.
+
 Generated 2026-09-01T17:48:24.822539+00:00 · commit `75cef5067474`
 
 OFFICIAL TEST EVALUATION NOT RERUN — BUDGET EXHAUSTED.
