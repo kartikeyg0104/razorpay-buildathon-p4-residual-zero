@@ -1,0 +1,87 @@
+# Render Blueprint for Residual Zero.
+#
+# Docker rather than the Python runtime, for one concrete reason: production requires the
+# `postgres` optional dependency (`psycopg`), and a buildpack that runs a bare
+# `pip install .` would omit it. The app would then refuse to start - correctly, because
+# RZ_ENV=production rejects a non-PostgreSQL database - but for a reason that reads like a
+# configuration bug. The Dockerfile installs `.[postgres]` explicitly, runs as a non-root
+# user, and is the same image verified locally.
+#
+# The database is Neon and stays Neon. This blueprint deliberately declares NO Render
+# database: the production store is external, and creating one here would give the service
+# a second, empty database to silently prefer.
+
+services:
+  - type: web
+    name: residual-zero
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter          # ortools + scipy + pandas do not fit the free plan's memory
+    region: oregon
+    branch: main
+    autoDeploy: true
+
+    # Liveness only: returns {"ok": true, "service": "residual-zero"}. It opens no database
+    # connection, calls no AI provider, runs no reconciliation and reads no financial state,
+    # so a health probe can never be the thing that wakes the engine.
+    healthCheckPath: /healthz
+
+    envVars:
+      # ---------------------------------------------------------------- deployment mode
+      # Production refuses to start without authentication, a session secret, an https
+      # origin and a PostgreSQL URL - enforced at module import, so it holds under any
+      # start command, not just `python -m`.
+      - key: RZ_ENV
+        value: production
+      - key: RZ_AUTH_MODE
+        value: required
+      # Render terminates TLS and forwards X-Forwarded-Proto/For.
+      - key: RZ_TRUST_PROXY
+        value: "1"
+      - key: RZ_HOST
+        value: 0.0.0.0
+      - key: RZ_LOG_LEVEL
+        value: INFO
+
+      # RZ_PORT is intentionally absent. Render injects PORT, and the app prefers RZ_PORT
+      # over PORT - setting it here would bind the wrong port and fail the health check
+      # while the process looked healthy.
+
+      # RZ_PUBLIC_ORIGIN is intentionally absent too: it falls back to RENDER_EXTERNAL_URL,
+      # which Render sets to this service's own https URL. Add RZ_PUBLIC_ORIGIN explicitly
+      # only when putting a custom domain in front.
+
+      # ---------------------------------------------------------------- secrets
+      # sync: false means "prompt me, never store it in git". Set these in the Render
+      # dashboard (or at blueprint apply time). Nothing secret belongs in this file.
+      - key: RZ_SESSION_SECRET
+        generateValue: true          # Render generates and stores a strong value
+      - key: RZ_DATABASE_URL         # Neon pooled connection string, with sslmode=require
+        sync: false
+      - key: NVIDIA_API_KEY          # server-side only; never reaches a browser or the extension
+        sync: false
+
+      # ---------------------------------------------------------------- AI provider
+      # NVIDIA NIM is the only supported live backend. An unrecognised value resolves to no
+      # endpoint and makes no call.
+      - key: AI_PROVIDER
+        value: nvidia
+      - key: AI_MODEL
+        value: openai/gpt-oss-20b
+      - key: AI_TIMEOUT_S
+        value: "30"
+      - key: AI_TOTAL_BUDGET_S
+        value: "40"
+
+      # ---------------------------------------------------------------- optional
+      # Comma-separated extra browser origins allowed to read the API.
+      - key: RZ_ALLOWED_ORIGINS
+        sync: false
+      # Chrome extension ids allowed as CORS origins. The extension itself authenticates
+      # with a bearer token and does not need this unless a page must read a cross-origin
+      # response.
+      - key: RZ_EXTENSION_IDS
+        sync: false
+      # Set to 0 to close self-service signup for a judged demo.
+      - key: RZ_ALLOW_SIGNUP
+        value: "1"

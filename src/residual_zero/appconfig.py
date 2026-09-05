@@ -43,6 +43,8 @@ ENV_VAR = "RZ_ENV"
 AUTH_VAR = "RZ_AUTH_MODE"
 SECRET_VAR = "RZ_SESSION_SECRET"
 ORIGIN_VAR = "RZ_PUBLIC_ORIGIN"
+# Set by Render to the service's own https URL. Used only when RZ_PUBLIC_ORIGIN is unset.
+PLATFORM_ORIGIN_VAR = "RENDER_EXTERNAL_URL"
 EXTRA_ORIGINS_VAR = "RZ_ALLOWED_ORIGINS"
 EXT_IDS_VAR = "RZ_EXTENSION_IDS"
 TRUST_PROXY_VAR = "RZ_TRUST_PROXY"
@@ -149,6 +151,13 @@ def load_config() -> AppConfig:
 
     secret = (os.environ.get(SECRET_VAR) or "").strip()
     origin = (os.environ.get(ORIGIN_VAR) or "").strip().rstrip("/")
+    if not origin:
+        # A platform that publishes the service's own HTTPS URL can supply it. Render sets
+        # RENDER_EXTERNAL_URL, and the URL is not knowable before the service exists - so
+        # without this, the first deploy of a new service could not satisfy the production
+        # origin check no matter what the operator typed. An explicit RZ_PUBLIC_ORIGIN
+        # still wins, which is what a custom domain needs.
+        origin = (os.environ.get(PLATFORM_ORIGIN_VAR) or "").strip().rstrip("/")
     if not origin and env is Env.LOCAL:
         origin = "http://127.0.0.1:8765"
 

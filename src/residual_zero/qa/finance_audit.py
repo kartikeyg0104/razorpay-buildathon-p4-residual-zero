@@ -40,8 +40,19 @@ def record_audit(entry: dict[str, Any]) -> None:
     if os.environ.get("PYTEST_CURRENT_TEST") and not os.environ.get("RZ_AI_AUDIT", "").strip():
         return
     path = audit_path()
-    path.parent.mkdir(parents=True, exist_ok=True)
     payload = _trim(dict(entry))
     payload.pop("api_key", None)
-    with path.open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(payload, default=str) + "\n")
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(payload, default=str) + "\n")
+    except OSError as exc:
+        # Best effort. This is the AI *investigation* log - observability, not the
+        # hash-chained financial audit, which lives in the database and is written on a
+        # different path entirely. In a container the image filesystem is read-only to the
+        # app user, and an unwritable log was turning a successful read-only answer into a
+        # 500 (observed in the built image). Losing a log line is not a reason to refuse to
+        # tell an operator what the deterministic engine computed.
+        from residual_zero import obs
+
+        obs.warn("ai_audit.not_recorded", error=type(exc).__name__, path=str(path))

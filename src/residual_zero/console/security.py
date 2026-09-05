@@ -45,6 +45,10 @@ PUBLIC_EXACT = frozenset({
 })
 PUBLIC_PREFIXES = ("/static/",)
 
+# Reachable over plain HTTP as well as HTTPS: a platform health check has no
+# X-Forwarded-Proto and must receive 200, not a redirect to the public origin.
+HEALTH_PATHS = frozenset({"/healthz", "/readyz"})
+
 # Permission required per route. Anything not listed needs `read_financial`, so a new route
 # is a financial read until somebody says otherwise.
 #
@@ -231,6 +235,18 @@ class HttpsRedirectMiddleware:
             await self.app(scope, receive, send)
             return
         request = Request(scope, receive)
+
+        # Health probes are exempt. A platform's health check reaches the container
+        # directly on its private network, over plain HTTP and without X-Forwarded-Proto,
+        # so redirecting it means the probe sees a 308, never a 200, and the deploy never
+        # goes live while the process is in fact healthy (observed against the production
+        # image before this exemption). Nothing is weakened: these two endpoints carry no
+        # credential and disclose no financial data, which is exactly why they are the
+        # probe targets.
+        if request.url.path in HEALTH_PATHS:
+            await self.app(scope, receive, send)
+            return
+
         scheme = scope.get("scheme", "http")
         if config.trust_proxy:
             forwarded = (request.headers.get("x-forwarded-proto") or "").split(",")[0].strip()

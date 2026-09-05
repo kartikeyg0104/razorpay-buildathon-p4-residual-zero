@@ -87,3 +87,25 @@ def test_no_test_module_imports_playwright_at_module_level():
     assert not offenders, (
         "module-level playwright imports break a [dev]-only install: " + ", ".join(offenders)
     )
+
+
+def test_the_image_copies_every_directory_read_at_runtime():
+    """A path the app reads must exist in the deployed image.
+
+    `fixtures/` was missing, and the settlement adapter reads it in fixture mode - so the
+    credit detail page returned 500 in the container while passing every local test. This
+    compares what src/ opens by relative path against what the Dockerfile copies.
+    """
+    import re
+
+    src_text = "\n".join(
+        p.read_text(encoding="utf-8") for p in Path("src/residual_zero").rglob("*.py")
+    )
+    used = set(re.findall(r'Path\("([a-z_]+)"\)', src_text))
+    dockerfile = Path("Dockerfile").read_text(encoding="utf-8")
+    copied = set(re.findall(r"^COPY\s+([a-z_]+)\s", dockerfile, re.M))
+    # `var` is created at runtime for per-organisation SQLite; it is not shipped.
+    missing = sorted(used - copied - {"var"})
+    assert not missing, (
+        f"read at runtime but not COPYed into the image: {missing}"
+    )
