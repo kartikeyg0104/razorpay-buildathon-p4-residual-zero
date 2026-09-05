@@ -14,6 +14,9 @@ The deployment-specific hazards, each with the reason it is a hazard:
 
 from __future__ import annotations
 
+import re
+from pathlib import Path
+
 import pytest
 
 from residual_zero.appconfig import AppConfig, AuthMode, Env, load_config
@@ -25,7 +28,9 @@ ALPHA_CREDIT = "crd_001_acc_01_2025-01-09"
 REQUIRED_HEADERS = {
     "x-content-type-options": "nosniff",
     "x-frame-options": "DENY",
-    "referrer-policy": "no-referrer",
+    # Not `no-referrer`: that value nullifies Origin on form submissions and the CSRF
+    # check below then refuses this desk's own forms. See the regression test at the end.
+    "referrer-policy": "same-origin",
 }
 
 
@@ -264,3 +269,27 @@ def test_the_login_next_parameter_cannot_be_an_open_redirect(deployment):
         assert response.headers["location"] == "/", (
             f"next={hostile!r} became {response.headers['location']!r}"
         )
+
+
+def test_the_referrer_policy_does_not_nullify_the_origin_header():
+    """REGRESSION: `no-referrer` made the desk refuse its own forms.
+
+    Under `Referrer-Policy: no-referrer` the Fetch spec serialises `Origin` as `null` on
+    form submissions. The CSRF check compares Origin against this deployment's own
+    origins, so every authenticated HTML form POST — minting an extension token,
+    recording a human review decision — was refused as cross-site. Reproduced in a real
+    browser; curl could not show it, because curl sends whatever Origin it is given.
+
+    The policy must still not leak paths cross-origin, which is what these values give.
+    """
+    from residual_zero.console import security
+
+    source = Path("src/residual_zero/console/security.py").read_text(encoding="utf-8")
+    match = re.search(r'"referrer-policy",\s*"([^"]+)"', source)
+    assert match, "no referrer-policy is set"
+    policy = match.group(1)
+    assert policy != "no-referrer", (
+        "no-referrer nullifies Origin on form POSTs and the CSRF check then refuses them"
+    )
+    assert policy in {"same-origin", "strict-origin-when-cross-origin", "origin"}, policy
+    assert security is not None

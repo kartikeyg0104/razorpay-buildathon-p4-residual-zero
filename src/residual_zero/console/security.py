@@ -199,7 +199,18 @@ class SecurityHeadersMiddleware:
                 headers = MutableHeaders(scope=message)
                 headers.setdefault("x-content-type-options", "nosniff")
                 headers.setdefault("x-frame-options", "DENY")
-                headers.setdefault("referrer-policy", "no-referrer")
+                # `same-origin`, not `no-referrer`. Under no-referrer the Fetch spec
+                # serialises the Origin header as `null` on form submissions, so every
+                # authenticated HTML form POST on this desk — minting an extension token,
+                # recording a human review decision — arrived with Origin: null and was
+                # refused as cross-site by our own CSRF check. Reproduced in a real
+                # browser; curl never showed it because curl sends whatever Origin you
+                # give it.
+                #
+                # This leaks nothing further: same-origin sends the referrer only to this
+                # site and nothing at all cross-origin, which is what no-referrer was
+                # there for. The Origin check itself is unchanged and still strict.
+                headers.setdefault("referrer-policy", "same-origin")
                 headers.setdefault(
                     "permissions-policy", "geolocation=(), microphone=(), camera=()"
                 )
