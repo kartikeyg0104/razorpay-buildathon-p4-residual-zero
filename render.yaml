@@ -32,6 +32,12 @@ services:
     # so a health probe can never be the thing that wakes the engine.
     healthCheckPath: /healthz
 
+    # No `disk:` on purpose. The only writable path is /app/var, which holds the AI
+    # investigation log (observability - it degrades to a warning if unwritable) and
+    # per-organisation SQLite files, which are never created when the backend is
+    # PostgreSQL. Nothing durable lives outside Neon, so a disk would imply state that
+    # should not exist here.
+
     envVars:
       # ---------------------------------------------------------------- deployment mode
       # Production refuses to start without authentication, a session secret, an https
@@ -80,14 +86,19 @@ services:
         value: "40"
 
       # ---------------------------------------------------------------- optional
-      # Comma-separated extra browser origins allowed to read the API.
+      # Optional, and empty is the right default - declared with an explicit empty value
+      # rather than sync:false so applying the blueprint prompts for exactly two secrets
+      # (RZ_DATABASE_URL and NVIDIA_API_KEY) and nothing else. Fill either in the dashboard
+      # if you later need it.
+      #
+      # Extra browser origins allowed to read the API, comma-separated.
       - key: RZ_ALLOWED_ORIGINS
-        sync: false
-      # Chrome extension ids allowed as CORS origins. The extension itself authenticates
-      # with a bearer token and does not need this unless a page must read a cross-origin
-      # response.
+        value: ""
+      # Chrome extension ids allowed as CORS origins. The extension authenticates with a
+      # bearer token and does not need this unless an extension page must read a
+      # cross-origin response.
       - key: RZ_EXTENSION_IDS
-        sync: false
+        value: ""
       # Set to 0 to close self-service signup for a judged demo.
       - key: RZ_ALLOW_SIGNUP
         value: "1"
