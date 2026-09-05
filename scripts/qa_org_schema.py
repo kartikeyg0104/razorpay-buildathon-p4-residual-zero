@@ -53,6 +53,31 @@ def main(argv: list[str] | None = None) -> int:
                 r[0] for r in conn.execute("SELECT version FROM schema_migration ORDER BY version")
             ]
             print("recorded migrations:", versions)
+            if "audit_entry" in tables:
+                rows = list(conn.execute(
+                    "SELECT COUNT(*), COUNT(DISTINCT json_extract(payload, '$.bank_credit_id')) "
+                    "FROM audit_entry"
+                ))[0]
+                print(f"  audit entries {rows[0]} over {rows[1]} distinct credits")
+                dupes = list(conn.execute(
+                    "SELECT json_extract(payload, '$.bank_credit_id') AS cid, COUNT(*) c "
+                    "FROM audit_entry GROUP BY cid HAVING COUNT(*) > 1 ORDER BY c DESC"
+                ))
+                print(f"  credits with more than one entry: {len(dupes)}")
+                if dupes:
+                    print(f"    worst: {dupes[0][0]} x{dupes[0][1]}")
+            if "reconciliation_run" in tables:
+                for r in conn.execute(
+                    "SELECT run_id, status, n_credits, n_computed, n_reused, n_persisted "
+                    "FROM reconciliation_run ORDER BY started_at"
+                ):
+                    print(f"  run {r[0]} {r[1]} credits={r[2]} computed={r[3]} "
+                          f"reused={r[4]} persisted={r[5]}")
+                    n = list(conn.execute(
+                        "SELECT COUNT(*), COUNT(DISTINCT json_extract(payload, "
+                        "'$.bank_credit_id')) FROM audit_entry WHERE run_id = ?", (r[0],)
+                    ))[0]
+                    print(f"    entries {n[0]} over {n[1]} distinct credits")
             for name in ("audit_entry", "exception", "reconciliation", "reconciliation_run"):
                 if name in tables:
                     n = list(conn.execute(f"SELECT COUNT(*) FROM {name}"))[0][0]
