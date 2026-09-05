@@ -7,7 +7,6 @@ from pathlib import Path
 import re
 
 import pytest
-from playwright.sync_api import expect
 
 from tests.e2e.conftest import shot_dir
 
@@ -20,6 +19,8 @@ def test_investigate_with_ai_shows_trace(page, console):
     page.goto(console + f"/credit/{DEMO}", wait_until="domcontentloaded", timeout=45000)
     page.locator("[data-ai-ask]").first.click()
     page.wait_for_selector("[data-ai-out]:not([hidden])", timeout=45000)
+    from playwright.sync_api import expect  # in [e2e], not [dev] - keep it lazy
+
     # A locator assertion, not page.wait_for_function: waiting via an in-page expression
     # needs `eval`, which the console's Content-Security-Policy (`script-src 'self'`, no
     # 'unsafe-eval') blocks. Playwright's own polling path made that intermittent - it

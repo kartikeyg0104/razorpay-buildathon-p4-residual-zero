@@ -63,3 +63,27 @@ def test_e2e_screenshots_default_outside_the_tracked_tree():
     # Default branch must be the gitignored artifacts/e2e tree.
     block = conftest[conftest.index("def shot_dir"):]
     assert '"e2e"' in block and '"shots"' in block
+
+
+def test_no_test_module_imports_playwright_at_module_level():
+    """A `pip install -e ".[dev]"` must be able to collect the whole suite.
+
+    playwright lives in the `[e2e]` extra on purpose, so unit and integration tests install
+    without a browser toolchain. A module-level `from playwright... import ...` in any test
+    file turns that install into a collection error for the entire run - caught by cloning
+    the repository and installing only `[dev]`.
+    """
+    import ast
+
+    offenders = []
+    for path in Path("tests").rglob("*.py"):
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        for node in tree.body:  # module level only; inside a function is fine
+            if isinstance(node, (ast.Import, ast.ImportFrom)):
+                name = (node.module or "") if isinstance(node, ast.ImportFrom) \
+                    else node.names[0].name
+                if "playwright" in name:
+                    offenders.append(f"{path}:{node.lineno}")
+    assert not offenders, (
+        "module-level playwright imports break a [dev]-only install: " + ", ".join(offenders)
+    )
