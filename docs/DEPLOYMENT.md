@@ -353,6 +353,58 @@ be given a recorded run.
 
 ---
 
+## 7a-quater. Recording a reconciliation run
+
+The per-credit results were always written to whichever backend the environment
+configures — `init_db`, `open_audit`, `open_verify` and `open_exceptions` all go through
+the storage engine, so a run inside `use_tenant` persists uniqueness, residual and
+disposition into an organisation's PostgreSQL schema with its hash chain. What was missing
+was the *run*: the record that a deterministic execution happened, over which dataset,
+under which configuration, and whether it finished. Without it nobody can tell "searched
+and found nothing" from "never searched".
+
+```bash
+# local, single-tenant, unchanged: writes the SQLite ledger under --out, records no run
+python -m residual_zero.cli run --split dev
+
+# one organisation, into whichever database the environment configures
+RZ_DATABASE_URL=postgresql://... python -m residual_zero.cli run --org demo
+```
+
+`reconciliation_run` (migration `0002_run.sql`) holds run identity, the dataset and config
+digests, status, counts and timings. It is owned by the **audit** writer, so the three
+declared table owners stay three and the run row commits on the same connection as the
+chain. `audit_entry.run_id` links entries to their run; it is nullable and sits outside the
+hashed payload, so linking cannot change `entry_hash` and rows written before runs existed
+remain valid results with no run row.
+
+**Identity is a digest of organisation + dataset + configuration, never a timestamp.** The
+same run twice must collide so the second can be refused; a clock would make every
+execution unique by construction. Re-running returns the recorded run and writes nothing.
+
+**A run is not recorded until persistence succeeds.** Production refuses to record a run
+without PostgreSQL rather than write a local file and call it success, and the check runs
+before the identity store is opened — otherwise the refusal creates the very local database
+it is refusing to create. A failed run deletes its own entries and stays visible as
+`FAILED`; readers exclude any run that never reached `COMPLETED`, because a partial run is
+not a smaller run.
+
+### Transaction pooling
+
+Neon's pooled endpoint is PgBouncer in transaction mode, where **session state does not
+survive between transactions**. `SET search_path` and `SET default_transaction_read_only`
+were both session-level, and both leaked: the audit writes landed in the right schema while
+the exception writes on an identically built connection raised `UndefinedTable`, and later
+a writer inherited a reader's read-only marker. Neither failed cleanly.
+
+Every transaction now re-establishes its own scope (`SET LOCAL search_path`, and
+`SET TRANSACTION READ ONLY` for readers — `SET LOCAL default_transaction_read_only` sets
+the default for *subsequent* transactions and leaves the current one writable). Startup
+options are not an alternative: pgbouncer refuses the connection with "unsupported startup
+parameter in options: search_path". Set `RZ_TEST_PGBOUNCER_URL` to run the pooled suite.
+
+---
+
 ## 7b. Region co-location is a performance requirement, not a preference
 
 Put the web service in the **same region as the database**. Residual Zero opens a
