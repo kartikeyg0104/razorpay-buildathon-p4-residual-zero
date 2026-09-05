@@ -380,7 +380,31 @@ remain valid results with no run row.
 
 **Identity is a digest of organisation + dataset + configuration, never a timestamp.** The
 same run twice must collide so the second can be refused; a clock would make every
-execution unique by construction. Re-running returns the recorded run and writes nothing.
+execution unique by construction. Re-running a run that already *covers its dataset*
+returns it and writes nothing — coverage is the test, not status, because a run that
+stopped short still has credits nobody has computed.
+
+### Run accounting: four numbers, not one
+
+| column | question |
+|---|---|
+| `n_credits` | how many credits the run was asked to cover — the denominator |
+| `n_computed` | how many *this invocation* computed. Invocation-local, and smaller than coverage whenever idempotency skipped work already done |
+| `n_reused` | how many were already persisted and correctly skipped rather than recomputed |
+| `n_persisted` | how many credits carry a persisted result for this run — **coverage** |
+
+`n_persisted` is a `COUNT(DISTINCT …)` over `audit_entry`, never a tally accumulated in
+Python: a counter and the rows it describes can disagree, and when they do the rows are
+the ones that are true. This is not hypothetical — the first live run reported 231 while
+248 credits carried results, because an interrupted attempt had persisted 17 of them and
+the retry correctly skipped rather than duplicated them. The number was right about what
+it measured and wrong about what its name implied.
+
+**A run is COMPLETED only when `n_persisted = n_credits`**, restated as a CHECK constraint
+so the database refuses to store a completion claim that is not true. A run that finished
+its loop without covering the dataset is `PARTIAL`: its results are genuine, it is not a
+failure, and a retry computes exactly the credits that are missing. Readers treat
+`COMPLETED` and `PARTIAL` alike for *results* and never conflate them for *completeness*.
 
 **A run is not recorded until persistence succeeds.** Production refuses to record a run
 without PostgreSQL rather than write a local file and call it success, and the check runs

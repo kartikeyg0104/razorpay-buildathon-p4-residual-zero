@@ -391,14 +391,18 @@ def _load_work(conn) -> dict[str, dict[str, str]]:
     return out
 
 
-#: Entries belonging to a run that never completed. Such a run produced no result, so its
-#: rows are not one — but they are not deleted either: audit_entry is a hash chain and
-#: removing rows from the middle of it would break the very thing it exists to prove.
-#: Excluded on read instead, which loses nothing and claims nothing.
+#: Entries belonging to a run that never finished deciding. RUNNING has not finished and
+#: FAILED produced no result, so their rows are not results — but they are not deleted
+#: either: audit_entry is a hash chain and removing rows from the middle of it would break
+#: the very thing it exists to prove. Excluded on read instead, which loses nothing and
+#: claims nothing.
+#:
+#: PARTIAL is included. Its results are genuine; what is incomplete is the coverage, and
+#: that is reported as coverage rather than by hiding the rows.
 _COMPLETED_ENTRIES = (
     "SELECT payload FROM audit_entry "
     "WHERE run_id IS NULL OR run_id NOT IN "
-    "(SELECT run_id FROM reconciliation_run WHERE status <> 'COMPLETED') "
+    "(SELECT run_id FROM reconciliation_run WHERE status NOT IN ('COMPLETED', 'PARTIAL')) "
     "ORDER BY seq"
 )
 _ALL_ENTRIES = "SELECT payload FROM audit_entry ORDER BY seq"

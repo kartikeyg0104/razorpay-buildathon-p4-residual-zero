@@ -145,7 +145,14 @@ def open_audit(path: "Path | None" = None) -> sqlite3.Connection:
 
 RUN_RUNNING = "RUNNING"
 RUN_COMPLETED = "COMPLETED"
+#: The engine finished but did not cover the dataset. A real outcome, not a failure: the
+#: results are genuine and a retry completes it. Never to be read as COMPLETED.
+RUN_PARTIAL = "PARTIAL"
 RUN_FAILED = "FAILED"
+
+#: Statuses whose per-credit results a reader should believe. A run still in flight has
+#: not finished deciding, and a failed one produced no result at all.
+RUN_READABLE = (RUN_COMPLETED, RUN_PARTIAL)
 
 
 class RunConflict(RuntimeError):
@@ -184,8 +191,10 @@ def derive_run_id(
 
 _RUN_KEYS = (
     "run_id", "org_id", "split", "dataset_digest", "config_digest", "status",
-    "n_credits", "n_processed", "started_at", "finished_at", "error",
+    "n_credits", "n_computed", "n_reused", "n_persisted",
+    "started_at", "finished_at", "error",
 )
+_RUN_COLUMNS = ", ".join(_RUN_KEYS)
 
 
 def _run_row(row) -> dict[str, Any]:
@@ -202,14 +211,14 @@ def _run_row(row) -> dict[str, Any]:
         value = out.get(key)
         if isinstance(value, (datetime, date)):
             out[key] = value.isoformat()
+    # Completeness is coverage against the dataset, never the invocation's own count.
+    out["complete"] = bool(out["n_credits"]) and out["n_persisted"] == out["n_credits"]
     return out
 
 
 def find_run(conn, run_id: str) -> dict[str, Any] | None:
     row = conn.execute(
-        "SELECT run_id, org_id, split, dataset_digest, config_digest, status, "
-        "n_credits, n_processed, started_at, finished_at, error "
-        "FROM reconciliation_run WHERE run_id = ?",
+        f"SELECT {_RUN_COLUMNS} FROM reconciliation_run WHERE run_id = ?",
         (run_id,),
     ).fetchone()
     if row is None:
@@ -218,13 +227,18 @@ def find_run(conn, run_id: str) -> dict[str, Any] | None:
 
 
 def latest_completed_run(conn) -> dict[str, Any] | None:
-    """The run a reader should believe. RUNNING and FAILED rows are not results."""
+    """The run a reader should believe.
+
+    COMPLETED or PARTIAL: both finished deciding and both persisted real results. The
+    difference between them is coverage, which the caller can see in ``complete`` — it is
+    not something to hide by withholding the run.
+
+    RUNNING has not finished and FAILED produced nothing.
+    """
     row = conn.execute(
-        "SELECT run_id, org_id, split, dataset_digest, config_digest, status, "
-        "n_credits, n_processed, started_at, finished_at, error "
-        "FROM reconciliation_run WHERE status = ? ORDER BY started_at DESC, run_id DESC "
-        "LIMIT 1",
-        (RUN_COMPLETED,),
+        f"SELECT {_RUN_COLUMNS} FROM reconciliation_run WHERE status IN (?, ?) "
+        "ORDER BY started_at DESC, run_id DESC LIMIT 1",
+        RUN_READABLE,
     ).fetchone()
     if row is None:
         return None
@@ -244,17 +258,22 @@ def begin_run(
     n_credits: int,
     started_at: str,
 ) -> None:
-    """Open a run as RUNNING. Refuses to reopen one that already completed.
+    """Open a run as RUNNING. Refuses to reopen one that already covers its dataset.
 
     The refusal is the idempotency guarantee: the same organisation, dataset and
     configuration derive the same id, so a second execution raises instead of writing a
-    second set of results for the same facts.
+    second set of results for the same facts. Coverage is the test, not status — a run
+    that stopped short still has credits nobody has computed.
     """
     existing = find_run(conn, run_id)
-    if existing is not None and existing["status"] == RUN_COMPLETED:
+    # Covered, not merely COMPLETED. This refusal exists to stop a second set of results
+    # describing facts already recorded — which is only true once coverage is there. A
+    # PARTIAL run, or one whose coverage was never recorded, has work left to do.
+    if existing is not None and existing["complete"]:
         raise RunConflict(
-            f"run {run_id} already completed for organisation {existing['org_id']!r} "
-            f"({existing['n_processed']} credits at {existing['finished_at']}). "
+            f"run {run_id} already covers organisation {existing['org_id']!r} "
+            f"({existing['n_persisted']}/{existing['n_credits']} credits "
+            f"at {existing['finished_at']}). "
             f"Re-running the same dataset under the same configuration would duplicate it."
         )
     # A previous RUNNING or FAILED attempt is replaced: it never became a result.
@@ -262,22 +281,59 @@ def begin_run(
     conn.execute(
         "INSERT INTO reconciliation_run "
         "(run_id, org_id, split, dataset_root, dataset_digest, config_digest, "
-        " engine_version, status, n_credits, n_processed, started_at, error) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        " engine_version, status, n_credits, n_computed, n_reused, n_persisted, "
+        " started_at, error) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         (run_id, org_id, split, dataset_root, dataset_digest, config_digest,
-         engine_version, RUN_RUNNING, int(n_credits), 0, started_at, ""),
+         engine_version, RUN_RUNNING, int(n_credits), 0, 0, 0, started_at, ""),
     )
     conn.commit()
 
 
-def complete_run(conn, run_id: str, *, n_processed: int, finished_at: str) -> None:
-    """Mark the run recorded. This commit is what makes the run visible to readers."""
+def persisted_coverage(conn, run_id: str) -> int:
+    """How many distinct credits carry a persisted result for this run.
+
+    Counted from the rows, never accumulated in Python. A counter and the rows it claims
+    to describe can disagree — that is exactly how a run covering 248 credits reported
+    231 — and when they do, the rows are the ones that are true.
+
+    DISTINCT because a credit reprocessed by a retry has more than one entry: coverage is
+    credits, not entries.
+    """
+    row = conn.execute(
+        "SELECT COUNT(DISTINCT json_extract(payload, '$.bank_credit_id')) "
+        "FROM audit_entry WHERE run_id = ?",
+        (run_id,),
+    ).fetchone()
+    return int(row[0]) if row and row[0] is not None else 0
+
+
+def complete_run(
+    conn,
+    run_id: str,
+    *,
+    n_computed: int,
+    n_credits: int,
+    finished_at: str,
+) -> str:
+    """Close the run against its actual persisted coverage. Returns the status recorded.
+
+    COMPLETED is a claim that the dataset is covered, so it is decided by counting rows,
+    not by trusting the loop's own tally. A run that finished without covering the dataset
+    is PARTIAL: its results are real, and calling it complete would be the lie this whole
+    exercise exists to remove. The database restates the rule as a CHECK constraint.
+    """
+    n_persisted = persisted_coverage(conn, run_id)
+    n_reused = max(0, n_persisted - int(n_computed))
+    status = RUN_COMPLETED if n_persisted == int(n_credits) else RUN_PARTIAL
     conn.execute(
-        "UPDATE reconciliation_run SET status = ?, n_processed = ?, finished_at = ? "
-        "WHERE run_id = ?",
-        (RUN_COMPLETED, int(n_processed), finished_at, run_id),
+        "UPDATE reconciliation_run SET status = ?, n_computed = ?, n_reused = ?, "
+        "n_persisted = ?, n_credits = ?, finished_at = ? WHERE run_id = ?",
+        (status, int(n_computed), n_reused, n_persisted, int(n_credits),
+         finished_at, run_id),
     )
     conn.commit()
+    return status
 
 
 def discard_run(conn, run_id: str, *, error: str, finished_at: str) -> None:

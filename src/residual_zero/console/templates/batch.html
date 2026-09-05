@@ -13,7 +13,13 @@
     <span class="dot {{ '' if chain_ok is none else ('ok' if chain_ok else 'bad') }}"></span>
     audit {{ 'not run' if chain_ok is none else ('intact' if chain_ok else 'broken') }}
     · {{ (n_credits ~ ' credits posted') if n_credits else 'no credits posted' }}
-    {%- if recorded_run %} · run <span class="id">{{ recorded_run.run_id }}</span>{% endif %}
+    {%- if recorded_run %} · run <span class="id">{{ recorded_run.run_id }}</span>
+    {#- Coverage, not the invocation's own tally: n_computed is smaller whenever
+        idempotency skipped work already persisted, and reading it as coverage is the
+        bug this line exists to avoid repeating. #}
+    · {{ recorded_run.n_persisted }}/{{ recorded_run.n_credits }} covered
+    {%- if not recorded_run.complete %} · <strong>{{ recorded_run.status }}</strong>{% endif %}
+    {%- endif %}
   </div>
 </div>
 

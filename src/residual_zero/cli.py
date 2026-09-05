@@ -169,13 +169,26 @@ def _cmd_run_org(args) -> int:
     if result.reused:
         print(
             f"run {result.run_id} already recorded for {result.org_id} "
-            f"({result.n_processed} credits, {result.backend}); nothing to do"
+            f"({result.n_persisted}/{result.n_credits} credits covered, "
+            f"{result.backend}); nothing to do"
         )
         return 0
+    # Coverage first, because that is what "the run did the work" means. The invocation's
+    # own tally is reported beside it and never instead of it.
     print(
         f"recorded run {result.run_id} for {result.org_id}: "
-        f"{result.n_processed} credits into {result.backend}"
+        f"{result.status} {result.n_persisted}/{result.n_credits} credits covered "
+        f"({result.n_computed} computed, {result.n_reused} already persisted) "
+        f"into {result.backend}"
     )
+    if not result.complete:
+        print(
+            f"run {result.run_id} is PARTIAL: "
+            f"{result.n_credits - result.n_persisted} credits are not covered. "
+            f"Re-running computes exactly those.",
+            file=sys.stderr,
+        )
+        return 5
     return 0
 
 

@@ -24,6 +24,7 @@ from pathlib import Path
 
 from residual_zero.audit import (
     RUN_COMPLETED,
+    RUN_READABLE,
     RunConflict,
     begin_run,
     complete_run,
@@ -31,6 +32,7 @@ from residual_zero.audit import (
     discard_run,
     find_run,
     open_audit,
+    persisted_coverage,
 )
 
 ENGINE_VERSION = "0.1.0"
@@ -47,21 +49,41 @@ class PersistenceError(RuntimeError):
 
 @dataclass(frozen=True)
 class RunResult:
-    """What happened, split into the two things that can independently fail."""
+    """What happened, in numbers that answer different questions.
+
+    ``n_computed`` is invocation-local and ``n_persisted`` is coverage. Conflating them is
+    how a run covering 248 credits reported 231: per-credit idempotency made the retry
+    skip work already persisted, which is correct, and the loop's tally counted only what
+    it did itself, which is also correct — it was the name that lied.
+    """
 
     run_id: str
     org_id: str
     backend: str
     #: The deterministic engine ran to completion.
     engine_ok: bool
-    #: The run reached COMPLETED in the database. Only this makes it a recorded run.
+    #: The run reached a terminal recorded status. Only this makes it a recorded run.
     persisted: bool
-    n_processed: int
+    #: Credits the run was asked to cover. The denominator.
+    n_credits: int
+    #: Credits this invocation computed. Not coverage.
+    n_computed: int
+    #: Credits already persisted and correctly skipped rather than recomputed.
+    n_reused: int
+    #: Credits carrying a persisted result for this run. Coverage, counted from the rows.
+    n_persisted: int
+    #: COMPLETED or PARTIAL.
+    status: str
     reused: bool = False
 
     @property
     def recorded(self) -> bool:
         return self.engine_ok and self.persisted
+
+    @property
+    def complete(self) -> bool:
+        """Coverage reaches the dataset. The only meaning of a complete run."""
+        return bool(self.n_credits) and self.n_persisted == self.n_credits
 
 
 def dataset_digest(root: Path) -> str:
@@ -111,6 +133,21 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def input_credit_count(split: str, limit: int = 0) -> int:
+    """How many credits this run is asked to cover.
+
+    Read from the same corpus the engine reads — ``data/<split>/rendered`` — because the
+    orchestrator loads its credits from there regardless of how a tenant is configured.
+    Taking the number from anywhere else would let the denominator drift from the work.
+    """
+    from residual_zero.ingest.csv_bank import load_bank_credits
+    from residual_zero.ingest.source_root import SourceRoot
+
+    credits = load_bank_credits(SourceRoot(Path("data").joinpath(split, "rendered")))
+    total = len(credits)
+    return min(total, limit) if limit else total
+
+
 def record_run(
     *,
     tenant,
@@ -150,19 +187,33 @@ def record_run(
         tenant.org_id, split, root.as_posix(), data_digest, cfg_digest, limit
     )
     backend = _backend_name()
+    n_input = input_credit_count(split, limit)
 
     with use_tenant(tenant):
         audit = open_audit()
         try:
             existing = find_run(audit, resolved_id)
-            if existing is not None and existing["status"] == RUN_COMPLETED:
+            # Complete, not merely COMPLETED. The status alone says the loop finished;
+            # `complete` says the dataset is covered, and only that makes re-running
+            # pointless. It also means a row written by an older accounting model — one
+            # that recorded no coverage at all — is recomputed rather than trusted.
+            if existing is not None and existing["complete"]:
                 # Idempotent by identity: same organisation, same data, same configuration.
                 # Returning the recorded run is the whole point — re-running would write a
                 # second set of results describing the same facts.
+                #
+                # Only a COMPLETED run short-circuits. A PARTIAL one is resumed, because
+                # its coverage is incomplete and per-credit idempotency means the retry
+                # computes exactly the credits that are missing.
                 return RunResult(
                     run_id=resolved_id, org_id=tenant.org_id, backend=backend,
                     engine_ok=True, persisted=True,
-                    n_processed=int(existing["n_processed"]), reused=True,
+                    n_credits=int(existing["n_credits"]),
+                    n_computed=0,
+                    n_reused=int(existing["n_persisted"]),
+                    n_persisted=int(existing["n_persisted"]),
+                    status=str(existing["status"]),
+                    reused=True,
                 )
             begin_run(
                 audit,
@@ -173,7 +224,7 @@ def record_run(
                 dataset_digest=data_digest,
                 config_digest=cfg_digest,
                 engine_version=ENGINE_VERSION,
-                n_credits=0,
+                n_credits=n_input,
                 started_at=_now(),
             )
         finally:
@@ -210,17 +261,27 @@ def record_run(
 
         audit = open_audit()
         try:
-            complete_run(audit, resolved_id, n_processed=n, finished_at=_now())
+            status = complete_run(
+                audit, resolved_id, n_computed=n, n_credits=n_input, finished_at=_now()
+            )
+            recorded = find_run(audit, resolved_id) or {}
         except BaseException as exc:
             raise PersistenceError(
-                f"the engine processed {n} credits but the run could not be recorded: {exc}"
+                f"the engine computed {n} credits but the run could not be recorded: {exc}"
             ) from exc
         finally:
             audit.close()
 
     return RunResult(
         run_id=resolved_id, org_id=tenant.org_id, backend=backend,
-        engine_ok=engine_ok, persisted=True, n_processed=n,
+        engine_ok=engine_ok, persisted=True,
+        n_credits=int(recorded.get("n_credits", n_input)),
+        n_computed=int(recorded.get("n_computed", n)),
+        n_reused=int(recorded.get("n_reused", 0)),
+        # Read back rather than remembered: the number a caller sees is the number the
+        # database holds, so the two cannot drift.
+        n_persisted=int(recorded.get("n_persisted", 0)),
+        status=status,
     )
 
 

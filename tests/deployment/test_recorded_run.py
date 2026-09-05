@@ -77,10 +77,18 @@ def test_a_run_is_created_and_completed_in_postgres(orgs):
     assert result.persisted, "the run was not recorded"
     assert result.recorded
     assert result.backend == "postgres", "a production-shaped run must not use SQLite"
-    assert result.n_processed == 6
+    assert result.n_credits == 6, "the denominator is what the run was asked to cover"
+    assert result.n_computed == 6
+    assert result.n_persisted == 6, "coverage must equal the credits actually persisted"
+    assert result.n_reused == 0
+    assert result.complete
 
-    rows = _rows("org_runa", "SELECT run_id, status, n_processed FROM reconciliation_run")
-    assert rows == [(result.run_id, "COMPLETED", 6)]
+    rows = _rows(
+        "org_runa",
+        "SELECT run_id, status, n_credits, n_computed, n_reused, n_persisted "
+        "FROM reconciliation_run",
+    )
+    assert rows == [(result.run_id, "COMPLETED", 6, 6, 0, 6)]
 
 
 @requires_pg
@@ -117,7 +125,9 @@ def test_the_run_can_be_retrieved_after_the_writing_process_is_gone(orgs):
     assert found is not None
     assert found["run_id"] == result.run_id
     assert found["status"] == "COMPLETED"
-    assert found["n_processed"] == 5
+    assert found["n_persisted"] == 5
+    assert found["n_credits"] == 5
+    assert found["complete"] is True
 
 
 # ---------------------------------------------------------------- 5-9: the recorded states
@@ -447,7 +457,9 @@ def test_an_organisation_created_before_the_run_table_can_still_record(orgs):
         cur.execute('SET search_path TO "org_runa"')
         cur.execute("DROP TABLE IF EXISTS reconciliation_run CASCADE")
         cur.execute("ALTER TABLE audit_entry DROP COLUMN IF EXISTS run_id")
-        cur.execute("DELETE FROM schema_migration WHERE version = '0002_run'")
+        cur.execute(
+            "DELETE FROM schema_migration WHERE version IN ('0002_run', '0003_run_accounting')"
+        )
 
     assert _rows(
         "org_runa",
@@ -539,4 +551,281 @@ def test_entries_from_a_run_that_never_completed_are_not_read(orgs):
     assert not any(k.startswith("wreck_") for k in audits)
     # ...and the rows are still there, because the chain needs them.
     assert _rows("org_runa", "SELECT COUNT(*) FROM audit_entry")[0][0] == 11
-    assert result.n_processed == 6
+    assert result.n_persisted == 6
+
+
+# ---------------------------------------------------------------- run accounting
+#
+# The live run reported n_processed=231 while 248 credits carried results. A partial
+# earlier attempt of the same idempotent identity had persisted 17 of them; the retry
+# correctly skipped those rather than duplicating them, and the loop's own tally counted
+# only what it did itself. The number was right about what it measured and wrong about
+# what its name implied.
+
+
+def _interrupt_after(n: int):
+    """An engine that persists `n` credits and then dies, like the production run did."""
+    import residual_zero.orchestrator as orch
+
+    real = orch.run_split
+
+    def partial(split, db_path, **kwargs):
+        real(split, db_path, **{**kwargs, "limit": n})
+        raise RuntimeError(f"interrupted after {n}")
+
+    return real, partial
+
+
+@requires_pg
+def test_a_retry_reports_coverage_not_its_own_tally(orgs):
+    """REGRESSION: 17 results already persisted, and the run reported only the other 231.
+
+    The exact production shape. An attempt persisted part of the dataset and died; its
+    cleanup then failed too (the read-only leak), so those results survived. The retry —
+    same organisation, same dataset, same configuration, therefore the same run identity —
+    correctly skipped them instead of duplicating, and the loop's own tally counted only
+    what it had done itself. Coverage was 248 and the run said 231.
+    """
+    import residual_zero.orchestrator as orch
+    import residual_zero.runner as runner_module
+
+    from residual_zero.runner import record_run
+
+    a, _b = orgs
+    real = orch.run_split
+
+    def dies_after_17(split, db_path, **kwargs):
+        real(split, db_path, **{**kwargs, "limit": 17})
+        raise RuntimeError("interrupted")
+
+    # The cleanup failing is what left the rows behind, so reproduce that too rather than
+    # a tidy failure that would not have caused the bug.
+    # Restored by hand, not with monkeypatch.undo(): undo() reverts everything on the
+    # shared instance, including the fixture's RZ_DATABASE_URL, which silently sent the
+    # retry to a leftover SQLite ledger and made this test pass for the wrong reason.
+    real_discard = runner_module.discard_run
+    runner_module.discard_run = lambda *a, **k: None
+    orch.run_split = dies_after_17
+    try:
+        with pytest.raises(RuntimeError, match="interrupted"):
+            record_run(tenant=a, split="dev", limit=40)
+    finally:
+        orch.run_split = real
+        runner_module.discard_run = real_discard
+
+    stranded = _rows("org_runa", "SELECT COUNT(*) FROM audit_entry")[0][0]
+    assert stranded == 17, f"the interrupted attempt left {stranded} results, expected 17"
+
+    retry = record_run(tenant=a, split="dev", limit=40)
+
+    assert retry.n_computed == 23, "only the missing credits should be computed"
+    assert retry.n_reused == 17, "the stranded results must be counted as reused"
+    assert retry.n_persisted == 40, "coverage is every credit carrying a result"
+    assert retry.n_credits == 40
+    assert retry.complete and retry.status == "COMPLETED"
+    # The distinction the whole change exists to make.
+    assert retry.n_computed != retry.n_persisted
+
+
+@requires_pg
+def test_coverage_is_counted_from_rows_not_accumulated(orgs):
+    """n_persisted must be a COUNT, so a counter cannot drift from the rows."""
+    from residual_zero.audit import open_audit, persisted_coverage
+    from residual_zero.runner import record_run
+    from residual_zero.tenancy import use_tenant
+
+    a, _b = orgs
+    result = record_run(tenant=a, split="dev", limit=9)
+    with use_tenant(a):
+        conn = open_audit()
+        try:
+            counted = persisted_coverage(conn, result.run_id)
+        finally:
+            conn.close()
+    assert counted == result.n_persisted == 9
+
+
+@requires_pg
+def test_no_duplicate_result_records(orgs):
+    """One credit, one result. A retry must not write a second."""
+    from residual_zero.runner import record_run
+
+    a, _b = orgs
+    record_run(tenant=a, split="dev", limit=12)
+    record_run(tenant=a, split="dev", limit=12)
+
+    dupes = _rows(
+        "org_runa",
+        "SELECT payload::jsonb ->> 'bank_credit_id' AS cid, COUNT(*) c "
+        "FROM audit_entry GROUP BY cid HAVING COUNT(*) > 1",
+    )
+    assert dupes == [], f"duplicate results: {dupes}"
+    assert _rows("org_runa", "SELECT COUNT(*) FROM audit_entry") == [(12,)]
+
+
+@requires_pg
+def test_the_pre_existing_results_belong_to_the_same_run(orgs):
+    """Reused rows must be attributed to the run whose identity produced them."""
+    import residual_zero.orchestrator as orch
+    import residual_zero.runner as runner_module
+
+    from residual_zero.runner import record_run
+
+    a, _b = orgs
+    real = orch.run_split
+
+    def dies_after_17(split, db_path, **kwargs):
+        real(split, db_path, **{**kwargs, "limit": 17})
+        raise RuntimeError("interrupted")
+
+    real_discard = runner_module.discard_run
+    runner_module.discard_run = lambda *a, **k: None
+    orch.run_split = dies_after_17
+    try:
+        with pytest.raises(RuntimeError):
+            record_run(tenant=a, split="dev", limit=40)
+    finally:
+        orch.run_split = real
+        runner_module.discard_run = real_discard
+
+    retry = record_run(tenant=a, split="dev", limit=40)
+    by_run = dict(_rows(
+        "org_runa", "SELECT run_id, COUNT(*) FROM audit_entry GROUP BY run_id"
+    ))
+    assert by_run == {retry.run_id: 40}, (
+        "every result, stranded or freshly computed, belongs to the one run identity"
+    )
+    assert retry.n_persisted == 40
+
+
+@requires_pg
+def test_a_partial_run_cannot_report_complete(orgs):
+    """REGRESSION: a run that did not cover the dataset must not read as COMPLETED."""
+    import residual_zero.orchestrator as orch
+
+    from residual_zero.runner import record_run
+
+    a, _b = orgs
+    real = orch.run_split
+    # Cover only half of what the run was asked for, without raising.
+    orch.run_split = lambda split, db_path, **kw: real(
+        split, db_path, **{**kw, "limit": 10}
+    )
+    try:
+        result = record_run(tenant=a, split="dev", limit=20)
+    finally:
+        orch.run_split = real
+
+    assert result.status == "PARTIAL"
+    assert not result.complete
+    assert result.n_credits == 20
+    assert result.n_persisted == 10
+    assert _rows("org_runa", "SELECT status FROM reconciliation_run") == [("PARTIAL",)]
+
+
+@requires_pg
+def test_the_database_refuses_a_completed_run_that_is_not_covered(orgs):
+    """The invariant is restated where a caller cannot forget it."""
+    import psycopg
+
+    from residual_zero.runner import record_run
+
+    a, _b = orgs
+    result = record_run(tenant=a, split="dev", limit=6)
+    with psycopg.connect(PG_URL, autocommit=True) as conn, conn.cursor() as cur:
+        cur.execute('SET search_path TO "org_runa"')
+        with pytest.raises(psycopg.errors.CheckViolation):
+            cur.execute(
+                "UPDATE reconciliation_run SET n_credits = 99 WHERE run_id = %s",
+                (result.run_id,),
+            )
+
+
+@requires_pg
+def test_a_partial_run_is_resumed_rather_than_short_circuited(orgs):
+    """Only a COMPLETED run short-circuits. A PARTIAL one has work left."""
+    import residual_zero.orchestrator as orch
+
+    from residual_zero.runner import record_run
+
+    a, _b = orgs
+    real = orch.run_split
+    orch.run_split = lambda split, db_path, **kw: real(
+        split, db_path, **{**kw, "limit": 8}
+    )
+    try:
+        first = record_run(tenant=a, split="dev", limit=20)
+    finally:
+        orch.run_split = real
+    assert first.status == "PARTIAL"
+
+    resumed = record_run(tenant=a, split="dev", limit=20)
+    assert resumed.run_id == first.run_id, "same identity, same run"
+    assert not resumed.reused, "a PARTIAL run must be resumed, not returned as done"
+    assert resumed.n_persisted == 20
+    assert resumed.n_reused == 8
+    assert resumed.status == "COMPLETED"
+
+
+@requires_pg
+def test_a_failed_run_reports_neither_coverage_nor_completion(orgs):
+    from residual_zero.audit import find_run, open_audit
+    from residual_zero.runner import record_run
+    from residual_zero.tenancy import use_tenant
+    import residual_zero.orchestrator as orch
+
+    a, _b = orgs
+    real = orch.run_split
+    orch.run_split = lambda *args, **kwargs: (_ for _ in ()).throw(RuntimeError("boom"))
+    try:
+        with pytest.raises(RuntimeError):
+            record_run(tenant=a, split="dev", limit=5)
+    finally:
+        orch.run_split = real
+
+    with use_tenant(a):
+        conn = open_audit()
+        try:
+            run = find_run(conn, _rows("org_runa", "SELECT run_id FROM reconciliation_run")[0][0])
+        finally:
+            conn.close()
+    assert run["status"] == "FAILED"
+    assert run["n_persisted"] == 0
+    assert run["complete"] is False
+
+
+@requires_pg
+def test_a_run_claiming_completion_without_coverage_is_recomputed(orgs):
+    """A COMPLETED row that records no coverage is not evidence of a covered run.
+
+    The live run predated this accounting model: COMPLETED, with the invocation's tally in
+    the column and no coverage recorded anywhere. Short-circuiting on the status alone
+    would have preserved those numbers forever; keying off coverage recomputes them from
+    the rows that are actually there.
+    """
+    import psycopg
+
+    from residual_zero.runner import record_run
+
+    a, _b = orgs
+    first = record_run(tenant=a, split="dev", limit=11)
+    assert first.complete
+
+    # Wind the row back to the older shape: complete-looking, coverage unrecorded.
+    with psycopg.connect(PG_URL, autocommit=True) as conn, conn.cursor() as cur:
+        cur.execute('SET search_path TO "org_runa"')
+        cur.execute(
+            "UPDATE reconciliation_run SET n_credits = 0, n_persisted = 0, n_computed = 7 "
+            "WHERE run_id = %s",
+            (first.run_id,),
+        )
+
+    again = record_run(tenant=a, split="dev", limit=11)
+    assert not again.reused, "a run with no recorded coverage must not short-circuit"
+    assert again.n_persisted == 11, "coverage must be recounted from the rows"
+    assert again.n_credits == 11
+    assert again.n_computed == 0, "every credit was already persisted"
+    assert again.n_reused == 11
+    assert again.complete and again.status == "COMPLETED"
+    # ...and no duplicates were written to get there.
+    assert _rows("org_runa", "SELECT COUNT(*) FROM audit_entry") == [(11,)]

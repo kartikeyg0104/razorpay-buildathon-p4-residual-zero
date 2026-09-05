@@ -641,11 +641,18 @@ def mount(app: FastAPI) -> None:
             {
                 "ok": True,
                 "recorded": run is not None,
+                # Coverage, promoted out of the run body so a reader cannot miss it.
+                "complete": bool(run and run.get("complete")),
+                "n_credits": (run or {}).get("n_credits", 0),
+                "n_persisted": (run or {}).get("n_persisted", 0),
                 "run": run,
                 "writes_cleared": False,
                 "note": (
-                    "A run records that the deterministic engine executed. It is not a "
-                    "clearance and it does not authorise one."
+                    "n_persisted is coverage: distinct credits carrying a persisted "
+                    "result, counted from the rows. n_computed is what this invocation "
+                    "computed and is smaller whenever idempotency skipped work already "
+                    "done. A run records that the deterministic engine executed; it is "
+                    "not a clearance and it does not authorise one."
                 ),
             }
         )
@@ -672,6 +679,12 @@ def mount(app: FastAPI) -> None:
                 "n_human": pack.n_human,
                 "run_recorded": run is not None,
                 "run_id": (run or {}).get("run_id", ""),
+                "run_status": (run or {}).get("status", ""),
+                "run_complete": bool(run and run.get("complete")),
+                "run_n_credits": (run or {}).get("n_credits", 0),
+                "run_n_persisted": (run or {}).get("n_persisted", 0),
+                "run_n_computed": (run or {}).get("n_computed", 0),
+                "run_n_reused": (run or {}).get("n_reused", 0),
                 "chain": any(item["name"] == "audit chain intact" and item["ok"] for item in pack.checklist),
                 # NVIDIA NIM is the only backend. Each fact appears exactly once: this
                 # literal used to repeat `provider_model`, `LIVE_PROVIDER`,

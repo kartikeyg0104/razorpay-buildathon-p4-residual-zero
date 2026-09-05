@@ -53,7 +53,9 @@ CREATE TABLE IF NOT EXISTS reconciliation_run (
     engine_version TEXT NOT NULL,
     status TEXT NOT NULL DEFAULT 'RUNNING',
     n_credits INTEGER NOT NULL DEFAULT 0,
-    n_processed INTEGER NOT NULL DEFAULT 0,
+    n_computed INTEGER NOT NULL DEFAULT 0,
+    n_reused INTEGER NOT NULL DEFAULT 0,
+    n_persisted INTEGER NOT NULL DEFAULT 0,
     started_at TEXT NOT NULL DEFAULT '',
     finished_at TEXT,
     error TEXT NOT NULL DEFAULT ''
@@ -102,6 +104,11 @@ ADDED_COLUMNS: tuple[tuple[str, str, str], ...] = (
     # Outside the hashed payload, so an existing chain still verifies. NULL means "written
     # before runs were recorded", which is a real result with no run row — not a gap.
     ("audit_entry", "run_id", "TEXT"),
+    # Run accounting split one number into four. An existing dev ledger keeps its
+    # (always empty) reconciliation_run table and gains the columns.
+    ("reconciliation_run", "n_computed", "INTEGER NOT NULL DEFAULT 0"),
+    ("reconciliation_run", "n_reused", "INTEGER NOT NULL DEFAULT 0"),
+    ("reconciliation_run", "n_persisted", "INTEGER NOT NULL DEFAULT 0"),
 )
 
 
