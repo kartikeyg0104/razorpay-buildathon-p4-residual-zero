@@ -156,12 +156,26 @@ def _cache_get(key: str) -> list[dict[str, Any]] | None:
 
 
 def _cache_put(key: str, fields: list[dict[str, Any]]) -> None:
+    """Write to the extraction cache, or carry on without it.
+
+    A cache is an optimisation, and failing to write one must never fail the read it was
+    meant to speed up. In the container the default path sits in the read-only image tree
+    (only /app/var is writable), so this raised PermissionError and turned a perfectly
+    good evidence lookup into a 500 — the same shape as the AI audit log before it.
+    """
     if os.environ.get("PYTEST_CURRENT_TEST") and not os.environ.get("RZ_EXTRACT_CACHE", "").strip():
         return
     path = cache_path()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps({"key": key, "fields": fields, "prompt_version": PROMPT_VERSION}) + "\n")
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a", encoding="utf-8") as handle:
+            handle.write(
+                json.dumps({"key": key, "fields": fields, "prompt_version": PROMPT_VERSION}) + "\n"
+            )
+    except OSError as exc:
+        from residual_zero import obs
+
+        obs.warn("evidence_cache.not_written", path=str(path), error=type(exc).__name__)
 
 
 def extract_for_credit(

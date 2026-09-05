@@ -133,7 +133,19 @@ async function request(path, init) {
   if (token) headers["Authorization"] = `Bearer ${token}`;
   let res;
   try {
-    res = await fetch(desk + path, { ...(init || {}), headers, signal: controller.signal });
+    // `credentials: "omit"` enforces the paragraph above rather than merely asserting it.
+    // fetch defaults to "same-origin", and an extension page holding host permission for
+    // the desk still attaches that host's cookies — so with a browser session open, reads
+    // silently succeeded *as the signed-in user* while writes were refused as
+    // `foreign_origin`, because a cookie principal must pass the origin check and
+    // `chrome-extension://…` never will. A half-working extension that acts as somebody
+    // else is worse than one that says it needs a token.
+    res = await fetch(desk + path, {
+      ...(init || {}),
+      headers,
+      credentials: "omit",
+      signal: controller.signal,
+    });
   } catch (err) {
     if (err && err.name === "AbortError") {
       throw new DeskError("The desk did not answer within 30s.", "timeout");

@@ -127,8 +127,16 @@ async function boot() {
       statusEl.textContent = `desk live · ${desk.human} need human · auto-clear ${desk.cleared}`;
       statusEl.className = "status ok";
       chrome.runtime.sendMessage({ op: "badge", human: desk.human, cleared: desk.cleared });
-    } catch {
-      statusEl.textContent = "desk offline";
+    } catch (err) {
+      // Say which failure it is. "desk offline" for a 401 sent a real debugging session
+      // down the wrong path: the desk was up, reachable and answering — it just had no
+      // token to identify the extension with.
+      const kind = err && err.kind;
+      statusEl.textContent =
+        kind === "unauthenticated" ? "desk needs a token · options → paste it"
+        : kind === "forbidden" ? "desk refused this token"
+        : kind === "timeout" ? "desk did not answer"
+        : "desk offline";
       statusEl.className = "status err";
     }
   }

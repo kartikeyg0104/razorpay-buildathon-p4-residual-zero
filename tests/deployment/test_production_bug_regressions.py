@@ -236,3 +236,27 @@ def test_a_conflicting_second_clear_is_refused_on_sqlite(tmp_path, monkeypatch):
         assert members == ["itm_a", "itm_b"]
     finally:
         conn.close()
+
+
+def test_an_unwritable_evidence_cache_does_not_fail_the_lookup(tmp_path, monkeypatch):
+    """REGRESSION: /api/finance/evidence returned 500 in the container.
+
+    The extraction cache defaults to artifacts/console/, which the image ships read-only
+    to the service account, so writing it raised PermissionError and a perfectly good
+    evidence lookup became an internal error. A cache is an optimisation; failing to
+    write one must never fail the read it exists to speed up.
+
+    Same shape as the AI audit log before it, which is why the Dockerfile now has to keep
+    every runtime write path under /app/var — asserted in test_render_config.
+    """
+    from residual_zero.qa import evidence_extract
+
+    unwritable = tmp_path / "readonly"
+    unwritable.mkdir()
+    unwritable.chmod(0o500)
+    monkeypatch.setenv("RZ_EXTRACT_CACHE", str(unwritable / "nested" / "cache.jsonl"))
+    monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
+    try:
+        evidence_extract._cache_put("k", [{"field": "utr", "value": "x"}])
+    finally:
+        unwritable.chmod(0o700)

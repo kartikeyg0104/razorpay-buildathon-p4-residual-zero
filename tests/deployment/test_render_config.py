@@ -366,7 +366,7 @@ def test_every_runtime_write_path_lives_under_the_writable_volume():
     production.
     """
     text = DOCKERFILE.read_text(encoding="utf-8")
-    for var in ("RZ_LLM_CACHE_DIR", "RZ_AI_AUDIT", "RZ_TENANT_ROOT"):
+    for var in ("RZ_LLM_CACHE_DIR", "RZ_EXTRACT_CACHE", "RZ_AI_AUDIT", "RZ_TENANT_ROOT"):
         match = re.search(rf"{var}=(\S+)", text)
         assert match, f"{var} is not set in the Dockerfile"
         assert match.group(1).startswith("/app/var/"), (

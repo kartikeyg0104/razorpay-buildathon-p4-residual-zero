@@ -339,3 +339,25 @@ def test_demo_credit_is_reachable_for_the_extension():
     body = json.loads(_route("/api/credit/{credit_id}").endpoint(DEMO_CREDIT).body)
     assert body["ok"] is True
     assert body["writes_cleared"] is False
+
+
+def test_the_extension_never_rides_the_desk_session_cookie():
+    """It authenticates with its own token or not at all.
+
+    REGRESSION: fetch defaults to `credentials: "same-origin"`, and an extension page that
+    holds host permission for the desk still sends that host's cookies. With a browser
+    session open, every read succeeded *as the signed-in user* and only writes failed —
+    refused as `foreign_origin`, because a cookie principal has to pass the origin check
+    and `chrome-extension://…` never will. The extension looked connected and was acting
+    as somebody else.
+
+    The design always said bearer rather than cookie. This makes the code say it too.
+    """
+    api_js = EXT.joinpath("lib", "api.js").read_text(encoding="utf-8")
+    assert 'credentials: "omit"' in api_js, (
+        "the extension must not send the desk's session cookie"
+    )
+    fetches = re.findall(r"await fetch\((.{0,400}?)\)\;", api_js, re.S)
+    assert fetches, "no fetch call found"
+    for call in fetches:
+        assert 'credentials: "omit"' in call, f"a fetch may carry cookies: {call[:120]!r}"
