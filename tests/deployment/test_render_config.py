@@ -34,6 +34,49 @@ def env_vars(service) -> dict:
 # ---------------------------------------------------------------- blueprint shape
 
 
+# Anything on these lists makes a blueprint refuse to apply without billing details.
+PAID_ONLY_KEYS = frozenset({
+    "disk",                      # persistent disks are paid
+    "numInstances", "scaling",   # scaling is paid
+    "preDeployCommand",          # paid plans only
+    "maxShutdownDelaySeconds",   # paid plans only
+})
+PAID_SERVICE_TYPES = frozenset({"pserv", "worker", "cron", "redis", "keyvalue"})
+PAID_PLANS = frozenset({
+    "starter", "standard", "standard plus",
+    "pro", "pro plus", "pro max", "pro ultra",
+})
+
+
+def test_the_service_runs_on_the_free_plan(service):
+    """REGRESSION: `plan: starter` made Render demand a card before it would deploy.
+
+    That plan was chosen on an unmeasured guess about ortools/scipy/pandas memory. Measured
+    under a hard 512 MiB limit the service peaks at 103.6 MiB - about 20% - after all 19
+    surfaces, five close-pack and journal builds, an AI investigation and five
+    solver-backed proof pages, with no OOM kill. Those libraries are never even mapped into
+    the serving process.
+    """
+    assert service.get("plan") == "free", (
+        "a non-free plan makes the blueprint require payment details"
+    )
+    assert service["plan"] not in PAID_PLANS
+
+
+def test_no_paid_only_resource_is_declared(service):
+    """Every remaining reason a blueprint can demand billing details."""
+    spec = yaml.safe_load(RENDER_YAML.read_text(encoding="utf-8"))
+    assert "databases" not in spec, "a Render PostgreSQL instance is a paid resource"
+    present = PAID_ONLY_KEYS & set(service)
+    assert not present, f"paid-only settings in the blueprint: {sorted(present)}"
+    for s in spec["services"]:
+        assert s["type"] not in PAID_SERVICE_TYPES, (
+            f"service type {s['type']!r} is not available on the free plan"
+        )
+    # One free web service; a second would exceed what a card-less account can run.
+    assert len(spec["services"]) == 1
+
+
 def test_the_blueprint_is_a_docker_web_service(service):
     """Docker, not the Python runtime: production needs the `postgres` extra.
 

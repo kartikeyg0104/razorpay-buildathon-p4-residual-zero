@@ -240,6 +240,34 @@ Neither suite writes into a committed artifact. Two knobs exist for the cases wh
 Regenerate the published evaluation artifacts explicitly with `make eval` /
 `python -m eval.ai_recovery`, never as a side effect of `pytest`.
 
+## 7a-bis. Running on Render's free plan
+
+The blueprint targets `plan: free`, which needs no payment details. Measured against the
+free plan's hard 512 MiB limit, on the production image:
+
+| | memory |
+|---|---|
+| After boot | 71 MiB (14%) |
+| After all 19 surfaces | 97 MiB (19%) |
+| After 5x close-pack + journal builds | 100 MiB (20%) |
+| After an AI investigation + 5 solver-backed proof pages | **104 MiB (20%)** |
+
+Zero OOM kills, zero restarts. `ortools`, `scipy`, `pandas`, `numpy` and `lxml` are
+declared dependencies but are never mapped into the serving process - only `psycopg` is -
+so the console's working set is far smaller than the dependency list suggests.
+
+**What the free plan costs you.** A free instance sleeps after roughly 15 minutes with no
+inbound request and cold-starts in about a minute. Nothing is lost when it sleeps: all
+durable state is in Neon, and `/app/var` holds only the AI investigation log and
+per-organisation SQLite files that are never created on the PostgreSQL backend. For a
+judged demo, either open the URL a minute before showing it, or point any uptime pinger at
+`/healthz` (it opens no database connection, so pinging it is close to free).
+
+**If Render rejects the free plan in `ohio`,** change `region` to `oregon` - the only other
+edit needed. Expect roughly 60-70 ms per connection to Neon's `us-east-2` instead of
+single-digit milliseconds; with six connections per credit page that is under a second, not
+the 24 s measured from 12,000 km away. Prefer `ohio` if it is offered.
+
 ## 7b. Region co-location is a performance requirement, not a preference
 
 Put the web service in the **same region as the database**. Residual Zero opens a

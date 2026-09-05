@@ -16,7 +16,16 @@ services:
     name: residual-zero
     runtime: docker
     dockerfilePath: ./Dockerfile
-    plan: starter          # ortools + scipy + pandas do not fit the free plan's memory
+    # Free. The earlier `starter` here was an unmeasured guess about ortools/scipy/pandas
+    # memory, and it was wrong twice over: measured under a hard 512 MiB cgroup limit the
+    # service peaks at 103.6 MiB (20%) after exercising all 19 surfaces, five close-pack
+    # and journal builds, an AI investigation and five solver-backed proof pages - zero OOM
+    # kills, zero restarts. ortools, scipy, pandas, numpy and lxml are declared
+    # dependencies but are never mapped into the serving process at all; only psycopg is.
+    #
+    # Free instances sleep after ~15 minutes idle and cold-start in roughly a minute. That
+    # is a demo consideration, not a correctness one - see docs/DEPLOYMENT.md.
+    plan: free
     # MUST co-locate with the Neon database. The Neon endpoint is us-east-2 (AWS Ohio),
     # so this is `ohio`. Measured: one fresh connection to Neon costs 2550 ms from ~12,000 km
     # away versus 2.1 ms on the same host, and a credit page opens six connections - which
