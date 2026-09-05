@@ -249,3 +249,6 @@ textarea {
   padding: 9px 11px; border-radius: 10px;
   border: 1px solid rgba(240, 180, 41, 0.28); background: rgba(240, 180, 41, 0.06);
 }
+
+/* The status line becomes a control when it is telling you to fix something. */
+.status.link { cursor: pointer; text-decoration: underline; }

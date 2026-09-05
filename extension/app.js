@@ -102,6 +102,18 @@ async function boot() {
   const view = document.getElementById("view");
   const title = document.getElementById("view-title");
   const statusEl = document.getElementById("status");
+  const openOptions = () => {
+    if (globalThis.chrome && chrome.runtime && chrome.runtime.openOptionsPage) {
+      chrome.runtime.openOptionsPage();
+    }
+  };
+  const settingsBtn = document.getElementById("settings");
+  if (settingsBtn) settingsBtn.addEventListener("click", openOptions);
+  // Clicking the status line opens settings too, because that line is where the reader
+  // already is when it tells them a token is missing.
+  statusEl.addEventListener("click", () => {
+    if (statusEl.dataset.needsToken === "1") openOptions();
+  });
   const search = document.getElementById("search");
 
   document.getElementById("desk-url").textContent = await deskUrl();
@@ -126,18 +138,21 @@ async function boot() {
       const desk = await api.desk();
       statusEl.textContent = `desk live · ${desk.human} need human · auto-clear ${desk.cleared}`;
       statusEl.className = "status ok";
+      statusEl.dataset.needsToken = "0";
       chrome.runtime.sendMessage({ op: "badge", human: desk.human, cleared: desk.cleared });
     } catch (err) {
       // Say which failure it is. "desk offline" for a 401 sent a real debugging session
       // down the wrong path: the desk was up, reachable and answering — it just had no
       // token to identify the extension with.
       const kind = err && err.kind;
+      const needsToken = kind === "unauthenticated";
       statusEl.textContent =
-        kind === "unauthenticated" ? "desk needs a token · options → paste it"
+        needsToken ? "desk needs a token — click here to open settings"
         : kind === "forbidden" ? "desk refused this token"
         : kind === "timeout" ? "desk did not answer"
         : "desk offline";
-      statusEl.className = "status err";
+      statusEl.className = needsToken ? "status err link" : "status err";
+      statusEl.dataset.needsToken = needsToken ? "1" : "0";
     }
   }
 

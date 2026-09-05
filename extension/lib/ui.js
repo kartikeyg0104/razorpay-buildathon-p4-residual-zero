@@ -166,6 +166,18 @@ export function errorState(err, onRetry) {
       : kind === "offline" || kind === "timeout"
         ? null
         : el("span", { class: "hint" }, String((err && err.message) || "")),
+    // An unauthenticated desk needs one specific action, so offer it here rather than
+    // naming a page the reader then has to go hunting for in Chrome's own menus.
+    kind === "unauthenticated"
+      ? el("button", {
+          class: "btn", type: "button",
+          onclick: () => {
+            if (globalThis.chrome && chrome.runtime && chrome.runtime.openOptionsPage) {
+              chrome.runtime.openOptionsPage();
+            }
+          },
+        }, "Open settings")
+      : null,
     onRetry ? el("button", { class: "btn", type: "button", onclick: onRetry }, "Retry") : null,
   ]);
 }
