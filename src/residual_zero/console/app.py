@@ -391,14 +391,51 @@ def _load_work(conn) -> dict[str, dict[str, str]]:
     return out
 
 
-def _load_audits(conn) -> dict[str, dict]:
+#: Entries belonging to a run that never completed. Such a run produced no result, so its
+#: rows are not one — but they are not deleted either: audit_entry is a hash chain and
+#: removing rows from the middle of it would break the very thing it exists to prove.
+#: Excluded on read instead, which loses nothing and claims nothing.
+_COMPLETED_ENTRIES = (
+    "SELECT payload FROM audit_entry "
+    "WHERE run_id IS NULL OR run_id NOT IN "
+    "(SELECT run_id FROM reconciliation_run WHERE status <> 'COMPLETED') "
+    "ORDER BY seq"
+)
+_ALL_ENTRIES = "SELECT payload FROM audit_entry ORDER BY seq"
+
+
+def _entry_payloads(conn) -> list[str]:
+    """Payloads a reader should believe.
+
+    A partial run is not a smaller run. One died mid-way in production and its own
+    cleanup failed, leaving 248 entries behind: the desk read them alongside a later
+    completed run and reported 479 posted credits over a 248-credit corpus.
+
+    NULL run_id is kept. Those entries predate run records and are real results with no
+    run row, which is not the same as a run that failed.
+    """
+    from residual_zero.storage.errors import QUERY_ERRORS, rollback_quietly
+
+    try:
+        return [row[0] for row in conn.execute(_COMPLETED_ENTRIES)]
+    except QUERY_ERRORS:
+        # A ledger older than the run table has no run that could have failed.
+        rollback_quietly(conn)
+        return [row[0] for row in conn.execute(_ALL_ENTRIES)]
+
+
+def _audits_from_payloads(payloads) -> dict[str, dict]:
     out: dict[str, dict] = {}
-    for (payload,) in conn.execute("SELECT payload FROM audit_entry ORDER BY seq"):
+    for payload in payloads:
         data = json.loads(payload)
         cid = data.get("bank_credit_id")
         if cid:
             out[str(cid)] = data
     return out
+
+
+def _load_audits(conn) -> dict[str, dict]:
+    return _audits_from_payloads(_entry_payloads(conn))
 
 
 def _neighbors(credit_id: str, ids: list[str]) -> tuple[str | None, str | None]:
@@ -467,18 +504,24 @@ def batch():
     audits: dict[str, dict] = {}
     if conn is not None:
         try:
-            n_credits = conn.execute("SELECT COUNT(*) FROM audit_entry").fetchone()[0]
+            # Counted the same way the payloads are read, or the headline says 479 while
+            # the panels below it describe 231.
+            payloads = _entry_payloads(conn)
+            audits = _audits_from_payloads(payloads)
+            # Credits, for the headline. Entries, for the chain — an audit entry that
+            # names no credit is still a link in it.
+            n_credits = len(audits)
+            n_entries = len(payloads)
             n_flagged = conn.execute("SELECT COUNT(*) FROM exception").fetchone()[0]
             # An empty chain verifies vacuously. Reporting that as "intact" is a claim
             # about evidence that does not exist, so say nothing instead.
-            if n_credits:
+            if n_entries:
                 chain_ok, _broken, head = verify_chain(conn)
             raw_rows = list(
                 conn.execute(
                     "SELECT bank_credit_id, exception_class FROM exception ORDER BY bank_credit_id"
                 )
             )
-            audits = _load_audits(conn)
         finally:
             conn.close()
     elif (split := _split()) is not None:

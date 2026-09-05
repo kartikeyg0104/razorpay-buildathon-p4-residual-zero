@@ -485,3 +485,58 @@ def test_production_without_postgres_writes_no_local_database(tmp_path, monkeypa
 
     created = list(tmp_path.rglob("*.sqlite"))
     assert created == [], f"a local production database was created: {created}"
+
+
+@requires_pg
+def test_entries_from_a_run_that_never_completed_are_not_read(orgs):
+    """REGRESSION: the production desk reported 479 posted over a 248-credit corpus.
+
+    A run died mid-way and its own cleanup failed — the read-only leak — so its entries
+    stayed. A later completed run's entries were then read alongside them and the totals
+    were simply added together. A partial run is not a smaller run.
+
+    The rows are excluded on read, never deleted: audit_entry is a hash chain and removing
+    rows from the middle of it would break the thing it exists to prove.
+    """
+    import psycopg
+
+    from residual_zero.console import app as console_app
+    from residual_zero.runner import record_run
+    from residual_zero.tenancy import use_tenant
+
+    a, _b = orgs
+    result = record_run(tenant=a, split="dev", limit=6)
+
+    # Forge the wreckage of a run whose cleanup failed: a FAILED row and its entries.
+    with psycopg.connect(PG_URL, autocommit=True) as conn, conn.cursor() as cur:
+        cur.execute('SET search_path TO "org_runa"')
+        cur.execute(
+            "INSERT INTO reconciliation_run (run_id, org_id, split, dataset_root, "
+            "dataset_digest, config_digest, engine_version, status) "
+            "VALUES ('run_wreck', 'runa', 'dev', 'x', 'x', 'x', '0', 'FAILED')"
+        )
+        for seq in range(900, 905):
+            cur.execute(
+                "INSERT INTO audit_entry (seq, payload, metrics, prev_hash, entry_hash, run_id) "
+                "VALUES (%s, %s, '{}', %s, %s, 'run_wreck')",
+                (seq, '{"bank_credit_id": "wreck_%d", "uniqueness": "AMBIGUOUS"}' % seq,
+                 f"p{seq}", f"h{seq}"),
+            )
+
+    total = _rows("org_runa", "SELECT COUNT(*) FROM audit_entry")[0][0]
+    assert total == 11, "the fixture should have both runs' rows on disk"
+
+    console_app.reset_caches()
+    with use_tenant(a):
+        conn = console_app._db()
+        assert conn is not None
+        try:
+            audits = console_app._load_audits(conn)
+        finally:
+            conn.close()
+
+    assert len(audits) == 6, f"read {len(audits)} entries; the failed run leaked in"
+    assert not any(k.startswith("wreck_") for k in audits)
+    # ...and the rows are still there, because the chain needs them.
+    assert _rows("org_runa", "SELECT COUNT(*) FROM audit_entry")[0][0] == 11
+    assert result.n_processed == 6
