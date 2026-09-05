@@ -181,6 +181,9 @@ ALLOWED_LITERALS = {
     "postgresql://residual:residual_local_only@",
     # The CI service container's throwaway credential, on 127.0.0.1 inside the runner.
     "postgresql://residual:residual_ci@",
+    # Deliberately unreachable host used to prove a Postgres connection failure is loud
+    # and never falls back to SQLite (test_production_db_path.py).
+    "postgresql://nobody:nothing@",
 }
 
 
