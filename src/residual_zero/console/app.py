@@ -165,8 +165,12 @@ def _ledger_is_untouched(conn) -> bool:
     """True when this schema holds no overlay rows at all.
 
     Only meaningful for an organisation that reads a file corpus: its records live in the
-    committed files, and its schema exists to hold what the desk writes *about* them —
+    committed files, and its storage exists to hold what the desk writes *about* them —
     exceptions and human decisions. Nothing there yet means nothing has been recorded yet.
+
+    Both backends need this. ``bootstrap_tenant`` creates the SQLite ledger the moment the
+    organisation is created, so "the file is missing" was never the signal for a tenant
+    either — it only ever caught the single-tenant default database.
     """
     from residual_zero.storage.errors import QUERY_ERRORS, rollback_quietly
 
@@ -208,8 +212,9 @@ def _db():
         path = tenant.sqlite_path if tenant is not None else DB
         if not path.is_file():
             return None
-        return open_readonly(path)
-    conn = open_readonly()
+        conn = open_readonly(path)
+    else:
+        conn = open_readonly()
     if tenant is not None and tenant.dataset_kind == "files" and _ledger_is_untouched(conn):
         conn.close()
         return None
@@ -452,14 +457,22 @@ def batch():
     n_zero = 0
     n_gate_a = 0
     flagged_paise = 0
-    chain_ok = True
+    # None means "there is no chain to verify", which is not the same claim as
+    # "the chain verified". Defaulting to True made a corpus organisation — one
+    # with no ledger at all — render "audit intact", asserting a verification that
+    # never ran. On a desk whose whole premise is deterministic proof, that is the
+    # one thing the badge must not do.
+    chain_ok: bool | None = None
     head = ""
     audits: dict[str, dict] = {}
     if conn is not None:
         try:
             n_credits = conn.execute("SELECT COUNT(*) FROM audit_entry").fetchone()[0]
             n_flagged = conn.execute("SELECT COUNT(*) FROM exception").fetchone()[0]
-            chain_ok, _broken, head = verify_chain(conn)
+            # An empty chain verifies vacuously. Reporting that as "intact" is a claim
+            # about evidence that does not exist, so say nothing instead.
+            if n_credits:
+                chain_ok, _broken, head = verify_chain(conn)
             raw_rows = list(
                 conn.execute(
                     "SELECT bank_credit_id, exception_class FROM exception ORDER BY bank_credit_id"

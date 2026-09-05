@@ -8,8 +8,9 @@
     <p class="lede">See what was proven, what was linked, and what still needs human review. Residual-zero {{ t04.residual_zero if t04 else '—' }} means the reconstructed explanation matches the bank amount exactly. Settlement-linked {{ t04.settlement_linked if t04 else '—' }} identifies the ledger records (6 fail rate re-derive). <a href="/demo">5-minute product tour.</a></p>
   </div>
   <div class="status">
-    <span class="dot {{ 'ok' if chain_ok else 'bad' }}"></span>
-    audit {{ 'intact' if chain_ok else 'broken' }} · {{ n_credits }} credits
+    {# None is "no chain to verify", which is a different claim from "verified". #}
+    <span class="dot {{ '' if chain_ok is none else ('ok' if chain_ok else 'bad') }}"></span>
+    audit {{ 'not started' if chain_ok is none else ('intact' if chain_ok else 'broken') }} · {{ n_credits }} credits
   </div>
 </div>
 
